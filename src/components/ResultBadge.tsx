@@ -6,11 +6,15 @@ import { Category } from "../types";
 interface ResultBadgeProps {
   musicCategory: Category;
   textCategory: Category;
+  size?: "small" | "medium" | "large";
+  displayType?: "standard" | "compact" | "detailed";
 }
 
 const ResultBadge: React.FC<ResultBadgeProps> = ({
   musicCategory,
   textCategory,
+  size = "medium",
+  displayType = "standard",
 }) => {
   if (!musicCategory || !textCategory) {
     return null;
@@ -33,21 +37,128 @@ const ResultBadge: React.FC<ResultBadgeProps> = ({
     }
   };
 
+  const getCategoryLabel = (category: Category, type: "music" | "text") => {
+    if (displayType === "compact") {
+      return `${type === "music" ? "M" : "T"}: ${category}`;
+    }
+
+    return `${type === "music" ? "Musique" : "Texte"}: Cat. ${category}`;
+  };
+
+  const getSizeClasses = () => {
+    switch (size) {
+      case "small":
+        return "px-2 py-1 text-xs";
+      case "large":
+        return "px-4 py-2 text-base";
+      case "medium":
+      default:
+        return "px-3 py-1.5 text-sm";
+    }
+  };
+
+  const getCategoryIcon = (category: Category) => {
+    switch (category) {
+      case 1:
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+              clipRule="evenodd"
+            />
+          </svg>
+        );
+      case 2:
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+          </svg>
+        );
+      case 3:
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+              clipRule="evenodd"
+            />
+          </svg>
+        );
+      case 4:
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+          </svg>
+        );
+      case 5:
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+              clipRule="evenodd"
+            />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const getVersion = () => {
+    if (displayType === "detailed") {
+      return <span className="text-xs opacity-60 ml-1">v1.0</span>;
+    }
+    return null;
+  };
+
+  const sizeClass = getSizeClasses();
+
   return (
     <div className="flex flex-col sm:flex-row gap-2">
       <div
-        className={`px-3 py-1.5 rounded-full text-sm font-medium ${getCategoryColor(
+        className={`rounded-full font-medium border flex items-center ${sizeClass} ${getCategoryColor(
           musicCategory
-        )} border`}
+        )}`}
       >
-        Musique: Cat. {musicCategory}
+        {getCategoryIcon(musicCategory)}
+        {getCategoryLabel(musicCategory, "music")}
+        {getVersion()}
       </div>
       <div
-        className={`px-3 py-1.5 rounded-full text-sm font-medium ${getCategoryColor(
+        className={`rounded-full font-medium border flex items-center ${sizeClass} ${getCategoryColor(
           textCategory
-        )} border`}
+        )}`}
       >
-        Texte: Cat. {textCategory}
+        {getCategoryIcon(textCategory)}
+        {getCategoryLabel(textCategory, "text")}
+        {getVersion()}
       </div>
     </div>
   );

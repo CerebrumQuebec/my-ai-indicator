@@ -10,6 +10,7 @@ interface IntroductionProps {
 const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
+  const [showCCInspiration, setShowCCInspiration] = useState(false);
   const [knowsLicense, setKnowsLicense] = useState<boolean | null>(null);
   const { setQuestionnaireMode } = useWizard();
 
@@ -35,7 +36,9 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
           </h1>
           <p className="text-lg text-text-secondary max-w-3xl mx-auto">
             Cet outil vous aidera à déterminer dans quelle mesure votre
-            processus créatif utilise l&apos;intelligence artificielle.
+            processus créatif utilise l&apos;intelligence artificielle. Inspiré
+            du modèle Creative Commons, notre indicateur offre une transparence
+            sur la genèse de votre œuvre.
           </p>
         </div>
 
@@ -98,131 +101,247 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
       {/* Second box: Explanations */}
       <div className="bg-surface-dark rounded-xl border border-white/10 p-6 space-y-4">
         {/* How it works section */}
-        <div className="space-y-2">
-          <button
+        <div>
+          <div
+            className="flex justify-between items-center cursor-pointer"
             onClick={() => setShowHowItWorks(!showHowItWorks)}
-            className="w-full flex items-center justify-between text-left"
           >
-            <h2 className="text-xl font-semibold text-text-primary flex items-center">
-              <span className="bg-primary-500 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-white">
-                ?
-              </span>
-              Comment ça marche
-            </h2>
-            <svg
-              className={`w-6 h-6 text-text-primary transition-transform ${
-                showHowItWorks ? "rotate-180" : ""
-              }`}
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-
+            <h3 className="text-lg font-semibold text-text-primary">
+              Comment ça fonctionne ?
+            </h3>
+            <div className="text-primary-500">
+              {showHowItWorks ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
           {showHowItWorks && (
-            <div className="space-y-3 pl-11">
-              <div className="flex items-start">
-                <span className="bg-primary-600 text-white rounded-full min-w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">
-                  1
-                </span>
-                <p className="text-text-primary">
-                  {knowsLicense === false
-                    ? "Répondez à quelques questions sur votre utilisation de l'IA"
-                    : "Choisissez votre niveau d'utilisation de l'IA"}
-                </p>
-              </div>
-              <div className="flex items-start">
-                <span className="bg-primary-600 text-white rounded-full min-w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">
-                  2
-                </span>
-                <p className="text-text-primary">
-                  {knowsLicense === false
-                    ? "Obtenez une recommandation de licence adaptée"
-                    : "Confirmez votre choix"}
-                </p>
-              </div>
-              <div className="flex items-start">
-                <span className="bg-primary-600 text-white rounded-full min-w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">
-                  3
-                </span>
-                <p className="text-text-primary">
-                  Obtenez une évaluation détaillée
-                </p>
-              </div>
-              <div className="flex items-start">
-                <span className="bg-primary-600 text-white rounded-full min-w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">
-                  4
-                </span>
-                <p className="text-text-primary">Partagez vos résultats</p>
-              </div>
+            <div className="mt-4 space-y-3 text-text-secondary">
+              <p>
+                Cet outil vous guide à travers un processus simple pour
+                déterminer quelle catégorie d&apos;implication IA correspond à
+                votre création musicale et textuelle.
+              </p>
+              <p>Pour chaque domaine (musique et texte), vous pourrez soit :</p>
+              <ul className="list-disc list-inside pl-4 space-y-2">
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Choisir directement une catégorie
+                  </span>{" "}
+                  si vous savez déjà quel niveau d&apos;IA vous avez utilisé
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Répondre à un questionnaire
+                  </span>{" "}
+                  qui vous aidera à déterminer la catégorie la plus appropriée
+                </li>
+              </ul>
+              <p>
+                À la fin, vous recevrez un badge et du code à intégrer pour
+                afficher votre indicateur d&apos;utilisation de l&apos;IA sur
+                vos plateformes.
+              </p>
             </div>
           )}
         </div>
 
-        <div className="border-t border-white/10 my-4" />
-
         {/* Why use this section */}
-        <div className="space-y-2">
-          <button
+        <div>
+          <div
+            className="flex justify-between items-center cursor-pointer"
             onClick={() => setShowWhy(!showWhy)}
-            className="w-full flex items-center justify-between text-left"
           >
-            <h2 className="text-xl font-semibold text-text-primary flex items-center">
-              <span className="bg-primary-500 rounded-full w-8 h-8 flex items-center justify-center mr-3 text-white">
-                ?
-              </span>
-              Pourquoi utiliser cet indicateur
-            </h2>
-            <svg
-              className={`w-6 h-6 text-text-primary transition-transform ${
-                showWhy ? "rotate-180" : ""
-              }`}
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-
+            <h3 className="text-lg font-semibold text-text-primary">
+              Pourquoi utiliser cet indicateur ?
+            </h3>
+            <div className="text-primary-500">
+              {showWhy ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
           {showWhy && (
-            <div className="space-y-2 pl-11">
-              <div className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <p className="text-text-primary">
-                  Pour être transparent avec votre public et vos collaborateurs
-                </p>
-              </div>
-              <div className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <p className="text-text-primary">
-                  Pour valoriser votre démarche créative, quelle qu&apos;elle
-                  soit
-                </p>
-              </div>
-              <div className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <p className="text-text-primary">
-                  Pour contribuer au débat sur la place de l&apos;IA dans
-                  l&apos;art
-                </p>
-              </div>
+            <div className="mt-4 space-y-3 text-text-secondary">
+              <p>
+                À l&apos;ère de l&apos;IA générative, il devient crucial
+                d&apos;offrir de la
+                <span className="font-medium text-text-primary">
+                  {" "}
+                  transparence{" "}
+                </span>
+                sur le processus créatif. L&apos;Indicateur d&apos;Utilisation
+                de l&apos;IA vous permet de :
+              </p>
+              <ul className="list-disc list-inside pl-4 space-y-2">
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Maintenir la confiance
+                  </span>{" "}
+                  avec votre public en étant transparent sur l&apos;origine de
+                  votre travail
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Valoriser votre processus créatif
+                  </span>{" "}
+                  qu&apos;il soit principalement humain ou assisté par l&apos;IA
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Contribuer à un écosystème sain
+                  </span>{" "}
+                  où la création assistée par IA est clairement identifiable
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Compléter vos licences existantes
+                  </span>{" "}
+                  (Creative Commons ou autres) avec cette information sur la
+                  provenance
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* New section: Creative Commons inspiration */}
+        <div>
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => setShowCCInspiration(!showCCInspiration)}
+          >
+            <h3 className="text-lg font-semibold text-text-primary">
+              Inspiré de Creative Commons
+            </h3>
+            <div className="text-primary-500">
+              {showCCInspiration ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+          {showCCInspiration && (
+            <div className="mt-4 space-y-3 text-text-secondary">
+              <p>
+                Notre Indicateur d&apos;Utilisation de l&apos;IA s&apos;inspire
+                directement de Creative Commons, qui a révolutionné la façon
+                dont les créateurs peuvent partager leurs œuvres avec des
+                permissions claires.
+              </p>
+              <p>
+                <span className="font-medium text-text-primary">
+                  Similarités avec Creative Commons :
+                </span>
+              </p>
+              <ul className="list-disc list-inside pl-4 space-y-2">
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Approche standardisée
+                  </span>{" "}
+                  avec des catégories claires et précises
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Triple couche
+                  </span>{" "}
+                  (humaine, technique et explicative) pour une compréhension à
+                  tous les niveaux
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Badges visuels
+                  </span>{" "}
+                  reconnaissables qui communiquent l&apos;information
+                  essentielle au premier coup d&apos;œil
+                </li>
+                <li>
+                  <span className="font-medium text-text-primary">
+                    Métadonnées standardisées
+                  </span>{" "}
+                  pour l&apos;intégration technique dans les fichiers et sites
+                  web
+                </li>
+              </ul>
+              <p>
+                <span className="font-medium text-text-primary">
+                  Différence principale :
+                </span>{" "}
+                Là où Creative Commons définit comment une œuvre peut être{" "}
+                <em>utilisée</em>, notre indicateur précise comment elle a été{" "}
+                <em>créée</em>.
+              </p>
             </div>
           )}
         </div>

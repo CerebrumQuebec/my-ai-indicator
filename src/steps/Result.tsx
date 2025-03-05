@@ -2,13 +2,16 @@
 
 import React, { useState } from "react";
 import { useWizard } from "../contexts/WizardContext";
-import Button from "../components/Button";
 import ResultBadge from "../components/ResultBadge";
 import { ResultProps } from "../types";
+import Link from "next/link";
 
 const Result: React.FC<ResultProps> = ({ onBack }) => {
   const { musicCategory, textCategory } = useWizard();
   const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState<
+    "visual" | "metadata" | "advanced"
+  >("visual");
 
   if (!musicCategory || !textCategory) {
     return null;
@@ -25,6 +28,23 @@ const Result: React.FC<ResultProps> = ({ onBack }) => {
 
   const markdownCode = `![Musique: Cat. ${musicCategory}](https://img.shields.io/badge/Musique-Cat.%20${musicCategory}-blue) ![Texte: Cat. ${textCategory}](https://img.shields.io/badge/Texte-Cat.%20${textCategory}-blue)`;
 
+  const metadataHtml = `<meta name="AI-Usage-Music" content="Category-${musicCategory}" />
+<meta name="AI-Usage-Text" content="Category-${textCategory}" />
+<meta name="AI-Usage-Version" content="1.0" />`;
+
+  const metadataJson = `{
+  "AIUsage": {
+    "version": "1.0",
+    "music": ${musicCategory},
+    "text": ${textCategory}
+  }
+}`;
+
+  const id3Example = `# Exemple d'ajout aux métadonnées ID3 (audio)
+# Utiliser un outil comme MP3Tag ou EasyTag
+
+TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
+
   const handleCopyHTML = () => {
     navigator.clipboard.writeText(htmlCode);
     setCopied(true);
@@ -33,6 +53,24 @@ const Result: React.FC<ResultProps> = ({ onBack }) => {
 
   const handleCopyMarkdown = () => {
     navigator.clipboard.writeText(markdownCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyMetadata = () => {
+    navigator.clipboard.writeText(metadataHtml);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyJson = () => {
+    navigator.clipboard.writeText(metadataJson);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopyId3 = () => {
+    navigator.clipboard.writeText(id3Example);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -100,89 +138,285 @@ const Result: React.FC<ResultProps> = ({ onBack }) => {
           Votre indicateur d&apos;utilisation de l&apos;IA
         </h2>
         <p className="mt-2 text-text-secondary">
-          Voici le résultat de votre évaluation. Vous pouvez copier le code HTML
-          ou Markdown pour l&apos;intégrer à votre site ou le partager.
+          Basé sur vos réponses, nous avons déterminé ces catégories pour votre
+          création.
         </p>
       </div>
 
-      <div className="bg-surface-card p-6 rounded-lg border border-white/10">
-        <div className="flex flex-col items-center space-y-4">
+      <div className="bg-surface-dark p-6 rounded-xl border border-white/10">
+        <div className="flex justify-center mb-6">
           <ResultBadge
             musicCategory={musicCategory}
             textCategory={textCategory}
+            size="large"
+            displayType="detailed"
           />
-          <div className="text-sm text-text-secondary">
-            Votre indicateur d&apos;utilisation de l&apos;IA
-          </div>
         </div>
-      </div>
 
-      <div className="bg-surface-card p-6 rounded-lg border border-white/10">
         {getExplanation()}
       </div>
 
-      <div className="space-y-4">
-        <h3 className="text-lg font-medium text-text-primary">
-          Code à intégrer
-        </h3>
-
-        <div>
-          <div className="flex justify-between items-center">
-            <label
-              htmlFor="html-code"
-              className="block text-sm font-medium text-text-primary"
-            >
-              HTML
-            </label>
-            <Button variant="secondary" onClick={handleCopyHTML}>
-              {copied ? "Copié !" : "Copier"}
-            </Button>
-          </div>
-          <div className="mt-1">
-            <textarea
-              id="html-code"
-              name="html-code"
-              rows={3}
-              className="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm bg-surface-dark text-text-primary border-white/10 rounded-md"
-              value={htmlCode}
-              readOnly
-            ></textarea>
-          </div>
+      <div className="bg-surface-dark rounded-xl border border-white/10 overflow-hidden">
+        <div className="flex border-b border-white/10">
+          <button
+            className={`flex-1 py-3 px-4 text-center font-medium ${
+              activeTab === "visual"
+                ? "bg-surface-hover text-text-primary"
+                : "text-text-secondary hover:bg-surface-card/50"
+            }`}
+            onClick={() => setActiveTab("visual")}
+          >
+            Badges visuels
+          </button>
+          <button
+            className={`flex-1 py-3 px-4 text-center font-medium ${
+              activeTab === "metadata"
+                ? "bg-surface-hover text-text-primary"
+                : "text-text-secondary hover:bg-surface-card/50"
+            }`}
+            onClick={() => setActiveTab("metadata")}
+          >
+            Métadonnées
+          </button>
+          <button
+            className={`flex-1 py-3 px-4 text-center font-medium ${
+              activeTab === "advanced"
+                ? "bg-surface-hover text-text-primary"
+                : "text-text-secondary hover:bg-surface-card/50"
+            }`}
+            onClick={() => setActiveTab("advanced")}
+          >
+            Avancé
+          </button>
         </div>
 
-        <div>
-          <div className="flex justify-between items-center">
-            <label
-              htmlFor="markdown-code"
-              className="block text-sm font-medium text-text-primary"
-            >
-              Markdown
-            </label>
-            <Button variant="secondary" onClick={handleCopyMarkdown}>
-              {copied ? "Copié !" : "Copier"}
-            </Button>
-          </div>
-          <div className="mt-1">
-            <textarea
-              id="markdown-code"
-              name="markdown-code"
-              rows={2}
-              className="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm bg-surface-dark text-text-primary border-white/10 rounded-md"
-              value={markdownCode}
-              readOnly
-            ></textarea>
-          </div>
+        <div className="p-6">
+          {activeTab === "visual" && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Code HTML
+                </h3>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{htmlCode}</code>
+                  </pre>
+                  <button
+                    onClick={handleCopyHTML}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Code Markdown
+                </h3>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{markdownCode}</code>
+                  </pre>
+                  <button
+                    onClick={handleCopyMarkdown}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "metadata" && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Métadonnées HTML
+                </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  À ajouter dans la section &lt;head&gt; de votre site web
+                </p>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{metadataHtml}</code>
+                  </pre>
+                  <button
+                    onClick={handleCopyMetadata}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Métadonnées JSON-LD
+                </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  Pour APIs et systèmes d&apos;échange de données
+                </p>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{metadataJson}</code>
+                  </pre>
+                  <button
+                    onClick={handleCopyJson}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "advanced" && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Métadonnées pour fichiers audio
+                </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  Exemple d&apos;utilisation avec les tags ID3 pour MP3
+                </p>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{id3Example}</code>
+                  </pre>
+                  <button
+                    onClick={handleCopyId3}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  Combinaison avec Creative Commons
+                </h3>
+                <p className="text-text-secondary mb-3">
+                  L&apos;Indicateur IA peut être utilisé en parallèle avec une
+                  licence Creative Commons ou toute autre licence de droit
+                  d&apos;auteur. Exemple :
+                </p>
+                <div className="bg-black/30 rounded-lg p-4 text-text-secondary text-sm">
+                  <p>
+                    © 2023 [Votre nom] •{" "}
+                    <strong>
+                      IA Cat. {musicCategory} (Musique) / Cat. {textCategory}{" "}
+                      (Texte)
+                    </strong>{" "}
+                    • <span className="text-blue-400">CC BY-SA 4.0</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="flex space-x-4 pt-6">
-        {onBack && (
-          <Button variant="secondary" onClick={onBack}>
-            Retour
-          </Button>
-        )}
-        <Button onClick={() => window.location.reload()}>Recommencer</Button>
+      <div className="flex justify-between">
+        <button
+          onClick={onBack}
+          className="flex items-center px-4 py-2 text-text-primary hover:text-primary-400 font-medium transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 mr-1"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Retour
+        </button>
+        <Link
+          href="/"
+          className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+        >
+          Terminer
+        </Link>
       </div>
+
+      {copied && (
+        <div className="fixed bottom-4 right-4 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 px-4 py-2 rounded-lg shadow-lg">
+          Copié dans le presse-papier !
+        </div>
+      )}
     </div>
   );
 };

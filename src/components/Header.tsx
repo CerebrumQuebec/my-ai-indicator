@@ -48,6 +48,14 @@ const Header: React.FC = () => {
               </li>
               <li>
                 <Link
+                  href="/faq"
+                  className="text-text-primary hover:text-primary-400 transition-colors font-medium"
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className="text-text-primary hover:text-primary-400 transition-colors font-medium"
                 >
