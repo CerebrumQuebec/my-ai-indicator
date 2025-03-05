@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useWizard } from "../contexts/WizardContext";
 
 interface IntroductionProps {
   onNext: () => void;
@@ -9,6 +10,20 @@ interface IntroductionProps {
 const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
+  const [knowsLicense, setKnowsLicense] = useState<boolean | null>(null);
+  const { setQuestionnaireMode } = useWizard();
+
+  // Function to handle selection of knowledge state
+  const handleLicenseKnowledge = (knows: boolean) => {
+    setKnowsLicense(knows);
+    if (knows) {
+      setQuestionnaireMode(false);
+      onNext();
+    } else {
+      setQuestionnaireMode(true);
+      onNext();
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -24,14 +39,59 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
           </p>
         </div>
 
-        {/* Primary CTA Button */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={onNext}
-            className="bg-primary-500 hover:bg-primary-600 text-white font-semibold py-4 px-10 rounded-lg transition-colors shadow-glow text-lg"
-          >
-            Commencer l&apos;évaluation
-          </button>
+        {/* License knowledge question */}
+        <div className="mt-8 bg-surface-dark rounded-xl border border-white/10 p-6">
+          <div className="flex items-center mb-4">
+            <h2 className="text-xl font-semibold text-text-primary">
+              Connaissez-vous le type de licence dont vous avez besoin ?
+            </h2>
+          </div>
+
+          <div className="space-y-3 mt-6">
+            <button
+              onClick={() => handleLicenseKnowledge(true)}
+              className={`w-full flex items-center p-4 rounded-lg border border-white/10 bg-surface-card hover:bg-surface-hover transition-colors ${
+                knowsLicense === true ? "ring-2 ring-primary-500" : ""
+              }`}
+            >
+              <div className="flex-shrink-0 w-6 h-6 border-2 rounded-full border-primary-500 flex items-center justify-center mr-3">
+                {knowsLicense === true && (
+                  <div className="w-3 h-3 rounded-full bg-primary-500"></div>
+                )}
+              </div>
+              <span className="text-lg text-text-primary">
+                Oui. Je connais la licence dont j&apos;ai besoin.
+              </span>
+            </button>
+
+            <button
+              onClick={() => handleLicenseKnowledge(false)}
+              className={`w-full flex items-center p-4 rounded-lg border border-white/10 bg-surface-card hover:bg-surface-hover transition-colors ${
+                knowsLicense === false ? "ring-2 ring-primary-500" : ""
+              }`}
+            >
+              <div className="flex-shrink-0 w-6 h-6 border-2 rounded-full border-primary-500 flex items-center justify-center mr-3">
+                {knowsLicense === false && (
+                  <div className="w-3 h-3 rounded-full bg-primary-500"></div>
+                )}
+              </div>
+              <span className="text-lg text-text-primary">
+                Non. J&apos;ai besoin d&apos;aide pour choisir une licence.
+              </span>
+            </button>
+          </div>
+
+          {/* Action buttons based on selection */}
+          {knowsLicense === true && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={onNext}
+                className="bg-primary-500 hover:bg-primary-600 text-white font-semibold py-4 px-10 rounded-lg transition-colors shadow-glow text-lg"
+              >
+                Choisir ma licence
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -75,8 +135,9 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
                   1
                 </span>
                 <p className="text-text-primary">
-                  Répondez aux questions sur votre utilisation de l&apos;IA en
-                  musique
+                  {knowsLicense === false
+                    ? "Répondez à quelques questions sur votre utilisation de l'IA"
+                    : "Choisissez votre niveau d'utilisation de l'IA"}
                 </p>
               </div>
               <div className="flex items-start">
@@ -84,7 +145,9 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
                   2
                 </span>
                 <p className="text-text-primary">
-                  Évaluez votre utilisation de l&apos;IA pour les textes
+                  {knowsLicense === false
+                    ? "Obtenez une recommandation de licence adaptée"
+                    : "Confirmez votre choix"}
                 </p>
               </div>
               <div className="flex items-start">

@@ -5,10 +5,13 @@ import ProgressBar from "../components/ProgressBar";
 import Introduction from "../steps/Introduction";
 import MusicStep from "../steps/MusicStep";
 import TextStep from "../steps/TextStep";
+import MusicQuestionnaire from "../steps/MusicQuestionnaire";
+import TextQuestionnaire from "../steps/TextQuestionnaire";
 import Result from "../steps/Result";
 
 export default function Home() {
-  const { step, setStep, musicCategory, textCategory } = useWizard();
+  const { step, setStep, musicCategory, textCategory, isQuestionnaireMode } =
+    useWizard();
   const totalSteps = 4;
 
   const handleNext = () => {
@@ -39,9 +42,17 @@ export default function Home() {
       case 1:
         return <Introduction onNext={handleNext} />;
       case 2:
-        return <MusicStep onNext={handleNext} onBack={handleBack} />;
+        return isQuestionnaireMode ? (
+          <MusicQuestionnaire onNext={handleNext} onBack={handleBack} />
+        ) : (
+          <MusicStep onNext={handleNext} onBack={handleBack} />
+        );
       case 3:
-        return <TextStep onNext={handleNext} onBack={handleBack} />;
+        return isQuestionnaireMode ? (
+          <TextQuestionnaire onNext={handleNext} onBack={handleBack} />
+        ) : (
+          <TextStep onNext={handleNext} onBack={handleBack} />
+        );
       case 4:
         return <Result onBack={handleBack} />;
       default:
