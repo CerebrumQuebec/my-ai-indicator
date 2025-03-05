@@ -135,7 +135,7 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold text-text-primary">
-          Votre indicateur d&apos;utilisation de l&apos;IA
+          Votre badge IA
         </h2>
         <p className="mt-2 text-text-secondary">
           Basé sur vos réponses, nous avons déterminé ces catégories pour votre
@@ -365,8 +365,8 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
                   Combinaison avec Creative Commons
                 </h3>
                 <p className="text-text-secondary mb-3">
-                  L&apos;Indicateur IA peut être utilisé en parallèle avec une
-                  licence Creative Commons ou toute autre licence de droit
+                  Le Badge IA peut être utilisé en parallèle avec une licence
+                  Creative Commons ou toute autre licence de droit
                   d&apos;auteur. Exemple :
                 </p>
                 <div className="bg-black/30 rounded-lg p-4 text-text-secondary text-sm">

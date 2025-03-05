@@ -1,6 +1,6 @@
 export const fr = {
   // Header
-  appName: "Indicateur d'Utilisation de l'IA",
+  appName: "Badge IA",
   home: "Accueil",
   about: "À propos",
   faq: "FAQ",
@@ -11,7 +11,7 @@ export const fr = {
   privacy: "Confidentialité",
 
   // Meta
-  metaTitle: "Indicateur d'Utilisation de l'IA",
+  metaTitle: "Badge IA",
   metaDescription:
     "Évaluez votre niveau d'utilisation de l'IA dans vos créations musicales et textuelles",
 
@@ -21,9 +21,9 @@ export const fr = {
   reset: "Réinitialiser",
 
   // Introduction
-  welcomeTitle: "Bienvenue sur l'indicateur d'utilisation de l'IA",
+  welcomeTitle: "Bienvenue sur le Badge IA",
   welcomeDescription:
-    "Cet outil vous aidera à déterminer dans quelle mesure votre processus créatif utilise l'intelligence artificielle. Inspiré du modèle Creative Commons, notre indicateur offre une transparence sur la genèse de votre œuvre.",
+    "Cet outil vous aidera à déterminer dans quelle mesure votre processus créatif utilise l'intelligence artificielle. Inspiré du modèle Creative Commons, notre badge offre une transparence sur la genèse de votre œuvre.",
   licenseQuestion: "Connaissez-vous le type de licence dont vous avez besoin ?",
   yes: "Oui",
   no: "Non",
@@ -57,12 +57,12 @@ export const fr = {
   // FAQ Page
   faqTitle: "Foire Aux Questions",
   faqDescription:
-    "Trouvez des réponses aux questions courantes sur l'Indicateur d'Utilisation de l'IA.",
+    "Trouvez des réponses aux questions courantes sur le Badge IA.",
 
   // FAQ Questions
-  faqQuestion1: "Qu'est-ce que l'Indicateur d'Utilisation de l'IA ?",
+  faqQuestion1: "Qu'est-ce que le Badge IA ?",
   faqAnswer1:
-    "L'Indicateur d'Utilisation de l'IA est un outil qui aide les créateurs à communiquer de manière transparente le niveau d'implication de l'IA dans leurs œuvres créatives, similaire à la façon dont les licences Creative Commons communiquent les droits d'utilisation.",
+    "Le Badge IA est un outil qui aide les créateurs à communiquer de manière transparente le niveau d'implication de l'IA dans leurs œuvres créatives, similaire à la façon dont les licences Creative Commons communiquent les droits d'utilisation.",
 
   faqQuestion2:
     "Pourquoi devrais-je indiquer l'utilisation de l'IA dans mon travail ?",
@@ -77,17 +77,17 @@ export const fr = {
   faqQuestion4:
     "Puis-je utiliser différentes catégories pour différentes parties de mon travail ?",
   faqAnswer4:
-    "Oui, vous pouvez indiquer différents niveaux d'utilisation de l'IA pour différents aspects de votre travail, comme des indicateurs séparés pour la musique et les paroles dans une chanson.",
+    "Oui, vous pouvez indiquer différents niveaux d'utilisation de l'IA pour différents aspects de votre travail, comme des badges séparés pour la musique et les paroles dans une chanson.",
 
   faqQuestion5: "Est-ce une obligation légale ?",
   faqAnswer5:
-    "Non, l'utilisation de l'Indicateur d'Utilisation de l'IA est volontaire. Cependant, la transparence concernant l'utilisation de l'IA devient de plus en plus importante et pourrait être requise dans certains contextes à l'avenir.",
+    "Non, l'utilisation du Badge IA est volontaire. Cependant, la transparence concernant l'utilisation de l'IA devient de plus en plus importante et pourrait être requise dans certains contextes à l'avenir.",
 
   // About Page
-  aboutTitle: "À propos de l'Indicateur d'Utilisation de l'IA",
+  aboutTitle: "À propos du Badge IA",
   aboutIntroTitle: "Introduction",
   aboutIntroText:
-    "L'Indicateur d'Utilisation de l'IA est un système standardisé conçu pour communiquer de manière transparente le niveau d'implication de l'IA dans les œuvres créatives. Inspiré par Creative Commons, il fournit un cadre clair permettant aux créateurs d'indiquer comment l'IA a été utilisée dans leur processus de création.",
+    "Le Badge IA est un système standardisé conçu pour communiquer de manière transparente le niveau d'implication de l'IA dans les œuvres créatives. Inspiré par Creative Commons, il fournit un cadre clair permettant aux créateurs d'indiquer comment l'IA a été utilisée dans leur processus de création.",
   aboutMissionTitle: "Notre Mission",
   aboutMissionText:
     "Notre mission est de promouvoir la transparence dans la création assistée par IA en fournissant un moyen simple et standardisé pour les créateurs de communiquer le niveau d'implication de l'IA dans leur travail. Nous croyons que la transparence renforce la confiance et aide le public à mieux comprendre et apprécier les œuvres créatives à l'ère de l'IA.",
@@ -96,8 +96,13 @@ export const fr = {
     "Nous avons développé cinq catégories distinctes qui représentent différents niveaux d'implication de l'IA dans le processus créatif, des œuvres créées entièrement par l'IA à celles créées entièrement par des humains sans assistance IA.",
   aboutTeamTitle: "Notre Équipe",
   aboutTeamText:
-    "L'Indicateur d'Utilisation de l'IA a été développé par une équipe de créateurs, de technologues et d'experts juridiques engagés à promouvoir la transparence et les pratiques éthiques dans la création assistée par IA.",
+    "Le Badge IA a été développé par une équipe de créateurs, de technologues et d'experts juridiques engagés à promouvoir la transparence et les pratiques éthiques dans la création assistée par IA.",
   backToHome: "Retour à l'accueil",
+
+  // Contact Page
+  contactTitle: "Contact",
+  contactDescription:
+    "N'hésitez pas à nous contacter si vous avez des questions sur le Badge IA.",
 
   // Add more translations as needed
 };

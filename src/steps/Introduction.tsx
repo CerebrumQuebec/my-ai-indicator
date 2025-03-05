@@ -162,8 +162,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
                 </ul>
                 <p>
                   À la fin, vous recevrez un badge et du code à intégrer pour
-                  afficher votre indicateur d&apos;utilisation de l&apos;IA sur
-                  vos plateformes.
+                  afficher votre badge IA sur vos plateformes.
                 </p>
               </div>
             )}
@@ -176,7 +175,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
               onClick={() => setShowWhy(!showWhy)}
             >
               <h3 className="text-lg font-semibold text-text-primary">
-                Pourquoi utiliser cet indicateur ?
+                Pourquoi utiliser ce badge ?
               </h3>
               <div className="text-primary-500">
                 {showWhy ? (
@@ -217,8 +216,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
                     {" "}
                     transparence{" "}
                   </span>
-                  sur le processus créatif. L&apos;Indicateur d&apos;Utilisation
-                  de l&apos;IA vous permet de :
+                  sur le processus créatif. Le Badge IA vous permet de :
                 </p>
                 <ul className="list-disc list-inside pl-4 space-y-2">
                   <li>
@@ -295,10 +293,9 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
             {showCCInspiration && (
               <div className="mt-4 space-y-3 text-text-secondary">
                 <p>
-                  Notre Indicateur d&apos;Utilisation de l&apos;IA
-                  s&apos;inspire directement de Creative Commons, qui a
-                  révolutionné la façon dont les créateurs peuvent partager
-                  leurs œuvres avec des permissions claires.
+                  Notre Badge IA s&apos;inspire directement de Creative Commons,
+                  qui a révolutionné la façon dont les créateurs peuvent
+                  partager leurs œuvres avec des permissions claires.
                 </p>
                 <p>
                   <span className="font-medium text-text-primary">
@@ -339,7 +336,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
                     Différence principale :
                   </span>{" "}
                   Là où Creative Commons définit comment une œuvre peut être{" "}
-                  <em>utilisée</em>, notre indicateur précise comment elle a été{" "}
+                  <em>utilisée</em>, notre badge précise comment elle a été{" "}
                   <em>créée</em>.
                 </p>
               </div>

@@ -1,6 +1,6 @@
 export const en = {
   // Header
-  appName: "AI Usage Indicator",
+  appName: "AI Badge",
   home: "Home",
   about: "About",
   faq: "FAQ",
@@ -11,7 +11,7 @@ export const en = {
   privacy: "Privacy",
 
   // Meta
-  metaTitle: "AI Usage Indicator",
+  metaTitle: "AI Badge",
   metaDescription:
     "Evaluate your level of AI usage in your musical and textual creations",
 
@@ -21,9 +21,9 @@ export const en = {
   reset: "Reset",
 
   // Introduction
-  welcomeTitle: "Welcome to the AI Usage Indicator",
+  welcomeTitle: "Welcome to the AI Badge",
   welcomeDescription:
-    "This tool will help you determine to what extent your creative process uses artificial intelligence. Inspired by the Creative Commons model, our indicator offers transparency on the genesis of your work.",
+    "This tool will help you determine to what extent your creative process uses artificial intelligence. Inspired by the Creative Commons model, our badge offers transparency on the genesis of your work.",
   licenseQuestion: "Do you know what type of license you need?",
   yes: "Yes",
   no: "No",
@@ -56,13 +56,12 @@ export const en = {
 
   // FAQ Page
   faqTitle: "Frequently Asked Questions",
-  faqDescription:
-    "Find answers to common questions about the AI Usage Indicator.",
+  faqDescription: "Find answers to common questions about the AI Badge.",
 
   // FAQ Questions
-  faqQuestion1: "What is the AI Usage Indicator?",
+  faqQuestion1: "What is the AI Badge?",
   faqAnswer1:
-    "The AI Usage Indicator is a tool that helps creators transparently communicate the level of AI involvement in their creative works, similar to how Creative Commons licenses communicate usage rights.",
+    "The AI Badge is a tool that helps creators transparently communicate the level of AI involvement in their creative works, similar to how Creative Commons licenses communicate usage rights.",
 
   faqQuestion2: "Why should I indicate AI usage in my work?",
   faqAnswer2:
@@ -75,17 +74,17 @@ export const en = {
   faqQuestion4:
     "Can I use different categories for different parts of my work?",
   faqAnswer4:
-    "Yes, you can indicate different levels of AI usage for different aspects of your work, such as separate indicators for music and lyrics in a song.",
+    "Yes, you can indicate different levels of AI usage for different aspects of your work, such as separate badges for music and lyrics in a song.",
 
   faqQuestion5: "Is this a legal requirement?",
   faqAnswer5:
-    "No, using the AI Usage Indicator is voluntary. However, transparency about AI usage is becoming increasingly important and may be required in some contexts in the future.",
+    "No, using the AI Badge is voluntary. However, transparency about AI usage is becoming increasingly important and may be required in some contexts in the future.",
 
   // About Page
-  aboutTitle: "About the AI Usage Indicator",
+  aboutTitle: "About the AI Badge",
   aboutIntroTitle: "Introduction",
   aboutIntroText:
-    "The AI Usage Indicator is a standardized system designed to transparently communicate the level of AI involvement in creative works. Inspired by Creative Commons, it provides a clear framework for creators to indicate how AI was used in their creation process.",
+    "The AI Badge is a standardized system designed to transparently communicate the level of AI involvement in creative works. Inspired by Creative Commons, it provides a clear framework for creators to indicate how AI was used in their creation process.",
   aboutMissionTitle: "Our Mission",
   aboutMissionText:
     "Our mission is to promote transparency in AI-assisted creation by providing a simple, standardized way for creators to communicate the level of AI involvement in their work. We believe that transparency builds trust and helps audiences better understand and appreciate creative works in the age of AI.",
@@ -94,8 +93,13 @@ export const en = {
     "We've developed five distinct categories that represent different levels of AI involvement in the creative process, from works created entirely by AI to those created entirely by humans with no AI assistance.",
   aboutTeamTitle: "Our Team",
   aboutTeamText:
-    "The AI Usage Indicator was developed by a team of creators, technologists, and legal experts committed to promoting transparency and ethical practices in AI-assisted creation.",
+    "The AI Badge was developed by a team of creators, technologists, and legal experts committed to promoting transparency and ethical practices in AI-assisted creation.",
   backToHome: "Back to Home",
+
+  // Contact Page
+  contactTitle: "Contact",
+  contactDescription:
+    "Feel free to reach out if you have any questions about the AI Badge.",
 
   // Add more translations as needed
 };

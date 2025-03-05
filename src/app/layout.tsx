@@ -6,18 +6,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Indicateur d'Utilisation de l'IA",
+  title: "Badge IA",
   description:
     "Évaluez votre niveau d'utilisation de l'IA dans vos créations musicales et textuelles",
-  keywords: [
-    "IA",
-    "intelligence artificielle",
-    "musique",
-    "texte",
-    "création",
-    "indicateur",
-  ],
-  authors: [{ name: "Indicateur IA Team" }],
+  keywords: ["ia", "badge", "creative commons", "musique", "texte"],
+  authors: [{ name: "Badge IA Team" }],
 };
 
 export const viewport: Viewport = {
