@@ -13,6 +13,16 @@ export default function Home() {
   const { step, setStep, musicCategory, textCategory, isQuestionnaireMode } =
     useWizard();
   const totalSteps = 4;
+  const totalQuestionsPerStep = 10;
+
+  // Get current question number from the active questionnaire component
+  const getCurrentQuestionNumber = () => {
+    if (!isQuestionnaireMode || step === 1 || step === 4) return 0;
+    const component = document.querySelector("[data-current-question]");
+    return component
+      ? parseInt(component.getAttribute("data-current-question") || "0")
+      : 0;
+  };
 
   const handleNext = () => {
     setStep(step + 1);
@@ -72,6 +82,9 @@ export default function Home() {
                 onBack={handleBack}
                 onNext={handleNext}
                 canContinue={canContinue()}
+                isQuestionnaireMode={isQuestionnaireMode}
+                currentQuestion={getCurrentQuestionNumber()}
+                totalQuestions={totalQuestionsPerStep}
               />
             </div>
           )}

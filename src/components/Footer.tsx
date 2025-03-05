@@ -2,9 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
+import { useTranslation } from "../contexts/TranslationContext";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="w-full bg-surface-dark border-t border-white/10 mt-auto">
@@ -15,25 +17,24 @@ const Footer: React.FC = () => {
               href="/about"
               className="text-text-primary hover:text-primary-400 transition-colors font-medium"
             >
-              À propos
+              {t("about")}
             </Link>
             <Link
               href="/privacy"
               className="text-text-primary hover:text-primary-400 transition-colors font-medium"
             >
-              Confidentialité
+              {t("privacy")}
             </Link>
             <Link
               href="/contact"
               className="text-text-primary hover:text-primary-400 transition-colors font-medium"
             >
-              Contact
+              {t("contact")}
             </Link>
           </div>
           <div className="text-text-secondary text-sm">
             <p>
-              © {currentYear} Indicateur d&apos;Utilisation de l&apos;IA. Tous
-              droits réservés.
+              © {currentYear} {t("appName")}. {t("allRightsReserved")}.
             </p>
           </div>
         </div>

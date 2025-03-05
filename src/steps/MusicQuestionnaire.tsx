@@ -86,7 +86,7 @@ const MusicQuestionnaire: React.FC<StepProps> = ({ onNext, onBack }) => {
   const question = musicQuestions[currentQuestion];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-current-question={currentQuestion}>
       <div>
         <h2 className="text-2xl font-semibold text-text-primary">
           Évaluation détaillée de votre processus musical

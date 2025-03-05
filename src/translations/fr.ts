@@ -1,0 +1,103 @@
+export const fr = {
+  // Header
+  appName: "Indicateur d'Utilisation de l'IA",
+  home: "Accueil",
+  about: "À propos",
+  faq: "FAQ",
+  contact: "Contact",
+
+  // Footer
+  allRightsReserved: "Tous droits réservés",
+  privacy: "Confidentialité",
+
+  // Meta
+  metaTitle: "Indicateur d'Utilisation de l'IA",
+  metaDescription:
+    "Évaluez votre niveau d'utilisation de l'IA dans vos créations musicales et textuelles",
+
+  // Common
+  next: "Suivant",
+  previous: "Précédent",
+  reset: "Réinitialiser",
+
+  // Introduction
+  welcomeTitle: "Bienvenue sur l'indicateur d'utilisation de l'IA",
+  welcomeDescription:
+    "Cet outil vous aidera à déterminer dans quelle mesure votre processus créatif utilise l'intelligence artificielle. Inspiré du modèle Creative Commons, notre indicateur offre une transparence sur la genèse de votre œuvre.",
+  licenseQuestion: "Connaissez-vous le type de licence dont vous avez besoin ?",
+  yes: "Oui",
+  no: "Non",
+  howItWorks: "Comment ça marche",
+  whyIndicate: "Pourquoi indiquer l'utilisation de l'IA ?",
+  ccInspiration: "Inspiration Creative Commons",
+
+  // Music Step
+  musicEvaluationTitle: "Évaluation de votre processus musical",
+  musicEvaluationDescription:
+    "Sélectionnez la catégorie qui correspond le mieux à votre processus de création musicale.",
+
+  // Text Step
+  textEvaluationTitle: "Évaluation de votre processus textuel",
+  textEvaluationDescription:
+    "Sélectionnez la catégorie qui correspond le mieux à votre processus de création textuelle.",
+
+  // Categories
+  category1Title: "IA seule",
+  category1Description: "Génération IA sans intervention humaine.",
+  category2Title: "IA dirigée",
+  category2Description:
+    "Génération IA avec direction humaine (prompts, corrections).",
+  category3Title: "Collaboration IA",
+  category3Description: "Mélange équilibré entre créativité humaine et IA.",
+  category4Title: "Humain avec assistance IA",
+  category4Description: "Création principalement humaine avec outils IA.",
+  category5Title: "Humain uniquement",
+  category5Description: "Création exclusivement humaine sans IA.",
+
+  // FAQ Page
+  faqTitle: "Foire Aux Questions",
+  faqDescription:
+    "Trouvez des réponses aux questions courantes sur l'Indicateur d'Utilisation de l'IA.",
+
+  // FAQ Questions
+  faqQuestion1: "Qu'est-ce que l'Indicateur d'Utilisation de l'IA ?",
+  faqAnswer1:
+    "L'Indicateur d'Utilisation de l'IA est un outil qui aide les créateurs à communiquer de manière transparente le niveau d'implication de l'IA dans leurs œuvres créatives, similaire à la façon dont les licences Creative Commons communiquent les droits d'utilisation.",
+
+  faqQuestion2:
+    "Pourquoi devrais-je indiquer l'utilisation de l'IA dans mon travail ?",
+  faqAnswer2:
+    "Indiquer l'utilisation de l'IA renforce la confiance avec votre public, aide à établir des attentes appropriées et contribue à la transparence à une époque où le contenu généré par l'IA devient de plus en plus courant.",
+
+  faqQuestion3:
+    "Comment déterminer dans quelle catégorie se situe mon travail ?",
+  faqAnswer3:
+    "Vous pouvez soit sélectionner directement une catégorie si vous connaissez votre niveau d'utilisation de l'IA, soit utiliser notre questionnaire qui vous guidera à travers une série de questions pour déterminer la catégorie appropriée.",
+
+  faqQuestion4:
+    "Puis-je utiliser différentes catégories pour différentes parties de mon travail ?",
+  faqAnswer4:
+    "Oui, vous pouvez indiquer différents niveaux d'utilisation de l'IA pour différents aspects de votre travail, comme des indicateurs séparés pour la musique et les paroles dans une chanson.",
+
+  faqQuestion5: "Est-ce une obligation légale ?",
+  faqAnswer5:
+    "Non, l'utilisation de l'Indicateur d'Utilisation de l'IA est volontaire. Cependant, la transparence concernant l'utilisation de l'IA devient de plus en plus importante et pourrait être requise dans certains contextes à l'avenir.",
+
+  // About Page
+  aboutTitle: "À propos de l'Indicateur d'Utilisation de l'IA",
+  aboutIntroTitle: "Introduction",
+  aboutIntroText:
+    "L'Indicateur d'Utilisation de l'IA est un système standardisé conçu pour communiquer de manière transparente le niveau d'implication de l'IA dans les œuvres créatives. Inspiré par Creative Commons, il fournit un cadre clair permettant aux créateurs d'indiquer comment l'IA a été utilisée dans leur processus de création.",
+  aboutMissionTitle: "Notre Mission",
+  aboutMissionText:
+    "Notre mission est de promouvoir la transparence dans la création assistée par IA en fournissant un moyen simple et standardisé pour les créateurs de communiquer le niveau d'implication de l'IA dans leur travail. Nous croyons que la transparence renforce la confiance et aide le public à mieux comprendre et apprécier les œuvres créatives à l'ère de l'IA.",
+  aboutCategoriesTitle: "Nos Catégories",
+  aboutCategoriesText:
+    "Nous avons développé cinq catégories distinctes qui représentent différents niveaux d'implication de l'IA dans le processus créatif, des œuvres créées entièrement par l'IA à celles créées entièrement par des humains sans assistance IA.",
+  aboutTeamTitle: "Notre Équipe",
+  aboutTeamText:
+    "L'Indicateur d'Utilisation de l'IA a été développé par une équipe de créateurs, de technologues et d'experts juridiques engagés à promouvoir la transparence et les pratiques éthiques dans la création assistée par IA.",
+  backToHome: "Retour à l'accueil",
+
+  // Add more translations as needed
+};

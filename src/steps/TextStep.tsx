@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useWizard } from "../contexts/WizardContext";
+import { useTranslation } from "../contexts/TranslationContext";
 import RadioGroup from "../components/RadioGroup";
 import {
   StepProps,
@@ -12,6 +13,7 @@ import {
 
 const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   const { textCategory, setTextCategory } = useWizard();
+  const { t } = useTranslation();
 
   const handleOptionSelect = (value: Category) => {
     if (value === textCategory) {
@@ -22,21 +24,27 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
     }
   };
 
+  // Transform options with translation keys into options with localized strings
+  const localizedOptions = textCategoryOptions.map((option) => ({
+    id: option.id,
+    title: t(option.titleKey),
+    description: t(option.descriptionKey),
+  }));
+
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold text-text-primary">
-          Évaluation de votre processus textuel
+          {t("textEvaluationTitle")}
         </h2>
         <p className="mt-2 text-text-secondary">
-          Sélectionnez la catégorie qui correspond le mieux à votre processus de
-          création textuelle.
+          {t("textEvaluationDescription")}
         </p>
       </div>
 
       <div className="pt-2">
         <RadioGroup
-          options={textCategoryOptions}
+          options={localizedOptions}
           value={textCategory}
           onChange={handleOptionSelect}
           detailedOptions={textCategoryOptionsDetailed}

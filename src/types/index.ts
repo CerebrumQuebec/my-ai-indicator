@@ -26,129 +26,119 @@ export interface ResultProps {
 
 export interface CategoryOption {
   id: Category;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
 }
 
 export const musicCategoryOptions: CategoryOption[] = [
   {
     id: 1,
-    title: "IA seule",
-    description: "Génération IA sans intervention humaine.",
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
   },
   {
     id: 2,
-    title: "IA dirigée",
-    description: "Génération IA avec direction humaine (prompts, corrections).",
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
   },
   {
     id: 3,
-    title: "Collaboration IA",
-    description: "Mélange équilibré entre créativité humaine et IA.",
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
   },
   {
     id: 4,
-    title: "Assistance numérique",
-    description: "Production humaine avec outils numériques basiques.",
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
   {
     id: 5,
-    title: "Production artisanale",
-    description: "Production humaine sans IA ni automatisation.",
+    titleKey: "category5Title",
+    descriptionKey: "category5Description",
   },
 ];
 
 export const textCategoryOptions: CategoryOption[] = [
   {
     id: 1,
-    title: "IA seule",
-    description: "Texte généré par IA sans intervention.",
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
   },
   {
     id: 2,
-    title: "IA dirigée",
-    description: "Texte IA avec raffinement humain intensif.",
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
   },
   {
     id: 3,
-    title: "Collaboration IA",
-    description: "Rédaction mixte humain-IA.",
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
   },
   {
     id: 4,
-    title: "Assistance numérique",
-    description: "Texte humain avec outils d'aide basiques.",
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
   {
     id: 5,
-    title: "Production artisanale",
-    description: "Texte 100% humain sans assistance automatique.",
+    titleKey: "category5Title",
+    descriptionKey: "category5Description",
   },
 ];
 
 export const musicCategoryOptionsDetailed: CategoryOption[] = [
   {
     id: 1,
-    title: "IA seule",
-    description:
-      "L'œuvre est générée par une IA sans aucune implication manuelle directe dans le choix ou la modification du contenu final.",
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
   },
   {
     id: 2,
-    title: "IA dirigée",
-    description:
-      "L'œuvre finale est toujours à 100% générée par l'IA, mais avec une forte intervention humaine sur le plan de la direction créative, du prompting, des corrections et du raffinage.",
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
   },
   {
     id: 3,
-    title: "Collaboration IA",
-    description:
-      "Un mélange entre la créativité et l'interprétation humaine, et l'apport de l'IA ou d'autres outils numériques, de manière significative dans le processus.",
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
   },
   {
     id: 4,
-    title: "Assistance numérique",
-    description:
-      "L'œuvre est principalement produite, jouée ou composée par un être humain, mais emploie des outils numériques pour des améliorations ou des corrections non substantielles.",
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
   {
     id: 5,
-    title: "Production artisanale",
-    description:
-      "L'œuvre est quasi entièrement le fruit d'une interprétation et d'une expertise humaines, avec un usage très limité ou inexistant d'automatismes IA ou numériques.",
+    titleKey: "category5Title",
+    descriptionKey: "category5Description",
   },
 ];
 
 export const textCategoryOptionsDetailed: CategoryOption[] = [
   {
     id: 1,
-    title: "IA seule",
-    description:
-      "Le texte est généré automatiquement par une IA sans prompt réfléchi ou avec un prompt unique accepté tel quel.",
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
   },
   {
     id: 2,
-    title: "IA dirigée",
-    description:
-      "Le texte est principalement généré par l'IA, mais avec un raffinage intensif humain sur le plan de la structure, du style et du contenu.",
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
   },
   {
     id: 3,
-    title: "Collaboration IA",
-    description:
-      "L'auteur rédige (en partie) ou conçoit la structure, les idées, puis s'appuie sur l'IA pour compléter ou optimiser des segments de texte de manière significative.",
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
   },
   {
     id: 4,
-    title: "Assistance numérique",
-    description:
-      "Le texte est principalement écrit par l'auteur, mais utilise des outils IA ou d'autres logiciels qui affinent le résultat, sans changer fondamentalement les idées ni la structure.",
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
   {
     id: 5,
-    title: "Production artisanale",
-    description:
-      "Le texte est exclusivement écrit par un être humain sans avoir recours à des outils automatiques pour la correction, la suggestion, ou la reformulation.",
+    titleKey: "category5Title",
+    descriptionKey: "category5Description",
   },
 ];
 

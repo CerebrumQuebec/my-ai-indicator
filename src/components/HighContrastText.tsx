@@ -1,12 +1,12 @@
 import React from "react";
 
 interface HighContrastTextProps {
-  children: React.ReactNode;
+  text: string;
   className?: string;
 }
 
 const HighContrastText: React.FC<HighContrastTextProps> = ({
-  children,
+  text,
   className = "",
 }) => {
   return (
@@ -18,7 +18,7 @@ const HighContrastText: React.FC<HighContrastTextProps> = ({
         fontWeight: 500,
       }}
     >
-      {children}
+      {text}
     </div>
   );
 };
