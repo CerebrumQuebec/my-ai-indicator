@@ -14,12 +14,8 @@ const MusicStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   const { musicCategory, setMusicCategory } = useWizard();
 
   const handleOptionSelect = (value: Category) => {
-    if (value === musicCategory) {
-      onNext();
-    } else {
-      setMusicCategory(value);
-      onNext();
-    }
+    setMusicCategory(value);
+    onNext();
   };
 
   return (

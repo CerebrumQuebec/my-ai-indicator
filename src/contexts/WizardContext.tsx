@@ -11,6 +11,13 @@ export const WizardProvider: React.FC<{ children: ReactNode }> = ({
   const [step, setStep] = useState<number>(1);
   const [musicCategory, setMusicCategory] = useState<Category>(null);
   const [textCategory, setTextCategory] = useState<Category>(null);
+  const [isQuestionnaireMode, setQuestionnaireMode] = useState<boolean>(false);
+  const [musicQuestionnaireAnswers, setMusicQuestionnaireAnswers] = useState<
+    Record<string, number>
+  >({});
+  const [textQuestionnaireAnswers, setTextQuestionnaireAnswers] = useState<
+    Record<string, number>
+  >({});
 
   const value = {
     step,
@@ -19,6 +26,12 @@ export const WizardProvider: React.FC<{ children: ReactNode }> = ({
     setMusicCategory,
     textCategory,
     setTextCategory,
+    isQuestionnaireMode,
+    setQuestionnaireMode,
+    musicQuestionnaireAnswers,
+    setMusicQuestionnaireAnswers,
+    textQuestionnaireAnswers,
+    setTextQuestionnaireAnswers,
   };
 
   return (
