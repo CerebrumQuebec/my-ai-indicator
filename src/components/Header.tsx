@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
+import DonateButton from "./DonationButton";
 
 const Header: React.FC = () => {
   const { setStep, setMusicCategory, setTextCategory } = useWizard();
@@ -80,12 +81,15 @@ const Header: React.FC = () => {
               </ul>
             </nav>
 
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors font-medium"
-            >
-              {language === "fr" ? "EN" : "FR"}
-            </button>
+            <div className="flex items-center gap-4">
+              <DonateButton locale={language} />
+              <button
+                onClick={toggleLanguage}
+                className="px-3 py-1 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors font-medium"
+              >
+                {language === "fr" ? "EN" : "FR"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

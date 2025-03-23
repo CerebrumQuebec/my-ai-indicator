@@ -5,6 +5,21 @@ export const en = {
   about: "About",
   faq: "FAQ",
   contact: "Contact",
+  donate: "Donate",
+
+  // Donation
+  donateTitle: "Make a donation",
+  oneTimeDonation: "One-time",
+  monthlyDonation: "Monthly",
+  amount: "Amount",
+  customAmount: "Other amount (minimum $1)",
+  loading: "Loading...",
+  subscribe: "Subscribe",
+  perMonth: "/month",
+  donationSuccessTitle: "Thank You for Your Donation!",
+  donationSuccessMessage:
+    "Your support helps us continue our mission. We truly appreciate your generosity.",
+  backToHome: "Back to Home",
 
   // Footer
   allRightsReserved: "All rights reserved",
@@ -94,7 +109,6 @@ export const en = {
   aboutTeamTitle: "Our Team",
   aboutTeamText:
     "The AI Badge was developed by a team of creators, technologists, and legal experts committed to promoting transparency and ethical practices in AI-assisted creation.",
-  backToHome: "Back to Home",
 
   // Contact Page
   contactTitle: "Contact",
