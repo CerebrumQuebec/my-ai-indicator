@@ -1,87 +1,47 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
-
-// Types
-type Category = 0 | 1 | 2 | 3 | 4 | null;
-type ContentType = "sounds" | "visual" | "text";
-
-interface SelectedCategories {
-  sounds: boolean;
-  visual: boolean;
-  text: boolean;
-}
-
-interface WizardContextType {
-  step: number;
-  setStep: (step: number) => void;
-  isQuestionnaireMode: boolean;
-  setIsQuestionnaireMode: (mode: boolean) => void;
-
-  // Categories
-  soundsCategory: Category;
-  setSoundsCategory: (category: Category) => void;
-  visualCategory: Category;
-  setVisualCategory: (category: Category) => void;
-  textCategory: Category;
-  setTextCategory: (category: Category) => void;
-
-  // Selected Categories tracking
-  selectedCategories: SelectedCategories;
-  setSelectedCategories: (categories: SelectedCategories) => void;
-
-  // Questionnaire answers
-  soundsQuestionnaireAnswers: number[];
-  setSoundsQuestionnaireAnswers: (answers: number[]) => void;
-  visualQuestionnaireAnswers: number[];
-  setVisualQuestionnaireAnswers: (answers: number[]) => void;
-  textQuestionnaireAnswers: number[];
-  setTextQuestionnaireAnswers: (answers: number[]) => void;
-}
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { Category, WizardContextType, SelectedCategories } from "@/types";
 
 const WizardContext = createContext<WizardContextType | undefined>(undefined);
 
-export function WizardProvider({ children }: { children: React.ReactNode }) {
-  const [step, setStep] = useState(1);
-  const [isQuestionnaireMode, setIsQuestionnaireMode] = useState(false);
-
-  // Categories
-  const [soundsCategory, setSoundsCategory] = useState<Category>(null);
-  const [visualCategory, setVisualCategory] = useState<Category>(null);
-  const [textCategory, setTextCategory] = useState<Category>(null);
-
-  // Selected Categories
+export const WizardProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [step, setStep] = useState<number>(0);
   const [selectedCategories, setSelectedCategories] =
     useState<SelectedCategories>({
       sounds: false,
       visual: false,
       text: false,
     });
-
-  // Questionnaire answers
+  const [soundsCategory, setSoundsCategory] = useState<Category>(null);
+  const [visualCategory, setVisualCategory] = useState<Category>(null);
+  const [textCategory, setTextCategory] = useState<Category>(null);
+  const [isQuestionnaireMode, setQuestionnaireMode] = useState<boolean>(false);
   const [soundsQuestionnaireAnswers, setSoundsQuestionnaireAnswers] = useState<
-    number[]
-  >([]);
+    Record<string, number>
+  >({});
   const [visualQuestionnaireAnswers, setVisualQuestionnaireAnswers] = useState<
-    number[]
-  >([]);
+    Record<string, number>
+  >({});
   const [textQuestionnaireAnswers, setTextQuestionnaireAnswers] = useState<
-    number[]
-  >([]);
+    Record<string, number>
+  >({});
 
-  const value = {
+  const value: WizardContextType = {
     step,
     setStep,
-    isQuestionnaireMode,
-    setIsQuestionnaireMode,
+    selectedCategories,
+    setSelectedCategories,
     soundsCategory,
     setSoundsCategory,
     visualCategory,
     setVisualCategory,
     textCategory,
     setTextCategory,
-    selectedCategories,
-    setSelectedCategories,
+    isQuestionnaireMode,
+    setQuestionnaireMode,
     soundsQuestionnaireAnswers,
     setSoundsQuestionnaireAnswers,
     visualQuestionnaireAnswers,
@@ -93,12 +53,16 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
   return (
     <WizardContext.Provider value={value}>{children}</WizardContext.Provider>
   );
-}
+};
 
-export function useWizard() {
+export const useWizard = (): WizardContextType => {
   const context = useContext(WizardContext);
-  if (context === undefined) {
+
+  if (!context) {
     throw new Error("useWizard must be used within a WizardProvider");
   }
+
   return context;
-}
+};
+
+export default WizardContext;

@@ -5,13 +5,13 @@ import { useWizard } from "../contexts/WizardContext";
 import ResultBadge from "../components/ResultBadge";
 import { ResultProps } from "../types";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "../contexts/TranslationContext";
 import { StepProps, Category } from "../types";
 import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
 
 const Result: React.FC<StepProps> = () => {
-  const t = useTranslations();
+  const { t } = useTranslation();
   const { selectedCategories, soundsCategory, visualCategory, textCategory } =
     useWizard();
   const [copied, setCopied] = useState(false);
@@ -130,6 +130,32 @@ ${selectedCategoryTypes
       },
     };
     return JSON.stringify(metadata, null, 2);
+  };
+
+  const generateId3Example = () => {
+    return `# Example of adding to ID3 metadata (audio)
+# Use a tool like MP3Tag or EasyTag
+
+TXXX: AI-USAGE=${selectedCategoryTypes
+      .map(
+        (type) =>
+          `${getCategoryTitle(type)}-${getCategoryCode(
+            type
+          )}.AI.${getCategoryValue(type)}`
+      )
+      .join("/")}`;
+  };
+
+  const generateCreativeCommonsExample = () => {
+    const year = new Date().getFullYear();
+    return `© ${year} [Your name] • ${selectedCategoryTypes
+      .map(
+        (type) =>
+          `${getCategoryTitle(type)}: ${getCategoryCode(
+            type
+          )}.AI.${getCategoryValue(type)}`
+      )
+      .join(" / ")} • CC BY-SA 4.0`;
   };
 
   const handleCopy = (text: string) => {
@@ -284,6 +310,9 @@ ${selectedCategoryTypes
                 <h3 className="text-lg font-medium text-text-primary mb-3">
                   {t("htmlMetadata")}
                 </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  {t("htmlMetadataDescription")}
+                </p>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
                     <code>{generateMetadataHtml()}</code>
@@ -314,6 +343,9 @@ ${selectedCategoryTypes
                 <h3 className="text-lg font-medium text-text-primary mb-3">
                   {t("jsonMetadata")}
                 </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  {t("jsonMetadataDescription")}
+                </p>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
                     <code>{generateMetadataJson()}</code>
@@ -346,11 +378,68 @@ ${selectedCategoryTypes
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  {t("advancedUsage")}
+                  {t("audioMetadata")}
                 </h3>
-                <p className="text-text-secondary">
-                  {t("advancedUsageDescription")}
+                <p className="text-text-secondary text-sm mb-3">
+                  {t("audioMetadataDescription")}
                 </p>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{generateId3Example()}</code>
+                  </pre>
+                  <button
+                    onClick={() => handleCopy(generateId3Example())}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-medium text-text-primary mb-3">
+                  {t("creativeCommonsUsage")}
+                </h3>
+                <p className="text-text-secondary text-sm mb-3">
+                  {t("creativeCommonsDescription")}
+                </p>
+                <div className="relative">
+                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
+                    <code>{generateCreativeCommonsExample()}</code>
+                  </pre>
+                  <button
+                    onClick={() => handleCopy(generateCreativeCommonsExample())}
+                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -359,7 +448,7 @@ ${selectedCategoryTypes
 
       {copied && (
         <div className="fixed bottom-4 right-4 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 px-4 py-2 rounded-lg shadow-lg">
-          Copié dans le presse-papier !
+          {t("copied")}
         </div>
       )}
     </div>

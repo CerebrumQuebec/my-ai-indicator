@@ -7,114 +7,111 @@ import { CategoryOption, Category } from "../types";
 import HighContrastText from "./HighContrastText";
 import { useTranslation } from "../contexts/TranslationContext";
 
-// We need to extend CategoryOption to work with both title/description and titleKey/descriptionKey
-interface DisplayCategoryOption {
-  id: Category;
-  title: string;
-  description: string;
-}
-
-interface RadioGroupProps {
-  options: DisplayCategoryOption[];
-  value: Category;
+interface Props {
+  options: CategoryOption[];
+  value: Category | null;
   onChange: (value: Category) => void;
   detailedOptions?: CategoryOption[];
 }
 
-export default function RadioGroup({
+const RadioGroup: React.FC<Props> = ({
   options,
   value,
   onChange,
   detailedOptions,
-}: RadioGroupProps) {
-  const [expandedInfo, setExpandedInfo] = useState<number | null>(null);
+}) => {
+  const [expandedInfo, setExpandedInfo] = useState<Category | null>(null);
   const { t } = useTranslation();
-
-  // Transform detailedOptions if they exist
-  const displayDetailedOptions = detailedOptions?.map((option) => ({
-    id: option.id,
-    title: t(option.titleKey),
-    description: t(option.descriptionKey),
-  }));
 
   return (
     <HeadlessRadioGroup value={value} onChange={onChange}>
-      <div className="space-y-2">
+      <div className="space-y-4">
         {options.map((option) => (
           <HeadlessRadioGroup.Option
-            key={option.id}
-            value={option.id}
-            className={({ checked, active }) =>
-              `relative block cursor-pointer rounded-lg border border-white/10 bg-[#0f1525] px-4 py-3 shadow-sm focus:outline-none sm:flex sm:justify-between ${
-                checked ? "border-transparent ring-2 ring-primary-500" : ""
-              } ${active ? "border-primary-500 ring-2 ring-primary-500" : ""}`
+            key={option.value}
+            value={option.value}
+            className={({ active, checked }) =>
+              `${
+                active
+                  ? "ring-2 ring-primary-500 ring-offset-2"
+                  : "ring-1 ring-inset ring-gray-300"
+              }
+              ${
+                checked
+                  ? "bg-primary-500 text-white"
+                  : "bg-surface-card hover:bg-surface-hover"
+              }
+              relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
             }
           >
-            {({ active }) => (
+            {({ active, checked }) => (
               <>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <HeadlessRadioGroup.Label
-                      as="p"
-                      className="font-medium text-white"
-                    >
-                      {option.title}
-                    </HeadlessRadioGroup.Label>
-                    {displayDetailedOptions && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setExpandedInfo(
-                            expandedInfo === option.id ? null : option.id
-                          );
-                        }}
-                        className={`ml-4 flex items-center text-sm font-medium transition duration-150 hover:text-primary-300 ${
-                          active ? "text-primary-300" : "text-primary-500"
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="text-sm">
+                      <HeadlessRadioGroup.Label
+                        as="p"
+                        className={`font-medium ${
+                          checked
+                            ? "text-white"
+                            : "text-gray-900 dark:text-white"
                         }`}
                       >
-                        <InformationCircleIcon
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                        <span className="sr-only">
-                          Plus d&apos;informations
-                        </span>
-                      </button>
-                    )}
+                        <HighContrastText text={t(option.titleKey)} />
+                      </HeadlessRadioGroup.Label>
+                      <HeadlessRadioGroup.Description
+                        as="span"
+                        className={`inline ${
+                          checked
+                            ? "text-white"
+                            : "text-gray-500 dark:text-gray-300"
+                        }`}
+                      >
+                        {t(option.descriptionKey)}
+                      </HeadlessRadioGroup.Description>
+                    </div>
                   </div>
-                  <HeadlessRadioGroup.Description as="div" className="mt-1">
-                    <HighContrastText
-                      text={option.description}
-                      className="text-sm text-text-secondary"
-                    />
-                  </HeadlessRadioGroup.Description>
+                  {detailedOptions && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setExpandedInfo(
+                          expandedInfo === option.value ? null : option.value
+                        );
+                      }}
+                      className="shrink-0 text-white"
+                    >
+                      <InformationCircleIcon
+                        className={`h-6 w-6 ${
+                          checked
+                            ? "text-white"
+                            : "text-gray-500 dark:text-gray-300"
+                        }`}
+                      />
+                    </button>
+                  )}
                 </div>
+                {expandedInfo === option.value && detailedOptions && (
+                  <div className="mt-4 text-sm text-gray-500 dark:text-gray-300">
+                    {detailedOptions.find(
+                      (detailedOption) => detailedOption.value === option.value
+                    )?.descriptionKey &&
+                      t(
+                        detailedOptions.find(
+                          (detailedOption) =>
+                            detailedOption.value === option.value
+                        )!.descriptionKey
+                      )}
+                  </div>
+                )}
               </>
             )}
           </HeadlessRadioGroup.Option>
         ))}
       </div>
-
-      {/* Expanded information panel */}
-      {expandedInfo !== null && displayDetailedOptions && (
-        <div className="mt-4 rounded-lg bg-[#0f1525] border border-white/10 p-4">
-          <h3 className="text-lg font-semibold text-white mb-2">
-            {
-              displayDetailedOptions.find(
-                (option) => option.id === expandedInfo
-              )?.title
-            }
-          </h3>
-          <p className="text-text-secondary">
-            {
-              displayDetailedOptions.find(
-                (option) => option.id === expandedInfo
-              )?.description
-            }
-          </p>
-        </div>
-      )}
     </HeadlessRadioGroup>
   );
-}
+};
+
+export default RadioGroup;

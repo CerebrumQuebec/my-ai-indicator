@@ -1,24 +1,16 @@
 import "./globals.css";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { WizardProvider } from "../contexts/WizardContext";
 import { TranslationProvider } from "../contexts/TranslationContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export const metadata: Metadata = {
-  title: "Badge IA",
-  description:
-    "Évaluez votre niveau d'utilisation de l'IA dans vos créations musicales et textuelles",
-  keywords: ["ia", "badge", "creative commons", "musique", "texte"],
-  authors: [{ name: "Badge IA Team" }],
-};
+const inter = Inter({ subsets: ["latin"] });
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  themeColor: "#121827",
+export const metadata: Metadata = {
+  title: "AI Badge",
+  description: "Evaluate your level of AI usage in your creative works",
 };
 
 export default function RootLayout({
@@ -27,15 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="scroll-smooth">
-      <body className="min-h-screen bg-gradient-to-b from-surface-dark to-surface-card text-text-primary">
+    <html lang="en" className="scroll-smooth">
+      <body
+        className={`${inter.className} min-h-screen bg-gradient-to-b from-surface-dark to-surface-card text-text-primary`}
+      >
         <TranslationProvider>
           <WizardProvider>
-            <div className="flex min-h-screen flex-col">
+            <div className="flex flex-col min-h-screen">
               <Header />
-              <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {children}
-              </main>
+              <main className="flex-grow">{children}</main>
               <Footer />
             </div>
           </WizardProvider>

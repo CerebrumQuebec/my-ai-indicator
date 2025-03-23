@@ -46,6 +46,29 @@ export const fr = {
   whyIndicate: "Pourquoi indiquer l'utilisation de l'IA ?",
   ccInspiration: "Inspiration Creative Commons",
 
+  // Introduction sections
+  howItWorksContent:
+    "Le Badge IA vous aide à communiquer comment l'IA a été utilisée dans votre processus créatif. Répondez simplement à quelques questions sur votre travail, et nous vous aiderons à déterminer le badge approprié.",
+  whyIndicateContent:
+    "Être transparent sur l'utilisation de l'IA établit la confiance avec votre public et aide à définir des attentes appropriées. C'est de plus en plus important dans le paysage créatif actuel.",
+  ccInspirationIntro:
+    "Notre Badge IA s'inspire directement de Creative Commons, qui a révolutionné la façon dont les créateurs peuvent partager leurs œuvres avec des permissions claires.",
+  ccSimilaritiesTitle: "Similarités avec Creative Commons :",
+  ccSimilarity1Title: "Approche standardisée",
+  ccSimilarity1Description: "avec des catégories claires et précises",
+  ccSimilarity2Title: "Triple couche",
+  ccSimilarity2Description:
+    "(humaine, technique et explicative) pour une compréhension à tous les niveaux",
+  ccSimilarity3Title: "Badges visuels",
+  ccSimilarity3Description:
+    "reconnaissables qui communiquent l'information essentielle au premier coup d'œil",
+  ccSimilarity4Title: "Métadonnées standardisées",
+  ccSimilarity4Description:
+    "pour l'intégration technique dans les fichiers et sites web",
+  ccMainDifferenceTitle: "Différence principale :",
+  ccMainDifferenceContent:
+    "Là où Creative Commons définit comment une œuvre peut être utilisée, notre badge précise comment elle a été créée.",
+
   // Music Step
   musicEvaluationTitle: "Évaluation de votre processus musical",
   musicEvaluationDescription:
@@ -181,10 +204,15 @@ export const fr = {
   htmlCode: "Code HTML",
   markdownCode: "Code Markdown",
   htmlMetadata: "Métadonnées HTML",
+  htmlMetadataDescription: "À ajouter dans la section <head> de votre site web",
   jsonMetadata: "Métadonnées JSON-LD",
-  advancedUsage: "Utilisation Avancée",
-  advancedUsageDescription:
-    "Vous pouvez combiner ce badge avec d'autres licences ou systèmes de métadonnées pour fournir des informations complètes sur l'utilisation de l'IA dans votre contenu.",
+  jsonMetadataDescription: "Pour les APIs et systèmes d'échange de données",
+  audioMetadata: "Métadonnées pour fichiers audio",
+  audioMetadataDescription: "Exemple d'utilisation avec les tags ID3 pour MP3",
+  creativeCommonsUsage: "Utilisation avec Creative Commons",
+  creativeCommonsDescription:
+    "Le Badge IA peut être utilisé en parallèle avec une licence Creative Commons ou toute autre licence de droit d'auteur",
+  copied: "Copié dans le presse-papier !",
   startOver: "Recommencer",
 
   // Category descriptions

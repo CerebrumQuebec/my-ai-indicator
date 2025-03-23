@@ -46,6 +46,28 @@ export const en = {
   whyIndicate: "Why indicate AI use?",
   ccInspiration: "Creative Commons Inspiration",
 
+  // Introduction sections
+  howItWorksContent:
+    "The AI Badge helps you communicate how AI was used in your creative process. Simply answer a few questions about your work, and we'll help you determine the appropriate badge.",
+  whyIndicateContent:
+    "Being transparent about AI usage builds trust with your audience and helps set appropriate expectations. It's becoming increasingly important in today's creative landscape.",
+  ccInspirationIntro:
+    "Our AI Badge is directly inspired by Creative Commons, which revolutionized how creators can share their work with clear permissions.",
+  ccSimilaritiesTitle: "Similarities with Creative Commons:",
+  ccSimilarity1Title: "Standardized approach",
+  ccSimilarity1Description: "with clear and precise categories",
+  ccSimilarity2Title: "Triple layer",
+  ccSimilarity2Description:
+    "(human, technical, and explanatory) for understanding at all levels",
+  ccSimilarity3Title: "Visual badges",
+  ccSimilarity3Description:
+    "that communicate essential information at a glance",
+  ccSimilarity4Title: "Standardized metadata",
+  ccSimilarity4Description: "for technical integration in files and websites",
+  ccMainDifferenceTitle: "Main difference:",
+  ccMainDifferenceContent:
+    "Where Creative Commons defines how a work can be used, our badge specifies how it was created.",
+
   // Music Step
   musicEvaluationTitle: "Evaluation of your musical process",
   musicEvaluationDescription:
@@ -178,10 +200,15 @@ export const en = {
   htmlCode: "HTML Code",
   markdownCode: "Markdown Code",
   htmlMetadata: "HTML Metadata",
+  htmlMetadataDescription: "Add this to your website's <head> section",
   jsonMetadata: "JSON-LD Metadata",
-  advancedUsage: "Advanced Usage",
-  advancedUsageDescription:
-    "You can combine this badge with other licenses or metadata systems to provide comprehensive information about your content's AI usage.",
+  jsonMetadataDescription: "For APIs and data exchange systems",
+  audioMetadata: "Audio File Metadata",
+  audioMetadataDescription: "Example of using ID3 tags for MP3 files",
+  creativeCommonsUsage: "Creative Commons Usage",
+  creativeCommonsDescription:
+    "The AI Badge can be used alongside Creative Commons or other copyright licenses",
+  copied: "Copied to clipboard!",
   startOver: "Start Over",
 
   // Category descriptions

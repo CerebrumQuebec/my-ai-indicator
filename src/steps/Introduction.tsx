@@ -4,28 +4,25 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
+import { StepProps } from "../types";
 
-interface IntroductionProps {
-  onNext: () => void;
-}
-
-const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
+const Introduction: React.FC<StepProps> = ({ onNext }) => {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
   const [showCCInspiration, setShowCCInspiration] = useState(false);
   const [knowsLicense, setKnowsLicense] = useState<boolean | null>(null);
-  const { setStep, setIsQuestionnaireMode } = useWizard();
+  const { setStep, setQuestionnaireMode } = useWizard();
   const { t } = useTranslation();
 
   // Function to handle selection of knowledge state
   const handleLicenseKnowledge = (knows: boolean) => {
     setKnowsLicense(knows);
     if (knows) {
-      setIsQuestionnaireMode(false);
-      onNext();
+      setQuestionnaireMode(false);
+      onNext?.();
     } else {
-      setIsQuestionnaireMode(true);
-      onNext();
+      setQuestionnaireMode(true);
+      onNext?.();
     }
   };
 
@@ -84,7 +81,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
         </div>
 
         {/* Second box: Explanations */}
-        <div className="bg-surface-dark rounded-xl border border-white/10 p-6 space-y-4">
+        <div className="mt-8 bg-surface-dark rounded-xl border border-white/10 p-6 space-y-4">
           {/* How it works section */}
           <div>
             <div
@@ -92,7 +89,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
               onClick={() => setShowHowItWorks(!showHowItWorks)}
             >
               <h3 className="text-lg font-semibold text-text-primary">
-                Comment ça fonctionne ?
+                {t("howItWorks")}
               </h3>
               <div className="text-primary-500">
                 {showHowItWorks ? (
@@ -126,32 +123,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
             </div>
             {showHowItWorks && (
               <div className="mt-4 space-y-3 text-text-secondary">
-                <p>
-                  Cet outil vous guide à travers un processus simple pour
-                  déterminer quelle catégorie d&apos;implication IA correspond à
-                  votre création musicale et textuelle.
-                </p>
-                <p>
-                  Pour chaque domaine (musique et texte), vous pourrez soit :
-                </p>
-                <ul className="list-disc list-inside pl-4 space-y-2">
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Choisir directement une catégorie
-                    </span>{" "}
-                    si vous savez déjà quel niveau d&apos;IA vous avez utilisé
-                  </li>
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Répondre à un questionnaire
-                    </span>{" "}
-                    qui vous aidera à déterminer la catégorie la plus appropriée
-                  </li>
-                </ul>
-                <p>
-                  À la fin, vous recevrez un badge et du code à intégrer pour
-                  afficher votre badge IA sur vos plateformes.
-                </p>
+                {t("howItWorksContent")}
               </div>
             )}
           </div>
@@ -163,7 +135,7 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
               onClick={() => setShowWhy(!showWhy)}
             >
               <h3 className="text-lg font-semibold text-text-primary">
-                Pourquoi utiliser ce badge ?
+                {t("whyIndicate")}
               </h3>
               <div className="text-primary-500">
                 {showWhy ? (
@@ -197,56 +169,19 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
             </div>
             {showWhy && (
               <div className="mt-4 space-y-3 text-text-secondary">
-                <p>
-                  À l&apos;ère de l&apos;IA générative, il devient crucial
-                  d&apos;offrir de la
-                  <span className="font-medium text-text-primary">
-                    {" "}
-                    transparence{" "}
-                  </span>
-                  sur le processus créatif. Le Badge IA vous permet de :
-                </p>
-                <ul className="list-disc list-inside pl-4 space-y-2">
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Maintenir la confiance
-                    </span>{" "}
-                    avec votre public en étant transparent sur l&apos;origine de
-                    votre travail
-                  </li>
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Valoriser votre processus créatif
-                    </span>{" "}
-                    qu&apos;il soit principalement humain ou assisté par
-                    l&apos;IA
-                  </li>
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Contribuer à un écosystème sain
-                    </span>{" "}
-                    où la création assistée par IA est clairement identifiable
-                  </li>
-                  <li>
-                    <span className="font-medium text-text-primary">
-                      Compléter vos licences existantes
-                    </span>{" "}
-                    (Creative Commons ou autres) avec cette information sur la
-                    provenance
-                  </li>
-                </ul>
+                {t("whyIndicateContent")}
               </div>
             )}
           </div>
 
-          {/* New section: Creative Commons inspiration */}
+          {/* Creative Commons inspiration section */}
           <div>
             <div
               className="flex justify-between items-center cursor-pointer"
               onClick={() => setShowCCInspiration(!showCCInspiration)}
             >
               <h3 className="text-lg font-semibold text-text-primary">
-                Inspiré de Creative Commons
+                {t("ccInspiration")}
               </h3>
               <div className="text-primary-500">
                 {showCCInspiration ? (
@@ -280,52 +215,43 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
             </div>
             {showCCInspiration && (
               <div className="mt-4 space-y-3 text-text-secondary">
-                <p>
-                  Notre Badge IA s&apos;inspire directement de Creative Commons,
-                  qui a révolutionné la façon dont les créateurs peuvent
-                  partager leurs œuvres avec des permissions claires.
-                </p>
+                <p>{t("ccInspirationIntro")}</p>
                 <p>
                   <span className="font-medium text-text-primary">
-                    Similarités avec Creative Commons :
+                    {t("ccSimilaritiesTitle")}
                   </span>
                 </p>
                 <ul className="list-disc list-inside pl-4 space-y-2">
                   <li>
                     <span className="font-medium text-text-primary">
-                      Approche standardisée
+                      {t("ccSimilarity1Title")}
                     </span>{" "}
-                    avec des catégories claires et précises
+                    {t("ccSimilarity1Description")}
                   </li>
                   <li>
                     <span className="font-medium text-text-primary">
-                      Triple couche
+                      {t("ccSimilarity2Title")}
                     </span>{" "}
-                    (humaine, technique et explicative) pour une compréhension à
-                    tous les niveaux
+                    {t("ccSimilarity2Description")}
                   </li>
                   <li>
                     <span className="font-medium text-text-primary">
-                      Badges visuels
+                      {t("ccSimilarity3Title")}
                     </span>{" "}
-                    reconnaissables qui communiquent l&apos;information
-                    essentielle au premier coup d&apos;œil
+                    {t("ccSimilarity3Description")}
                   </li>
                   <li>
                     <span className="font-medium text-text-primary">
-                      Métadonnées standardisées
+                      {t("ccSimilarity4Title")}
                     </span>{" "}
-                    pour l&apos;intégration technique dans les fichiers et sites
-                    web
+                    {t("ccSimilarity4Description")}
                   </li>
                 </ul>
                 <p>
                   <span className="font-medium text-text-primary">
-                    Différence principale :
+                    {t("ccMainDifferenceTitle")}
                   </span>{" "}
-                  Là où Creative Commons définit comment une œuvre peut être{" "}
-                  <em>utilisée</em>, notre badge précise comment elle a été{" "}
-                  <em>créée</em>.
+                  {t("ccMainDifferenceContent")}
                 </p>
               </div>
             )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useWizard } from "../context/WizardContext";
+import { useWizard } from "../contexts/WizardContext";
 import ProgressBar from "../components/ProgressBar";
 import Introduction from "../steps/Introduction";
 import SoundsStep from "../steps/SoundsStep";
