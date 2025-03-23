@@ -1,20 +1,21 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "../contexts/TranslationContext";
 import { useWizard } from "../contexts/WizardContext";
-import { StepProps, Category } from "../types";
+import { StepProps, Category, soundsCategoryOptions } from "../types";
 import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
+import RadioGroup from "../components/RadioGroup";
 
-const SoundsStep: React.FC<StepProps> = ({ onNext, onBack }) => {
-  const t = useTranslations();
+const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
+  const { t } = useTranslation();
   const { soundsCategory, setSoundsCategory, setQuestionnaireMode } =
     useWizard();
 
   const handleCategoryChange = (value: Category) => {
     setSoundsCategory(value);
-    onNext?.();
+    if (onNext) onNext();
   };
 
   return (
@@ -28,32 +29,17 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack }) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[0, 1, 2, 3, 4].map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategoryChange(category as Category)}
-            className={`p-4 rounded-lg border transition-colors ${
-              soundsCategory === category
-                ? "bg-primary-500 border-primary-600 text-white"
-                : "bg-surface-card border-white/10 hover:bg-surface-hover"
-            }`}
-          >
-            <h3 className="font-semibold mb-2">
-              {t(`category${category}Title`)}
-            </h3>
-            <p className="text-sm opacity-90">
-              {t(`category${category}Description`)}
-            </p>
-          </button>
-        ))}
-      </div>
+      <RadioGroup
+        options={soundsCategoryOptions}
+        value={soundsCategory}
+        onChange={handleCategoryChange}
+      />
 
       <div className="flex justify-center">
         <Button
           onClick={() => {
             setQuestionnaireMode(true);
-            onNext?.();
+            if (onNext) onNext();
           }}
           variant="outline"
         >

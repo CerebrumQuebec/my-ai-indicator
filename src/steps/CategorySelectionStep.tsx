@@ -41,52 +41,88 @@ const CategorySelectionStep: React.FC<StepProps> = ({ onNext }) => {
         {/* Sounds Category */}
         <button
           onClick={() => handleCategoryToggle("sounds")}
-          className={`p-6 rounded-xl border-2 transition-colors text-left ${
-            selectedCategories.sounds
-              ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-              : "border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700"
-          }`}
+          style={{
+            padding: "1.5rem",
+            borderRadius: "0.75rem",
+            borderWidth: "4px",
+            borderStyle: "solid",
+            borderColor: selectedCategories.sounds ? "#3b82f6" : "#4b5563",
+            backgroundColor: selectedCategories.sounds
+              ? "#1e3a8a"
+              : "transparent",
+            color: selectedCategories.sounds ? "white" : "inherit",
+          }}
+          aria-pressed={selectedCategories.sounds}
         >
           <h3 className="text-lg font-semibold mb-2">
             <HighContrastText text={t("soundsCategoryTitle")} />
           </h3>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-gray-300">
             {t("soundsCategoryDescription")}
           </p>
+          {selectedCategories.sounds && (
+            <div className="mt-2 p-1 text-center bg-blue-600 text-white text-xs font-bold uppercase rounded">
+              Selected
+            </div>
+          )}
         </button>
 
         {/* Visual Category */}
         <button
           onClick={() => handleCategoryToggle("visual")}
-          className={`p-6 rounded-xl border-2 transition-colors text-left ${
-            selectedCategories.visual
-              ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20"
-              : "border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700"
-          }`}
+          style={{
+            padding: "1.5rem",
+            borderRadius: "0.75rem",
+            borderWidth: "4px",
+            borderStyle: "solid",
+            borderColor: selectedCategories.visual ? "#8b5cf6" : "#4b5563",
+            backgroundColor: selectedCategories.visual
+              ? "#5b21b6"
+              : "transparent",
+            color: selectedCategories.visual ? "white" : "inherit",
+          }}
+          aria-pressed={selectedCategories.visual}
         >
           <h3 className="text-lg font-semibold mb-2">
             <HighContrastText text={t("visualCategoryTitle")} />
           </h3>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-gray-300">
             {t("visualCategoryDescription")}
           </p>
+          {selectedCategories.visual && (
+            <div className="mt-2 p-1 text-center bg-purple-600 text-white text-xs font-bold uppercase rounded">
+              Selected
+            </div>
+          )}
         </button>
 
         {/* Text Category */}
         <button
           onClick={() => handleCategoryToggle("text")}
-          className={`p-6 rounded-xl border-2 transition-colors text-left ${
-            selectedCategories.text
-              ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-              : "border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-700"
-          }`}
+          style={{
+            padding: "1.5rem",
+            borderRadius: "0.75rem",
+            borderWidth: "4px",
+            borderStyle: "solid",
+            borderColor: selectedCategories.text ? "#10b981" : "#4b5563",
+            backgroundColor: selectedCategories.text
+              ? "#065f46"
+              : "transparent",
+            color: selectedCategories.text ? "white" : "inherit",
+          }}
+          aria-pressed={selectedCategories.text}
         >
           <h3 className="text-lg font-semibold mb-2">
             <HighContrastText text={t("textCategoryTitle")} />
           </h3>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-gray-300">
             {t("textCategoryDescription")}
           </p>
+          {selectedCategories.text && (
+            <div className="mt-2 p-1 text-center bg-green-600 text-white text-xs font-bold uppercase rounded">
+              Selected
+            </div>
+          )}
         </button>
       </div>
 
