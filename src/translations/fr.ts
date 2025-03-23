@@ -104,5 +104,26 @@ export const fr = {
   contactDescription:
     "N'hésitez pas à nous contacter si vous avez des questions sur le Badge IA.",
 
+  // Privacy Page
+  privacyTitle: "Politique de Confidentialité",
+  privacyDescription: "Notre engagement envers votre confidentialité",
+  privacyIntro:
+    "Chez Badge IA, nous prenons votre confidentialité très au sérieux. Cette page explique notre approche de la confidentialité.",
+  noTrackingTitle: "Aucun Suivi",
+  noTrackingText:
+    "Nous n'utilisons aucun outil de suivi ou service d'analyse. Cela signifie :",
+  noGoogleAnalytics: "• Pas de Google Analytics",
+  noPixel: "• Pas de Pixel Meta (Facebook)",
+  noCookies: "• Pas de Cookies",
+  dataCollectionTitle: "Collecte de Données",
+  dataCollectionText:
+    "Ce site web ne collecte aucune information personnelle de ses visiteurs. Vous pouvez utiliser toutes les fonctionnalités du Badge IA sans fournir aucune donnée personnelle.",
+  transparencyTitle: "Notre Transparence",
+  transparencyText:
+    "Nous croyons en la transparence totale. Ce site web est conçu pour être aussi simple et respectueux de la vie privée que possible, se concentrant uniquement sur la fourniture du service Badge IA sans aucune collecte de données inutile.",
+  questionsTitle: "Des Questions ?",
+  questionsText:
+    "Si vous avez des questions sur notre politique de confidentialité, n'hésitez pas à nous contacter.",
+
   // Add more translations as needed
 };

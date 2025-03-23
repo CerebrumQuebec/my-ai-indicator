@@ -83,28 +83,6 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
           </div>
         </div>
 
-        {/* Additional information buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4">
-          <button
-            onClick={() => setShowHowItWorks(!showHowItWorks)}
-            className="flex-1 px-4 py-3 bg-surface-dark hover:bg-surface-card rounded-lg transition-colors text-text-primary"
-          >
-            {t("howItWorks")}
-          </button>
-          <button
-            onClick={() => setShowWhy(!showWhy)}
-            className="flex-1 px-4 py-3 bg-surface-dark hover:bg-surface-card rounded-lg transition-colors text-text-primary"
-          >
-            {t("whyIndicate")}
-          </button>
-          <button
-            onClick={() => setShowCCInspiration(!showCCInspiration)}
-            className="flex-1 px-4 py-3 bg-surface-dark hover:bg-surface-card rounded-lg transition-colors text-text-primary"
-          >
-            {t("ccInspiration")}
-          </button>
-        </div>
-
         {/* Second box: Explanations */}
         <div className="bg-surface-dark rounded-xl border border-white/10 p-6 space-y-4">
           {/* How it works section */}

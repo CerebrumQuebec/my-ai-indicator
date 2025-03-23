@@ -101,5 +101,26 @@ export const en = {
   contactDescription:
     "Feel free to reach out if you have any questions about the AI Badge.",
 
+  // Privacy Page
+  privacyTitle: "Privacy Policy",
+  privacyDescription: "Our commitment to your privacy",
+  privacyIntro:
+    "At AI Badge, we take your privacy very seriously. This page explains our approach to privacy.",
+  noTrackingTitle: "No Tracking",
+  noTrackingText:
+    "We do not use any tracking tools or analytics services. This means:",
+  noGoogleAnalytics: "• No Google Analytics",
+  noPixel: "• No Meta (Facebook) Pixel",
+  noCookies: "• No Cookies",
+  dataCollectionTitle: "Data Collection",
+  dataCollectionText:
+    "This website does not collect any personal information from its visitors. You can use all features of the AI Badge without providing any personal data.",
+  transparencyTitle: "Our Transparency",
+  transparencyText:
+    "We believe in complete transparency. This website is designed to be as simple and privacy-respecting as possible, focusing solely on providing the AI Badge service without any unnecessary data collection.",
+  questionsTitle: "Questions?",
+  questionsText:
+    "If you have any questions about our privacy policy, please don't hesitate to contact us.",
+
   // Add more translations as needed
 };
