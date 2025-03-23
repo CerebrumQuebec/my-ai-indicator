@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useWizard } from "../contexts/WizardContext";
 
 export interface ProgressBarProps {
   currentStep: number;
@@ -23,6 +24,28 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   currentQuestion,
   totalQuestions,
 }) => {
+  const {
+    setStep,
+    setSoundsCategory,
+    setVisualCategory,
+    setTextCategory,
+    setSelectedCategories,
+    setQuestionnaireMode,
+  } = useWizard();
+
+  const handleReset = () => {
+    setStep(1);
+    setSoundsCategory(null);
+    setVisualCategory(null);
+    setTextCategory(null);
+    setSelectedCategories({
+      sounds: false,
+      visual: false,
+      text: false,
+    });
+    setQuestionnaireMode(false);
+  };
+
   const progress = isQuestionnaireMode
     ? ((currentStep - 1) / totalSteps) * 100 +
       ((currentQuestion / totalQuestions) * 100) / totalSteps
@@ -44,6 +67,12 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
             className="text-sm text-text-secondary hover:text-text-primary transition-colors"
           >
             Back
+          </button>
+          <button
+            onClick={handleReset}
+            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+          >
+            Reset
           </button>
           {canContinue && (
             <button

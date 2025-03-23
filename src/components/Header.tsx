@@ -98,11 +98,6 @@ const Header: React.FC = () => {
             </nav>
 
             <div className="flex items-center gap-4">
-              {step > 0 && (
-                <Button onClick={handleReset} variant="outline">
-                  {t("reset")}
-                </Button>
-              )}
               <button
                 onClick={toggleLanguage}
                 className="px-3 py-1 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors font-medium"
