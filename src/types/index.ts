@@ -156,34 +156,6 @@ export const musicCategoryOptions: CategoryOption[] = [
   },
 ];
 
-export const soundsCategoryOptionsDetailed: CategoryOption[] = [
-  {
-    id: 0,
-    titleKey: "category0Title",
-    descriptionKey: "category0Description",
-  },
-  {
-    id: 1,
-    titleKey: "category1Title",
-    descriptionKey: "category1Description",
-  },
-  {
-    id: 2,
-    titleKey: "category2Title",
-    descriptionKey: "category2Description",
-  },
-  {
-    id: 3,
-    titleKey: "category3Title",
-    descriptionKey: "category3Description",
-  },
-  {
-    id: 4,
-    titleKey: "category4Title",
-    descriptionKey: "category4Description",
-  },
-];
-
 export const textCategoryOptionsDetailed: CategoryOption[] = [
   {
     id: 0,

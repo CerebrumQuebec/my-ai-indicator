@@ -1,7 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Category, WizardContextType, SelectedCategories } from "@/types";
+import {
+  Category,
+  WizardContextType,
+  SelectedCategories,
+} from "../types/index";
 
 const WizardContext = createContext<WizardContextType | undefined>(undefined);
 

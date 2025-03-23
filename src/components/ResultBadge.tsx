@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Category } from "@/types";
+import { useTranslation } from "../contexts/TranslationContext";
+import { Category } from "../types/index";
 import HighContrastText from "./HighContrastText";
 
 export interface ResultBadgeProps {

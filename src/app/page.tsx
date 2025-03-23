@@ -10,7 +10,8 @@ import SoundsQuestionnaire from "../steps/SoundsQuestionnaire";
 import TextQuestionnaire from "../steps/TextQuestionnaire";
 import VisualQuestionnaire from "../steps/VisualQuestionnaire";
 import Result from "../steps/Result";
-import CategorySelection from "../steps/CategorySelection";
+import ManualSelectionStep from "../steps/ManualSelectionStep";
+import GuidedSelectionStep from "../steps/GuidedSelectionStep";
 
 export default function Home() {
   const {
@@ -80,7 +81,11 @@ export default function Home() {
       case 1:
         return <Introduction onNext={handleNext} />;
       case 2:
-        return <CategorySelection onNext={handleNext} onBack={handleBack} />;
+        return isQuestionnaireMode ? (
+          <GuidedSelectionStep onNext={handleNext} onBack={handleBack} />
+        ) : (
+          <ManualSelectionStep onNext={handleNext} onBack={handleBack} />
+        );
       default:
         const currentStepIndex = step - 3; // Adjust for intro and category selection steps
         const categories = Object.entries(selectedCategories)

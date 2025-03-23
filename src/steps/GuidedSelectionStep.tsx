@@ -5,7 +5,7 @@ import { useWizard } from "../contexts/WizardContext";
 import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
 
-const GuidedSelectionStep: React.FC<StepProps> = ({ onNext }) => {
+const GuidedSelectionStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   const { t } = useTranslation();
   const { selectedCategories, setSelectedCategories } = useWizard();
 
@@ -126,7 +126,13 @@ const GuidedSelectionStep: React.FC<StepProps> = ({ onNext }) => {
         </button>
       </div>
 
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-between mt-8">
+        <button
+          onClick={onBack}
+          className="px-6 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
+        >
+          {t("back")}
+        </button>
         <Button
           onClick={handleNext}
           disabled={!isAtLeastOneCategorySelected}
