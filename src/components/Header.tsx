@@ -10,6 +10,7 @@ import HighContrastText from "./HighContrastText";
 
 const Header: React.FC = () => {
   const {
+    step,
     setStep,
     setSoundsCategory,
     setVisualCategory,
@@ -97,9 +98,11 @@ const Header: React.FC = () => {
             </nav>
 
             <div className="flex items-center gap-4">
-              <Button onClick={handleReset} variant="outline">
-                {t("reset")}
-              </Button>
+              {step > 0 && (
+                <Button onClick={handleReset} variant="outline">
+                  {t("reset")}
+                </Button>
+              )}
               <button
                 onClick={toggleLanguage}
                 className="px-3 py-1 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors font-medium"
