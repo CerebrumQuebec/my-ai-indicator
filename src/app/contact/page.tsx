@@ -16,10 +16,10 @@ export default function Contact() {
           <div>
             <h2 className="text-xl text-white mb-2">Philippe Bourque</h2>
             <a
-              href="mailto:phil@quaribou.net"
+              href="mailto:phil@cerebrum.website"
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
-              phil@quaribou.net
+              phil@cerebrum.website
             </a>
           </div>
 

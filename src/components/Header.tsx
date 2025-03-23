@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
 
@@ -28,9 +29,15 @@ const Header: React.FC = () => {
             onClick={handleReset}
             className="flex items-center text-2xl font-bold text-text-primary mb-4 md:mb-0 hover:text-primary-400 transition-colors"
           >
-            <span className="bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg mr-3">
-              ℹ️
-            </span>
+            <div className="relative w-8 h-8 mr-3">
+              <Image
+                src="/logo.png"
+                alt="Badge AI Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
             {t("appName")}
           </Link>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
 
@@ -32,7 +33,16 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
     <div className="space-y-8">
       {/* First box: Welcome and CTA */}
       <div className="bg-surface-card rounded-xl border border-white/10 p-6">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
+          <div className="relative w-24 h-24 mx-auto">
+            <Image
+              src="/logo.png"
+              alt="Badge AI Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
           <h1 className="text-4xl font-bold text-text-primary">
             {t("welcomeTitle")}
           </h1>
