@@ -38,34 +38,34 @@ export default function About() {
             </p>
 
             {/* Content Type Cards - Stack on mobile, 3 columns on larger screens */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mt-4 sm:mt-6">
-              <div className="bg-surface-dark rounded-lg border border-white/10 p-4">
-                <h3 className="font-semibold text-text-primary mb-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-4">
+              <div className="bg-surface-dark rounded-lg border border-white/10 p-3 sm:p-4">
+                <h3 className="text-lg font-semibold text-text-primary mb-1.5">
                   {t("soundsCategoryTitle")}
                 </h3>
-                <p className="text-sm text-text-secondary mb-3">
+                <p className="text-sm text-text-secondary mb-2">
                   {t("soundsCategoryDescription")}
                 </p>
                 <div className="text-xs text-text-secondary font-medium">
                   S.AI.0 - S.AI.4
                 </div>
               </div>
-              <div className="bg-surface-dark rounded-lg border border-white/10 p-4">
-                <h3 className="font-semibold text-text-primary mb-2">
+              <div className="bg-surface-dark rounded-lg border border-white/10 p-3 sm:p-4">
+                <h3 className="text-lg font-semibold text-text-primary mb-1.5">
                   {t("visualCategoryTitle")}
                 </h3>
-                <p className="text-sm text-text-secondary mb-3">
+                <p className="text-sm text-text-secondary mb-2">
                   {t("visualCategoryDescription")}
                 </p>
                 <div className="text-xs text-text-secondary font-medium">
                   V.AI.0 - V.AI.4
                 </div>
               </div>
-              <div className="bg-surface-dark rounded-lg border border-white/10 p-4">
-                <h3 className="font-semibold text-text-primary mb-2">
+              <div className="bg-surface-dark rounded-lg border border-white/10 p-3 sm:p-4">
+                <h3 className="text-lg font-semibold text-text-primary mb-1.5">
                   {t("textCategoryTitle")}
                 </h3>
-                <p className="text-sm text-text-secondary mb-3">
+                <p className="text-sm text-text-secondary mb-2">
                   {t("textCategoryDescription")}
                 </p>
                 <div className="text-xs text-text-secondary font-medium">
@@ -75,16 +75,16 @@ export default function About() {
             </div>
 
             {/* AI Usage Level Cards - Stack on mobile, 2-3-5 columns as screen grows */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mt-4 sm:mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 mt-3 sm:mt-4">
               {[0, 1, 2, 3, 4].map((category) => (
                 <div
                   key={category}
-                  className="bg-surface-dark rounded-lg border border-white/10 p-4"
+                  className="bg-surface-dark rounded-lg border border-white/10 p-3"
                 >
-                  <h3 className="font-semibold text-text-primary mb-2">
+                  <h3 className="text-base font-semibold text-text-primary mb-1.5">
                     {t(`category${category}Title`)}
                   </h3>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-xs text-text-secondary">
                     {t(`category${category}Description`)}
                   </p>
                 </div>
