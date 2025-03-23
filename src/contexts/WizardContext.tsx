@@ -8,7 +8,7 @@ const WizardContext = createContext<WizardContextType | undefined>(undefined);
 export const WizardProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number>(1);
   const [selectedCategories, setSelectedCategories] =
     useState<SelectedCategories>({
       sounds: false,

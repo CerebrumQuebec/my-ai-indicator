@@ -1,6 +1,7 @@
 "use client";
 
 import { useWizard } from "../contexts/WizardContext";
+import { useTranslation } from "../contexts/TranslationContext";
 
 interface CategorySelectionProps {
   onNext: () => void;
@@ -12,6 +13,7 @@ export default function CategorySelection({
   onBack,
 }: CategorySelectionProps) {
   const { selectedCategories, setSelectedCategories } = useWizard();
+  const { t } = useTranslation();
 
   const toggleCategory = (category: keyof typeof selectedCategories) => {
     setSelectedCategories({
@@ -24,11 +26,10 @@ export default function CategorySelection({
     <div className="space-y-8">
       <div className="space-y-4">
         <h2 className="text-2xl font-bold text-text-primary">
-          Select Content Types to Evaluate
+          {t("categorySelectionTitle")}
         </h2>
         <p className="text-text-secondary">
-          Choose one or more content types that you want to evaluate for AI
-          usage.
+          {t("categorySelectionDescription")}
         </p>
       </div>
 
@@ -41,9 +42,11 @@ export default function CategorySelection({
               : "border-white/10 hover:border-white/20"
           }`}
         >
-          <h3 className="text-lg font-semibold mb-2">Sounds</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            {t("soundsCategoryTitle")}
+          </h3>
           <p className="text-sm text-text-secondary">
-            Music, podcasts, sound effects, and audio content
+            {t("soundsCategoryDescription")}
           </p>
         </button>
 
@@ -55,9 +58,11 @@ export default function CategorySelection({
               : "border-white/10 hover:border-white/20"
           }`}
         >
-          <h3 className="text-lg font-semibold mb-2">Visual</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            {t("visualCategoryTitle")}
+          </h3>
           <p className="text-sm text-text-secondary">
-            Pictures, videos, images, and visual content
+            {t("visualCategoryDescription")}
           </p>
         </button>
 
@@ -69,9 +74,11 @@ export default function CategorySelection({
               : "border-white/10 hover:border-white/20"
           }`}
         >
-          <h3 className="text-lg font-semibold mb-2">Text</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            {t("textCategoryTitle")}
+          </h3>
           <p className="text-sm text-text-secondary">
-            Books, social media posts, emails, code, and written content
+            {t("textCategoryDescription")}
           </p>
         </button>
       </div>
@@ -81,14 +88,14 @@ export default function CategorySelection({
           onClick={onBack}
           className="px-6 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
         >
-          Back
+          {t("back")}
         </button>
         <button
           onClick={onNext}
           disabled={!Object.values(selectedCategories).some(Boolean)}
           className="px-6 py-2 rounded-lg bg-primary hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Continue
+          {t("next")}
         </button>
       </div>
     </div>
