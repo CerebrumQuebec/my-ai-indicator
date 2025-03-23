@@ -74,6 +74,11 @@ export const fr = {
   musicEvaluationDescription:
     "Sélectionnez la catégorie qui correspond le mieux à votre processus de création musicale.",
 
+  // Add sounds evaluation keys for consistency
+  soundsEvaluationTitle: "Évaluation de votre processus sonore",
+  soundsEvaluationDescription:
+    "Sélectionnez la catégorie qui correspond le mieux à votre processus de création sonore.",
+
   // Text Step
   textEvaluationTitle: "Évaluation de votre processus textuel",
   textEvaluationDescription:
@@ -115,6 +120,22 @@ export const fr = {
     "Génération par IA avec direction humaine (prompts, corrections).",
   category4Title: "IA Uniquement",
   category4Description: "Génération par IA sans intervention humaine.",
+
+  // Text-specific categories
+  textCategory0Title: "Humain Uniquement",
+  textCategory0Description: "Texte écrit exclusivement par un humain sans IA.",
+  textCategory1Title: "Humain avec Assistance IA",
+  textCategory1Description:
+    "Texte principalement écrit par un humain avec des outils IA pour assistance.",
+  textCategory2Title: "Collaboration IA",
+  textCategory2Description:
+    "Mélange équilibré entre rédaction humaine et génération IA.",
+  textCategory3Title: "IA Dirigée",
+  textCategory3Description:
+    "Génération par IA avec des prompts et édition humaine.",
+  textCategory4Title: "IA Uniquement",
+  textCategory4Description:
+    "Texte entièrement généré par IA sans édition humaine.",
 
   // FAQ Page
   faqTitle: "Questions Fréquentes",
@@ -224,6 +245,71 @@ export const fr = {
   categoryDDescription: "Création de contenu assistée par l'IA",
   categoryEDescription: "Contenu amélioré ou modifié par l'IA",
   categoryFDescription: "Aucune utilisation d'IA",
+
+  // Questionnaire questions and options
+  // Sounds questionnaire
+  soundsQ1:
+    "Comment le matériel sonore de base (mélodie, harmonie, rythme) a-t-il été créé ?",
+  soundsQ1OptionA: "Entièrement généré par l'IA sans modification",
+  soundsQ1OptionB:
+    "Généré par l'IA, puis sélectionné parmi plusieurs propositions",
+  soundsQ1OptionC: "Co-créé avec une aide significative de l'IA",
+  soundsQ1OptionD: "Créé par l'humain avec une aide mineure de l'IA",
+  soundsQ1OptionE: "Créé entièrement par l'humain",
+
+  // Visual questionnaire
+  visualQ1: "Comment le contenu visuel a-t-il été créé ?",
+  visualQ1OptionA: "Entièrement généré par l'IA sans modification",
+  visualQ1OptionB: "Généré par l'IA, puis sélectionné et édité",
+  visualQ1OptionC: "Co-créé avec une aide significative de l'IA",
+  visualQ1OptionD: "Créé par l'humain avec des améliorations mineures de l'IA",
+  visualQ1OptionE: "Créé entièrement par l'humain",
+
+  // Text questionnaire
+  textQ1: "Comment le contenu textuel de base a-t-il été créé ?",
+  textQ1OptionA: "Entièrement généré par l'IA sans modification",
+  textQ1OptionB:
+    "Généré par l'IA, puis sélectionné parmi plusieurs propositions",
+  textQ1OptionC: "Co-créé avec une aide significative de l'IA",
+  textQ1OptionD: "Créé par l'humain avec une aide mineure de l'IA",
+  textQ1OptionE: "Créé entièrement par l'humain",
+
+  // Selected text label
+  selected: "Sélectionné",
+
+  // Visual-specific categories
+  visualCategory0Title: "Humain Uniquement",
+  visualCategory0Description:
+    "Contenu visuel créé exclusivement par un humain sans IA.",
+  visualCategory1Title: "Humain avec Assistance IA",
+  visualCategory1Description:
+    "Contenu visuel principalement créé par un humain avec des outils IA pour assistance.",
+  visualCategory2Title: "Collaboration IA",
+  visualCategory2Description:
+    "Mélange équilibré entre créativité humaine et génération IA pour le contenu visuel.",
+  visualCategory3Title: "IA Dirigée",
+  visualCategory3Description:
+    "Contenu visuel généré par IA avec des prompts et édition humaine.",
+  visualCategory4Title: "IA Uniquement",
+  visualCategory4Description:
+    "Contenu visuel entièrement généré par IA sans édition humaine.",
+
+  // Sounds-specific categories
+  soundsCategory0Title: "Humain Uniquement",
+  soundsCategory0Description:
+    "Contenu audio créé exclusivement par un humain sans IA.",
+  soundsCategory1Title: "Humain avec Assistance IA",
+  soundsCategory1Description:
+    "Contenu audio principalement créé par un humain avec des outils IA pour assistance.",
+  soundsCategory2Title: "Collaboration IA",
+  soundsCategory2Description:
+    "Mélange équilibré entre créativité humaine et génération IA pour le contenu audio.",
+  soundsCategory3Title: "IA Dirigée",
+  soundsCategory3Description:
+    "Contenu audio généré par IA avec des prompts et édition humaine.",
+  soundsCategory4Title: "IA Uniquement",
+  soundsCategory4Description:
+    "Contenu audio entièrement généré par IA sans édition humaine.",
 
   // Add more translations as needed
 };

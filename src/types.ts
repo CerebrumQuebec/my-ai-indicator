@@ -38,6 +38,34 @@ export interface WizardContextType {
   setTextQuestionnaireAnswers: (answers: Record<string, number>) => void;
 }
 
+export const soundsCategoryOptions: CategoryOption[] = [
+  {
+    value: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
+  {
+    value: 1,
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
+  },
+  {
+    value: 2,
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
+  },
+  {
+    value: 3,
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
+  },
+  {
+    value: 4,
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
+  },
+];
+
 export const visualCategoryOptions: CategoryOption[] = [
   {
     value: 0,

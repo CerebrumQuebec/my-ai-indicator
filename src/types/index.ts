@@ -47,84 +47,84 @@ export interface CategoryOption {
 export const soundsCategoryOptions: CategoryOption[] = [
   {
     id: 0,
-    titleKey: "category0Title",
-    descriptionKey: "category0Description",
+    titleKey: "soundsCategory0Title",
+    descriptionKey: "soundsCategory0Description",
   },
   {
     id: 1,
-    titleKey: "category1Title",
-    descriptionKey: "category1Description",
+    titleKey: "soundsCategory1Title",
+    descriptionKey: "soundsCategory1Description",
   },
   {
     id: 2,
-    titleKey: "category2Title",
-    descriptionKey: "category2Description",
+    titleKey: "soundsCategory2Title",
+    descriptionKey: "soundsCategory2Description",
   },
   {
     id: 3,
-    titleKey: "category3Title",
-    descriptionKey: "category3Description",
+    titleKey: "soundsCategory3Title",
+    descriptionKey: "soundsCategory3Description",
   },
   {
     id: 4,
-    titleKey: "category4Title",
-    descriptionKey: "category4Description",
+    titleKey: "soundsCategory4Title",
+    descriptionKey: "soundsCategory4Description",
   },
 ];
 
 export const visualCategoryOptions: CategoryOption[] = [
   {
     id: 0,
-    titleKey: "category0Title",
-    descriptionKey: "category0Description",
+    titleKey: "visualCategory0Title",
+    descriptionKey: "visualCategory0Description",
   },
   {
     id: 1,
-    titleKey: "category1Title",
-    descriptionKey: "category1Description",
+    titleKey: "visualCategory1Title",
+    descriptionKey: "visualCategory1Description",
   },
   {
     id: 2,
-    titleKey: "category2Title",
-    descriptionKey: "category2Description",
+    titleKey: "visualCategory2Title",
+    descriptionKey: "visualCategory2Description",
   },
   {
     id: 3,
-    titleKey: "category3Title",
-    descriptionKey: "category3Description",
+    titleKey: "visualCategory3Title",
+    descriptionKey: "visualCategory3Description",
   },
   {
     id: 4,
-    titleKey: "category4Title",
-    descriptionKey: "category4Description",
+    titleKey: "visualCategory4Title",
+    descriptionKey: "visualCategory4Description",
   },
 ];
 
 export const textCategoryOptions: CategoryOption[] = [
   {
     id: 0,
-    titleKey: "category0Title",
-    descriptionKey: "category0Description",
+    titleKey: "textCategory0Title",
+    descriptionKey: "textCategory0Description",
   },
   {
     id: 1,
-    titleKey: "category1Title",
-    descriptionKey: "category1Description",
+    titleKey: "textCategory1Title",
+    descriptionKey: "textCategory1Description",
   },
   {
     id: 2,
-    titleKey: "category2Title",
-    descriptionKey: "category2Description",
+    titleKey: "textCategory2Title",
+    descriptionKey: "textCategory2Description",
   },
   {
     id: 3,
-    titleKey: "category3Title",
-    descriptionKey: "category3Description",
+    titleKey: "textCategory3Title",
+    descriptionKey: "textCategory3Description",
   },
   {
     id: 4,
-    titleKey: "category4Title",
-    descriptionKey: "category4Description",
+    titleKey: "textCategory4Title",
+    descriptionKey: "textCategory4Description",
   },
 ];
 

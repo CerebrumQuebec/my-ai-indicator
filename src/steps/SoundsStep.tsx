@@ -15,17 +15,29 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
 
   const handleCategoryChange = (value: Category) => {
     setSoundsCategory(value);
-    if (onNext) onNext();
+  };
+
+  const handleNext = () => {
+    if (onNext && soundsCategory !== null) {
+      onNext();
+    }
+  };
+
+  const handleQuestionnaireMode = () => {
+    if (onNext) {
+      setQuestionnaireMode(true);
+      onNext();
+    }
   };
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">
-          <HighContrastText text={t("musicEvaluationTitle")} />
+          <HighContrastText text={t("soundsEvaluationTitle")} />
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          {t("musicEvaluationDescription")}
+          {t("soundsEvaluationDescription")}
         </p>
       </div>
 
@@ -35,22 +47,24 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
         onChange={handleCategoryChange}
       />
 
-      <div className="flex justify-center">
-        <Button
-          onClick={() => {
-            setQuestionnaireMode(true);
-            if (onNext) onNext();
-          }}
-          variant="outline"
-        >
-          {t("takeQuestionnaire")}
-        </Button>
-      </div>
-
-      <div className="flex justify-between">
-        <Button onClick={onBack} variant="outline">
-          {t("back")}
-        </Button>
+      <div className="flex justify-between mt-8">
+        {onBack && (
+          <Button onClick={onBack} variant="secondary">
+            {t("back")}
+          </Button>
+        )}
+        <div className="flex gap-4">
+          <Button onClick={handleQuestionnaireMode} variant="secondary">
+            {t("takeQuestionnaire")}
+          </Button>
+          <Button
+            onClick={handleNext}
+            disabled={soundsCategory === null}
+            className="w-full sm:w-auto"
+          >
+            {t("next")}
+          </Button>
+        </div>
       </div>
     </div>
   );

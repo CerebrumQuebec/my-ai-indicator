@@ -64,7 +64,7 @@ export default function CategorySelection({
           </p>
           {selectedCategories.sounds && (
             <div className="mt-2 p-1 text-center bg-blue-600 text-white text-xs font-bold uppercase rounded">
-              Selected
+              {t("selected")}
             </div>
           )}
         </button>
@@ -92,7 +92,7 @@ export default function CategorySelection({
           </p>
           {selectedCategories.visual && (
             <div className="mt-2 p-1 text-center bg-purple-600 text-white text-xs font-bold uppercase rounded">
-              Selected
+              {t("selected")}
             </div>
           )}
         </button>
@@ -120,7 +120,7 @@ export default function CategorySelection({
           </p>
           {selectedCategories.text && (
             <div className="mt-2 p-1 text-center bg-green-600 text-white text-xs font-bold uppercase rounded">
-              Selected
+              {t("selected")}
             </div>
           )}
         </button>

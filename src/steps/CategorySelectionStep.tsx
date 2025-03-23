@@ -1,12 +1,12 @@
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "../contexts/TranslationContext";
 import { useWizard } from "../contexts/WizardContext";
 import { StepProps } from "@/types";
 import Button from "@/components/Button";
 import HighContrastText from "@/components/HighContrastText";
 
 const CategorySelectionStep: React.FC<StepProps> = ({ onNext }) => {
-  const t = useTranslations();
+  const { t } = useTranslation();
   const { selectedCategories, setSelectedCategories } = useWizard();
 
   const handleCategoryToggle = (category: keyof typeof selectedCategories) => {

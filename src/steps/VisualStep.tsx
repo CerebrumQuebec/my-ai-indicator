@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "../contexts/TranslationContext";
 import { useWizard } from "../contexts/WizardContext";
 import { StepProps, Category, visualCategoryOptions } from "../types";
 import RadioGroup from "../components/RadioGroup";
@@ -9,8 +9,8 @@ import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
 
 const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
-  const t = useTranslations();
-  const { visualCategory, setVisualCategory, setIsQuestionnaireMode } =
+  const { t } = useTranslation();
+  const { visualCategory, setVisualCategory, setQuestionnaireMode } =
     useWizard();
 
   const handleCategoryChange = (value: Category) => {
@@ -25,16 +25,10 @@ const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
 
   const handleQuestionnaireMode = () => {
     if (onNext) {
-      setIsQuestionnaireMode(true);
+      setQuestionnaireMode(true);
       onNext();
     }
   };
-
-  const localizedOptions = visualCategoryOptions.map((option) => ({
-    ...option,
-    title: t(option.titleKey),
-    description: t(option.descriptionKey),
-  }));
 
   return (
     <div className="space-y-6">
@@ -48,7 +42,7 @@ const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
       </div>
 
       <RadioGroup
-        options={localizedOptions}
+        options={visualCategoryOptions}
         value={visualCategory}
         onChange={handleCategoryChange}
       />

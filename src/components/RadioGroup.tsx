@@ -23,13 +23,16 @@ const RadioGroup: React.FC<Props> = ({
   const [expandedInfo, setExpandedInfo] = useState<Category | null>(null);
   const { t } = useTranslation();
 
+  // For debugging - remove in production
+  console.log("RadioGroup options:", options);
+
   return (
     <HeadlessRadioGroup value={value} onChange={onChange}>
       <div className="space-y-4">
         {options.map((option) => (
           <HeadlessRadioGroup.Option
-            key={option.value}
-            value={option.value}
+            key={option.id}
+            value={option.id}
             className={({ active, checked }) =>
               `${
                 active
@@ -77,7 +80,7 @@ const RadioGroup: React.FC<Props> = ({
                       onClick={(e) => {
                         e.preventDefault();
                         setExpandedInfo(
-                          expandedInfo === option.value ? null : option.value
+                          expandedInfo === option.id ? null : option.id
                         );
                       }}
                       className="shrink-0 text-white"
@@ -92,15 +95,14 @@ const RadioGroup: React.FC<Props> = ({
                     </button>
                   )}
                 </div>
-                {expandedInfo === option.value && detailedOptions && (
+                {expandedInfo === option.id && detailedOptions && (
                   <div className="mt-4 text-sm text-gray-500 dark:text-gray-300">
                     {detailedOptions.find(
-                      (detailedOption) => detailedOption.value === option.value
+                      (detailedOption) => detailedOption.id === option.id
                     )?.descriptionKey &&
                       t(
                         detailedOptions.find(
-                          (detailedOption) =>
-                            detailedOption.value === option.value
+                          (detailedOption) => detailedOption.id === option.id
                         )!.descriptionKey
                       )}
                   </div>
