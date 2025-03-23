@@ -25,7 +25,7 @@ export default function Home() {
   } = useWizard();
 
   const totalSteps =
-    2 + Object.values(selectedCategories).filter(Boolean).length; // Intro + Category Selection + One step per selected category
+    3 + Object.values(selectedCategories).filter(Boolean).length; // Intro + Category Selection + One step per selected category + Result
   const totalQuestionsPerStep = 10;
 
   // Get current question number from the active questionnaire component
