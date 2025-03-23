@@ -56,18 +56,42 @@ export const en = {
   textEvaluationDescription:
     "Select the category that best matches your text creation process.",
 
+  // Visual Step
+  visualEvaluationTitle: "Evaluation of your visual content",
+  visualEvaluationDescription:
+    "Select the category that best matches your visual creation process.",
+  visualQuestionnaireTitle: "Visual Content Questionnaire",
+  visualQuestionnaireDescription:
+    "Answer these questions to help determine the level of AI involvement in your visual content.",
+  takeQuestionnaire: "Not sure? Take the questionnaire",
+  back: "Back",
+
+  // Category Selection
+  categorySelectionTitle: "Select Content Types",
+  categorySelectionDescription:
+    "Choose which types of content you want to evaluate for AI usage.",
+  soundsCategoryTitle: "Sounds",
+  soundsCategoryDescription:
+    "Music, podcasts, sound effects, and other audio content.",
+  visualCategoryTitle: "Visual",
+  visualCategoryDescription:
+    "Images, videos, animations, and other visual content.",
+  textCategoryTitle: "Text",
+  textCategoryDescription:
+    "Written content like books, social media posts, emails, and code.",
+
   // Categories
-  category1Title: "AI Only",
-  category1Description: "AI generation without human intervention.",
-  category2Title: "Directed AI",
-  category2Description:
+  category0Title: "Human Only",
+  category0Description: "Exclusively human creation without AI.",
+  category1Title: "Human with AI Assistance",
+  category1Description: "Mainly human creation with AI tools.",
+  category2Title: "AI Collaboration",
+  category2Description: "Balanced mix between human creativity and AI.",
+  category3Title: "Directed AI",
+  category3Description:
     "AI generation with human direction (prompts, corrections).",
-  category3Title: "AI Collaboration",
-  category3Description: "Balanced mix between human creativity and AI.",
-  category4Title: "Human with AI Assistance",
-  category4Description: "Mainly human creation with AI tools.",
-  category5Title: "Human Only",
-  category5Description: "Exclusively human creation without AI.",
+  category4Title: "AI Only",
+  category4Description: "AI generation without human intervention.",
 
   // FAQ Page
   faqTitle: "Frequently Asked Questions",
@@ -135,6 +159,38 @@ export const en = {
   questionsTitle: "Questions?",
   questionsText:
     "If you have any questions about our privacy policy, please don't hesitate to contact us.",
+
+  // Questionnaires
+  soundsQuestionnaireTitle: "Sounds Content Questionnaire",
+  soundsQuestionnaireDescription:
+    "Answer these questions to help determine the level of AI involvement in your sound content.",
+  textQuestionnaireTitle: "Text Content Questionnaire",
+  textQuestionnaireDescription:
+    "Answer these questions to help determine the level of AI involvement in your text content.",
+
+  // Result page
+  resultTitle: "Your AI Usage Badge",
+  resultDescription:
+    "Here's your AI usage badge. You can use it to indicate how AI was used in your content.",
+  visualBadges: "Visual Badges",
+  metadata: "Metadata",
+  advanced: "Advanced",
+  htmlCode: "HTML Code",
+  markdownCode: "Markdown Code",
+  htmlMetadata: "HTML Metadata",
+  jsonMetadata: "JSON-LD Metadata",
+  advancedUsage: "Advanced Usage",
+  advancedUsageDescription:
+    "You can combine this badge with other licenses or metadata systems to provide comprehensive information about your content's AI usage.",
+  startOver: "Start Over",
+
+  // Category descriptions
+  categoryADescription: "Generated content with human review and edits",
+  categoryBDescription: "Generated content with minimal human edits",
+  categoryCDescription: "Fully generated content without human edits",
+  categoryDDescription: "AI-assisted content creation",
+  categoryEDescription: "Content enhanced or modified by AI",
+  categoryFDescription: "No AI usage",
 
   // Add more translations as needed
 };

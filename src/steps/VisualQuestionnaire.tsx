@@ -10,7 +10,7 @@ import HighContrastText from "../components/HighContrastText";
 const questions: QuestionItem[] = [
   {
     id: "q1",
-    text: "How was the text content created?",
+    text: "How was the visual content created?",
     options: [
       {
         id: "a",
@@ -29,7 +29,7 @@ const questions: QuestionItem[] = [
       },
       {
         id: "d",
-        text: "Created by human with minor AI assistance",
+        text: "Created by human with minor AI enhancements",
         points: 1,
       },
       {
@@ -42,34 +42,33 @@ const questions: QuestionItem[] = [
   // Add more questions here
 ];
 
-const TextQuestionnaire: React.FC<StepProps> = ({ onNext, onBack }) => {
+const VisualQuestionnaire: React.FC<StepProps> = ({ onNext, onBack }) => {
   const t = useTranslations();
   const {
-    setTextCategory,
-    textQuestionnaireAnswers,
-    setTextQuestionnaireAnswers,
+    setVisualCategory,
+    visualQuestionnaireAnswers,
+    setVisualQuestionnaireAnswers,
   } = useWizard();
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const handleAnswer = (questionId: string, points: number) => {
-    const newAnswers = {
-      ...textQuestionnaireAnswers,
+    setVisualQuestionnaireAnswers({
+      ...visualQuestionnaireAnswers,
       [questionId]: points,
-    };
-    setTextQuestionnaireAnswers(newAnswers);
+    });
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       // Calculate final category based on answers
-      const answerPoints = Object.values(newAnswers).filter(
-        (value): value is number => typeof value === "number"
+      const totalPoints = Object.values(visualQuestionnaireAnswers).reduce(
+        (sum, points) => sum + points,
+        0
       );
-      const totalPoints = answerPoints.reduce((sum, points) => sum + points, 0);
-      const averagePoints = totalPoints / answerPoints.length;
+      const averagePoints = totalPoints / questions.length;
       const category = Math.round(averagePoints) as 0 | 1 | 2 | 3 | 4;
 
-      setTextCategory(category);
+      setVisualCategory(category);
       if (onNext) onNext();
     }
   };
@@ -80,10 +79,10 @@ const TextQuestionnaire: React.FC<StepProps> = ({ onNext, onBack }) => {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">
-          <HighContrastText text={t("textQuestionnaireTitle")} />
+          <HighContrastText text={t("visualQuestionnaireTitle")} />
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          {t("textQuestionnaireDescription")}
+          {t("visualQuestionnaireDescription")}
         </p>
       </div>
 
@@ -118,4 +117,4 @@ const TextQuestionnaire: React.FC<StepProps> = ({ onNext, onBack }) => {
   );
 };
 
-export default TextQuestionnaire;
+export default VisualQuestionnaire;

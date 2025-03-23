@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
 import RadioGroup from "../components/RadioGroup";
@@ -17,10 +18,14 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
 
   const handleOptionSelect = (value: Category) => {
     if (value === textCategory) {
-      onNext();
+      if (onNext) {
+        onNext();
+      }
     } else {
       setTextCategory(value);
-      onNext();
+      if (onNext) {
+        onNext();
+      }
     }
   };
 

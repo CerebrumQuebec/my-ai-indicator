@@ -1,23 +1,35 @@
 "use client";
 
-import { useWizard } from "../contexts/WizardContext";
+import { useWizard } from "../context/WizardContext";
 import ProgressBar from "../components/ProgressBar";
 import Introduction from "../steps/Introduction";
-import MusicStep from "../steps/MusicStep";
+import SoundsStep from "../steps/SoundsStep";
 import TextStep from "../steps/TextStep";
-import MusicQuestionnaire from "../steps/MusicQuestionnaire";
+import VisualStep from "../steps/VisualStep";
+import SoundsQuestionnaire from "../steps/SoundsQuestionnaire";
 import TextQuestionnaire from "../steps/TextQuestionnaire";
+import VisualQuestionnaire from "../steps/VisualQuestionnaire";
 import Result from "../steps/Result";
+import CategorySelection from "../steps/CategorySelection";
 
 export default function Home() {
-  const { step, setStep, musicCategory, textCategory, isQuestionnaireMode } =
-    useWizard();
-  const totalSteps = 4;
+  const {
+    step,
+    setStep,
+    soundsCategory,
+    visualCategory,
+    textCategory,
+    isQuestionnaireMode,
+    selectedCategories,
+  } = useWizard();
+
+  const totalSteps =
+    2 + Object.values(selectedCategories).filter(Boolean).length; // Intro + Category Selection + One step per selected category
   const totalQuestionsPerStep = 10;
 
   // Get current question number from the active questionnaire component
   const getCurrentQuestionNumber = () => {
-    if (!isQuestionnaireMode || step === 1 || step === 4) return 0;
+    if (!isQuestionnaireMode || step === 1 || step === totalSteps) return 0;
     const component = document.querySelector("[data-current-question]");
     return component
       ? parseInt(component.getAttribute("data-current-question") || "0")
@@ -39,10 +51,26 @@ export default function Home() {
       case 1:
         return true;
       case 2:
-        return !!musicCategory;
-      case 3:
-        return !!textCategory;
+        return Object.values(selectedCategories).some(Boolean); // At least one category selected
       default:
+        const currentStepIndex = step - 3; // Adjust for intro and category selection steps
+        const categories = Object.entries(selectedCategories)
+          .filter(([_, selected]) => selected)
+          .map(([category]) => category);
+
+        if (currentStepIndex >= 0 && currentStepIndex < categories.length) {
+          const currentCategory = categories[currentStepIndex];
+          switch (currentCategory) {
+            case "sounds":
+              return soundsCategory !== null;
+            case "visual":
+              return visualCategory !== null;
+            case "text":
+              return textCategory !== null;
+            default:
+              return false;
+          }
+        }
         return false;
     }
   };
@@ -52,20 +80,41 @@ export default function Home() {
       case 1:
         return <Introduction onNext={handleNext} />;
       case 2:
-        return isQuestionnaireMode ? (
-          <MusicQuestionnaire onNext={handleNext} onBack={handleBack} />
-        ) : (
-          <MusicStep onNext={handleNext} onBack={handleBack} />
-        );
-      case 3:
-        return isQuestionnaireMode ? (
-          <TextQuestionnaire onNext={handleNext} onBack={handleBack} />
-        ) : (
-          <TextStep onNext={handleNext} onBack={handleBack} />
-        );
-      case 4:
-        return <Result onBack={handleBack} />;
+        return <CategorySelection onNext={handleNext} onBack={handleBack} />;
       default:
+        const currentStepIndex = step - 3; // Adjust for intro and category selection steps
+        const categories = Object.entries(selectedCategories)
+          .filter(([_, selected]) => selected)
+          .map(([category]) => category);
+
+        if (currentStepIndex >= 0 && currentStepIndex < categories.length) {
+          const currentCategory = categories[currentStepIndex];
+          switch (currentCategory) {
+            case "sounds":
+              return isQuestionnaireMode ? (
+                <SoundsQuestionnaire onNext={handleNext} onBack={handleBack} />
+              ) : (
+                <SoundsStep onNext={handleNext} onBack={handleBack} />
+              );
+            case "visual":
+              return isQuestionnaireMode ? (
+                <VisualQuestionnaire onNext={handleNext} onBack={handleBack} />
+              ) : (
+                <VisualStep onNext={handleNext} onBack={handleBack} />
+              );
+            case "text":
+              return isQuestionnaireMode ? (
+                <TextQuestionnaire onNext={handleNext} onBack={handleBack} />
+              ) : (
+                <TextStep onNext={handleNext} onBack={handleBack} />
+              );
+          }
+        }
+
+        if (step === totalSteps) {
+          return <Result onBack={handleBack} />;
+        }
+
         return <Introduction onNext={handleNext} />;
     }
   };

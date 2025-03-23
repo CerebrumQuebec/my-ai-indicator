@@ -14,17 +14,17 @@ const Introduction: React.FC<IntroductionProps> = ({ onNext }) => {
   const [showWhy, setShowWhy] = useState(false);
   const [showCCInspiration, setShowCCInspiration] = useState(false);
   const [knowsLicense, setKnowsLicense] = useState<boolean | null>(null);
-  const { setQuestionnaireMode } = useWizard();
+  const { setStep, setIsQuestionnaireMode } = useWizard();
   const { t } = useTranslation();
 
   // Function to handle selection of knowledge state
   const handleLicenseKnowledge = (knows: boolean) => {
     setKnowsLicense(knows);
     if (knows) {
-      setQuestionnaireMode(false);
+      setIsQuestionnaireMode(false);
       onNext();
     } else {
-      setQuestionnaireMode(true);
+      setIsQuestionnaireMode(true);
       onNext();
     }
   };

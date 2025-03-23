@@ -1,22 +1,36 @@
-export type Category = 1 | 2 | 3 | 4 | 5 | null;
+export type Category = 0 | 1 | 2 | 3 | 4 | null;
+
+export type ContentType = "sounds" | "visual" | "text";
+
+export interface SelectedCategories {
+  sounds: boolean;
+  visual: boolean;
+  text: boolean;
+}
 
 export interface WizardContextType {
   step: number;
   setStep: (step: number) => void;
-  musicCategory: Category;
-  setMusicCategory: (category: Category) => void;
+  selectedCategories: SelectedCategories;
+  setSelectedCategories: (categories: SelectedCategories) => void;
+  soundsCategory: Category;
+  setSoundsCategory: (category: Category) => void;
+  visualCategory: Category;
+  setVisualCategory: (category: Category) => void;
   textCategory: Category;
   setTextCategory: (category: Category) => void;
   isQuestionnaireMode: boolean;
   setQuestionnaireMode: (mode: boolean) => void;
-  musicQuestionnaireAnswers: Record<string, number>;
-  setMusicQuestionnaireAnswers: (answers: Record<string, number>) => void;
+  soundsQuestionnaireAnswers: Record<string, number>;
+  setSoundsQuestionnaireAnswers: (answers: Record<string, number>) => void;
+  visualQuestionnaireAnswers: Record<string, number>;
+  setVisualQuestionnaireAnswers: (answers: Record<string, number>) => void;
   textQuestionnaireAnswers: Record<string, number>;
   setTextQuestionnaireAnswers: (answers: Record<string, number>) => void;
 }
 
 export interface StepProps {
-  onNext: () => void;
+  onNext?: () => void;
   onBack?: () => void;
 }
 
@@ -30,7 +44,12 @@ export interface CategoryOption {
   descriptionKey: string;
 }
 
-export const musicCategoryOptions: CategoryOption[] = [
+export const soundsCategoryOptions: CategoryOption[] = [
+  {
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
   {
     id: 1,
     titleKey: "category1Title",
@@ -51,15 +70,43 @@ export const musicCategoryOptions: CategoryOption[] = [
     titleKey: "category4Title",
     descriptionKey: "category4Description",
   },
+];
+
+export const visualCategoryOptions: CategoryOption[] = [
   {
-    id: 5,
-    titleKey: "category5Title",
-    descriptionKey: "category5Description",
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
+  {
+    id: 1,
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
+  },
+  {
+    id: 2,
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
+  },
+  {
+    id: 3,
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
+  },
+  {
+    id: 4,
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
 ];
 
 export const textCategoryOptions: CategoryOption[] = [
   {
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
+  {
     id: 1,
     titleKey: "category1Title",
     descriptionKey: "category1Description",
@@ -78,15 +125,15 @@ export const textCategoryOptions: CategoryOption[] = [
     id: 4,
     titleKey: "category4Title",
     descriptionKey: "category4Description",
-  },
-  {
-    id: 5,
-    titleKey: "category5Title",
-    descriptionKey: "category5Description",
   },
 ];
 
-export const musicCategoryOptionsDetailed: CategoryOption[] = [
+export const musicCategoryOptions: CategoryOption[] = [
+  {
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
   {
     id: 1,
     titleKey: "category1Title",
@@ -107,15 +154,43 @@ export const musicCategoryOptionsDetailed: CategoryOption[] = [
     titleKey: "category4Title",
     descriptionKey: "category4Description",
   },
+];
+
+export const soundsCategoryOptionsDetailed: CategoryOption[] = [
   {
-    id: 5,
-    titleKey: "category5Title",
-    descriptionKey: "category5Description",
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
+  {
+    id: 1,
+    titleKey: "category1Title",
+    descriptionKey: "category1Description",
+  },
+  {
+    id: 2,
+    titleKey: "category2Title",
+    descriptionKey: "category2Description",
+  },
+  {
+    id: 3,
+    titleKey: "category3Title",
+    descriptionKey: "category3Description",
+  },
+  {
+    id: 4,
+    titleKey: "category4Title",
+    descriptionKey: "category4Description",
   },
 ];
 
 export const textCategoryOptionsDetailed: CategoryOption[] = [
   {
+    id: 0,
+    titleKey: "category0Title",
+    descriptionKey: "category0Description",
+  },
+  {
     id: 1,
     titleKey: "category1Title",
     descriptionKey: "category1Description",
@@ -134,11 +209,6 @@ export const textCategoryOptionsDetailed: CategoryOption[] = [
     id: 4,
     titleKey: "category4Title",
     descriptionKey: "category4Description",
-  },
-  {
-    id: 5,
-    titleKey: "category5Title",
-    descriptionKey: "category5Description",
   },
 ];
 
@@ -164,27 +234,27 @@ export const musicQuestions: QuestionItem[] = [
       {
         id: "a",
         text: "Entièrement généré par une IA sans modification",
-        points: 1,
+        points: 4,
       },
       {
         id: "b",
         text: "Généré par une IA, puis sélectionné parmi plusieurs propositions",
-        points: 2,
+        points: 3,
       },
       {
         id: "c",
         text: "Co-créé avec une aide significative de l'IA",
-        points: 3,
+        points: 2,
       },
       {
         id: "d",
         text: "Principalement créé par un humain avec suggestions d'IA",
-        points: 4,
+        points: 1,
       },
       {
         id: "e",
         text: "Entièrement composé par un humain sans aucune suggestion d'IA",
-        points: 5,
+        points: 0,
       },
     ],
   },
@@ -195,27 +265,27 @@ export const musicQuestions: QuestionItem[] = [
       {
         id: "a",
         text: "Aucun prompt spécifique ou un prompt très basique",
-        points: 1,
+        points: 4,
       },
       {
         id: "b",
         text: "Un prompt détaillé avec paramètres spécifiques",
-        points: 2,
+        points: 3,
       },
       {
         id: "c",
         text: "Multiples itérations de prompts avec ajustements progressifs",
-        points: 3,
+        points: 2,
       },
       {
         id: "d",
         text: "Ne s'applique pas - J'ai principalement composé moi-même avec une assistance minimale",
-        points: 4,
+        points: 1,
       },
       {
         id: "e",
         text: "Ne s'applique pas - Aucune IA utilisée dans la composition",
-        points: 5,
+        points: 0,
       },
     ],
   },
@@ -226,27 +296,27 @@ export const musicQuestions: QuestionItem[] = [
       {
         id: "a",
         text: "Générées automatiquement par l'IA sans modification",
-        points: 1,
+        points: 4,
       },
       {
         id: "b",
         text: "Générées par l'IA mais réarrangées manuellement",
-        points: 2,
+        points: 3,
       },
       {
         id: "c",
         text: "Combinaison de suggestions IA et de décisions humaines",
-        points: 3,
+        points: 2,
       },
       {
         id: "d",
         text: "Principalement déterminées par un humain avec quelques suggestions d'outils",
-        points: 4,
+        points: 1,
       },
       {
         id: "e",
         text: "Entièrement conçues par un humain sans outils automatisés",
-        points: 5,
+        points: 0,
       },
     ],
   },
@@ -726,7 +796,6 @@ export const calculateCategory = (
   let totalPoints = 0;
   let totalWeight = 0;
 
-  // Calculate weighted average
   Object.entries(answers).forEach(([questionId, points]) => {
     const weight = weights[questionId] || 1;
     totalPoints += points * weight;
@@ -735,12 +804,12 @@ export const calculateCategory = (
 
   const score = totalPoints / totalWeight;
 
-  // Determine category based on score ranges
-  if (score >= 1 && score < 1.6) return 1;
-  if (score >= 1.6 && score < 2.6) return 2;
-  if (score >= 2.6 && score < 3.6) return 3;
-  if (score >= 3.6 && score < 4.6) return 4;
-  if (score >= 4.6 && score <= 5) return 5;
+  // Determine category based on score ranges for 0-4 scale
+  if (score >= 3.5) return 4;
+  if (score >= 2.5) return 3;
+  if (score >= 1.5) return 2;
+  if (score >= 0.5) return 1;
+  if (score >= 0) return 0;
 
   return null;
 };

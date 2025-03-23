@@ -5,155 +5,178 @@ import { useWizard } from "../contexts/WizardContext";
 import ResultBadge from "../components/ResultBadge";
 import { ResultProps } from "../types";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { StepProps, Category } from "../types";
+import Button from "../components/Button";
+import HighContrastText from "../components/HighContrastText";
 
-const Result: React.FC<ResultProps> = ({ onBack }) => {
-  const { musicCategory, textCategory } = useWizard();
+const Result: React.FC<StepProps> = () => {
+  const t = useTranslations();
+  const { selectedCategories, soundsCategory, visualCategory, textCategory } =
+    useWizard();
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "visual" | "metadata" | "advanced"
   >("visual");
 
-  if (!musicCategory || !textCategory) {
-    return null;
-  }
+  const getSelectedCategories = () => {
+    const categories = [];
+    if (selectedCategories.sounds) categories.push("sounds");
+    if (selectedCategories.visual) categories.push("visual");
+    if (selectedCategories.text) categories.push("text");
+    return categories;
+  };
 
-  const htmlCode = `<div style="display: inline-flex; gap: 8px; font-family: sans-serif;">
-  <span style="background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 500;">
-    Musique: Cat. ${musicCategory}
-  </span>
-  <span style="background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 500;">
-    Texte: Cat. ${textCategory}
-  </span>
+  const getCategoryValue = (type: string): Category => {
+    switch (type) {
+      case "sounds":
+        return soundsCategory;
+      case "visual":
+        return visualCategory;
+      case "text":
+        return textCategory;
+      default:
+        return null;
+    }
+  };
+
+  const getCategoryTitle = (type: string): string => {
+    switch (type) {
+      case "sounds":
+        return t("soundsCategoryTitle");
+      case "visual":
+        return t("visualCategoryTitle");
+      case "text":
+        return t("textCategoryTitle");
+      default:
+        return "";
+    }
+  };
+
+  const getCategoryDescription = (type: string, category: Category): string => {
+    if (category === null) return "";
+    return t(`category${category}Description`);
+  };
+
+  const getCategoryCode = (type: string): string => {
+    switch (type) {
+      case "sounds":
+        return "S";
+      case "visual":
+        return "V";
+      case "text":
+        return "T";
+      default:
+        return "";
+    }
+  };
+
+  const selectedCategoryTypes = getSelectedCategories();
+
+  const generateBadgeHtml = () => {
+    return `<div style="display: inline-flex; gap: 8px; font-family: sans-serif;">
+${selectedCategoryTypes
+  .map(
+    (
+      type
+    ) => `  <span style="background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 500;">
+    ${getCategoryTitle(type)}: ${getCategoryCode(type)}.AI.${getCategoryValue(
+      type
+    )}
+  </span>`
+  )
+  .join("\n")}
 </div>`;
+  };
 
-  const markdownCode = `![Musique: Cat. ${musicCategory}](https://img.shields.io/badge/Musique-Cat.%20${musicCategory}-blue) ![Texte: Cat. ${textCategory}](https://img.shields.io/badge/Texte-Cat.%20${textCategory}-blue)`;
+  const generateMarkdownCode = () => {
+    return selectedCategoryTypes
+      .map(
+        (type) =>
+          `![${getCategoryTitle(type)}: ${getCategoryCode(
+            type
+          )}.AI.${getCategoryValue(
+            type
+          )}](https://img.shields.io/badge/${getCategoryTitle(
+            type
+          )}-${getCategoryCode(type)}.AI.${getCategoryValue(type)}-blue)`
+      )
+      .join(" ");
+  };
 
-  const metadataHtml = `<meta name="AI-Usage-Music" content="Category-${musicCategory}" />
-<meta name="AI-Usage-Text" content="Category-${textCategory}" />
-<meta name="AI-Usage-Version" content="1.0" />`;
+  const generateMetadataHtml = () => {
+    return selectedCategoryTypes
+      .map(
+        (type) =>
+          `<meta name="AI-Usage-${getCategoryTitle(
+            type
+          )}" content="${getCategoryCode(type)}.AI.${getCategoryValue(
+            type
+          )}" />`
+      )
+      .join("\n");
+  };
 
-  const metadataJson = `{
-  "AIUsage": {
-    "version": "1.0",
-    "music": ${musicCategory},
-    "text": ${textCategory}
-  }
-}`;
+  const generateMetadataJson = () => {
+    const metadata = {
+      AIUsage: {
+        version: "1.0",
+        ...Object.fromEntries(
+          selectedCategoryTypes.map((type) => [
+            type,
+            `${getCategoryCode(type)}.AI.${getCategoryValue(type)}`,
+          ])
+        ),
+      },
+    };
+    return JSON.stringify(metadata, null, 2);
+  };
 
-  const id3Example = `# Exemple d'ajout aux métadonnées ID3 (audio)
-# Utiliser un outil comme MP3Tag ou EasyTag
-
-TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
-
-  const handleCopyHTML = () => {
-    navigator.clipboard.writeText(htmlCode);
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleCopyMarkdown = () => {
-    navigator.clipboard.writeText(markdownCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleCopyMetadata = () => {
-    navigator.clipboard.writeText(metadataHtml);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleCopyJson = () => {
-    navigator.clipboard.writeText(metadataJson);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleCopyId3 = () => {
-    navigator.clipboard.writeText(id3Example);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const getExplanation = () => {
-    return (
-      <div>
-        <p className="font-medium text-text-primary">Votre création est:</p>
-        <ul className="list-disc list-inside mt-2 space-y-1 text-text-secondary">
-          <li>
-            <span className="font-medium text-text-primary">
-              Musique (Catégorie {musicCategory}):
-            </span>{" "}
-            {musicCategoryExplanation(musicCategory)}
-          </li>
-          <li>
-            <span className="font-medium text-text-primary">
-              Texte (Catégorie {textCategory}):
-            </span>{" "}
-            {textCategoryExplanation(textCategory)}
-          </li>
-        </ul>
-      </div>
-    );
-  };
-
-  const musicCategoryExplanation = (category: number) => {
-    switch (category) {
-      case 1:
-        return "Générée entièrement par l'IA sans intervention humaine";
-      case 2:
-        return "Générée par l'IA avec une forte direction humaine";
-      case 3:
-        return "Mélange équilibré entre création humaine et assistance IA";
-      case 4:
-        return "Principalement humaine avec légère assistance numérique";
-      case 5:
-        return "Création purement artisanale, sans IA";
-      default:
-        return "";
-    }
-  };
-
-  const textCategoryExplanation = (category: number) => {
-    switch (category) {
-      case 1:
-        return "Généré entièrement par l'IA sans intervention humaine";
-      case 2:
-        return "Généré par l'IA avec un raffinage humain";
-      case 3:
-        return "Co-création entre l'humain et l'IA";
-      case 4:
-        return "Principalement écrit par un humain avec assistance numérique";
-      case 5:
-        return "Écrit exclusivement par un humain sans outils automatiques";
-      default:
-        return "";
-    }
   };
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-semibold text-text-primary">
-          Votre badge IA
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">
+          <HighContrastText text={t("resultTitle")} />
         </h2>
-        <p className="mt-2 text-text-secondary">
-          Basé sur vos réponses, nous avons déterminé ces catégories pour votre
-          création.
+        <p className="text-gray-600 dark:text-gray-300">
+          {t("resultDescription")}
         </p>
       </div>
 
-      <div className="bg-surface-dark p-6 rounded-xl border border-white/10">
-        <div className="flex justify-center mb-6">
-          <ResultBadge
-            musicCategory={musicCategory}
-            textCategory={textCategory}
-            size="large"
-            displayType="detailed"
-          />
-        </div>
+      <div className="space-y-8">
+        {selectedCategoryTypes.map((type) => {
+          const category = getCategoryValue(type);
+          return (
+            <div key={type} className="space-y-4">
+              <h3 className="text-xl font-semibold">
+                <HighContrastText text={getCategoryTitle(type)} />
+              </h3>
+              <ResultBadge
+                type={type}
+                category={category}
+                title={getCategoryTitle(type)}
+              />
+              <p className="text-gray-600 dark:text-gray-300">
+                {getCategoryDescription(type, category)}
+              </p>
+            </div>
+          );
+        })}
+      </div>
 
-        {getExplanation()}
+      <div className="flex justify-center mt-8">
+        <Button
+          onClick={() => window.location.reload()}
+          className="w-full sm:w-auto"
+        >
+          {t("startOver")}
+        </Button>
       </div>
 
       <div className="bg-surface-dark rounded-xl border border-white/10 overflow-hidden">
@@ -166,7 +189,7 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             }`}
             onClick={() => setActiveTab("visual")}
           >
-            Badges visuels
+            {t("visualBadges")}
           </button>
           <button
             className={`flex-1 py-3 px-4 text-center font-medium ${
@@ -176,7 +199,7 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             }`}
             onClick={() => setActiveTab("metadata")}
           >
-            Métadonnées
+            {t("metadata")}
           </button>
           <button
             className={`flex-1 py-3 px-4 text-center font-medium ${
@@ -186,7 +209,7 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             }`}
             onClick={() => setActiveTab("advanced")}
           >
-            Avancé
+            {t("advanced")}
           </button>
         </div>
 
@@ -195,14 +218,14 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Code HTML
+                  {t("htmlCode")}
                 </h3>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
-                    <code>{htmlCode}</code>
+                    <code>{generateBadgeHtml()}</code>
                   </pre>
                   <button
-                    onClick={handleCopyHTML}
+                    onClick={() => handleCopy(generateBadgeHtml())}
                     className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
                   >
                     <svg
@@ -225,14 +248,14 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
 
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Code Markdown
+                  {t("markdownCode")}
                 </h3>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
-                    <code>{markdownCode}</code>
+                    <code>{generateMarkdownCode()}</code>
                   </pre>
                   <button
-                    onClick={handleCopyMarkdown}
+                    onClick={() => handleCopy(generateMarkdownCode())}
                     className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
                   >
                     <svg
@@ -259,17 +282,14 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Métadonnées HTML
+                  {t("htmlMetadata")}
                 </h3>
-                <p className="text-text-secondary text-sm mb-3">
-                  À ajouter dans la section &lt;head&gt; de votre site web
-                </p>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
-                    <code>{metadataHtml}</code>
+                    <code>{generateMetadataHtml()}</code>
                   </pre>
                   <button
-                    onClick={handleCopyMetadata}
+                    onClick={() => handleCopy(generateMetadataHtml())}
                     className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
                   >
                     <svg
@@ -292,17 +312,14 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
 
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Métadonnées JSON-LD
+                  {t("jsonMetadata")}
                 </h3>
-                <p className="text-text-secondary text-sm mb-3">
-                  Pour APIs et systèmes d&apos;échange de données
-                </p>
                 <div className="relative">
                   <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
-                    <code>{metadataJson}</code>
+                    <code>{generateMetadataJson()}</code>
                   </pre>
                   <button
-                    onClick={handleCopyJson}
+                    onClick={() => handleCopy(generateMetadataJson())}
                     className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
                   >
                     <svg
@@ -329,87 +346,15 @@ TXXX: AI-USAGE=Music-Cat-${musicCategory}/Text-Cat-${textCategory}`;
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Métadonnées pour fichiers audio
+                  {t("advancedUsage")}
                 </h3>
-                <p className="text-text-secondary text-sm mb-3">
-                  Exemple d&apos;utilisation avec les tags ID3 pour MP3
+                <p className="text-text-secondary">
+                  {t("advancedUsageDescription")}
                 </p>
-                <div className="relative">
-                  <pre className="bg-black/30 rounded-lg p-4 overflow-x-auto text-text-secondary text-sm">
-                    <code>{id3Example}</code>
-                  </pre>
-                  <button
-                    onClick={handleCopyId3}
-                    className="absolute top-3 right-3 bg-surface-card p-1.5 rounded-md hover:bg-surface-hover"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-text-secondary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-medium text-text-primary mb-3">
-                  Combinaison avec Creative Commons
-                </h3>
-                <p className="text-text-secondary mb-3">
-                  Le Badge IA peut être utilisé en parallèle avec une licence
-                  Creative Commons ou toute autre licence de droit
-                  d&apos;auteur. Exemple :
-                </p>
-                <div className="bg-black/30 rounded-lg p-4 text-text-secondary text-sm">
-                  <p>
-                    © 2023 [Votre nom] •{" "}
-                    <strong>
-                      IA Cat. {musicCategory} (Musique) / Cat. {textCategory}{" "}
-                      (Texte)
-                    </strong>{" "}
-                    • <span className="text-blue-400">CC BY-SA 4.0</span>
-                  </p>
-                </div>
               </div>
             </div>
           )}
         </div>
-      </div>
-
-      <div className="flex justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center px-4 py-2 text-text-primary hover:text-primary-400 font-medium transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-1"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Retour
-        </button>
-        <Link
-          href="/"
-          className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2 rounded-lg font-medium transition-colors"
-        >
-          Terminer
-        </Link>
       </div>
 
       {copied && (

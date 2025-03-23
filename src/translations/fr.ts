@@ -56,18 +56,42 @@ export const fr = {
   textEvaluationDescription:
     "Sélectionnez la catégorie qui correspond le mieux à votre processus de création textuelle.",
 
+  // Visual Step
+  visualEvaluationTitle: "Évaluation de votre contenu visuel",
+  visualEvaluationDescription:
+    "Sélectionnez la catégorie qui correspond le mieux à votre processus de création visuelle.",
+  visualQuestionnaireTitle: "Questionnaire sur le contenu visuel",
+  visualQuestionnaireDescription:
+    "Répondez à ces questions pour déterminer le niveau d'implication de l'IA dans votre contenu visuel.",
+  takeQuestionnaire: "Pas sûr ? Faites le questionnaire",
+  back: "Retour",
+
+  // Category Selection
+  categorySelectionTitle: "Sélectionner les Types de Contenu",
+  categorySelectionDescription:
+    "Choisissez quels types de contenu vous souhaitez évaluer pour l'utilisation de l'IA.",
+  soundsCategoryTitle: "Sons",
+  soundsCategoryDescription:
+    "Musique, podcasts, effets sonores et autres contenus audio.",
+  visualCategoryTitle: "Visuel",
+  visualCategoryDescription:
+    "Images, vidéos, animations et autres contenus visuels.",
+  textCategoryTitle: "Texte",
+  textCategoryDescription:
+    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code.",
+
   // Categories
-  category1Title: "IA Uniquement",
-  category1Description: "Génération par IA sans intervention humaine.",
-  category2Title: "IA Dirigée",
-  category2Description:
+  category0Title: "Humain Uniquement",
+  category0Description: "Création exclusivement humaine sans IA.",
+  category1Title: "Humain avec Assistance IA",
+  category1Description: "Création principalement humaine avec outils IA.",
+  category2Title: "Collaboration IA",
+  category2Description: "Mélange équilibré entre créativité humaine et IA.",
+  category3Title: "IA Dirigée",
+  category3Description:
     "Génération par IA avec direction humaine (prompts, corrections).",
-  category3Title: "Collaboration IA",
-  category3Description: "Mélange équilibré entre créativité humaine et IA.",
-  category4Title: "Humain avec Assistance IA",
-  category4Description: "Création principalement humaine avec outils IA.",
-  category5Title: "Humain Uniquement",
-  category5Description: "Création exclusivement humaine sans IA.",
+  category4Title: "IA Uniquement",
+  category4Description: "Génération par IA sans intervention humaine.",
 
   // FAQ Page
   faqTitle: "Questions Fréquentes",
@@ -138,6 +162,40 @@ export const fr = {
   questionsTitle: "Des Questions ?",
   questionsText:
     "Si vous avez des questions sur notre politique de confidentialité, n'hésitez pas à nous contacter.",
+
+  // Questionnaires
+  soundsQuestionnaireTitle: "Questionnaire sur le contenu sonore",
+  soundsQuestionnaireDescription:
+    "Répondez à ces questions pour déterminer le niveau d'implication de l'IA dans votre contenu sonore.",
+  textQuestionnaireTitle: "Questionnaire sur le contenu textuel",
+  textQuestionnaireDescription:
+    "Répondez à ces questions pour déterminer le niveau d'implication de l'IA dans votre contenu textuel.",
+
+  // Result page
+  resultTitle: "Votre Badge d'Utilisation d'IA",
+  resultDescription:
+    "Voici votre badge d'utilisation d'IA. Vous pouvez l'utiliser pour indiquer comment l'IA a été utilisée dans votre contenu.",
+  visualBadges: "Badges Visuels",
+  metadata: "Métadonnées",
+  advanced: "Avancé",
+  htmlCode: "Code HTML",
+  markdownCode: "Code Markdown",
+  htmlMetadata: "Métadonnées HTML",
+  jsonMetadata: "Métadonnées JSON-LD",
+  advancedUsage: "Utilisation Avancée",
+  advancedUsageDescription:
+    "Vous pouvez combiner ce badge avec d'autres licences ou systèmes de métadonnées pour fournir des informations complètes sur l'utilisation de l'IA dans votre contenu.",
+  startOver: "Recommencer",
+
+  // Category descriptions
+  categoryADescription:
+    "Contenu généré avec révision et modifications humaines",
+  categoryBDescription: "Contenu généré avec modifications humaines minimales",
+  categoryCDescription:
+    "Contenu entièrement généré sans modifications humaines",
+  categoryDDescription: "Création de contenu assistée par l'IA",
+  categoryEDescription: "Contenu amélioré ou modifié par l'IA",
+  categoryFDescription: "Aucune utilisation d'IA",
 
   // Add more translations as needed
 };
