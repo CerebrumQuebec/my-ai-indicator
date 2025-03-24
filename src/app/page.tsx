@@ -163,6 +163,97 @@ export default function Home() {
     }
   };
 
+  // Animation variants
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1.0],
+      },
+    }),
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10,
+      },
+    },
+    tap: { scale: 0.95 },
+  };
+
+  const floatingVariants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: {
+      opacity: [0.3, 0.5, 0.3],
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        repeatType: "mirror" as const,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const arrowVariants = {
+    initial: { x: 0 },
+    animate: {
+      x: [0, 5, 0],
+      transition: {
+        duration: 1.5,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const glowVariants = {
+    initial: { opacity: 0.7, scale: 1 },
+    animate: {
+      opacity: [0.7, 1, 0.7],
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "mirror" as const,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const backgroundGradientVariants = {
+    initial: {
+      background:
+        "linear-gradient(90deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+      scale: 1,
+    },
+    animate: {
+      background: [
+        "linear-gradient(90deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+        "linear-gradient(180deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+        "linear-gradient(270deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+        "linear-gradient(360deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+        "linear-gradient(90deg, rgba(107, 70, 193, 0.5) 0%, rgba(79, 70, 229, 0.5) 100%)",
+      ],
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 5,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+      },
+    },
+  };
+
   // If wizard is active, show the wizard interface
   if (showWizard) {
     return (
@@ -201,7 +292,7 @@ export default function Home() {
 
   // Particle animation component
   const FloatingParticles = () => {
-    const particleCount = 50; // Increased particle count
+    const particleCount = 50;
 
     // Custom particle arrays with different properties for variety
     const largeParticles = Array.from({ length: 15 });
@@ -220,9 +311,137 @@ export default function Home() {
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
+    // Animation variants to ensure proper function initialization
+    const particleVariants = {
+      initial: (i: number) => ({
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        opacity: Math.random() * 0.15 + 0.05,
+      }),
+      animate: (i: number) => ({
+        x: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        y: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        scale: [1, 1.1, 0.9, 1],
+        opacity: [
+          Math.random() * 0.15 + 0.05,
+          Math.random() * 0.15 + 0.1,
+          Math.random() * 0.15 + 0.05,
+        ],
+        transition: {
+          duration: 20 + Math.random() * 40,
+          repeat: Infinity,
+          repeatType: "mirror" as const,
+          ease: "easeInOut",
+        },
+      }),
+    };
+
+    const mediumParticleVariants = {
+      initial: (i: number) => ({
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        opacity: Math.random() * 0.2 + 0.1,
+      }),
+      animate: (i: number) => ({
+        x: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        y: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        opacity: [
+          Math.random() * 0.2 + 0.1,
+          Math.random() * 0.2 + 0.15,
+          Math.random() * 0.2 + 0.1,
+        ],
+        transition: {
+          duration: 15 + Math.random() * 25,
+          repeat: Infinity,
+          repeatType: "mirror" as const,
+          ease: "easeInOut",
+        },
+      }),
+    };
+
+    const smallParticleVariants = {
+      initial: (i: number) => ({
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        opacity: Math.random() * 0.4 + 0.2,
+      }),
+      animate: (i: number) => ({
+        x: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        y: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        opacity: [
+          Math.random() * 0.4 + 0.2,
+          Math.random() * 0.4 + 0.3,
+          Math.random() * 0.4 + 0.2,
+        ],
+        transition: {
+          duration: 10 + Math.random() * 15,
+          repeat: Infinity,
+          repeatType: "mirror" as const,
+          ease: "linear",
+        },
+      }),
+    };
+
+    const microParticleVariants = {
+      initial: (i: number) => ({
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        opacity: Math.random() * 0.5 + 0.3,
+      }),
+      animate: (i: number) => ({
+        x: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        y: [
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+          `${Math.random() * 100}%`,
+        ],
+        opacity: [0.3, 0.6, 0.3],
+        scale: [1, 1.2, 1],
+        transition: {
+          duration: 5 + Math.random() * 10,
+          repeat: Infinity,
+          repeatType: "mirror" as const,
+          ease: "easeInOut",
+        },
+      }),
+    };
+
     return (
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Large glowing orbs (slow moving) */}
         {largeParticles.map((_, i) => (
           <motion.div
             key={`large-${i}`}
@@ -232,40 +451,14 @@ export default function Home() {
               height: Math.random() * 100 + 150 + "px",
               background: getRandomColor(),
               filter: "blur(60px)",
-              opacity: Math.random() * 0.15 + 0.05,
             }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              scale: [1, 1.1, 0.9, 1],
-              opacity: [
-                Math.random() * 0.15 + 0.05,
-                Math.random() * 0.15 + 0.1,
-                Math.random() * 0.15 + 0.05,
-              ],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 40,
-              repeat: Infinity,
-              ease: "easeInOut",
-              times: [0, 0.5, 1],
-            }}
+            custom={i}
+            variants={particleVariants}
+            initial="initial"
+            animate="animate"
           />
         ))}
 
-        {/* Medium particles (moderate speed) */}
         {mediumParticles.map((_, i) => (
           <motion.div
             key={`medium-${i}`}
@@ -276,39 +469,13 @@ export default function Home() {
               background: `rgba(255, 255, 255, ${Math.random() * 0.1 + 0.05})`,
               filter: "blur(15px)",
             }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.2 + 0.1,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [
-                Math.random() * 0.2 + 0.1,
-                Math.random() * 0.2 + 0.15,
-                Math.random() * 0.2 + 0.1,
-              ],
-            }}
-            transition={{
-              duration: 15 + Math.random() * 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            custom={i}
+            variants={mediumParticleVariants}
+            initial="initial"
+            animate="animate"
           />
         ))}
 
-        {/* Small particles (faster) */}
         {smallParticles.map((_, i) => (
           <motion.div
             key={`small-${i}`}
@@ -319,37 +486,13 @@ export default function Home() {
               background: "rgba(255, 255, 255, 0.4)",
               boxShadow: "0 0 10px rgba(255, 255, 255, 0.3)",
             }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.4 + 0.2,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [
-                Math.random() * 0.4 + 0.2,
-                Math.random() * 0.4 + 0.3,
-                Math.random() * 0.4 + 0.2,
-              ],
-            }}
-            transition={{
-              duration: 10 + Math.random() * 15,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            custom={i}
+            variants={smallParticleVariants}
+            initial="initial"
+            animate="animate"
           />
         ))}
 
-        {/* Micro particles (fastest) */}
         {microParticles.map((_, i) => (
           <motion.div
             key={`micro-${i}`}
@@ -360,34 +503,10 @@ export default function Home() {
               background: "rgba(255, 255, 255, 0.8)",
               boxShadow: "0 0 5px rgba(255, 255, 255, 0.6)",
             }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.5 + 0.3,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            custom={i}
+            variants={microParticleVariants}
+            initial="initial"
+            animate="animate"
           />
         ))}
       </div>
@@ -411,12 +530,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <motion.div
               className="w-full md:w-1/2 space-y-4"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.8,
-                ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier for smoother motion
-              }}
+              variants={fadeInUpVariants}
+              initial="hidden"
+              animate="visible"
+              custom={0}
             >
               <motion.div
                 className="inline-block relative"
@@ -425,15 +542,9 @@ export default function Home() {
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-indigo rounded-md blur opacity-30"
-                  animate={{
-                    opacity: [0.3, 0.5, 0.3],
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  variants={glowVariants}
+                  initial="initial"
+                  animate="animate"
                 />
                 <motion.span
                   className="relative bg-surface-dark px-4 py-1 text-sm font-medium rounded-md border border-white/10"
@@ -543,31 +654,25 @@ export default function Home() {
                   />
                   <motion.button
                     onClick={startWizard}
-                    className="relative group inline-flex items-center px-8 py-3 text-base font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-400 transition-colors z-10"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="group relative inline-flex items-center px-8 py-3 text-base font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-400 transition-colors"
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
                   >
+                    <motion.div
+                      className="absolute -inset-1 rounded-xl opacity-70 blur-xl group-hover:opacity-100 transition duration-1000"
+                      variants={backgroundGradientVariants}
+                      initial="initial"
+                      animate="animate"
+                    />
                     <motion.span
                       className="relative flex items-center"
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
+                      variants={arrowVariants}
+                      initial="initial"
+                      animate="animate"
                     >
                       {t("start")}
-                      <motion.span
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.2,
-                        }}
-                      >
-                        <ArrowRightIcon className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                      </motion.span>
+                      <ArrowRightIcon className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </motion.span>
                   </motion.button>
                 </div>
@@ -1230,17 +1335,20 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover="hover"
+                whileTap="tap"
               >
+                <motion.div
+                  className="absolute -inset-1 rounded-xl opacity-70 blur-xl group-hover:opacity-100 transition duration-1000"
+                  variants={backgroundGradientVariants}
+                  initial="initial"
+                  animate="animate"
+                />
                 <motion.span
                   className="relative flex items-center"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  variants={arrowVariants}
+                  initial="initial"
+                  animate="animate"
                 >
                   {t("start")}
                   <ArrowRightIcon className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
