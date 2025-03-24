@@ -10,7 +10,12 @@ import HighContrastText from "./HighContrastText";
 import DonateButton from "./DonationButton";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  showWizard?: boolean;
+  setShowWizard?: (show: boolean) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ showWizard, setShowWizard }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
     step,
@@ -20,10 +25,14 @@ const Header: React.FC = () => {
     setTextCategory,
     setSelectedCategories,
     setQuestionnaireMode,
+    setSoundsQuestionnaireAnswers,
+    setVisualQuestionnaireAnswers,
+    setTextQuestionnaireAnswers,
   } = useWizard();
   const { language, setLanguage, t } = useTranslation();
 
   const handleReset = () => {
+    // Reset to landing page state by hiding the wizard and resetting all state
     setStep(1);
     setSoundsCategory(null);
     setVisualCategory(null);
@@ -34,7 +43,15 @@ const Header: React.FC = () => {
       text: false,
     });
     setQuestionnaireMode(false);
+    // Reset questionnaire answers
+    setSoundsQuestionnaireAnswers({});
+    setVisualQuestionnaireAnswers({});
+    setTextQuestionnaireAnswers({});
     setIsMenuOpen(false);
+    // Hide the wizard
+    if (setShowWizard) {
+      setShowWizard(false);
+    }
   };
 
   const toggleLanguage = () => {

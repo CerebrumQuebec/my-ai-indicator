@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.1" />
+
+    <!-- Small human figure -->
+    <path d="M30 25C34 25 37 29 37 33C37 37 34 40 30 40C26 40 23 37 23 33C23 29 26 25 30 25Z"
+        fill="white" />
+    <path
+        d="M40 50C40 43.9249 35.5228 40 30 40C24.4772 40 20 43.9249 20 50C20 56.0751 30 60 30 60C30 60 40 56.0751 40 50Z"
+        fill="white" />
+
+    <!-- Large AI figure -->
+    <circle cx="60" cy="45" r="20" fill="#6586ff" stroke="white" stroke-width="1" />
+
+    <!-- Direction arrow -->
+    <path d="M37 33L45 40" stroke="white" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    <path d="M45 40L40 45" stroke="white" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">3</text>
+</svg> 

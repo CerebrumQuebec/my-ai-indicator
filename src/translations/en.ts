@@ -33,7 +33,47 @@ export const en = {
   // Meta
   metaTitle: "Badge AI",
   metaDescription:
-    "Evaluate your level of AI usage in your musical and textual creations",
+    "Evaluate your level of AI usage in your audio, visual and textual creations",
+
+  // Badge Notation System
+  badgeNotationTitle: "Badge Notation System",
+  badgeNotationDescription:
+    "A standardized system for indicating AI involvement across different creative mediums",
+
+  // Badge Types
+  soundsBadgeTitle: "S",
+  soundsBadgeSubtitle: "Sounds",
+  soundsBadgeDescription:
+    "Music, podcasts, sound effects, and other audio content",
+  soundsBadgeCode: "S.AI.0-4",
+
+  visualBadgeTitle: "V",
+  visualBadgeSubtitle: "Visual",
+  visualBadgeDescription:
+    "Images, videos, animations, and other visual content",
+  visualBadgeCode: "V.AI.0-4",
+
+  textBadgeTitle: "T",
+  textBadgeSubtitle: "Text",
+  textBadgeDescription:
+    "Written content like books, social media posts, emails, and code",
+  textBadgeCode: "T.AI.0-4",
+
+  // AI Levels
+  aiLevel0Title: "0",
+  aiLevel0Description: "Human Only",
+
+  aiLevel1Title: "1",
+  aiLevel1Description: "Human with AI Assistance",
+
+  aiLevel2Title: "2",
+  aiLevel2Description: "AI Collaboration",
+
+  aiLevel3Title: "3",
+  aiLevel3Description: "Directed AI",
+
+  aiLevel4Title: "4",
+  aiLevel4Description: "AI Only",
 
   // Common
   next: "Next",

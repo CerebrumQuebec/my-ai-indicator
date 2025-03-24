@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.1" />
+
+    <!-- Human figure -->
+    <path
+        d="M35 30C40.2 30 45 34.8 45 40C45 45.2 40.2 50 35 50C29.8 50 25 45.2 25 40C25 34.8 29.8 30 35 30Z"
+        fill="white" />
+    <path
+        d="M47.5 65C47.5 58.0964 42.2843 52.5 35 52.5C27.7157 52.5 22.5 58.0964 22.5 65C22.5 71.9036 35 77.5 35 77.5C35 77.5 47.5 71.9036 47.5 65Z"
+        fill="white" />
+
+    <!-- AI figure -->
+    <circle cx="65" cy="40" r="15" fill="#9f7aea" stroke="white" stroke-width="1" />
+    <circle cx="65" cy="65" r="10" fill="#9f7aea" stroke="white" stroke-width="1" />
+
+    <!-- Connection line -->
+    <line x1="45" y1="40" x2="50" y2="40" stroke="white" stroke-width="2" stroke-dasharray="2" />
+
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">2</text>
+</svg> 

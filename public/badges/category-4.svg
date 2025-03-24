@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1"
+        stroke-opacity="0.1" />
+
+    <!-- AI figure - larger circle -->
+    <circle cx="50" cy="40" r="20" fill="#c3daff" stroke="white" stroke-width="1" />
+
+    <!-- AI circle elements -->
+    <circle cx="40" cy="70" r="7" fill="#c3daff" stroke="white" stroke-width="1" />
+    <circle cx="60" cy="70" r="7" fill="#c3daff" stroke="white" stroke-width="1" />
+
+    <!-- Connect lines -->
+    <line x1="50" y1="60" x2="40" y2="70" stroke="#c3daff" stroke-width="2" />
+    <line x1="50" y1="60" x2="60" y2="70" stroke="#c3daff" stroke-width="2" />
+
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">4</text>
+</svg> 

@@ -33,7 +33,47 @@ export const fr = {
   // Meta
   metaTitle: "Badge IA",
   metaDescription:
-    "Évaluez votre niveau d'utilisation de l'IA dans vos créations musicales et textuelles",
+    "Évaluez votre niveau d'utilisation de l'IA dans vos créations audios, visuelles et textuelles",
+
+  // Badge Notation System
+  badgeNotationTitle: "Système de Notation des Badges",
+  badgeNotationDescription:
+    "Un système standardisé pour indiquer l'implication de l'IA dans différents médiums créatifs",
+
+  // Badge Types
+  soundsBadgeTitle: "S",
+  soundsBadgeSubtitle: "Sons",
+  soundsBadgeDescription:
+    "Musique, podcasts, effets sonores et autres contenus audio",
+  soundsBadgeCode: "S.AI.0-4",
+
+  visualBadgeTitle: "V",
+  visualBadgeSubtitle: "Visuel",
+  visualBadgeDescription:
+    "Images, vidéos, animations et autres contenus visuels",
+  visualBadgeCode: "V.AI.0-4",
+
+  textBadgeTitle: "T",
+  textBadgeSubtitle: "Texte",
+  textBadgeDescription:
+    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code",
+  textBadgeCode: "T.AI.0-4",
+
+  // AI Levels
+  aiLevel0Title: "0",
+  aiLevel0Description: "Humain Uniquement",
+
+  aiLevel1Title: "1",
+  aiLevel1Description: "Humain avec Assistance IA",
+
+  aiLevel2Title: "2",
+  aiLevel2Description: "Collaboration IA",
+
+  aiLevel3Title: "3",
+  aiLevel3Description: "IA Dirigée",
+
+  aiLevel4Title: "4",
+  aiLevel4Description: "IA Uniquement",
 
   // Common
   next: "Suivant",
