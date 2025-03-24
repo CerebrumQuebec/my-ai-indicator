@@ -76,7 +76,7 @@ ${selectedCategoryTypes
     (
       type
     ) => `  <span style="background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; padding: 4px 12px; border-radius: 9999px; font-size: 14px; font-weight: 500;">
-    ${getCategoryTitle(type)}: ${getCategoryCode(type)}.AI.${getCategoryValue(
+    ${getCategoryTitle(type)}: ${getCategoryCode(type)}-AI-${getCategoryValue(
       type
     )}
   </span>`
@@ -91,11 +91,11 @@ ${selectedCategoryTypes
         (type) =>
           `![${getCategoryTitle(type)}: ${getCategoryCode(
             type
-          )}.AI.${getCategoryValue(
+          )}-AI-${getCategoryValue(
             type
           )}](https://img.shields.io/badge/${getCategoryTitle(
             type
-          )}-${getCategoryCode(type)}.AI.${getCategoryValue(type)}-blue)`
+          )}-${getCategoryCode(type)}-AI-${getCategoryValue(type)}-blue)`
       )
       .join(" ");
   };
@@ -106,7 +106,7 @@ ${selectedCategoryTypes
         (type) =>
           `<meta name="AI-Usage-${getCategoryTitle(
             type
-          )}" content="${getCategoryCode(type)}.AI.${getCategoryValue(
+          )}" content="${getCategoryCode(type)}-AI-${getCategoryValue(
             type
           )}" />`
       )
@@ -120,7 +120,7 @@ ${selectedCategoryTypes
         ...Object.fromEntries(
           selectedCategoryTypes.map((type) => [
             type,
-            `${getCategoryCode(type)}.AI.${getCategoryValue(type)}`,
+            `${getCategoryCode(type)}-AI-${getCategoryValue(type)}`,
           ])
         ),
       },
@@ -137,7 +137,7 @@ TXXX: AI-USAGE=${selectedCategoryTypes
         (type) =>
           `${getCategoryTitle(type)}-${getCategoryCode(
             type
-          )}.AI.${getCategoryValue(type)}`
+          )}-AI-${getCategoryValue(type)}`
       )
       .join("/")}`;
   };
@@ -149,14 +149,14 @@ TXXX: AI-USAGE=${selectedCategoryTypes
         (type) =>
           `${getCategoryTitle(type)}: ${getCategoryCode(
             type
-          )}.AI.${getCategoryValue(type)}`
+          )}-AI-${getCategoryValue(type)}`
       )
       .join(" / ")} • CC BY-SA 4.0`;
   };
 
   const generatePlainTextBadge = () => {
     return selectedCategoryTypes
-      .map((type) => `${getCategoryCode(type)}.AI.${getCategoryValue(type)}`)
+      .map((type) => `${getCategoryCode(type)}-AI-${getCategoryValue(type)}`)
       .join(" • ");
   };
 
@@ -208,7 +208,7 @@ TXXX: AI-USAGE=${selectedCategoryTypes
                         {getCategoryTitle(type)}
                       </h3>
                       <div className="text-lg font-mono text-primary-400 mt-1">
-                        {getCategoryCode(type)}.AI.{category}
+                        {getCategoryCode(type)}-AI-{category}
                       </div>
                     </div>
                   </div>
@@ -265,7 +265,7 @@ TXXX: AI-USAGE=${selectedCategoryTypes
                       </span>
                       <span className="text-2xl font-bold tracking-wider">{`${getCategoryCode(
                         type
-                      )}.AI.${category}`}</span>
+                      )}-AI-${category}`}</span>
                     </div>
                   </React.Fragment>
                 );
