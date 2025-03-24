@@ -1,0 +1,100 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": false,
+    "pageViews": {
+      ".write": true,
+      "total": {
+        ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+      },
+      "daily": {
+        "$date": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+        }
+      }
+    },
+    "analytics": {
+      ".write": true,
+      "devices": {
+        "$device": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+        }
+      },
+      "browsers": {
+        "$browser": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+        }
+      },
+      "languages": {
+        "$language": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+        }
+      },
+      "hours": {
+        "$hour": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val()) && $hour.matches(/^[0-9]{1,2}$/)"
+        }
+      },
+      "performance": {
+        "avg_load_time": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        }
+      }
+    },
+    "platformClicks": {
+      ".write": true,
+      "$platform": {
+        ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+      }
+    },
+    "timezones": {
+      ".write": true,
+      "$zone": {
+        ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+      }
+    },
+    "milestones": {
+      ".write": true,
+      "records": {
+        ".write": true,
+        "daily": {
+          ".validate": "newData.hasChildren(['date', 'count']) && newData.child('date').isString() && newData.child('count').isNumber() && newData.child('count').val() > 0"
+        },
+        "hourly": {
+          ".validate": "newData.hasChildren(['datetime', 'count']) && newData.child('datetime').isString() && newData.child('count').isNumber() && newData.child('count').val() > 0"
+        },
+        "minute": {
+          ".validate": "newData.hasChildren(['datetime', 'count']) && newData.child('datetime').isString() && newData.child('count').isNumber() && newData.child('count').val() > 0"
+        }
+      },
+      "achievements": {
+        ".write": true,
+        "$milestone": {
+          ".validate": "newData.hasChildren(['date', 'type', 'value']) && newData.child('date').isString() && newData.child('type').isString() && newData.child('value').isNumber()"
+        }
+      }
+    },
+    "comparisons": {
+      ".write": true,
+      "weekly": {
+        "$week": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        }
+      },
+      "monthly": {
+        "$month": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        }
+      },
+      "peaks": {
+        ".write": true,
+        "daily": {
+          ".validate": "newData.hasChildren(['date', 'count']) && newData.child('date').isString() && newData.child('count').isNumber() && newData.child('count').val() > 0"
+        },
+        "weekly": {
+          ".validate": "newData.hasChildren(['weekStart', 'count']) && newData.child('weekStart').isString() && newData.child('count').isNumber() && newData.child('count').val() > 0"
+        }
+      }
+    }
+  }
+}

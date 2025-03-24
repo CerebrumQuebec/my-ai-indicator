@@ -36,9 +36,24 @@ export const en = {
     "Evaluate your level of AI usage in your audio, visual and textual creations",
 
   // Badge Notation System
-  badgeNotationTitle: "Badge Notation System",
-  badgeNotationDescription:
+  badgeNotationSystemTitle: "Badge Notation System",
+  badgeNotationSystemDescription:
     "A standardized system for indicating AI involvement across different creative mediums",
+  soundsLetter: "S",
+  soundsTitle: "Sounds",
+  soundsDescription: "Music, podcasts, sound effects, and other audio content",
+  visualLetter: "V",
+  visualTitle: "Visual",
+  visualDescription: "Images, videos, animations, and other visual content",
+  textLetter: "T",
+  textTitle: "Text",
+  textDescription:
+    "Written content like books, social media posts, emails, and code",
+  levelHumanOnly: "Human Only",
+  levelHumanWithAI: "Human with AI Assistance",
+  levelAICollaboration: "AI Collaboration",
+  levelDirectedAI: "Directed AI",
+  levelAIOnly: "AI Only",
 
   // Badge Types
   soundsBadgeTitle: "S",
@@ -259,22 +274,50 @@ export const en = {
   privacyTitle: "Privacy Policy",
   privacyDescription: "Our commitment to your privacy",
   privacyIntro:
-    "At Badge AI, we take your privacy very seriously. This page explains our approach to privacy.",
+    "At Badge AI, we take your privacy very seriously. This page explains our approach to privacy and data analytics.",
   noTrackingTitle: "No Tracking",
   noTrackingText:
-    "We do not use any tracking tools or analytics services. This means:",
+    "We do not use any third-party tracking tools or analytics services. This means:",
   noGoogleAnalytics: "• No Google Analytics",
   noPixel: "• No Meta (Facebook) Pixel",
   noCookies: "• No Cookies",
   dataCollectionTitle: "Data Collection",
   dataCollectionText:
-    "This website does not collect any personal information from its visitors. You can use all features of the Badge AI without providing any personal data.",
+    "This website uses a minimalist, privacy-focused analytics system. We do not collect any personally identifiable information, and you can view all collected data in the Analytics tab.",
+  analyticsSystemTitle: "Our Analytics System",
+  analyticsSystemDescription:
+    "We use our own privacy-focused analytics system that:",
+  analyticsFeatures_noPersonalInfo: "Does not collect any personal information",
+  analyticsFeatures_noCookies: "Does not use cookies or tracking scripts",
+  analyticsFeatures_anonymousData:
+    "Only records anonymous aggregate data like:",
+  analyticsFeatures_features_pageViews: "Total page views",
+  analyticsFeatures_features_deviceTypes:
+    "Device types (mobile/desktop/tablet)",
+  analyticsFeatures_features_browserTypes: "Browser types",
+  analyticsFeatures_features_languages: "Languages",
+  analyticsFeatures_features_visitTimes: "Visit times",
+  analyticsFeatures_features_performance: "Page load performance",
+  analyticsFeatures_noIdentification: "Cannot identify individual users",
+  analyticsFeatures_noTracking: "Cannot track users across sessions",
+  analyticsFeatures_transparent:
+    "Is fully transparent - you can view all collected data in the Analytics tab",
+  analyticsSystemCharacteristics: "Our analytics system is:",
+  analyticsCharacteristics_openSource: "Open source - you can review the code",
+  analyticsCharacteristics_selfHosted:
+    "Self-hosted - we don't share data with third parties",
+  analyticsCharacteristics_gdprCompliant:
+    "GDPR compliant - no personal data collection",
+  analyticsCharacteristics_minimal:
+    "Minimal - we only collect what's necessary",
+  analyticsCharacteristics_transparent:
+    "Transparent - all data is publicly viewable",
   transparencyTitle: "Our Transparency",
   transparencyText:
-    "We believe in complete transparency. This website is designed to be as simple and privacy-respecting as possible, focusing solely on providing the Badge AI service without any unnecessary data collection.",
+    "We believe in complete transparency. Our analytics system is open source, self-hosted, and designed to be as simple and privacy-respecting as possible.",
   questionsTitle: "Questions?",
   questionsText:
-    "If you have any questions about our privacy policy, please don't hesitate to contact us.",
+    "If you have any questions about our privacy policy or analytics system, please don't hesitate to contact us.",
 
   // Questionnaires
   soundsQuestionnaireTitle: "Sounds Content Questionnaire",
@@ -378,4 +421,48 @@ export const en = {
 
   // Add more translations as needed
   start: "Start",
+
+  // Analytics
+  analytics: "Analytics",
+  analyticsOverview: "Overview",
+  totalVisits: "Total Visits",
+  todayVisits: "Today's Visits",
+  avgLoadTime: "Average Load Time",
+  seconds: "seconds",
+  notAvailable: "Not Available",
+  devices: "Devices",
+  browsers: "Browsers",
+  languages: "Languages",
+  visitHours: "Visit Hours",
+  visits: "visits",
+  records: "Records",
+  dailyRecord: "Daily Record",
+  hourlyRecord: "Hourly Record",
+  minuteRecord: "Minute Record",
+  achievements: "Achievements",
+  visitors: "visitors",
+  french: "French",
+  english: "English",
+  spanish: "Spanish",
+  german: "German",
+  italian: "Italian",
+  portuguese: "Portuguese",
+  desktop: "Desktop",
+  mobile: "Mobile",
+  tablet: "Tablet",
+  chrome: "Chrome",
+  firefox: "Firefox",
+  safari: "Safari",
+  other: "Other",
+  loadingAnalytics: "Loading analytics...",
+  privacyPolicy: "Privacy Policy",
+  platformClicks: "Platform Clicks",
+  comparativeAnalysis: "Comparative Analysis",
+  weeklyStats: "Weekly Statistics",
+  monthlyStats: "Monthly Statistics",
+  historicalRecords: "Historical Records",
+  dailyPeak: "Daily Peak",
+  weeklyPeak: "Weekly Peak",
+  week: "Week",
+  weekOf: "Week of",
 };

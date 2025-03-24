@@ -709,12 +709,11 @@ export default function Home() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="animated-gradient-text">
-                Badge Notation System
+                {t("badgeNotationSystemTitle")}
               </span>
             </h2>
             <p className="text-text-secondary max-w-3xl mx-auto">
-              A standardized system for indicating AI involvement across
-              different creative mediums
+              {t("badgeNotationSystemDescription")}
             </p>
           </motion.div>
 
@@ -735,26 +734,23 @@ export default function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {[
                   {
-                    letter: "S",
-                    title: "Sounds",
-                    description:
-                      "Music, podcasts, sound effects, and other audio content",
+                    letter: t("soundsLetter"),
+                    title: t("soundsTitle"),
+                    description: t("soundsDescription"),
                     color: "primary-400",
                     bg: "primary-500",
                   },
                   {
-                    letter: "V",
-                    title: "Visual",
-                    description:
-                      "Images, videos, animations, and other visual content",
+                    letter: t("visualLetter"),
+                    title: t("visualTitle"),
+                    description: t("visualDescription"),
                     color: "accent-indigo",
                     bg: "accent-indigo",
                   },
                   {
-                    letter: "T",
-                    title: "Text",
-                    description:
-                      "Written content like books, social media posts, emails, and code",
+                    letter: t("textLetter"),
+                    title: t("textTitle"),
+                    description: t("textDescription"),
                     color: "primary-200",
                     bg: "primary-600",
                   },
@@ -829,11 +825,11 @@ export default function Home() {
               >
                 <div className="flex flex-wrap justify-center gap-6">
                   {[
-                    { level: "0", description: "Human Only" },
-                    { level: "1", description: "Human with AI Assistance" },
-                    { level: "2", description: "AI Collaboration" },
-                    { level: "3", description: "Directed AI" },
-                    { level: "4", description: "AI Only" },
+                    { level: "0", description: t("levelHumanOnly") },
+                    { level: "1", description: t("levelHumanWithAI") },
+                    { level: "2", description: t("levelAICollaboration") },
+                    { level: "3", description: t("levelDirectedAI") },
+                    { level: "4", description: t("levelAIOnly") },
                   ].map((item, index) => (
                     <motion.div
                       className="text-center"

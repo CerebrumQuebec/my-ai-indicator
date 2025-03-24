@@ -53,7 +53,7 @@ export default function DonateButton({
         body: JSON.stringify({
           amount: parseInt(finalAmount),
           isSubscription,
-          success_url: `${window.location.origin}/donation/success`,
+          success_url: `${window.location.origin}/app/donation/success`,
           cancel_url: window.location.href,
         }),
       });
