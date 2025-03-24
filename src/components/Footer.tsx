@@ -34,7 +34,14 @@ const Footer: React.FC = () => {
           </div>
           <div className="text-text-secondary text-sm">
             <p>
-              © {currentYear} {t("appName")}. {t("allRightsReserved")}.
+              © {currentYear} {t("appName")}.{" "}
+              <a
+                href="https://cerebrum.website/"
+                className="text-text-primary hover:text-primary-400 transition-colors"
+              >
+                {t("cerebrum")}
+              </a>{" "}
+              {t("allRightsReserved")}.
             </p>
           </div>
         </div>

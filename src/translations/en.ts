@@ -200,6 +200,15 @@ export const en = {
   contactTitle: "Contact",
   contactDescription:
     "Feel free to reach out if you have any questions about the AI Badge.",
+  contactBioTitle: "About me",
+  contactRole: "CEO of Cérebrum • Artist Engineer",
+  contactBio1:
+    "👀 I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
+  contactBio2:
+    "🌱 I'm currently learning Large Scale Web Development Architecture.",
+  contactBio3:
+    '💞️ I\'m looking to collaborate on making great tools that will bring "démocratie directe", eliminate poverty and protect cultural diversity for all human beings.',
+  contactEmail: "phil@cerebrum.website",
 
   // Privacy Page
   privacyTitle: "Privacy Policy",

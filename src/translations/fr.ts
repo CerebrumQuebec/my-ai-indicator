@@ -24,6 +24,7 @@ export const fr = {
   // Footer
   allRightsReserved: "Tous droits réservés",
   privacy: "Confidentialité",
+  cerebrum: "Cérebrum",
 
   // Meta
   metaTitle: "Badge IA",
@@ -206,6 +207,15 @@ export const fr = {
   contactTitle: "Contact",
   contactDescription:
     "N'hésitez pas à nous contacter si vous avez des questions sur le Badge IA.",
+  contactBioTitle: "À propos de moi",
+  contactRole: "CEO de Cérebrum • Artiste ingénieur",
+  contactBio1:
+    "👀 Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
+  contactBio2:
+    "🌱 Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
+  contactBio3:
+    "💞️ Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
+  contactEmail: "phil@cerebrum.website",
 
   // Privacy Page
   privacyTitle: "Politique de Confidentialité",
