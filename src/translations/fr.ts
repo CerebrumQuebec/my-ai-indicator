@@ -140,7 +140,7 @@ export const fr = {
   back: "Retour",
 
   // Category Selection
-  categorySelectionTitle: "Sélectionner les Types de Contenu",
+  categorySelectionTitle: "Identifier comment l'IA a été utilisée",
   categorySelectionDescription:
     "Choisissez quels types de contenu vous souhaitez évaluer pour l'utilisation de l'IA.",
   soundsCategoryTitle: "Sons",

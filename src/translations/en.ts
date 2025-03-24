@@ -139,7 +139,7 @@ export const en = {
   back: "Back",
 
   // Category Selection
-  categorySelectionTitle: "Select Content Types",
+  categorySelectionTitle: "Identify how AI was used",
   categorySelectionDescription:
     "Choose which types of content you want to evaluate for AI usage.",
   soundsCategoryTitle: "Sounds",

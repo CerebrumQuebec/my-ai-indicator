@@ -6,8 +6,9 @@ import HighContrastText from "./HighContrastText";
 
 export interface RadioOption {
   value: Category;
-  label: string;
-  description: string;
+  label: string | JSX.Element;
+  description?: string;
+  icon?: JSX.Element;
 }
 
 interface RadioGroupProps {
@@ -68,16 +69,47 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
       {options.map((option) => (
         <div
           key={option.value}
-          className={`relative p-4 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 ${
+          className={`${
             value === option.value
               ? `${getBackgroundColor(option.value)} shadow-md hover:shadow-lg`
               : "hover:bg-white/5 hover:border-white/20"
-          }`}
+          } relative flex cursor-pointer rounded-lg border p-4 transition-all focus:outline-none`}
           onClick={() => handleChange(option.value)}
           role="radio"
           aria-checked={value === option.value}
         >
-          <div className="flex space-x-4 items-start">
+          <div className="flex w-full items-center justify-between">
+            <div className="flex items-center">
+              {option.icon && (
+                <div className="mr-4 flex-shrink-0">{option.icon}</div>
+              )}
+              <div>
+                {typeof option.label === "string" ? (
+                  <p
+                    className={`font-medium ${
+                      value === option.value
+                        ? "text-primary-500"
+                        : "text-text-primary"
+                    }`}
+                  >
+                    {option.label}
+                  </p>
+                ) : (
+                  option.label
+                )}
+                {option.description && (
+                  <span
+                    className={`inline ${
+                      value === option.value
+                        ? "text-primary-400"
+                        : "text-text-secondary"
+                    }`}
+                  >
+                    {option.description}
+                  </span>
+                )}
+              </div>
+            </div>
             <div className="flex-shrink-0 mt-1">
               <div
                 className={`h-5 w-5 flex items-center justify-center rounded-full border-2 ${
@@ -90,27 +122,6 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
                   <div className="h-2.5 w-2.5 rounded-full bg-current"></div>
                 )}
               </div>
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between">
-                <h3 className="text-lg font-semibold mb-1 flex items-center">
-                  <HighContrastText text={option.label} />
-                  <span
-                    className={`ml-2 text-sm font-medium px-2 py-0.5 rounded-full ${
-                      value === option.value
-                        ? getCheckmarkColor(option.value)
-                        : "text-gray-400 bg-gray-800/50"
-                    }`}
-                  >
-                    {option.value !== null
-                      ? `Category ${option.value}`
-                      : "Select"}
-                  </span>
-                </h3>
-              </div>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                {option.description}
-              </p>
             </div>
           </div>
         </div>
