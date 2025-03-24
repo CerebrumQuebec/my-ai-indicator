@@ -36,9 +36,25 @@ export const fr = {
     "Évaluez votre niveau d'utilisation de l'IA dans vos créations audios, visuelles et textuelles",
 
   // Badge Notation System
-  badgeNotationTitle: "Système de Notation des Badges",
-  badgeNotationDescription:
+  badgeNotationSystemTitle: "Système de Notation des Badges",
+  badgeNotationSystemDescription:
     "Un système standardisé pour indiquer l'implication de l'IA dans différents médiums créatifs",
+  soundsLetter: "S",
+  soundsTitle: "Sons",
+  soundsDescription:
+    "Musique, podcasts, effets sonores et autres contenus audio",
+  visualLetter: "V",
+  visualTitle: "Visuel",
+  visualDescription: "Images, vidéos, animations et autres contenus visuels",
+  textLetter: "T",
+  textTitle: "Texte",
+  textDescription:
+    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code",
+  levelHumanOnly: "Humain Uniquement",
+  levelHumanWithAI: "Humain avec Assistance IA",
+  levelAICollaboration: "Collaboration IA",
+  levelDirectedAI: "IA Dirigée",
+  levelAIOnly: "IA Uniquement",
 
   // Badge Types
   soundsBadgeTitle: "S",

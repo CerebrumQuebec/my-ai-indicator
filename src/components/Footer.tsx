@@ -166,10 +166,10 @@ const Footer: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="inline-flex gap-3 font-sans">
                 <span className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium hover:bg-white/15 transition-colors">
-                  Visuel: V.AI.3
+                  Visuel: V.AI.4
                 </span>
                 <span className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium hover:bg-white/15 transition-colors">
-                  Texte: T.AI.2
+                  Texte: T.AI.4
                 </span>
               </div>
             </div>

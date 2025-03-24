@@ -36,9 +36,24 @@ export const en = {
     "Evaluate your level of AI usage in your audio, visual and textual creations",
 
   // Badge Notation System
-  badgeNotationTitle: "Badge Notation System",
-  badgeNotationDescription:
+  badgeNotationSystemTitle: "Badge Notation System",
+  badgeNotationSystemDescription:
     "A standardized system for indicating AI involvement across different creative mediums",
+  soundsLetter: "S",
+  soundsTitle: "Sounds",
+  soundsDescription: "Music, podcasts, sound effects, and other audio content",
+  visualLetter: "V",
+  visualTitle: "Visual",
+  visualDescription: "Images, videos, animations, and other visual content",
+  textLetter: "T",
+  textTitle: "Text",
+  textDescription:
+    "Written content like books, social media posts, emails, and code",
+  levelHumanOnly: "Human Only",
+  levelHumanWithAI: "Human with AI Assistance",
+  levelAICollaboration: "AI Collaboration",
+  levelDirectedAI: "Directed AI",
+  levelAIOnly: "AI Only",
 
   // Badge Types
   soundsBadgeTitle: "S",
