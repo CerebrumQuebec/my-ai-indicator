@@ -9,6 +9,7 @@ import { useTranslation } from "../contexts/TranslationContext";
 import { StepProps, Category } from "../types";
 import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
+import Image from "next/image";
 
 const Result: React.FC<StepProps> = () => {
   const { t } = useTranslation();
@@ -167,6 +168,13 @@ TXXX: AI-USAGE=${selectedCategoryTypes
 
   return (
     <div className="space-y-6">
+      {/* Background decorative elements */}
+      <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute -top-20 right-20 w-96 h-96 bg-gradient-to-br from-primary-500 to-accent-indigo rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute top-1/3 -left-20 w-80 h-80 bg-primary-600 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute -bottom-32 right-1/4 w-64 h-64 bg-accent-indigo rounded-full opacity-10 blur-3xl"></div>
+      </div>
+
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-4">
           <HighContrastText text={t("resultTitle")} />
@@ -179,6 +187,35 @@ TXXX: AI-USAGE=${selectedCategoryTypes
       <div className="space-y-8">
         <div className="space-y-4">
           <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-4">
+              {selectedCategoryTypes.map((type) => {
+                const category = getCategoryValue(type);
+                return (
+                  <div
+                    key={type}
+                    className="bg-surface-dark/70 rounded-lg border border-white/10 p-4 flex flex-col items-center transition-all hover:scale-105 hover:shadow-lg min-w-[120px]"
+                  >
+                    <div className="relative w-20 h-20">
+                      <Image
+                        src={`/badges/category-${category}.svg`}
+                        alt={`Category ${category} badge`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="mt-2 text-center">
+                      <h3 className="text-lg font-medium">
+                        {getCategoryTitle(type)}
+                      </h3>
+                      <div className="text-lg font-mono text-primary-400 mt-1">
+                        {getCategoryCode(type)}.AI.{category}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
             <div className="bg-gradient-to-r from-[#8B1F1F] to-[#C41E3A] text-white px-8 py-6 rounded-2xl flex items-center space-x-4 shadow-xl transform transition-all hover:scale-105 border border-white/10">
               {selectedCategoryTypes.map((type, index) => {
                 const category = getCategoryValue(type);
