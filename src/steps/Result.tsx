@@ -158,6 +158,12 @@ TXXX: AI-USAGE=${selectedCategoryTypes
       .join(" / ")} • CC BY-SA 4.0`;
   };
 
+  const generatePlainTextBadge = () => {
+    return selectedCategoryTypes
+      .map((type) => `${getCategoryCode(type)}.AI.${getCategoryValue(type)}`)
+      .join(" • ");
+  };
+
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -177,7 +183,7 @@ TXXX: AI-USAGE=${selectedCategoryTypes
 
       <div className="space-y-8">
         <div className="space-y-4">
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-4">
             <div className="bg-gradient-to-r from-[#8B1F1F] to-[#C41E3A] text-white px-8 py-6 rounded-2xl flex items-center space-x-4 shadow-xl transform transition-all hover:scale-105 border border-white/10">
               {selectedCategoryTypes.map((type, index) => {
                 const category = getCategoryValue(type);
@@ -234,6 +240,27 @@ TXXX: AI-USAGE=${selectedCategoryTypes
               })}
               <span className="text-sm opacity-80 ml-4 font-medium">v1.0</span>
             </div>
+            <button
+              onClick={() => handleCopy(generatePlainTextBadge())}
+              className="flex items-center gap-2 px-4 py-2 bg-surface-card/50 hover:bg-surface-card/70 rounded-lg transition-colors"
+              title={t("copy")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+              <span>Copier le badge</span>
+            </button>
           </div>
         </div>
         {selectedCategoryTypes.map((type) => {

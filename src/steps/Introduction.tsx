@@ -22,8 +22,8 @@ const Introduction: React.FC<StepProps> = ({ onNext }) => {
     <div className="space-y-8">
       {/* First box: Welcome and CTA */}
       <div className="bg-surface-card rounded-xl border border-white/10 p-6">
-        <div className="text-center space-y-6">
-          <div className="relative w-24 h-24 mx-auto">
+        <div className="text-center">
+          <div className="relative w-24 h-24 mx-auto mb-6">
             <Image
               src="/logo.png"
               alt="Badge AI Logo"
@@ -32,16 +32,14 @@ const Introduction: React.FC<StepProps> = ({ onNext }) => {
               priority
             />
           </div>
-          <h1 className="text-4xl font-bold text-text-primary">
+          <h1 className="text-4xl font-bold text-text-primary mb-6">
             {t("welcomeTitle")}
           </h1>
-          <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+          <p className="text-lg text-text-secondary max-w-3xl mx-auto mb-16">
             {t("welcomeDescription")}
           </p>
-        </div>
 
-        {/* Start button */}
-        <div className="mt-16 flex justify-center">
+          {/* Start button */}
           <button
             onClick={handleStart}
             className="group relative inline-flex items-center px-10 py-4 text-lg font-medium rounded-2xl bg-primary-500 text-white hover:bg-primary-400 transition-colors"
