@@ -44,15 +44,27 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
   };
 
   const handleNext = () => {
+    console.log("SoundsStep - handleNext called, category:", soundsCategory);
     if (onNext && soundsCategory !== null) {
+      console.log("SoundsStep - Calling onNext to advance to next step");
       onNext();
+    } else {
+      console.log(
+        "SoundsStep - Cannot advance: onNext is null or category is null"
+      );
     }
   };
 
   const handleQuestionnaireMode = () => {
+    console.log("SoundsStep - handleQuestionnaireMode called");
     if (onNext) {
+      console.log("SoundsStep - Setting questionnaire mode and calling onNext");
       setQuestionnaireMode(true);
       onNext();
+    } else {
+      console.log(
+        "SoundsStep - Cannot advance to questionnaire: onNext is null"
+      );
     }
   };
 

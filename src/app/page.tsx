@@ -24,6 +24,13 @@ export default function Home() {
     selectedCategories,
   } = useWizard();
 
+  // Debug current step
+  console.log("Current step:", step);
+  console.log("Selected categories:", selectedCategories);
+  console.log("Sound category:", soundsCategory);
+  console.log("Visual category:", visualCategory);
+  console.log("Text category:", textCategory);
+
   // Adjusted step calculation to not count Introduction
   const totalSteps =
     1 + Object.values(selectedCategories).filter(Boolean).length + 1; // Category Selection + Selected Categories + Result
@@ -48,6 +55,7 @@ export default function Home() {
     }
   };
 
+  // Improved canContinue function to better handle step logic
   const canContinue = () => {
     switch (step) {
       case 1:
@@ -73,11 +81,21 @@ export default function Home() {
               return false;
           }
         }
+
+        // If we've gone through all the selected categories, we can continue to the result
+        if (currentStepIndex >= categories.length) {
+          return true;
+        }
+
         return false;
     }
   };
 
   const renderStep = () => {
+    // Debug step rendering
+    console.log("Rendering step:", step);
+    console.log("Total steps:", totalSteps);
+
     switch (step) {
       case 1:
         return <Introduction onNext={handleNext} />;
@@ -92,6 +110,11 @@ export default function Home() {
         const categories = Object.entries(selectedCategories)
           .filter(([_, selected]) => selected)
           .map(([category]) => category);
+
+        // If we've gone through all categories steps
+        if (currentStepIndex >= categories.length) {
+          return <Result onBack={handleBack} />;
+        }
 
         if (currentStepIndex >= 0 && currentStepIndex < categories.length) {
           const currentCategory = categories[currentStepIndex];
@@ -117,10 +140,7 @@ export default function Home() {
           }
         }
 
-        if (step === totalSteps) {
-          return <Result onBack={handleBack} />;
-        }
-
+        // Default fallback
         return <Introduction onNext={handleNext} />;
     }
   };

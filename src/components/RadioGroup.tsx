@@ -75,6 +75,10 @@ const RadioGroup: React.FC<Props> = ({
               onChange={() => {
                 console.log("RadioGroup - Option selected:", option.id);
                 onChange(option.id);
+                console.log(
+                  "RadioGroup - After calling onChange with:",
+                  option.id
+                );
               }}
             />
             <div className="flex w-full items-center justify-between">
