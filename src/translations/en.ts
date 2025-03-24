@@ -60,19 +60,19 @@ export const en = {
   soundsBadgeSubtitle: "Sounds",
   soundsBadgeDescription:
     "Music, podcasts, sound effects, and other audio content",
-  soundsBadgeCode: "S.AI.0-4",
+  soundsBadgeCode: "S-AI-0-4",
 
   visualBadgeTitle: "V",
   visualBadgeSubtitle: "Visual",
   visualBadgeDescription:
     "Images, videos, animations, and other visual content",
-  visualBadgeCode: "V.AI.0-4",
+  visualBadgeCode: "V-AI-0-4",
 
   textBadgeTitle: "T",
   textBadgeSubtitle: "Text",
   textBadgeDescription:
     "Written content like books, social media posts, emails, and code",
-  textBadgeCode: "T.AI.0-4",
+  textBadgeCode: "T-AI-0-4",
 
   // AI Levels
   aiLevel0Title: "0",
@@ -235,11 +235,11 @@ export const en = {
   aboutTeamText:
     "The Badge AI was developed by Philippe Bourque, CEO of Cérebrum and Artist Engineer from Quebec City.",
   aboutTeamBio1:
-    "👀 I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
+    "I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
   aboutTeamBio2:
-    "🌱 I'm currently learning Large Scale Web Development Architecture.",
+    "I'm currently learning Large Scale Web Development Architecture.",
   aboutTeamBio3:
-    '💞️ I\'m looking to collaborate on making great tools that will bring "démocratie directe", eliminate poverty and protect cultural diversity for all human beings.',
+    "I'm looking to collaborate on making great tools that will bring 'démocratie directe', eliminate poverty and protect cultural diversity for all human beings.",
   aboutTeamRole: "CEO of Cérebrum • Artist Engineer",
   aboutTeamContact: "phil@cerebrum.website",
 
@@ -263,11 +263,11 @@ export const en = {
   contactBioTitle: "About me",
   contactRole: "CEO of Cérebrum • Artist Engineer",
   contactBio1:
-    "👀 I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
+    "I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
   contactBio2:
-    "🌱 I'm currently learning Large Scale Web Development Architecture.",
+    "I'm currently learning Large Scale Web Development Architecture.",
   contactBio3:
-    '💞️ I\'m looking to collaborate on making great tools that will bring "démocratie directe", eliminate poverty and protect cultural diversity for all human beings.',
+    "I'm looking to collaborate on making great tools that will bring 'démocratie directe', eliminate poverty and protect cultural diversity for all human beings.",
   contactEmail: "phil@cerebrum.website",
 
   // Privacy Page

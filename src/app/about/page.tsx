@@ -100,7 +100,7 @@ export default function About() {
                     {t("soundsCategoryDescription")}
                   </p>
                   <div className="text-xs font-mono bg-primary-500/20 text-primary-400 py-1 px-2 rounded-md inline-block">
-                    S.AI.0 - S.AI.4
+                    S-AI-0 - S-AI-4
                   </div>
                 </div>
                 <div className="bg-surface-dark/70 rounded-lg border border-white/10 p-3 sm:p-4 transition-all duration-300 hover:bg-surface-dark hover:border-accent-indigo/30 hover:shadow-lg hover:-translate-y-1">
@@ -112,7 +112,7 @@ export default function About() {
                     {t("visualCategoryDescription")}
                   </p>
                   <div className="text-xs font-mono bg-accent-indigo/20 text-accent-indigo py-1 px-2 rounded-md inline-block">
-                    V.AI.0 - V.AI.4
+                    V-AI-0 - V-AI-4
                   </div>
                 </div>
                 <div className="bg-surface-dark/70 rounded-lg border border-white/10 p-3 sm:p-4 transition-all duration-300 hover:bg-surface-dark hover:border-primary-200/30 hover:shadow-lg hover:-translate-y-1">
@@ -124,7 +124,7 @@ export default function About() {
                     {t("textCategoryDescription")}
                   </p>
                   <div className="text-xs font-mono bg-primary-600/20 text-primary-200 py-1 px-2 rounded-md inline-block">
-                    T.AI.0 - T.AI.4
+                    T-AI-0 - T-AI-4
                   </div>
                 </div>
               </div>
