@@ -2,6 +2,13 @@
 
 import React, { useEffect } from "react";
 import { useWizard } from "../contexts/WizardContext";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  DocumentTextIcon,
+  ChartBarIcon,
+} from "@heroicons/react/24/outline";
+import { useTranslation } from "../contexts/TranslationContext";
 
 export interface ProgressBarProps {
   currentStep: number;
@@ -32,6 +39,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     setSelectedCategories,
     setQuestionnaireMode,
   } = useWizard();
+  const { t } = useTranslation();
 
   const handleReset = () => {
     setStep(1);
@@ -61,44 +69,74 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   }, [currentStep, totalSteps, progressPercent]);
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <span className="bg-primary/20 text-primary px-2 py-1 rounded-full text-xs font-medium">
-            {isQuestionnaireMode
-              ? `Question ${currentQuestion}/${totalQuestions}`
-              : `Step ${currentStep}/${totalSteps}`}
-          </span>
-        </div>
-        <div className="flex gap-4">
-          <button
-            onClick={onBack}
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            Back
-          </button>
-          <button
-            onClick={handleReset}
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            Reset
-          </button>
-          {canContinue && (
-            <button
-              onClick={onNext}
-              className="text-sm text-primary hover:text-primary/80 transition-colors"
-            >
-              Next
-            </button>
+    <div className="relative">
+      <div className="flex items-center justify-between mb-3">
+        <button
+          onClick={onBack}
+          className="flex items-center text-white/70 hover:text-white transition-colors"
+        >
+          <ArrowLeftIcon className="h-5 w-5 mr-1" />
+          <span className="text-sm font-medium">{t("back")}</span>
+        </button>
+        <div className="text-sm font-medium">
+          {isQuestionnaireMode ? (
+            <span className="bg-white/10 px-3 py-1 rounded-full flex items-center">
+              <DocumentTextIcon className="h-4 w-4 mr-1 text-primary-400" />
+              {t("question")} {currentQuestion}/{totalQuestions}
+            </span>
+          ) : (
+            <span className="bg-white/10 px-3 py-1 rounded-full flex items-center">
+              <ChartBarIcon className="h-4 w-4 mr-1 text-primary-400" />
+              {t("step")} {currentStep}/{totalSteps}
+            </span>
           )}
         </div>
+        <button
+          onClick={onNext}
+          disabled={!canContinue}
+          className={`flex items-center ${
+            canContinue
+              ? "text-primary-400 hover:text-primary-300"
+              : "text-gray-500 cursor-not-allowed"
+          } transition-colors`}
+        >
+          <span className="text-sm font-medium">{t("next")}</span>
+          <ArrowRightIcon className="h-5 w-5 ml-1" />
+        </button>
       </div>
-      <div className="h-2.5 bg-black/40 rounded-full overflow-hidden">
+
+      <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden">
         <div
-          className="h-full bg-blue-500 transition-all duration-500 ease-out"
+          className="h-full bg-gradient-to-r from-primary-600 to-primary-400 rounded-full relative shimmer"
           style={{ width: `${progressPercent}%` }}
-        />
+        ></div>
       </div>
+      {!isQuestionnaireMode && (
+        <div className="flex justify-between mt-2">
+          {Array.from({ length: totalSteps }).map((_, index) => (
+            <div
+              key={index}
+              className={`flex flex-col items-center ${
+                index === currentStep - 1
+                  ? "text-primary-400"
+                  : index < currentStep - 1
+                  ? "text-green-400"
+                  : "text-gray-500"
+              }`}
+            >
+              <div
+                className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                  index === currentStep - 1
+                    ? "bg-primary-400 animate-pulse scale-125"
+                    : index < currentStep - 1
+                    ? "bg-green-400"
+                    : "bg-gray-600"
+                }`}
+              ></div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

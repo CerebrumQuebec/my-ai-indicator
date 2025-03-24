@@ -1,6 +1,6 @@
 export const en = {
   // Header
-  appName: "AI Badge",
+  appName: "Badge AI",
   home: "Home",
   about: "About",
   faq: "FAQ",
@@ -26,7 +26,7 @@ export const en = {
   privacy: "Privacy",
 
   // Meta
-  metaTitle: "AI Badge",
+  metaTitle: "Badge AI",
   metaDescription:
     "Evaluate your level of AI usage in your musical and textual creations",
 
@@ -36,7 +36,7 @@ export const en = {
   reset: "Reset",
 
   // Introduction
-  welcomeTitle: "Welcome to the AI Badge",
+  welcomeTitle: "Welcome to the Badge AI",
   welcomeDescription:
     "This tool will help you determine to what extent your creative process uses artificial intelligence. Inspired by the Creative Commons model, our badge offers transparency on the genesis of your work.",
   licenseQuestion: "Do you know what type of license you need?",
@@ -48,11 +48,11 @@ export const en = {
 
   // Introduction sections
   howItWorksContent:
-    "The AI Badge helps you communicate how AI was used in your creative process. Simply answer a few questions about your work, and we'll help you determine the appropriate badge.",
+    "The Badge AI helps you communicate how AI was used in your creative process. Simply answer a few questions about your work, and we'll help you determine the appropriate badge.",
   whyIndicateContent:
     "Being transparent about AI usage builds trust with your audience and helps set appropriate expectations. It's becoming increasingly important in today's creative landscape.",
   ccInspirationIntro:
-    "Our AI Badge is directly inspired by Creative Commons, which revolutionized how creators can share their work with clear permissions.",
+    "Our Badge AI is directly inspired by Creative Commons, which revolutionized how creators can share their work with clear permissions.",
   ccSimilaritiesTitle: "Similarities with Creative Commons:",
   ccSimilarity1Title: "Standardized approach",
   ccSimilarity1Description: "with clear and precise categories",
@@ -136,12 +136,12 @@ export const en = {
 
   // FAQ Page
   faqTitle: "Frequently Asked Questions",
-  faqDescription: "Find answers to common questions about the AI Badge.",
+  faqDescription: "Find answers to common questions about the Badge AI.",
 
   // FAQ Questions
-  faqQuestion1: "What is the AI Badge?",
+  faqQuestion1: "What is the Badge AI?",
   faqAnswer1:
-    "The AI Badge is a tool that helps creators transparently communicate the level of AI involvement in their creative works, similar to how Creative Commons licenses communicate usage rights.",
+    "The Badge AI is a tool that helps creators transparently communicate the level of AI involvement in their creative works, similar to how Creative Commons licenses communicate usage rights.",
 
   faqQuestion2: "Why should I indicate AI usage in my work?",
   faqAnswer2:
@@ -158,13 +158,13 @@ export const en = {
 
   faqQuestion5: "Is this a legal requirement?",
   faqAnswer5:
-    "No, using the AI Badge is voluntary. However, transparency about AI usage is becoming increasingly important and may be required in some contexts in the future.",
+    "No, using the Badge AI is voluntary. However, transparency about AI usage is becoming increasingly important and may be required in some contexts in the future.",
 
   // About Page
-  aboutTitle: "About the AI Badge",
+  aboutTitle: "About the Badge AI",
   aboutIntroTitle: "Introduction",
   aboutIntroText:
-    "The AI Badge is a standardized system designed to transparently communicate the level of AI involvement in creative works. Inspired by Creative Commons, it provides a clear framework for creators to indicate how AI was used in their creation process.",
+    "The Badge AI is a standardized system designed to transparently communicate the level of AI involvement in creative works. Inspired by Creative Commons, it provides a clear framework for creators to indicate how AI was used in their creation process.",
   aboutMissionTitle: "Our Mission",
   aboutMissionText:
     "Our mission is to promote transparency in AI-assisted creation by providing a simple, standardized way for creators to communicate the level of AI involvement in their work. We believe that transparency builds trust and helps audiences better understand and appreciate creative works in the age of AI.",
@@ -173,7 +173,7 @@ export const en = {
     "We've developed five distinct categories that represent different levels of AI involvement in the creative process, from works created entirely by AI to those created entirely by humans with no AI assistance.",
   aboutTeamTitle: "Our Team",
   aboutTeamText:
-    "The AI Badge was developed by Philippe Bourque, CEO of Cérebrum and Artist Engineer from Quebec City.",
+    "The Badge AI was developed by Philippe Bourque, CEO of Cérebrum and Artist Engineer from Quebec City.",
   aboutTeamBio1:
     "👀 I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
   aboutTeamBio2:
@@ -199,7 +199,7 @@ export const en = {
   // Contact Page
   contactTitle: "Contact",
   contactDescription:
-    "Feel free to reach out if you have any questions about the AI Badge.",
+    "Feel free to reach out if you have any questions about the Badge AI.",
   contactBioTitle: "About me",
   contactRole: "CEO of Cérebrum • Artist Engineer",
   contactBio1:
@@ -214,7 +214,7 @@ export const en = {
   privacyTitle: "Privacy Policy",
   privacyDescription: "Our commitment to your privacy",
   privacyIntro:
-    "At AI Badge, we take your privacy very seriously. This page explains our approach to privacy.",
+    "At Badge AI, we take your privacy very seriously. This page explains our approach to privacy.",
   noTrackingTitle: "No Tracking",
   noTrackingText:
     "We do not use any tracking tools or analytics services. This means:",
@@ -223,10 +223,10 @@ export const en = {
   noCookies: "• No Cookies",
   dataCollectionTitle: "Data Collection",
   dataCollectionText:
-    "This website does not collect any personal information from its visitors. You can use all features of the AI Badge without providing any personal data.",
+    "This website does not collect any personal information from its visitors. You can use all features of the Badge AI without providing any personal data.",
   transparencyTitle: "Our Transparency",
   transparencyText:
-    "We believe in complete transparency. This website is designed to be as simple and privacy-respecting as possible, focusing solely on providing the AI Badge service without any unnecessary data collection.",
+    "We believe in complete transparency. This website is designed to be as simple and privacy-respecting as possible, focusing solely on providing the Badge AI service without any unnecessary data collection.",
   questionsTitle: "Questions?",
   questionsText:
     "If you have any questions about our privacy policy, please don't hesitate to contact us.",
@@ -256,7 +256,7 @@ export const en = {
   audioMetadataDescription: "Example of using ID3 tags for MP3 files",
   creativeCommonsUsage: "Creative Commons Usage",
   creativeCommonsDescription:
-    "The AI Badge can be used alongside Creative Commons or other copyright licenses",
+    "The Badge AI can be used alongside Creative Commons or other copyright licenses",
   copied: "Copied to clipboard!",
   startOver: "Start Over",
 

@@ -31,6 +31,12 @@ const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
     }
   };
 
+  const adaptedOptions = visualCategoryOptions.map((option) => ({
+    value: option.id,
+    label: t(option.titleKey),
+    description: t(option.descriptionKey),
+  }));
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -46,9 +52,10 @@ const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
       </div>
 
       <RadioGroup
-        options={visualCategoryOptions}
+        options={adaptedOptions}
         value={visualCategory}
         onChange={handleCategoryChange}
+        name="visual-category"
       />
 
       <div className="flex justify-between items-center mt-8">

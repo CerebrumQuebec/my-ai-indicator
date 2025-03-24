@@ -14,20 +14,37 @@ export interface ResultBadgeProps {
 const ResultBadge: React.FC<ResultBadgeProps> = ({ type, category, title }) => {
   if (!category) return null;
 
+  const getCategoryGradient = (category: Category) => {
+    switch (category) {
+      case 0:
+        return "from-blue-600 to-blue-400";
+      case 1:
+        return "from-red-600 to-red-400";
+      case 2:
+        return "from-orange-600 to-orange-400";
+      case 3:
+        return "from-yellow-600 to-yellow-400";
+      case 4:
+        return "from-green-600 to-green-400";
+      default:
+        return "from-gray-600 to-gray-400";
+    }
+  };
+
   const getCategoryColor = (category: Category) => {
     switch (category) {
       case 0:
-        return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:text-blue-100 dark:border-blue-700";
+        return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/60 dark:text-blue-100 dark:border-blue-700/50";
       case 1:
-        return "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:text-red-100 dark:border-red-700";
+        return "bg-red-100 text-red-800 border-red-300 dark:bg-red-900/60 dark:text-red-100 dark:border-red-700/50";
       case 2:
-        return "bg-orange-100 text-orange-800 border-orange-300 dark:bg-orange-900 dark:text-orange-100 dark:border-orange-700";
+        return "bg-orange-100 text-orange-800 border-orange-300 dark:bg-orange-900/60 dark:text-orange-100 dark:border-orange-700/50";
       case 3:
-        return "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-100 dark:border-yellow-700";
+        return "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900/60 dark:text-yellow-100 dark:border-yellow-700/50";
       case 4:
-        return "bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:text-green-100 dark:border-green-700";
+        return "bg-green-100 text-green-800 border-green-300 dark:bg-green-900/60 dark:text-green-100 dark:border-green-700/50";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600";
+        return "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-800/60 dark:text-gray-100 dark:border-gray-600/50";
     }
   };
 
@@ -107,19 +124,24 @@ const ResultBadge: React.FC<ResultBadgeProps> = ({ type, category, title }) => {
 
   return (
     <div
-      className={`inline-flex items-center px-6 py-3 rounded-xl border-2 shadow-lg transform transition-all hover:scale-105 ${getCategoryColor(
+      className={`inline-flex items-center px-6 py-4 rounded-xl border-2 shadow-lg backdrop-blur-sm transform transition-all duration-300 hover:scale-105 hover:shadow-glow ${getCategoryColor(
         category
       )}`}
     >
-      <div className="flex items-center space-x-3">
-        <span className="text-2xl">{getCategoryIcon(category)}</span>
+      <div className="absolute inset-0 bg-gradient-to-r opacity-10 rounded-xl ${getCategoryGradient(category)}"></div>
+      <div className="flex items-center space-x-4 relative z-10">
+        <div className={`text-2xl p-2 rounded-full bg-white/10`}>
+          {getCategoryIcon(category)}
+        </div>
         <div className="flex flex-col">
-          <div className="text-lg font-bold">
+          <div className="text-lg font-bold mb-0.5">
             <HighContrastText text={title} />
           </div>
           <div className="flex items-center">
-            <span className="text-xl font-bold">Cat. {category}</span>
-            <span className="text-sm opacity-60 ml-2">v1.0</span>
+            <span className="text-xl font-bold tracking-wide">
+              Cat. {category}
+            </span>
+            <span className="text-sm opacity-70 ml-2 font-medium">v1.0</span>
           </div>
         </div>
       </div>

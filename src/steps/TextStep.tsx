@@ -44,6 +44,12 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
     }
   };
 
+  const adaptedOptions = textCategoryOptions.map((option) => ({
+    value: option.id,
+    label: t(option.titleKey),
+    description: t(option.descriptionKey),
+  }));
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -59,9 +65,10 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
       </div>
 
       <RadioGroup
-        options={textCategoryOptions}
+        options={adaptedOptions}
         value={textCategory}
         onChange={handleCategoryChange}
+        name="text-category"
       />
 
       <div className="flex justify-between items-center mt-8">

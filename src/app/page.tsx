@@ -143,8 +143,12 @@ export default function Home() {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-surface-card/90 backdrop-blur-sm rounded-2xl shadow-soft border border-white/10 overflow-hidden">
-        <div className="p-6 md:p-8">
+      <div className="glass-panel overflow-hidden relative">
+        <div className="absolute inset-0 -z-10 opacity-5 bg-gradient-to-tr from-primary-600/20 to-accent-indigo/20"></div>
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-500 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-accent-indigo rounded-full opacity-10 blur-3xl"></div>
+
+        <div className="p-6 md:p-8 relative z-10">
           {step > 1 && (
             <div className="mb-8">
               <ProgressBar
@@ -159,7 +163,7 @@ export default function Home() {
               />
             </div>
           )}
-          {renderStep()}
+          <div className="transition-opacity duration-300">{renderStep()}</div>
         </div>
       </div>
     </div>

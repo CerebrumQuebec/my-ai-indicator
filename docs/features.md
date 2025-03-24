@@ -4,7 +4,7 @@
 
 ### Overview
 
-Each AI badge should have a unique, permanent URL on badgeai.org that provides detailed information about the badge and its meaning. This system will enhance transparency and provide more context about AI usage in creative works.
+Each badge AI should have a unique, permanent URL on badgeai.org that provides detailed information about the badge and its meaning. This system will enhance transparency and provide more context about AI usage in creative works.
 
 ### Implementation Details
 

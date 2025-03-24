@@ -69,6 +69,12 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
     }
   };
 
+  const adaptedOptions = soundsCategoryOptions.map((option) => ({
+    value: option.id,
+    label: t(option.titleKey),
+    description: t(option.descriptionKey),
+  }));
+
   // Ensure we have valid options before rendering
   if (!soundsCategoryOptions || soundsCategoryOptions.length === 0) {
     console.error("SoundsStep - No options available for rendering");
@@ -90,9 +96,10 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
       </div>
 
       <RadioGroup
-        options={soundsCategoryOptions}
+        options={adaptedOptions}
         value={soundsCategory}
         onChange={handleCategoryChange}
+        name="sounds-category"
       />
 
       <div className="flex justify-between items-center mt-8">
