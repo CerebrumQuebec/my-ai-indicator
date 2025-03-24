@@ -265,22 +265,22 @@ export const fr = {
   privacyTitle: "Politique de Confidentialité",
   privacyDescription: "Notre engagement envers votre confidentialité",
   privacyIntro:
-    "Chez Badge IA, nous prenons votre confidentialité très au sérieux. Cette page explique notre approche de la confidentialité.",
+    "Chez Badge IA, nous prenons votre confidentialité très au sérieux. Cette page explique notre approche de la confidentialité et de l'analyse des données.",
   noTrackingTitle: "Pas de Suivi",
   noTrackingText:
-    "Nous n'utilisons aucun outil de suivi ou service d'analyse. Cela signifie :",
+    "Nous n'utilisons aucun outil de suivi ou service d'analyse tiers. Cela signifie :",
   noGoogleAnalytics: "• Pas de Google Analytics",
   noPixel: "• Pas de Meta (Facebook) Pixel",
   noCookies: "• Pas de Cookies",
   dataCollectionTitle: "Collecte de Données",
   dataCollectionText:
-    "Ce site web ne collecte aucune information personnelle de ses visiteurs. Vous pouvez utiliser toutes les fonctionnalités du Badge IA sans fournir de données personnelles.",
+    "Ce site web utilise un système d'analyse minimaliste et respectueux de la vie privée. Nous ne collectons aucune information personnelle identifiable et vous pouvez consulter toutes les données collectées dans l'onglet Analytiques.",
   transparencyTitle: "Notre Transparence",
   transparencyText:
-    "Nous croyons en la transparence totale. Ce site web est conçu pour être aussi simple et respectueux de la vie privée que possible, se concentrant uniquement sur la fourniture du service Badge IA sans collecte de données inutile.",
+    "Nous croyons en la transparence totale. Notre système d'analyse est open source, auto-hébergé et conçu pour être aussi simple et respectueux de la vie privée que possible.",
   questionsTitle: "Des Questions ?",
   questionsText:
-    "Si vous avez des questions sur notre politique de confidentialité, n'hésitez pas à nous contacter.",
+    "Si vous avez des questions sur notre politique de confidentialité ou notre système d'analyse, n'hésitez pas à nous contacter.",
 
   // Questionnaires
   soundsQuestionnaireTitle: "Questionnaire sur le contenu sonore",
@@ -388,4 +388,81 @@ export const fr = {
 
   // Add more translations as needed
   start: "Débuter",
+
+  // Analytics
+  analytics: "Analytiques",
+  analyticsOverview: "Vue d'ensemble",
+  totalVisits: "Visites totales",
+  todayVisits: "Visites aujourd'hui",
+  avgLoadTime: "Temps de chargement moyen",
+  seconds: "secondes",
+  notAvailable: "Non disponible",
+  devices: "Appareils",
+  browsers: "Navigateurs",
+  languages: "Langues",
+  visitHours: "Heures de visite",
+  visits: "visites",
+  records: "Records",
+  dailyRecord: "Record journalier",
+  hourlyRecord: "Record horaire",
+  minuteRecord: "Record par minute",
+  achievements: "Réalisations",
+  visitors: "visiteurs",
+  french: "Français",
+  english: "Anglais",
+  spanish: "Espagnol",
+  german: "Allemand",
+  italian: "Italien",
+  portuguese: "Portugais",
+  desktop: "Ordinateur",
+  mobile: "Mobile",
+  tablet: "Tablette",
+  chrome: "Chrome",
+  firefox: "Firefox",
+  safari: "Safari",
+  other: "Autre",
+  loadingAnalytics: "Chargement des analytiques...",
+  privacyPolicy: "Politique de confidentialité",
+  platformClicks: "Clics sur les plateformes",
+  comparativeAnalysis: "Analyse comparative",
+  weeklyStats: "Statistiques hebdomadaires",
+  monthlyStats: "Statistiques mensuelles",
+  historicalRecords: "Records historiques",
+  dailyPeak: "Pic journalier",
+  weeklyPeak: "Pic hebdomadaire",
+  week: "Semaine",
+  weekOf: "Semaine du",
+  analyticsSystemTitle: "Notre Système d'Analyse",
+  analyticsSystemDescription:
+    "Nous utilisons notre propre système d'analyse respectueux de la vie privée qui :",
+  analyticsFeatures_noPersonalInfo:
+    "Ne collecte aucune information personnelle",
+  analyticsFeatures_noCookies:
+    "N'utilise pas de cookies ni de scripts de suivi",
+  analyticsFeatures_anonymousData:
+    "Enregistre uniquement des données agrégées anonymes comme :",
+  analyticsFeatures_features_pageViews: "Nombre total de visites",
+  analyticsFeatures_features_deviceTypes:
+    "Types d'appareils (mobile/ordinateur/tablette)",
+  analyticsFeatures_features_browserTypes: "Types de navigateurs",
+  analyticsFeatures_features_languages: "Langues",
+  analyticsFeatures_features_visitTimes: "Heures de visite",
+  analyticsFeatures_features_performance: "Performance de chargement des pages",
+  analyticsFeatures_noIdentification:
+    "Ne peut pas identifier les utilisateurs individuels",
+  analyticsFeatures_noTracking:
+    "Ne peut pas suivre les utilisateurs entre les sessions",
+  analyticsFeatures_transparent:
+    "Est entièrement transparent - vous pouvez consulter toutes les données collectées dans l'onglet Analytiques",
+  analyticsSystemCharacteristics: "Notre système d'analyse est :",
+  analyticsCharacteristics_openSource:
+    "Open source - vous pouvez examiner le code",
+  analyticsCharacteristics_selfHosted:
+    "Auto-hébergé - nous ne partageons pas de données avec des tiers",
+  analyticsCharacteristics_gdprCompliant:
+    "Conforme au RGPD - aucune collecte de données personnelles",
+  analyticsCharacteristics_minimal:
+    "Minimal - nous collectons uniquement ce qui est nécessaire",
+  analyticsCharacteristics_transparent:
+    "Transparent - toutes les données sont visibles publiquement",
 };
