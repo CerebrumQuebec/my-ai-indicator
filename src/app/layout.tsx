@@ -9,8 +9,75 @@ import Footer from "../components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Badge AI",
-  description: "Evaluate your level of AI usage in your creative works",
+  metadataBase: new URL("https://badgeai.org"),
+  title: "Badge AI - AI Usage Transparency System",
+  description:
+    "Badge AI helps you communicate the level of AI involvement in your creative works with transparency and clarity. Evaluate your AI usage in audio, visual, and textual content.",
+  keywords: [
+    "AI badge",
+    "AI transparency",
+    "creative works",
+    "AI usage",
+    "content creation",
+    "AI evaluation",
+  ],
+  authors: [{ name: "Philippe Bourque", url: "https://cerebrum.website" }],
+  creator: "Cerebrum",
+  publisher: "Cerebrum",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://badgeai.org",
+    siteName: "Badge AI",
+    title: "Badge AI - AI Usage Transparency System",
+    description:
+      "Badge AI helps you communicate the level of AI involvement in your creative works with transparency and clarity. Evaluate your AI usage in audio, visual, and textual content.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Badge AI Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Badge AI - AI Usage Transparency System",
+    description:
+      "Badge AI helps you communicate the level of AI involvement in your creative works with transparency and clarity.",
+    images: ["/logo.png"],
+    creator: "@MonsieurBourque",
+    site: "@MonsieurBourque",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://badgeai.org",
+    languages: {
+      "en-US": "https://badgeai.org",
+      "fr-FR": "https://badgeai.org",
+    },
+  },
 };
 
 export default function RootLayout({
