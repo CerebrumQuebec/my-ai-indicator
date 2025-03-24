@@ -107,13 +107,22 @@ const ResultBadge: React.FC<ResultBadgeProps> = ({ type, category, title }) => {
 
   return (
     <div
-      className={`inline-flex items-center px-4 py-2 rounded-full border ${getCategoryColor(
+      className={`inline-flex items-center px-6 py-3 rounded-xl border-2 shadow-lg transform transition-all hover:scale-105 ${getCategoryColor(
         category
       )}`}
     >
-      {getCategoryIcon(category)}
-      <HighContrastText text={`${title}: Cat. ${category}`} />
-      <span className="text-xs opacity-60 ml-1">v1.0</span>
+      <div className="flex items-center space-x-3">
+        <span className="text-2xl">{getCategoryIcon(category)}</span>
+        <div className="flex flex-col">
+          <div className="text-lg font-bold">
+            <HighContrastText text={title} />
+          </div>
+          <div className="flex items-center">
+            <span className="text-xl font-bold">Cat. {category}</span>
+            <span className="text-sm opacity-60 ml-2">v1.0</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

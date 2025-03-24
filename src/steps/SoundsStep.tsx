@@ -87,13 +87,6 @@ const SoundsStep: React.FC<StepProps> = ({ onNext, onBack = () => {} }) => {
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           {t("soundsEvaluationDescription")}
         </p>
-        <Button
-          onClick={handleQuestionnaireMode}
-          variant="secondary"
-          className="mx-auto"
-        >
-          {t("takeQuestionnaire")}
-        </Button>
       </div>
 
       <RadioGroup
