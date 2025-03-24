@@ -62,11 +62,6 @@ export default function ManualSelectionStep({
           <p className="text-sm text-gray-300">
             {t("soundsCategoryDescription")}
           </p>
-          {selectedCategories.sounds && (
-            <div className="mt-2 p-1 text-center bg-blue-600 text-white text-xs font-bold uppercase rounded">
-              {t("selected")}
-            </div>
-          )}
         </button>
 
         <button
@@ -90,11 +85,6 @@ export default function ManualSelectionStep({
           <p className="text-sm text-gray-300">
             {t("visualCategoryDescription")}
           </p>
-          {selectedCategories.visual && (
-            <div className="mt-2 p-1 text-center bg-purple-600 text-white text-xs font-bold uppercase rounded">
-              {t("selected")}
-            </div>
-          )}
         </button>
 
         <button
@@ -118,11 +108,6 @@ export default function ManualSelectionStep({
           <p className="text-sm text-gray-300">
             {t("textCategoryDescription")}
           </p>
-          {selectedCategories.text && (
-            <div className="mt-2 p-1 text-center bg-green-600 text-white text-xs font-bold uppercase rounded">
-              {t("selected")}
-            </div>
-          )}
         </button>
       </div>
 
