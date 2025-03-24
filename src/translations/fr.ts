@@ -179,7 +179,28 @@ export const fr = {
     "Nous avons développé cinq catégories distinctes qui représentent différents niveaux d'implication de l'IA dans le processus créatif, des œuvres créées entièrement par l'IA à celles créées entièrement par des humains sans assistance IA.",
   aboutTeamTitle: "Notre Équipe",
   aboutTeamText:
-    "Le Badge IA a été développé par une équipe de créateurs, de technologues et d'experts juridiques engagés dans la promotion de la transparence et des pratiques éthiques dans la création assistée par l'IA.",
+    "Le Badge IA a été développé par Philippe Bourque, CEO de Cérebrum et Artiste ingénieur de la Ville de Québec.",
+  aboutTeamBio1:
+    "👀 Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
+  aboutTeamBio2:
+    "🌱 Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
+  aboutTeamBio3:
+    "💞️ Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
+  aboutTeamRole: "CEO de Cérebrum • Artiste ingénieur",
+  aboutTeamContact: "phil@cerebrum.website",
+
+  // Contribution Section
+  aboutContributeTitle: "Contribuer au Projet",
+  aboutContributeText:
+    "Nous accueillons toute personne souhaitant contribuer à l'amélioration de ce projet open source.",
+  aboutContributeAreas: "Vous pouvez contribuer dans les domaines suivants :",
+  aboutContributeArea1: "Gouvernance et Orientation du Projet",
+  aboutContributeArea2: "Développement et Amélioration du Code",
+  aboutContributeArea3: "Promotion et Sensibilisation",
+  aboutContributeGithub: "Consultez notre dépôt GitHub",
+  aboutContributeContact: "Contactez-nous",
+  aboutContributeInvite:
+    "Rejoignez-nous pour rendre la création assistée par l'IA plus transparente et éthique.",
 
   // Contact Page
   contactTitle: "Contact",

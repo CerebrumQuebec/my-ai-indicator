@@ -173,7 +173,28 @@ export const en = {
     "We've developed five distinct categories that represent different levels of AI involvement in the creative process, from works created entirely by AI to those created entirely by humans with no AI assistance.",
   aboutTeamTitle: "Our Team",
   aboutTeamText:
-    "The AI Badge was developed by a team of creators, technologists, and legal experts committed to promoting transparency and ethical practices in AI-assisted creation.",
+    "The AI Badge was developed by Philippe Bourque, CEO of Cérebrum and Artist Engineer from Quebec City.",
+  aboutTeamBio1:
+    "👀 I'm interested in cultural diversity, social justice, individual and cultural emancipation, computer engineering and Art.",
+  aboutTeamBio2:
+    "🌱 I'm currently learning Large Scale Web Development Architecture.",
+  aboutTeamBio3:
+    '💞️ I\'m looking to collaborate on making great tools that will bring "démocratie directe", eliminate poverty and protect cultural diversity for all human beings.',
+  aboutTeamRole: "CEO of Cérebrum • Artist Engineer",
+  aboutTeamContact: "phil@cerebrum.website",
+
+  // Contribution Section
+  aboutContributeTitle: "Contribute to the Project",
+  aboutContributeText:
+    "We welcome anyone who wants to contribute to improving this open source project.",
+  aboutContributeAreas: "You can contribute in the following areas:",
+  aboutContributeArea1: "Project Governance and Direction",
+  aboutContributeArea2: "Code Development and Enhancement",
+  aboutContributeArea3: "Promotion and Awareness",
+  aboutContributeGithub: "Check our GitHub repository",
+  aboutContributeContact: "Contact us",
+  aboutContributeInvite:
+    "Join us in making AI-assisted creation more transparent and ethical.",
 
   // Contact Page
   contactTitle: "Contact",
