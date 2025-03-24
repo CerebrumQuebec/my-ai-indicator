@@ -200,7 +200,7 @@ export default function Home() {
     <div className="w-full">
       <Header showWizard={showWizard} setShowWizard={setShowWizard} />
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-24">
+      <section className="relative overflow-hidden pt-8 pb-10 md:pt-10 md:pb-16">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
           <div className="absolute top-1/4 right-0 w-64 h-64 bg-primary-500 rounded-full opacity-10 blur-3xl"></div>
@@ -209,8 +209,8 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 space-y-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="w-full md:w-1/2 space-y-4">
               <div className="inline-block relative">
                 <span className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-indigo rounded-md blur opacity-30"></span>
                 <span className="relative bg-surface-dark px-4 py-1 text-sm font-medium rounded-md border border-white/10">
@@ -243,7 +243,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-3 md:pt-4">
                 <button
                   onClick={startWizard}
                   className="group relative inline-flex items-center px-8 py-3 text-base font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-400 transition-colors"
@@ -266,20 +266,20 @@ export default function Home() {
             <div className="w-full md:w-1/2 relative">
               <div className="relative w-full aspect-square max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-accent-indigo/20 rounded-3xl blur-xl"></div>
-                <div className="relative bg-surface-card/40 backdrop-blur-sm border border-white/10 rounded-3xl p-6 shadow-xl">
-                  <div className="flex items-center justify-center mb-4">
+                <div className="relative bg-surface-card/40 backdrop-blur-sm border border-white/10 rounded-3xl p-4 md:p-6 shadow-xl">
+                  <div className="flex items-center justify-center mb-3 md:mb-4">
                     <h3 className="text-lg font-medium text-text-primary">
                       <span className="animated-gradient-text">
                         {t("categorySelectionTitle")}
                       </span>
                     </h3>
                   </div>
-                  <div className="grid grid-cols-3 gap-3 mb-4">
+                  <div className="grid grid-cols-3 gap-2 md:gap-3 mb-3 md:mb-4">
                     <div className="flex flex-col items-center p-2 rounded-xl bg-primary-500/20 border border-primary-500/30 transition-transform hover:scale-105">
                       <span className="text-xs uppercase font-medium text-primary-400 mb-1">
                         Sounds
                       </span>
-                      <div className="w-12 h-12 relative">
+                      <div className="w-8 h-8 md:w-12 md:h-12 relative">
                         <Image
                           src="/icons/sounds-icon.svg"
                           alt="Sounds category"
@@ -292,7 +292,7 @@ export default function Home() {
                       <span className="text-xs uppercase font-medium text-accent-indigo mb-1">
                         Visual
                       </span>
-                      <div className="w-12 h-12 relative">
+                      <div className="w-8 h-8 md:w-12 md:h-12 relative">
                         <Image
                           src="/icons/visual-icon.svg"
                           alt="Visual category"
@@ -305,7 +305,7 @@ export default function Home() {
                       <span className="text-xs uppercase font-medium text-primary-200 mb-1">
                         Text
                       </span>
-                      <div className="w-12 h-12 relative">
+                      <div className="w-8 h-8 md:w-12 md:h-12 relative">
                         <Image
                           src="/icons/text-icon.svg"
                           alt="Text category"
@@ -315,13 +315,13 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-5 gap-2">
+                  <div className="grid grid-cols-5 gap-1 md:gap-2">
                     {[0, 1, 2, 3, 4].map((category) => (
                       <div
                         key={category}
-                        className="flex flex-col items-center p-2 rounded-xl bg-surface-dark/60 border border-white/5 transition-transform hover:scale-105"
+                        className="flex flex-col items-center p-1 md:p-2 rounded-xl bg-surface-dark/60 border border-white/5 transition-transform hover:scale-105"
                       >
-                        <div className="w-12 h-12 relative mb-1">
+                        <div className="w-8 h-8 md:w-12 md:h-12 relative mb-1">
                           <Image
                             src={`/badges/category-${category}.svg`}
                             alt={`Category ${category} badge`}
@@ -329,13 +329,13 @@ export default function Home() {
                             className="object-contain"
                           />
                         </div>
-                        <span className="text-xs text-center text-text-secondary">
+                        <span className="text-[10px] md:text-xs text-center text-text-secondary">
                           {t(`category${category}Title`)}
                         </span>
                       </div>
                     ))}
-                    <div className="col-span-5 flex flex-col items-center p-3 rounded-xl bg-gradient-to-r from-primary-500/20 to-accent-indigo/20 border border-white/10 mt-3">
-                      <p className="text-sm text-center text-text-primary">
+                    <div className="col-span-5 flex flex-col items-center p-2 md:p-3 rounded-xl bg-gradient-to-r from-primary-500/20 to-accent-indigo/20 border border-white/10 mt-2 md:mt-3">
+                      <p className="text-xs md:text-sm text-center text-text-primary">
                         {t("howItWorksContent")}
                       </p>
                     </div>
