@@ -83,108 +83,120 @@ export default function DonateButton({
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[100]"
             onClick={() => handleModalChange(false)}
-          />
-
-          {/* Modal Container */}
-          <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[calc(100vw-2rem)] max-w-md">
-            <div className="flex flex-col gap-4 p-6 bg-surface-dark/95 backdrop-blur-sm rounded-lg shadow-lg border border-white/10">
-              {/* Modal Header */}
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-text-primary">
-                  {t("donateTitle")}
-                </h3>
-                <button
-                  onClick={() => handleModalChange(false)}
-                  className="text-text-secondary hover:text-text-primary"
-                >
-                  ✕
-                </button>
-              </div>
-
-              {/* Donation Type Toggle */}
-              <div className="flex gap-2 p-1 bg-surface-card rounded-lg">
-                <button
-                  onClick={() => setIsSubscription(false)}
-                  className={`flex-1 py-2 px-3 rounded-md transition-colors ${
-                    !isSubscription
-                      ? "bg-primary-500 text-white"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {t("oneTimeDonation")}
-                </button>
-                <button
-                  onClick={() => setIsSubscription(true)}
-                  className={`flex-1 py-2 px-3 rounded-md transition-colors ${
-                    isSubscription
-                      ? "bg-primary-500 text-white"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {t("monthlyDonation")}
-                </button>
-              </div>
-
-              {/* Donation Amount Selection */}
-              <div className="flex flex-col gap-2">
-                <label className="text-lg font-semibold text-text-primary">
-                  {t("amount")}
-                </label>
-                {/* Predefined Amounts */}
-                <div className="grid grid-cols-2 gap-2">
-                  {["1", "5", "10", "20"].map((preset) => (
+          >
+            {/* Modal Container */}
+            <div className="min-h-screen px-4 text-center">
+              {/* This element is to trick the browser into centering the modal contents. */}
+              <span
+                className="inline-block h-screen align-middle"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <div
+                className="inline-block w-full max-w-md align-middle"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex flex-col gap-4 p-6 bg-surface-dark/95 backdrop-blur-sm rounded-lg shadow-lg border border-white/10">
+                  {/* Modal Header */}
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold text-text-primary">
+                      {t("donateTitle")}
+                    </h3>
                     <button
-                      key={preset}
-                      onClick={() => {
-                        setAmount(preset);
-                        setCustomAmount("");
-                      }}
-                      className={`py-2 px-4 rounded-lg transition-colors ${
-                        amount === preset && !customAmount
+                      onClick={() => handleModalChange(false)}
+                      className="text-text-secondary hover:text-text-primary"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  {/* Donation Type Toggle */}
+                  <div className="flex gap-2 p-1 bg-surface-card rounded-lg">
+                    <button
+                      onClick={() => setIsSubscription(false)}
+                      className={`flex-1 py-2 px-3 rounded-md transition-colors ${
+                        !isSubscription
                           ? "bg-primary-500 text-white"
-                          : "bg-surface-card text-text-secondary hover:text-text-primary"
+                          : "text-text-secondary hover:text-text-primary"
                       }`}
                     >
-                      {preset}$
+                      {t("oneTimeDonation")}
                     </button>
-                  ))}
-                </div>
+                    <button
+                      onClick={() => setIsSubscription(true)}
+                      className={`flex-1 py-2 px-3 rounded-md transition-colors ${
+                        isSubscription
+                          ? "bg-primary-500 text-white"
+                          : "text-text-secondary hover:text-text-primary"
+                      }`}
+                    >
+                      {t("monthlyDonation")}
+                    </button>
+                  </div>
 
-                {/* Custom Amount Input */}
-                <div className="mt-2">
-                  <input
-                    type="number"
-                    min="1"
-                    step="1"
-                    value={customAmount}
-                    onChange={(e) => {
-                      setCustomAmount(e.target.value);
-                      setAmount("");
-                    }}
-                    placeholder={t("customAmount")}
-                    className="w-full p-2 border rounded-lg bg-surface-card border-white/10 text-text-primary placeholder:text-text-secondary"
-                  />
+                  {/* Donation Amount Selection */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-lg font-semibold text-text-primary">
+                      {t("amount")}
+                    </label>
+                    {/* Predefined Amounts */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {["1", "5", "10", "20"].map((preset) => (
+                        <button
+                          key={preset}
+                          onClick={() => {
+                            setAmount(preset);
+                            setCustomAmount("");
+                          }}
+                          className={`py-2 px-4 rounded-lg transition-colors ${
+                            amount === preset && !customAmount
+                              ? "bg-primary-500 text-white"
+                              : "bg-surface-card text-text-secondary hover:text-text-primary"
+                          }`}
+                        >
+                          {preset}$
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Custom Amount Input */}
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        min="1"
+                        step="1"
+                        value={customAmount}
+                        onChange={(e) => {
+                          setCustomAmount(e.target.value);
+                          setAmount("");
+                        }}
+                        placeholder={t("customAmount")}
+                        className="w-full p-2 border rounded-lg bg-surface-card border-white/10 text-text-primary placeholder:text-text-secondary"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Donation Button */}
+                  <button
+                    onClick={handleDonateClick}
+                    disabled={loading || (!amount && !customAmount)}
+                    className={`w-full py-3 px-4 rounded-lg transition-opacity ${
+                      loading || (!amount && !customAmount)
+                        ? "bg-surface-card text-text-secondary"
+                        : "bg-primary-500 text-white hover:opacity-90"
+                    } disabled:opacity-50`}
+                  >
+                    {loading
+                      ? t("loading")
+                      : `${isSubscription ? t("subscribe") : t("donate")} (${
+                          customAmount || amount
+                        }$ ${isSubscription ? t("perMonth") : ""})`}
+                  </button>
                 </div>
               </div>
-
-              {/* Donation Button */}
-              <button
-                onClick={handleDonateClick}
-                disabled={loading || (!amount && !customAmount)}
-                className={`w-full py-3 px-4 rounded-lg transition-opacity ${
-                  loading || (!amount && !customAmount)
-                    ? "bg-surface-card text-text-secondary"
-                    : "bg-primary-500 text-white hover:opacity-90"
-                } disabled:opacity-50`}
-              >
-                {loading
-                  ? t("loading")
-                  : `${isSubscription ? t("subscribe") : t("donate")} (${
-                      customAmount || amount
-                    }$ ${isSubscription ? t("perMonth") : ""})`}
-              </button>
             </div>
           </div>
         </>

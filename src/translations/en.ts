@@ -24,6 +24,11 @@ export const en = {
   // Footer
   allRightsReserved: "All rights reserved",
   privacy: "Privacy",
+  footerDescription:
+    "Badge AI helps you communicate the level of AI involvement in your creative works with transparency and clarity.",
+  cerebrum: "Cerebrum",
+  resources: "Resources",
+  quickLinks: "Quick Links",
 
   // Meta
   metaTitle: "Badge AI",

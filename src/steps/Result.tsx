@@ -53,11 +53,6 @@ const Result: React.FC<StepProps> = () => {
     }
   };
 
-  const getCategoryDescription = (type: string, category: Category): string => {
-    if (category === null) return "";
-    return t(`category${category}Description`);
-  };
-
   const getCategoryCode = (type: string): string => {
     switch (type) {
       case "sounds":
@@ -263,28 +258,6 @@ TXXX: AI-USAGE=${selectedCategoryTypes
             </button>
           </div>
         </div>
-        {selectedCategoryTypes.map((type) => {
-          const category = getCategoryValue(type);
-          return (
-            <div key={type} className="space-y-2">
-              <h3 className="text-lg font-semibold text-text-primary">
-                <HighContrastText text={getCategoryTitle(type)} />
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                {getCategoryDescription(type, category)}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex justify-center mt-8">
-        <Button
-          onClick={() => window.location.reload()}
-          className="w-full sm:w-auto"
-        >
-          {t("startOver")}
-        </Button>
       </div>
 
       <div className="bg-surface-dark rounded-xl border border-white/10 overflow-hidden">

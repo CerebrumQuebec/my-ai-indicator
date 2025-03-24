@@ -24,7 +24,11 @@ export const fr = {
   // Footer
   allRightsReserved: "Tous droits réservés",
   privacy: "Confidentialité",
+  footerDescription:
+    "Badge IA vous aide à communiquer le niveau d'implication de l'IA dans vos œuvres créatives avec transparence et clarté.",
   cerebrum: "Cérebrum",
+  resources: "Ressources",
+  quickLinks: "Liens Rapides",
 
   // Meta
   metaTitle: "Badge IA",
