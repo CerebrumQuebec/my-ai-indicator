@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useWizard } from "../contexts/WizardContext";
 
 export interface ProgressBarProps {
@@ -46,10 +46,19 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     setQuestionnaireMode(false);
   };
 
-  const progress = isQuestionnaireMode
-    ? ((currentStep - 1) / totalSteps) * 100 +
-      ((currentQuestion / totalQuestions) * 100) / totalSteps
-    : (currentStep / totalSteps) * 100;
+  // Simple percentage calculation
+  let progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+
+  // Make sure progress is between 0-100
+  progressPercent = Math.max(0, Math.min(100, progressPercent));
+
+  // Debug logging
+  useEffect(() => {
+    console.log("Progress Bar Debug:");
+    console.log("Current Step:", currentStep);
+    console.log("Total Steps:", totalSteps);
+    console.log("Progress Percent:", progressPercent);
+  }, [currentStep, totalSteps, progressPercent]);
 
   return (
     <div className="space-y-2">
@@ -86,8 +95,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       </div>
       <div className="h-2.5 bg-black/40 rounded-full overflow-hidden">
         <div
-          className="h-full bg-primary transition-all duration-500 ease-out"
-          style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
+          className="h-full bg-blue-500 transition-all duration-500 ease-out"
+          style={{ width: `${progressPercent}%` }}
         />
       </div>
     </div>
