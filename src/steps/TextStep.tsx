@@ -84,7 +84,7 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
                   {t(option.descriptionKey)}
                 </div>
                 <div className="text-primary-400 font-mono mt-1">
-                  T.AI.{option.id}
+                  T-AI-{option.id}
                 </div>
               </div>
             </div>

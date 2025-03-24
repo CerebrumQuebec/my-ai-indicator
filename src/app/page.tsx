@@ -279,13 +279,13 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
               >
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-500/20 text-primary-400 border border-primary-500/30">
-                  <span className="font-mono mr-1">S.AI.0-4</span> Sounds
+                  <span className="font-mono mr-1">S-AI-0-4</span> Sounds
                 </span>
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-indigo/20 text-accent-indigo border border-accent-indigo/30">
-                  <span className="font-mono mr-1">V.AI.0-4</span> Visual
+                  <span className="font-mono mr-1">V-AI-0-4</span> Visual
                 </span>
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-600/20 text-primary-200 border border-primary-600/30">
-                  <span className="font-mono mr-1">T.AI.0-4</span> Text
+                  <span className="font-mono mr-1">T-AI-0-4</span> Text
                 </span>
               </motion.div>
 
@@ -585,21 +585,21 @@ export default function Home() {
                 title: t("soundsCategoryTitle"),
                 description: t("soundsCategoryDescription"),
                 icon: "/icons/sounds-icon.svg",
-                prefix: "S.AI.",
+                prefix: "S-AI-",
               },
               {
                 bg: "accent-indigo",
                 title: t("visualCategoryTitle"),
                 description: t("visualCategoryDescription"),
                 icon: "/icons/visual-icon.svg",
-                prefix: "V.AI.",
+                prefix: "V-AI-",
               },
               {
                 bg: "primary-600",
                 title: t("textCategoryTitle"),
                 description: t("textCategoryDescription"),
                 icon: "/icons/text-icon.svg",
-                prefix: "T.AI.",
+                prefix: "T-AI-",
               },
             ].map((category, index) => (
               <motion.div
@@ -810,7 +810,7 @@ export default function Home() {
                         damping: 10,
                       }}
                     >
-                      {item.letter}.AI.0-4
+                      {item.letter}-AI-0-4
                     </motion.code>
                   </motion.div>
                 ))}

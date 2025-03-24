@@ -71,7 +71,7 @@ const VisualStep: React.FC<StepProps> = ({ onNext, onBack }) => {
                   {t(option.descriptionKey)}
                 </div>
                 <div className="text-accent-indigo font-mono mt-1">
-                  V.AI.{option.id}
+                  V-AI-{option.id}
                 </div>
               </div>
             </div>

@@ -61,19 +61,19 @@ export const fr = {
   soundsBadgeSubtitle: "Sons",
   soundsBadgeDescription:
     "Musique, podcasts, effets sonores et autres contenus audio",
-  soundsBadgeCode: "S.AI.0-4",
+  soundsBadgeCode: "S-AI-0-4",
 
   visualBadgeTitle: "V",
   visualBadgeSubtitle: "Visuel",
   visualBadgeDescription:
     "Images, vidéos, animations et autres contenus visuels",
-  visualBadgeCode: "V.AI.0-4",
+  visualBadgeCode: "V-AI-0-4",
 
   textBadgeTitle: "T",
   textBadgeSubtitle: "Texte",
   textBadgeDescription:
     "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code",
-  textBadgeCode: "T.AI.0-4",
+  textBadgeCode: "T-AI-0-4",
 
   // AI Levels
   aiLevel0Title: "0",
@@ -242,11 +242,11 @@ export const fr = {
   aboutTeamText:
     "Le Badge IA a été développé par Philippe Bourque, CEO de Cérebrum et Artiste ingénieur de la Ville de Québec.",
   aboutTeamBio1:
-    "👀 Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
+    "Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
   aboutTeamBio2:
-    "🌱 Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
+    "Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
   aboutTeamBio3:
-    "💞️ Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
+    "Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
   aboutTeamRole: "CEO de Cérebrum • Artiste ingénieur",
   aboutTeamContact: "phil@cerebrum.website",
 
@@ -270,11 +270,11 @@ export const fr = {
   contactBioTitle: "À propos de moi",
   contactRole: "CEO de Cérebrum • Artiste ingénieur",
   contactBio1:
-    "👀 Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
+    "Je m'intéresse à la diversité culturelle, à la justice sociale, à l'émancipation individuelle et culturelle, à l'ingénierie informatique et à l'art.",
   contactBio2:
-    "🌱 Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
+    "Je suis actuellement en train d'apprendre l'architecture du développement web à grande échelle.",
   contactBio3:
-    "💞️ Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
+    "Je cherche à collaborer à la création d'outils qui apporteront la démocratie directe, éliminera la pauvreté et protégera la diversité culturelle pour tous les êtres humains.",
   contactEmail: "phil@cerebrum.website",
 
   // Privacy Page
