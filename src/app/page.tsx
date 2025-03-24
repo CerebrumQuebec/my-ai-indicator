@@ -24,13 +24,14 @@ export default function Home() {
     selectedCategories,
   } = useWizard();
 
+  // Adjusted step calculation to not count Introduction
   const totalSteps =
-    2 + Object.values(selectedCategories).filter(Boolean).length + 1; // Intro + Category Selection + Selected Categories + Result
+    1 + Object.values(selectedCategories).filter(Boolean).length + 1; // Category Selection + Selected Categories + Result
   const totalQuestionsPerStep = 10;
 
   // Get current question number from the active questionnaire component
   const getCurrentQuestionNumber = () => {
-    if (!isQuestionnaireMode || step === 1 || step === totalSteps) return 0;
+    if (!isQuestionnaireMode || step === totalSteps) return 0;
     const component = document.querySelector("[data-current-question]");
     return component
       ? parseInt(component.getAttribute("data-current-question") || "0")
@@ -131,7 +132,7 @@ export default function Home() {
           {step > 1 && (
             <div className="mb-8">
               <ProgressBar
-                currentStep={step}
+                currentStep={step - 1} // Subtract 1 to not count Introduction
                 totalSteps={totalSteps}
                 onBack={handleBack}
                 onNext={handleNext}

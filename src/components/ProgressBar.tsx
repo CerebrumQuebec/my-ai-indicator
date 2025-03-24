@@ -47,7 +47,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   };
 
   // Simple percentage calculation
-  let progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  let progressPercent = (currentStep / totalSteps) * 100;
 
   // Make sure progress is between 0-100
   progressPercent = Math.max(0, Math.min(100, progressPercent));
