@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
 import ProgressBar from "../components/ProgressBar";
@@ -199,198 +198,11 @@ export default function Home() {
 
   // Otherwise show the landing page
 
-  // Particle animation component
+  // Particle animation component - simplified to prevent errors
   const FloatingParticles = () => {
-    const particleCount = 50; // Increased particle count
-
-    // Custom particle arrays with different properties for variety
-    const largeParticles = Array.from({ length: 15 });
-    const mediumParticles = Array.from({ length: 20 });
-    const smallParticles = Array.from({ length: 20 });
-    const microParticles = Array.from({ length: 30 });
-
-    // Generate a random color from the theme
-    const getRandomColor = () => {
-      const colors = [
-        "rgba(107, 70, 193, 0.2)", // primary-500
-        "rgba(79, 70, 229, 0.2)", // accent-indigo
-        "rgba(59, 130, 246, 0.2)", // blue
-        "rgba(139, 92, 246, 0.2)", // purple
-      ];
-      return colors[Math.floor(Math.random() * colors.length)];
-    };
-
+    // Return empty div to avoid animation errors
     return (
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Large glowing orbs (slow moving) */}
-        {largeParticles.map((_, i) => (
-          <motion.div
-            key={`large-${i}`}
-            className="absolute rounded-full"
-            style={{
-              width: Math.random() * 100 + 150 + "px",
-              height: Math.random() * 100 + 150 + "px",
-              background: getRandomColor(),
-              filter: "blur(60px)",
-              opacity: Math.random() * 0.15 + 0.05,
-            }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              scale: [1, 1.1, 0.9, 1],
-              opacity: [
-                Math.random() * 0.15 + 0.05,
-                Math.random() * 0.15 + 0.1,
-                Math.random() * 0.15 + 0.05,
-              ],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 40,
-              repeat: Infinity,
-              ease: "easeInOut",
-              times: [0, 0.5, 1],
-            }}
-          />
-        ))}
-
-        {/* Medium particles (moderate speed) */}
-        {mediumParticles.map((_, i) => (
-          <motion.div
-            key={`medium-${i}`}
-            className="absolute rounded-full"
-            style={{
-              width: Math.random() * 40 + 30 + "px",
-              height: Math.random() * 40 + 30 + "px",
-              background: `rgba(255, 255, 255, ${Math.random() * 0.1 + 0.05})`,
-              filter: "blur(15px)",
-            }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.2 + 0.1,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [
-                Math.random() * 0.2 + 0.1,
-                Math.random() * 0.2 + 0.15,
-                Math.random() * 0.2 + 0.1,
-              ],
-            }}
-            transition={{
-              duration: 15 + Math.random() * 25,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-
-        {/* Small particles (faster) */}
-        {smallParticles.map((_, i) => (
-          <motion.div
-            key={`small-${i}`}
-            className="absolute rounded-full"
-            style={{
-              width: Math.random() * 6 + 4 + "px",
-              height: Math.random() * 6 + 4 + "px",
-              background: "rgba(255, 255, 255, 0.4)",
-              boxShadow: "0 0 10px rgba(255, 255, 255, 0.3)",
-            }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.4 + 0.2,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [
-                Math.random() * 0.4 + 0.2,
-                Math.random() * 0.4 + 0.3,
-                Math.random() * 0.4 + 0.2,
-              ],
-            }}
-            transition={{
-              duration: 10 + Math.random() * 15,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-        ))}
-
-        {/* Micro particles (fastest) */}
-        {microParticles.map((_, i) => (
-          <motion.div
-            key={`micro-${i}`}
-            className="absolute rounded-full"
-            style={{
-              width: "2px",
-              height: "2px",
-              background: "rgba(255, 255, 255, 0.8)",
-              boxShadow: "0 0 5px rgba(255, 255, 255, 0.6)",
-            }}
-            initial={{
-              x: Math.random() * 100 + "%",
-              y: Math.random() * 100 + "%",
-              opacity: Math.random() * 0.5 + 0.3,
-            }}
-            animate={{
-              x: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              y: [
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-                Math.random() * 100 + "%",
-              ],
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none"></div>
     );
   };
 
@@ -411,90 +223,51 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <motion.div
               className="w-full md:w-1/2 space-y-4"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.8,
-                ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier for smoother motion
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <motion.div
-                className="inline-block relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <motion.span
-                  className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-indigo rounded-md blur opacity-30"
-                  animate={{
-                    opacity: [0.3, 0.5, 0.3],
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.span
-                  className="relative bg-surface-dark px-4 py-1 text-sm font-medium rounded-md border border-white/10"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
+              <div className="inline-block relative">
+                <span className="absolute inset-0 bg-gradient-to-r from-primary-400 to-accent-indigo rounded-md blur opacity-30"></span>
+                <span className="relative bg-surface-dark px-4 py-1 text-sm font-medium rounded-md border border-white/10">
                   {t("appName")} — {t("welcomeTitle")}
-                </motion.span>
-              </motion.div>
+                </span>
+              </div>
+
+              {/* Simplified button */}
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-xl opacity-70 blur-xl group-hover:opacity-100 transition duration-1000 bg-gradient-to-r from-primary-400/50 to-accent-indigo/50"></div>
+                <motion.button
+                  onClick={startWizard}
+                  className="relative group inline-flex items-center px-8 py-3 text-base font-medium rounded-xl bg-primary-500 text-white hover:bg-primary-400 transition-colors z-10"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <span className="relative flex items-center">
+                    {t("start")}
+                    <ArrowRightIcon className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </motion.button>
+              </div>
 
               <motion.h1
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{
-                  delay: 0.2,
-                  duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier
-                }}
+                transition={{ duration: 0.5 }}
               >
-                <motion.span
-                  className="animated-gradient-text block"
-                  initial={{ y: 30, opacity: 0, scale: 0.95 }}
-                  animate={{ y: 0, opacity: 1, scale: 1 }}
-                  transition={{
-                    delay: 0.3,
-                    duration: 0.8,
-                    ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier
-                  }}
-                  style={{
-                    display: "inline-block",
-                    perspective: "1000px",
-                    transformStyle: "preserve-3d",
-                  }}
-                >
+                <span className="animated-gradient-text block">
                   {t("metaTitle")}
-                </motion.span>
-                <motion.span
-                  className="text-text-primary mt-2 block"
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    delay: 0.5,
-                    duration: 0.8,
-                    ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier
-                  }}
-                >
+                </span>
+                <span className="text-text-primary mt-2 block">
                   {t("metaDescription")}
-                </motion.span>
+                </span>
               </motion.h1>
 
               <motion.p
                 className="text-lg text-text-secondary max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.7,
-                  duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
               >
                 {t("welcomeDescription")}
               </motion.p>
@@ -503,7 +276,7 @@ export default function Home() {
                 className="flex flex-wrap gap-3 mt-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
+                transition={{ duration: 0.5 }}
               >
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-500/20 text-primary-400 border border-primary-500/30">
                   <span className="font-mono mr-1">S.AI.0-4</span> Sounds
@@ -593,56 +366,22 @@ export default function Home() {
               transition={{
                 duration: 0.8,
                 delay: 0.3,
-                ease: [0.25, 0.1, 0.25, 1.0],
+                ease: "easeOut",
               }}
             >
               <div className="relative w-full aspect-square max-w-md mx-auto">
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-accent-indigo/20 rounded-3xl blur-xl"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.5, 0.7, 0.5],
-                    filter: ["blur(30px)", "blur(40px)", "blur(30px)"],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                <motion.div className="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-accent-indigo/20 rounded-3xl blur-xl opacity-60"></motion.div>
 
-                {/* Floating 3D orbs in the background for depth */}
-                <motion.div
+                {/* Floating 3D orbs - replaced with static divs */}
+                <div
                   className="absolute w-20 h-20 rounded-full bg-primary-400/10"
                   style={{ top: "10%", right: "15%", filter: "blur(10px)" }}
-                  animate={{
-                    y: [0, -15, 0],
-                    x: [0, 10, 0],
-                    scale: [1, 1.1, 1],
-                    opacity: [0.5, 0.7, 0.5],
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                ></div>
 
-                <motion.div
+                <div
                   className="absolute w-16 h-16 rounded-full bg-accent-indigo/10"
                   style={{ bottom: "15%", left: "10%", filter: "blur(8px)" }}
-                  animate={{
-                    y: [0, 15, 0],
-                    x: [0, -10, 0],
-                    scale: [1, 1.2, 1],
-                    opacity: [0.4, 0.6, 0.4],
-                  }}
-                  transition={{
-                    duration: 12,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                ></div>
 
                 <motion.div
                   className="relative bg-surface-card/40 backdrop-blur-sm border border-white/10 rounded-3xl p-4 md:p-6 shadow-xl"
@@ -651,7 +390,7 @@ export default function Home() {
                   transition={{
                     delay: 0.5,
                     duration: 0.8,
-                    ease: [0.25, 0.1, 0.25, 1.0],
+                    ease: "easeOut",
                   }}
                   style={{
                     transformStyle: "preserve-3d",
@@ -659,9 +398,6 @@ export default function Home() {
                   }}
                   whileHover={{
                     scale: 1.02,
-                    rotateX: 2,
-                    rotateY: -2,
-                    transition: { duration: 0.5 },
                   }}
                 >
                   <motion.div
@@ -695,19 +431,10 @@ export default function Home() {
                     ].map((item, index) => (
                       <motion.div
                         key={item.label}
-                        className={`flex flex-col items-center p-2 rounded-xl bg-${item.color}/20 border border-${item.color}/30 transition-transform`}
-                        whileHover={{ scale: 1.1 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: 0.6 + index * 0.1,
-                          duration: 0.5,
-                          whileHover: {
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 10,
-                          },
-                        }}
+                        className={`flex flex-col items-center p-2 rounded-xl bg-${item.color}/20 border border-${item.color}/30 transition-transform hover:scale-105`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
                       >
                         <span
                           className={`text-xs uppercase font-medium text-${item.color} mb-1`}
@@ -813,77 +540,18 @@ export default function Home() {
               <motion.div
                 key={feature.title}
                 className="p-6 rounded-2xl bg-surface-card/40 backdrop-blur-sm border border-white/10 hover:border-primary-500/30 transition-all group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  delay: index * 0.2,
-                  duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic bezier
-                }}
-                whileHover={{
-                  y: -10,
-                  boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.3)",
-                  borderColor: "rgba(107, 70, 193, 0.4)",
-                  scale: 1.02,
-                  rotateX: 5,
-                  rotateY: 5,
-                  transition: {
-                    duration: 0.3,
-                    ease: "easeOut",
-                  },
-                }}
-                style={{
-                  transformStyle: "preserve-3d",
-                  perspective: "1000px",
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <motion.div
-                  className="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-500/30 transition-colors"
-                  whileHover={{
-                    rotate: [0, 5, -5, 0],
-                    scale: 1.1,
-                    transition: { duration: 0.5 },
-                  }}
-                  style={{
-                    transform: "translateZ(20px)", // 3D effect
-                  }}
-                >
-                  {/* Separate pulsing shadow animation */}
-                  <motion.div
-                    className="absolute inset-0 rounded-xl"
-                    animate={{
-                      boxShadow: [
-                        "0 0 0 rgba(107, 70, 193, 0.1)",
-                        "0 0 20px rgba(107, 70, 193, 0.3)",
-                      ],
-                      opacity: [0.6, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      ease: "easeInOut",
-                    }}
-                  />
+                <div className="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-500/30 transition-colors">
                   {feature.icon}
-                </motion.div>
-                <motion.h3
-                  className="text-xl font-semibold mb-3 text-text-primary"
-                  style={{
-                    transform: "translateZ(15px)", // 3D effect
-                  }}
-                >
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-text-primary">
                   {feature.title}
-                </motion.h3>
-                <motion.p
-                  className="text-text-secondary"
-                  style={{
-                    transform: "translateZ(10px)", // 3D effect
-                  }}
-                >
-                  {feature.content}
-                </motion.p>
+                </h3>
+                <p className="text-text-secondary">{feature.content}</p>
               </motion.div>
             ))}
           </div>
