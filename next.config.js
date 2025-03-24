@@ -15,6 +15,28 @@ const nextConfig = {
   images: {
     domains: [],
   },
+  // Add explicit file exclusions to prevent stack overflow
+  webpack: (config, { isServer }) => {
+    // Avoid excessive recursive pattern matching
+    config.watchOptions = {
+      ignored: ["**/node_modules", "**/.git", "**/.next"],
+    };
+
+    // Add additional exclusions for build process
+    if (!config.externals) {
+      config.externals = [];
+    }
+
+    // Add specific module exclusions
+    if (Array.isArray(config.externals)) {
+      config.externals.push("puppeteer");
+    }
+
+    return config;
+  },
+  // Reduce the amount of tracing to prevent stack overflows
+  poweredByHeader: false,
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;
