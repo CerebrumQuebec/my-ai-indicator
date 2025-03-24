@@ -12,6 +12,7 @@ import {
 } from "../types";
 import Button from "../components/Button";
 import HighContrastText from "../components/HighContrastText";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
 
 const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   const { textCategory, setTextCategory, setQuestionnaireMode } = useWizard();
@@ -46,9 +47,12 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">
-          <HighContrastText text={t("textEvaluationTitle")} />
-        </h2>
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <BiSolidMessageSquareDetail size={32} className="text-primary-500" />
+          <h2 className="text-2xl font-bold">
+            <HighContrastText text={t("textEvaluationTitle")} />
+          </h2>
+        </div>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
           {t("textEvaluationDescription")}
         </p>

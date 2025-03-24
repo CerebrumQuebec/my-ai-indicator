@@ -3,6 +3,9 @@
 import { useWizard } from "../contexts/WizardContext";
 import { useTranslation } from "../contexts/TranslationContext";
 import { SelectedCategories } from "../types";
+import { FaVolumeUp } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
 
 interface ManualSelectionStepProps {
   onNext: () => void;
@@ -57,6 +60,9 @@ export default function ManualSelectionStep({
           aria-pressed={selectedCategories.sounds}
         >
           <h3 className="text-lg font-semibold mb-2">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <FaVolumeUp size={24} />
+            </div>
             {t("soundsCategoryTitle")}
           </h3>
           <p className="text-sm text-gray-300">
@@ -80,6 +86,9 @@ export default function ManualSelectionStep({
           aria-pressed={selectedCategories.visual}
         >
           <h3 className="text-lg font-semibold mb-2">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <AiFillEye size={24} />
+            </div>
             {t("visualCategoryTitle")}
           </h3>
           <p className="text-sm text-gray-300">
@@ -103,6 +112,9 @@ export default function ManualSelectionStep({
           aria-pressed={selectedCategories.text}
         >
           <h3 className="text-lg font-semibold mb-2">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <BiSolidMessageSquareDetail size={24} />
+            </div>
             {t("textCategoryTitle")}
           </h3>
           <p className="text-sm text-gray-300">
