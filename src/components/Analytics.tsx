@@ -290,7 +290,9 @@ export default function Analytics() {
                             width: `${
                               (count /
                                 Math.max(
-                                  ...Object.values(viewCounts.platformClicks)
+                                  ...Object.values(
+                                    viewCounts.platformClicks || {}
+                                  )
                                 )) *
                               100
                             }%`,

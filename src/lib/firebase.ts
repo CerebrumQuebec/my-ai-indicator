@@ -71,7 +71,9 @@ export const incrementPageView = async () => {
         window.performance.timing.loadEventEnd -
         window.performance.timing.navigationStart;
       if (loadTime > 0) {
-        updates[`analytics/performance/avg_load_time`] = loadTime;
+        updates[`analytics/performance`] = {
+          avg_load_time: loadTime,
+        };
       }
     }
 
