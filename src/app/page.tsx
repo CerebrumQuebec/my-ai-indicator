@@ -100,11 +100,7 @@ export default function Home() {
       case 1:
         return <Introduction onNext={handleNext} />;
       case 2:
-        return isQuestionnaireMode ? (
-          <GuidedSelectionStep onNext={handleNext} onBack={handleBack} />
-        ) : (
-          <ManualSelectionStep onNext={handleNext} onBack={handleBack} />
-        );
+        return <ManualSelectionStep onNext={handleNext} onBack={handleBack} />;
       default:
         const currentStepIndex = step - 3; // Adjust for intro and category selection steps
         const categories = Object.entries(selectedCategories)

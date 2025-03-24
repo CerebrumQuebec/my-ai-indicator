@@ -302,4 +302,5 @@ export const en = {
     "Fully AI-generated audio content without human editing.",
 
   // Add more translations as needed
+  start: "Start",
 };

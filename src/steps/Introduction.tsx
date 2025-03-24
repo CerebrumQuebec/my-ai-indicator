@@ -10,20 +10,12 @@ const Introduction: React.FC<StepProps> = ({ onNext }) => {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
   const [showCCInspiration, setShowCCInspiration] = useState(false);
-  const [knowsLicense, setKnowsLicense] = useState<boolean | null>(null);
-  const { setStep, setQuestionnaireMode } = useWizard();
+  const { setQuestionnaireMode } = useWizard();
   const { t } = useTranslation();
 
-  // Function to handle selection of knowledge state
-  const handleLicenseKnowledge = (knows: boolean) => {
-    setKnowsLicense(knows);
-    if (knows) {
-      setQuestionnaireMode(false);
-      onNext?.();
-    } else {
-      setQuestionnaireMode(true);
-      onNext?.();
-    }
+  const handleStart = () => {
+    setQuestionnaireMode(false);
+    onNext?.();
   };
 
   return (
@@ -48,36 +40,29 @@ const Introduction: React.FC<StepProps> = ({ onNext }) => {
           </p>
         </div>
 
-        {/* License knowledge question */}
-        <div className="mt-8 bg-surface-dark rounded-xl border border-white/10 p-6">
-          <div className="flex items-center mb-4">
-            <h2 className="text-xl font-semibold text-text-primary">
-              {t("licenseQuestion")}
-            </h2>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <button
-              onClick={() => handleLicenseKnowledge(true)}
-              className={`flex-1 px-4 py-3 rounded-lg transition-colors ${
-                knowsLicense === true
-                  ? "bg-primary-500 text-white"
-                  : "bg-surface-card hover:bg-primary-500/20 text-text-primary"
-              }`}
-            >
-              {t("yes")}
-            </button>
-            <button
-              onClick={() => handleLicenseKnowledge(false)}
-              className={`flex-1 px-4 py-3 rounded-lg transition-colors ${
-                knowsLicense === false
-                  ? "bg-primary-500 text-white"
-                  : "bg-surface-card hover:bg-primary-500/20 text-text-primary"
-              }`}
-            >
-              {t("no")}
-            </button>
-          </div>
+        {/* Start button */}
+        <div className="mt-16 flex justify-center">
+          <button
+            onClick={handleStart}
+            className="group relative inline-flex items-center px-10 py-4 text-lg font-medium rounded-2xl bg-primary-500 text-white hover:bg-primary-400 transition-colors"
+          >
+            <span className="relative flex items-center">
+              {t("start")}
+              <svg
+                className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </span>
+          </button>
         </div>
 
         {/* Second box: Explanations */}
