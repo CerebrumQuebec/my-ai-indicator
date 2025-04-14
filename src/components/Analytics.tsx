@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getPageViews } from "@/lib/firebase";
 import { getEnhancedAnalytics } from "@/lib/enhanced-analytics";
+import { forceCheckMilestones } from "@/lib/firebase";
 import { useTranslation } from "@/contexts/TranslationContext";
 import { Cormorant_Garamond } from "next/font/google";
 
@@ -52,6 +53,7 @@ type Analytics = {
 export default function Analytics() {
   const { t } = useTranslation();
   const [viewCounts, setViewCounts] = useState<Analytics | null>(null);
+  const [isChecking, setIsChecking] = useState(false);
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -71,6 +73,27 @@ export default function Analytics() {
     const interval = setInterval(fetchCounts, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleForceCheck = async () => {
+    setIsChecking(true);
+    try {
+      await forceCheckMilestones();
+      // Refetch data
+      const [counts, enhanced] = await Promise.all([
+        getPageViews(),
+        getEnhancedAnalytics(),
+      ]);
+      setViewCounts({
+        ...counts,
+        platformClicks: enhanced?.platformClicks,
+        milestones: enhanced?.milestones,
+        comparisons: enhanced?.comparisons,
+      });
+    } catch (error) {
+      console.error("Failed to force check:", error);
+    }
+    setIsChecking(false);
+  };
 
   if (!viewCounts) {
     return (
@@ -117,9 +140,11 @@ export default function Analytics() {
     <div className={`space-y-8 ${cormorant.className}`}>
       {/* Overview with Performance */}
       <div className="bg-surface-card rounded-lg p-6">
-        <h2 className="text-2xl mb-4 text-text-primary">
-          {t("analyticsOverview")}
-        </h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl text-text-primary">
+            {t("analyticsOverview")}
+          </h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <div className="text-xl text-text-primary">
@@ -317,10 +342,13 @@ export default function Analytics() {
           </h2>
 
           {/* Records */}
-          <div className="mb-6">
-            <h3 className="text-xl mb-3 text-text-primary">{t("records")}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {viewCounts.milestones?.records.daily && (
+          {viewCounts.milestones?.records &&
+            viewCounts.milestones.records.daily &&
+            viewCounts.milestones.records.daily.count > 0 && (
+              <div className="bg-surface-card rounded-lg p-6">
+                <h2 className="text-2xl mb-4 text-text-primary">
+                  {t("records")}
+                </h2>
                 <div className="bg-surface-hover p-4 rounded-lg">
                   <div className="text-lg font-medium text-text-primary">
                     {t("dailyRecord")}
@@ -339,53 +367,8 @@ export default function Analytics() {
                     })}
                   </div>
                 </div>
-              )}
-
-              {viewCounts.milestones?.records.hourly && (
-                <div className="bg-surface-hover p-4 rounded-lg">
-                  <div className="text-lg font-medium text-text-primary">
-                    {t("hourlyRecord")}
-                  </div>
-                  <div className="text-text-primary">
-                    {formatNumber(viewCounts.milestones.records.hourly.count)}{" "}
-                    {t("visits")}
-                  </div>
-                  <div className="text-sm text-text-secondary">
-                    {new Date(
-                      viewCounts.milestones.records.hourly.datetime
-                    ).toLocaleString(undefined, {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      day: "numeric",
-                      month: "long",
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {viewCounts.milestones?.records.minute && (
-                <div className="bg-surface-hover p-4 rounded-lg">
-                  <div className="text-lg font-medium text-text-primary">
-                    {t("minuteRecord")}
-                  </div>
-                  <div className="text-text-primary">
-                    {formatNumber(viewCounts.milestones.records.minute.count)}{" "}
-                    {t("visits")}
-                  </div>
-                  <div className="text-sm text-text-secondary">
-                    {new Date(
-                      viewCounts.milestones.records.minute.datetime
-                    ).toLocaleString(undefined, {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      day: "numeric",
-                      month: "long",
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+              </div>
+            )}
 
           {/* Achievements */}
           {viewCounts.milestones?.achievements &&

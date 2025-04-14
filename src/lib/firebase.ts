@@ -93,47 +93,71 @@ export const incrementPageView = async () => {
 // Check and update milestones
 const checkMilestones = async (currentCount: number, timestamp: Date) => {
   try {
+    const now = new Date();
+    const montrealTime = new Date(
+      now.toLocaleString("en-US", { timeZone: "America/Montreal" })
+    );
+    const today = montrealTime.toISOString().split("T")[0];
+
+    // Get all daily counts
+    const dailyRef = ref(db, "pageViews/daily");
+    const dailySnapshot = await get(dailyRef);
+    const dailyCounts = dailySnapshot.val() || {};
+
+    // Find the highest daily count and its date
+    let maxDailyCount = 0;
+    let maxDailyDate = today;
+    Object.entries(dailyCounts).forEach(([date, count]) => {
+      const countNum = count as number;
+      if (countNum > maxDailyCount) {
+        maxDailyCount = countNum;
+        maxDailyDate = date;
+      }
+    });
+
+    // Get current records
     const recordsRef = ref(db, "milestones/records");
-    const snapshot = await get(recordsRef);
-    const records = snapshot.val() || {};
+    const recordsSnapshot = await get(recordsRef);
+    const records = recordsSnapshot.val() || {};
 
     const updates: Record<string, any> = {};
 
-    // Check daily record
-    const today = timestamp.toISOString().split("T")[0];
-    if (!records.daily || currentCount > records.daily.count) {
+    // Update daily record if we have a new maximum
+    if (!records.daily || maxDailyCount > records.daily.count) {
       updates["milestones/records/daily"] = {
-        date: today,
-        count: currentCount,
+        date: maxDailyDate,
+        count: maxDailyCount,
       };
     }
 
-    // Check hourly record
-    const hour = timestamp.toISOString().split(":")[0] + ":00";
-    if (!records.hourly || currentCount > records.hourly.count) {
-      updates["milestones/records/hourly"] = {
-        datetime: hour,
-        count: currentCount,
-      };
+    // Sort daily counts by date to find when milestones were reached
+    const sortedDates = Object.entries(dailyCounts).sort(([dateA], [dateB]) =>
+      dateA.localeCompare(dateB)
+    );
+
+    let runningTotal = 0;
+    const milestones = [100, 250, 500, 1000, 2500, 5000, 10000];
+    const reachedMilestones: Record<number, string> = {};
+
+    // Calculate running total and find when each milestone was reached
+    for (const [date, count] of sortedDates) {
+      const countNum = count as number;
+      runningTotal += countNum;
+
+      for (const milestone of milestones) {
+        if (!reachedMilestones[milestone] && runningTotal >= milestone) {
+          reachedMilestones[milestone] = date;
+        }
+      }
     }
 
-    // Check minute record
-    const minute = timestamp.toISOString().split(".")[0];
-    if (!records.minute || currentCount > records.minute.count) {
-      updates["milestones/records/minute"] = {
-        datetime: minute,
-        count: currentCount,
-      };
-    }
-
-    // Check milestones (100, 1000, 10000, etc.)
-    const milestones = [100, 1000, 10000, 100000];
+    // Update milestones with correct dates
     for (const milestone of milestones) {
       if (currentCount >= milestone) {
         const milestoneKey = `milestone_${milestone}`;
-        if (!records[milestoneKey]) {
+        if (!records[milestoneKey] && reachedMilestones[milestone]) {
           updates[`milestones/achievements/${milestoneKey}`] = {
-            date: timestamp.toISOString(),
+            date: reachedMilestones[milestone],
             type: "visitors",
             value: milestone,
           };
@@ -228,5 +252,18 @@ export const getPageViews = async () => {
         },
       },
     };
+  }
+};
+
+// Force check milestones based on current total
+export const forceCheckMilestones = async () => {
+  try {
+    const snapshot = await get(ref(db, "pageViews/total"));
+    const currentCount = snapshot.val() || 0;
+    await checkMilestones(currentCount, new Date());
+    return true;
+  } catch (error) {
+    console.error("Failed to force check milestones:", error);
+    return false;
   }
 };
