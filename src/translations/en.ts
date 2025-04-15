@@ -465,7 +465,14 @@ export const en = {
   weeklyPeak: "Weekly Peak",
   week: "Week",
   weekOf: "Week of",
-  achievementsAndRecords: "Achievements and Records",
+  thisWeek: "This Week",
+  lastWeek: "Last Week",
+  thisMonth: "This Month",
+  lastMonth: "Last Month",
+  recentWeeklyStats: "Recent Weekly Statistics",
+  recentMonthlyStats: "Recent Monthly Statistics",
+  allTimeDailyPeak: "All-Time Daily Peak",
+  allTimeWeeklyPeak: "All-Time Weekly Peak",
 
   // Screen Sizes
   screenSizes: "Screen Sizes",

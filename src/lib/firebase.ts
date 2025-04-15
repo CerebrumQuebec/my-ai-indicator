@@ -1,5 +1,6 @@
 import { ref, increment, update, get } from "firebase/database";
 import { db } from "./firebase-config";
+import { updateComparisons } from "./enhanced-analytics";
 
 // Get anonymous system info
 const getSystemInfo = () => {
@@ -107,7 +108,12 @@ export const incrementPageView = async () => {
       }
     }
 
+    // First update the basic analytics
     await update(ref(db), updates);
+
+    // Then update comparisons - this needs to happen after the pageViews update
+    // because it relies on the updated daily count
+    await updateComparisons();
 
     // Get current total count for milestone checking
     const snapshot = await get(ref(db, "pageViews/total"));

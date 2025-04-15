@@ -120,53 +120,76 @@ export const updateComparisons = async () => {
   try {
     const now = new Date();
     const weekStart = new Date(now);
-    weekStart.setDate(now.getDate() - now.getDay());
+    weekStart.setDate(now.getDate() - now.getDay()); // Get start of week (Sunday)
     const weekKey = weekStart.toISOString().split("T")[0];
     const today = now.toISOString().split("T")[0];
     const monthKey = now.toISOString().slice(0, 7); // YYYY-MM format
 
-    // Get current daily and weekly counts
+    // Get today's count from pageViews
     const dailyRef = ref(db, `pageViews/daily/${today}`);
-    const weeklyRef = ref(db, `comparisons/weekly/${weekKey}`);
-    const [dailySnapshot, weeklySnapshot] = await Promise.all([
-      get(dailyRef),
-      get(weeklyRef),
-    ]);
+    const dailySnapshot = await get(dailyRef);
+    const todayCount = dailySnapshot.val() || 0;
 
-    const dailyCount = dailySnapshot.val() || 0;
-    const weeklyCount = weeklySnapshot.val() || 0;
+    // Initialize comparisons node if it doesn't exist
+    const comparisonsRef = ref(db, "comparisons");
+    const comparisonsSnapshot = await get(comparisonsRef);
+
+    if (!comparisonsSnapshot.exists()) {
+      // Initialize the structure if it doesn't exist
+      await set(ref(db, "comparisons"), {
+        weekly: {},
+        monthly: {},
+        peaks: {
+          daily: { date: today, count: todayCount },
+          weekly: { weekStart: weekKey, count: todayCount },
+        },
+      });
+    }
+
+    // Get current weekly total
+    let weeklyTotal = 0;
+    const weeklyRef = ref(db, `comparisons/weekly/${weekKey}`);
+    const weeklySnapshot = await get(weeklyRef);
+    weeklyTotal = weeklySnapshot.val() || 0;
+
+    // Get current monthly total
+    let monthlyTotal = 0;
+    const monthlyRef = ref(db, `comparisons/monthly/${monthKey}`);
+    const monthlySnapshot = await get(monthlyRef);
+    monthlyTotal = monthlySnapshot.val() || 0;
 
     // Get current peaks
     const peaksRef = ref(db, "comparisons/peaks");
     const peaksSnapshot = await get(peaksRef);
-    const peaks = peaksSnapshot.val() || {};
-
-    const updates: Record<
-      string,
-      | number
-      | ReturnType<typeof increment>
-      | { date?: string; weekStart?: string; count: number }
-    > = {
-      [`comparisons/weekly/${weekKey}`]: increment(1),
-      [`comparisons/monthly/${monthKey}`]: increment(1),
+    const peaks = peaksSnapshot.val() || {
+      daily: { date: today, count: todayCount },
+      weekly: { weekStart: weekKey, count: weeklyTotal },
     };
 
-    // Update daily peak if current count is higher
-    if (!peaks.daily || dailyCount > peaks.daily.count) {
+    const updates: Record<string, any> = {
+      // Update weekly and monthly totals
+      [`comparisons/weekly/${weekKey}`]: weeklyTotal + 1,
+      [`comparisons/monthly/${monthKey}`]: monthlyTotal + 1,
+    };
+
+    // Update daily peak if today's count is higher
+    if (!peaks.daily || todayCount > peaks.daily.count) {
       updates["comparisons/peaks/daily"] = {
         date: today,
-        count: dailyCount,
+        count: todayCount,
       };
     }
 
-    // Update weekly peak if current count is higher
-    if (!peaks.weekly || weeklyCount > peaks.weekly.count) {
+    // Update weekly peak if this week's count is higher
+    const newWeeklyTotal = weeklyTotal + 1;
+    if (!peaks.weekly || newWeeklyTotal > peaks.weekly.count) {
       updates["comparisons/peaks/weekly"] = {
         weekStart: weekKey,
-        count: weeklyCount,
+        count: newWeeklyTotal,
       };
     }
 
+    // Apply all updates
     await update(ref(db), updates);
   } catch (error) {
     console.error("Failed to update comparisons:", error);
