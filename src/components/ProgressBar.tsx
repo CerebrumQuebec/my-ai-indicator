@@ -62,10 +62,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
   // Debug logging
   useEffect(() => {
-    console.log("Progress Bar Debug:");
-    console.log("Current Step:", currentStep);
-    console.log("Total Steps:", totalSteps);
-    console.log("Progress Percent:", progressPercent);
+    //console.log("Progress Bar Debug:");
+    //console.log("Current Step:", currentStep);
+    //console.log("Total Steps:", totalSteps);
+    //console.log("Progress Percent:", progressPercent);
   }, [currentStep, totalSteps, progressPercent]);
 
   return (

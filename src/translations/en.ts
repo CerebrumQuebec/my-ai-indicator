@@ -465,4 +465,28 @@ export const en = {
   weeklyPeak: "Weekly Peak",
   week: "Week",
   weekOf: "Week of",
+  thisWeek: "This Week",
+  lastWeek: "Last Week",
+  thisMonth: "This Month",
+  lastMonth: "Last Month",
+  recentWeeklyStats: "Recent Weekly Statistics",
+  recentMonthlyStats: "Recent Monthly Statistics",
+  allTimeDailyPeak: "All-Time Daily Peak",
+  allTimeWeeklyPeak: "All-Time Weekly Peak",
+
+  // Screen Sizes
+  screenSizes: "Screen Sizes",
+  screenSizeMobile: "Mobile",
+  screenSizeSmall: "Small Tablet",
+  screenSizeMedium: "Large Tablet",
+  screenSizeLarge: "Laptop",
+  screenSizeXlarge: "Desktop",
+  screenSizeUnknown: "Unknown Size",
+
+  // Timezone Distribution
+  timezoneDistribution: "Timezone Distribution",
+  visualizeTimezonesOnMap:
+    "Visualization of visitors by timezone on the world map",
+  timezoneMapLegend: "Each band represents a timezone (UTC)",
+  utcTime: "UTC",
 };

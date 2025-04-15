@@ -1,4 +1,4 @@
-import { ref, increment, update, get } from "firebase/database";
+import { ref, increment, update, get, set } from "firebase/database";
 import { db } from "./firebase-config";
 
 type RecordUpdate = {
@@ -25,9 +25,27 @@ export const trackPlatformClick = async (platform: string) => {
 export const trackTimezone = async () => {
   try {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    //console.log("[trackTimezone] Fuseau détecté :", timezone);
+
+    // Obtenir l'offset en heures
+    const now = new Date();
+    const offset = -now.getTimezoneOffset() / 60; // Convertir minutes en heures
+
+    // Convertir l'offset en code (50-74 comme pour hours)
+    // -12 devient 50, 0 devient 62, +12 devient 74
+    const timezoneCode = Math.floor(offset + 12 + 50);
+
+    //console.log("[trackTimezone] Code du fuseau:", timezoneCode);
+
+    // Mettre à jour le compteur dans analytics/timezones
     await update(ref(db), {
-      [`timezones/${timezone}`]: increment(1),
+      [`analytics/timezones/${timezoneCode}`]: increment(1),
     });
+
+    //console.log(
+    //  "[trackTimezone] Fuseau enregistré avec le code:",
+    //  timezoneCode
+    //);
   } catch (error) {
     console.error("Failed to track timezone:", error);
   }
@@ -42,12 +60,17 @@ export const checkRecords = async (currentCount: number, timestamp: Date) => {
 
     const updates: Record<string, RecordUpdate> = {};
 
-    // Check daily record
+    // Get today's count specifically for daily record
     const today = timestamp.toISOString().split("T")[0];
-    if (!records.daily || currentCount > records.daily.count) {
+    const dailyRef = ref(db, `pageViews/daily/${today}`);
+    const dailySnapshot = await get(dailyRef);
+    const todayCount = dailySnapshot.val() || 0;
+
+    // Check daily record against today's actual count
+    if (!records.daily || todayCount > records.daily.count) {
       updates["milestones/records/daily"] = {
         date: today,
-        count: currentCount,
+        count: todayCount,
       };
     }
 
@@ -97,53 +120,76 @@ export const updateComparisons = async () => {
   try {
     const now = new Date();
     const weekStart = new Date(now);
-    weekStart.setDate(now.getDate() - now.getDay());
+    weekStart.setDate(now.getDate() - now.getDay()); // Get start of week (Sunday)
     const weekKey = weekStart.toISOString().split("T")[0];
     const today = now.toISOString().split("T")[0];
     const monthKey = now.toISOString().slice(0, 7); // YYYY-MM format
 
-    // Get current daily and weekly counts
+    // Get today's count from pageViews
     const dailyRef = ref(db, `pageViews/daily/${today}`);
-    const weeklyRef = ref(db, `comparisons/weekly/${weekKey}`);
-    const [dailySnapshot, weeklySnapshot] = await Promise.all([
-      get(dailyRef),
-      get(weeklyRef),
-    ]);
+    const dailySnapshot = await get(dailyRef);
+    const todayCount = dailySnapshot.val() || 0;
 
-    const dailyCount = dailySnapshot.val() || 0;
-    const weeklyCount = weeklySnapshot.val() || 0;
+    // Initialize comparisons node if it doesn't exist
+    const comparisonsRef = ref(db, "comparisons");
+    const comparisonsSnapshot = await get(comparisonsRef);
+
+    if (!comparisonsSnapshot.exists()) {
+      // Initialize the structure if it doesn't exist
+      await set(ref(db, "comparisons"), {
+        weekly: {},
+        monthly: {},
+        peaks: {
+          daily: { date: today, count: todayCount },
+          weekly: { weekStart: weekKey, count: todayCount },
+        },
+      });
+    }
+
+    // Get current weekly total
+    let weeklyTotal = 0;
+    const weeklyRef = ref(db, `comparisons/weekly/${weekKey}`);
+    const weeklySnapshot = await get(weeklyRef);
+    weeklyTotal = weeklySnapshot.val() || 0;
+
+    // Get current monthly total
+    let monthlyTotal = 0;
+    const monthlyRef = ref(db, `comparisons/monthly/${monthKey}`);
+    const monthlySnapshot = await get(monthlyRef);
+    monthlyTotal = monthlySnapshot.val() || 0;
 
     // Get current peaks
     const peaksRef = ref(db, "comparisons/peaks");
     const peaksSnapshot = await get(peaksRef);
-    const peaks = peaksSnapshot.val() || {};
-
-    const updates: Record<
-      string,
-      | number
-      | ReturnType<typeof increment>
-      | { date?: string; weekStart?: string; count: number }
-    > = {
-      [`comparisons/weekly/${weekKey}`]: increment(1),
-      [`comparisons/monthly/${monthKey}`]: increment(1),
+    const peaks = peaksSnapshot.val() || {
+      daily: { date: today, count: todayCount },
+      weekly: { weekStart: weekKey, count: weeklyTotal },
     };
 
-    // Update daily peak if current count is higher
-    if (!peaks.daily || dailyCount > peaks.daily.count) {
+    const updates: Record<string, any> = {
+      // Update weekly and monthly totals
+      [`comparisons/weekly/${weekKey}`]: weeklyTotal + 1,
+      [`comparisons/monthly/${monthKey}`]: monthlyTotal + 1,
+    };
+
+    // Update daily peak if today's count is higher
+    if (!peaks.daily || todayCount > peaks.daily.count) {
       updates["comparisons/peaks/daily"] = {
         date: today,
-        count: dailyCount,
+        count: todayCount,
       };
     }
 
-    // Update weekly peak if current count is higher
-    if (!peaks.weekly || weeklyCount > peaks.weekly.count) {
+    // Update weekly peak if this week's count is higher
+    const newWeeklyTotal = weeklyTotal + 1;
+    if (!peaks.weekly || newWeeklyTotal > peaks.weekly.count) {
       updates["comparisons/peaks/weekly"] = {
         weekStart: weekKey,
-        count: weeklyCount,
+        count: newWeeklyTotal,
       };
     }
 
+    // Apply all updates
     await update(ref(db), updates);
   } catch (error) {
     console.error("Failed to update comparisons:", error);
@@ -179,5 +225,45 @@ export const getEnhancedAnalytics = async () => {
   } catch (error) {
     console.error("Failed to get enhanced analytics:", error);
     return null;
+  }
+};
+
+// Force check all historical records
+export const forceCheckHistoricalRecords = async () => {
+  try {
+    // Get all daily page views
+    const pageViewsRef = ref(db, "pageViews/daily");
+    const snapshot = await get(pageViewsRef);
+    const dailyCounts = snapshot.val() || {};
+
+    // Find the highest daily count
+    let maxDailyCount = 0;
+    let maxDailyDate = "";
+
+    Object.entries(dailyCounts).forEach(([date, count]) => {
+      const dailyCount = count as number;
+      if (dailyCount > maxDailyCount) {
+        maxDailyCount = dailyCount;
+        maxDailyDate = date;
+      }
+    });
+
+    // Update the record if we found a higher count
+    if (maxDailyCount > 0) {
+      await update(ref(db), {
+        "milestones/records/daily": {
+          date: maxDailyDate,
+          count: maxDailyCount,
+        },
+      });
+    }
+
+    return {
+      maxDailyCount,
+      maxDailyDate,
+    };
+  } catch (error) {
+    console.error("Failed to force check historical records:", error);
+    throw error;
   }
 };

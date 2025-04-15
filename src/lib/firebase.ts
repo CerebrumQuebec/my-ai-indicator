@@ -1,5 +1,6 @@
 import { ref, increment, update, get } from "firebase/database";
 import { db } from "./firebase-config";
+import { updateComparisons } from "./enhanced-analytics";
 
 // Get anonymous system info
 const getSystemInfo = () => {
@@ -36,10 +37,26 @@ const getSystemInfo = () => {
   );
   const hour = montrealTime.getHours();
 
+  // Determine screen size category
+  const width = window.innerWidth;
+  let screenSizeCategory = "unknown";
+  if (width < 640) {
+    screenSizeCategory = "mobile"; // Mobile
+  } else if (width < 768) {
+    screenSizeCategory = "small"; // Small tablets
+  } else if (width < 1024) {
+    screenSizeCategory = "medium"; // Large tablets / small laptops
+  } else if (width < 1280) {
+    screenSizeCategory = "large"; // Laptops
+  } else {
+    screenSizeCategory = "xlarge"; // Desktops and large screens
+  }
+
   return {
     deviceType,
     browser,
     screenSize: `${window.innerWidth}x${window.innerHeight}`,
+    screenSizeCategory, // Add the category
     language: navigator.language.split("-")[0],
     hour,
   };
@@ -50,11 +67,24 @@ export const incrementPageView = async () => {
   if (typeof window === "undefined") return;
 
   try {
-    const today = new Date().toISOString().split("T")[0];
+    // Get Montreal time with proper date handling
+    const now = new Date();
+    // Create a date object in Montreal timezone
+    const montrealDate = new Date(
+      now.toLocaleString("en-US", { timeZone: "America/Montreal" })
+    );
+
+    // Format the date manually to ensure YYYY-MM-DD format
+    const year = montrealDate.getFullYear();
+    const month = String(montrealDate.getMonth() + 1).padStart(2, "0");
+    const day = String(montrealDate.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+
     const systemInfo = getSystemInfo();
     if (!systemInfo) return;
 
-    const { deviceType, browser, language, hour } = systemInfo;
+    const { deviceType, browser, language, hour, screenSizeCategory } =
+      systemInfo;
 
     const updates = {
       [`pageViews/total`]: increment(1),
@@ -63,6 +93,7 @@ export const incrementPageView = async () => {
       [`analytics/browsers/${browser}`]: increment(1),
       [`analytics/languages/${language}`]: increment(1),
       [`analytics/hours/${hour}`]: increment(1),
+      [`analytics/screenSizes/${screenSizeCategory}`]: increment(1),
     };
 
     // Add performance data if available
@@ -77,7 +108,12 @@ export const incrementPageView = async () => {
       }
     }
 
+    // First update the basic analytics
     await update(ref(db), updates);
+
+    // Then update comparisons - this needs to happen after the pageViews update
+    // because it relies on the updated daily count
+    await updateComparisons();
 
     // Get current total count for milestone checking
     const snapshot = await get(ref(db, "pageViews/total"));
@@ -93,47 +129,82 @@ export const incrementPageView = async () => {
 // Check and update milestones
 const checkMilestones = async (currentCount: number, timestamp: Date) => {
   try {
+    // Get Montreal time
+    const now = new Date();
+    // Create a date object in Montreal timezone
+    const montrealDate = new Date(
+      now.toLocaleString("en-US", { timeZone: "America/Montreal" })
+    );
+
+    // Format the date manually to ensure YYYY-MM-DD format
+    const year = montrealDate.getFullYear();
+    const month = String(montrealDate.getMonth() + 1).padStart(2, "0");
+    const day = String(montrealDate.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+
+    // Get all daily counts
+    const dailyRef = ref(db, "pageViews/daily");
+    const dailySnapshot = await get(dailyRef);
+    const dailyCounts = dailySnapshot.val() || {};
+
+    // Find the highest daily count and its date
+    const todayCount = dailyCounts[today] || 0;
+    let maxDailyCount = todayCount;
+    let maxDailyDate = today;
+
+    // Compare with historical dates
+    Object.entries(dailyCounts).forEach(([date, count]) => {
+      const countNum = count as number;
+      // Only update if this day's count is higher than our current maximum
+      if (countNum > maxDailyCount) {
+        maxDailyCount = countNum;
+        maxDailyDate = date;
+      }
+    });
+
+    // Get current records
     const recordsRef = ref(db, "milestones/records");
-    const snapshot = await get(recordsRef);
-    const records = snapshot.val() || {};
+    const recordsSnapshot = await get(recordsRef);
+    const records = recordsSnapshot.val() || {};
 
     const updates: Record<string, any> = {};
 
-    // Check daily record
-    const today = timestamp.toISOString().split("T")[0];
-    if (!records.daily || currentCount > records.daily.count) {
+    // Update daily record if we have a new maximum
+    if (!records.daily || maxDailyCount > records.daily.count) {
       updates["milestones/records/daily"] = {
-        date: today,
-        count: currentCount,
+        date: maxDailyDate,
+        count: maxDailyCount,
       };
     }
 
-    // Check hourly record
-    const hour = timestamp.toISOString().split(":")[0] + ":00";
-    if (!records.hourly || currentCount > records.hourly.count) {
-      updates["milestones/records/hourly"] = {
-        datetime: hour,
-        count: currentCount,
-      };
+    // Sort daily counts by date to find when milestones were reached
+    const sortedDates = Object.entries(dailyCounts).sort(([dateA], [dateB]) =>
+      dateA.localeCompare(dateB)
+    );
+
+    let runningTotal = 0;
+    const milestones = [100, 250, 500, 1000, 2500, 5000, 10000];
+    const reachedMilestones: Record<number, string> = {};
+
+    // Calculate running total and find when each milestone was reached
+    for (const [date, count] of sortedDates) {
+      const countNum = count as number;
+      runningTotal += countNum;
+
+      for (const milestone of milestones) {
+        if (!reachedMilestones[milestone] && runningTotal >= milestone) {
+          reachedMilestones[milestone] = date;
+        }
+      }
     }
 
-    // Check minute record
-    const minute = timestamp.toISOString().split(".")[0];
-    if (!records.minute || currentCount > records.minute.count) {
-      updates["milestones/records/minute"] = {
-        datetime: minute,
-        count: currentCount,
-      };
-    }
-
-    // Check milestones (100, 1000, 10000, etc.)
-    const milestones = [100, 1000, 10000, 100000];
+    // Update milestones with correct dates
     for (const milestone of milestones) {
       if (currentCount >= milestone) {
         const milestoneKey = `milestone_${milestone}`;
-        if (!records[milestoneKey]) {
+        if (!records[milestoneKey] && reachedMilestones[milestone]) {
           updates[`milestones/achievements/${milestoneKey}`] = {
-            date: timestamp.toISOString(),
+            date: reachedMilestones[milestone],
             type: "visitors",
             value: milestone,
           };
@@ -197,19 +268,32 @@ export const getAnalytics = async () => {
 // Get page views data
 export const getPageViews = async () => {
   try {
-    const snapshot = await get(ref(db));
-    const data = snapshot.val() || {};
+    // Fetch data specifically from pageViews and analytics nodes
+    const pageViewsRef = ref(db, "pageViews");
+    const analyticsRef = ref(db, "analytics");
+    const [pageViewsSnapshot, analyticsSnapshot] = await Promise.all([
+      get(pageViewsRef),
+      get(analyticsRef),
+    ]);
+
+    const pageViewsData = pageViewsSnapshot.val() || {};
+    const analyticsData = analyticsSnapshot.val() || {};
+
+    //console.log("Analytics data from Firebase:", analyticsData);
+    //console.log("Timezones data:", analyticsData.timezones);
 
     return {
-      total: data.total || 0,
-      daily: data.pageViews?.daily || {},
+      total: pageViewsData.total || 0,
+      daily: pageViewsData.daily || {},
       analytics: {
-        devices: data.analytics?.devices || {},
-        browsers: data.analytics?.browsers || {},
-        languages: data.analytics?.languages || {},
-        hours: data.analytics?.hours || {},
+        devices: analyticsData.devices || {},
+        browsers: analyticsData.browsers || {},
+        languages: analyticsData.languages || {},
+        hours: analyticsData.hours || {},
+        screenSizes: analyticsData.screenSizes || {},
+        timezones: analyticsData.timezones || {},
         performance: {
-          avg_load_time: data.analytics?.performance?.avg_load_time || 0,
+          avg_load_time: analyticsData.performance?.avg_load_time || 0,
         },
       },
     };
@@ -223,10 +307,25 @@ export const getPageViews = async () => {
         browsers: {},
         languages: {},
         hours: {},
+        screenSizes: {},
+        timezones: {},
         performance: {
           avg_load_time: 0,
         },
       },
     };
+  }
+};
+
+// Force check milestones based on current total
+export const forceCheckMilestones = async () => {
+  try {
+    const snapshot = await get(ref(db, "pageViews/total"));
+    const currentCount = snapshot.val() || 0;
+    await checkMilestones(currentCount, new Date());
+    return true;
+  } catch (error) {
+    console.error("Failed to force check milestones:", error);
+    return false;
   }
 };

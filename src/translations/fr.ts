@@ -448,6 +448,14 @@ export const fr = {
   weeklyPeak: "Pic hebdomadaire",
   week: "Semaine",
   weekOf: "Semaine du",
+  thisWeek: "Cette semaine",
+  lastWeek: "Semaine dernière",
+  thisMonth: "Ce mois",
+  lastMonth: "Mois dernier",
+  recentWeeklyStats: "Statistiques hebdomadaires récentes",
+  recentMonthlyStats: "Statistiques mensuelles récentes",
+  allTimeDailyPeak: "Record journalier absolu",
+  allTimeWeeklyPeak: "Record hebdomadaire absolu",
   analyticsSystemTitle: "Notre Système d'Analyse",
   analyticsSystemDescription:
     "Nous utilisons notre propre système d'analyse respectueux de la vie privée qui :",
@@ -481,4 +489,21 @@ export const fr = {
     "Minimal - nous collectons uniquement ce qui est nécessaire",
   analyticsCharacteristics_transparent:
     "Transparent - toutes les données sont visibles publiquement",
+  achievementsAndRecords: "Réalisations et Records",
+
+  // Screen Sizes
+  screenSizes: "Tailles d'écran",
+  screenSizeMobile: "Mobile",
+  screenSizeSmall: "Petite tablette",
+  screenSizeMedium: "Grande tablette",
+  screenSizeLarge: "Ordinateur portable",
+  screenSizeXlarge: "Grand écran",
+  screenSizeUnknown: "Taille inconnue",
+
+  // Timezone Distribution
+  timezoneDistribution: "Distribution des Fuseaux Horaires",
+  visualizeTimezonesOnMap:
+    "Visualisation des visiteurs par fuseau horaire sur la carte du monde",
+  timezoneMapLegend: "Chaque bande représente un fuseau horaire (UTC)",
+  utcTime: "UTC",
 };
