@@ -481,4 +481,14 @@ export const fr = {
     "Minimal - nous collectons uniquement ce qui est nécessaire",
   analyticsCharacteristics_transparent:
     "Transparent - toutes les données sont visibles publiquement",
+  achievementsAndRecords: "Réalisations et Records",
+
+  // Screen Sizes
+  screenSizes: "Tailles d'écran",
+  screenSizeMobile: "Mobile",
+  screenSizeSmall: "Petite tablette",
+  screenSizeMedium: "Grande tablette",
+  screenSizeLarge: "Ordinateur portable",
+  screenSizeXlarge: "Grand écran",
+  screenSizeUnknown: "Taille inconnue",
 };

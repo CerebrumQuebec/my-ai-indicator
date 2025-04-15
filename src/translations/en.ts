@@ -465,4 +465,14 @@ export const en = {
   weeklyPeak: "Weekly Peak",
   week: "Week",
   weekOf: "Week of",
+  achievementsAndRecords: "Achievements and Records",
+
+  // Screen Sizes
+  screenSizes: "Screen Sizes",
+  screenSizeMobile: "Mobile",
+  screenSizeSmall: "Small Tablet",
+  screenSizeMedium: "Large Tablet",
+  screenSizeLarge: "Laptop",
+  screenSizeXlarge: "Desktop",
+  screenSizeUnknown: "Unknown Size",
 };

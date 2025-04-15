@@ -42,12 +42,17 @@ export const checkRecords = async (currentCount: number, timestamp: Date) => {
 
     const updates: Record<string, RecordUpdate> = {};
 
-    // Check daily record
+    // Get today's count specifically for daily record
     const today = timestamp.toISOString().split("T")[0];
-    if (!records.daily || currentCount > records.daily.count) {
+    const dailyRef = ref(db, `pageViews/daily/${today}`);
+    const dailySnapshot = await get(dailyRef);
+    const todayCount = dailySnapshot.val() || 0;
+
+    // Check daily record against today's actual count
+    if (!records.daily || todayCount > records.daily.count) {
       updates["milestones/records/daily"] = {
         date: today,
-        count: currentCount,
+        count: todayCount,
       };
     }
 
@@ -179,5 +184,45 @@ export const getEnhancedAnalytics = async () => {
   } catch (error) {
     console.error("Failed to get enhanced analytics:", error);
     return null;
+  }
+};
+
+// Force check all historical records
+export const forceCheckHistoricalRecords = async () => {
+  try {
+    // Get all daily page views
+    const pageViewsRef = ref(db, "pageViews/daily");
+    const snapshot = await get(pageViewsRef);
+    const dailyCounts = snapshot.val() || {};
+
+    // Find the highest daily count
+    let maxDailyCount = 0;
+    let maxDailyDate = "";
+
+    Object.entries(dailyCounts).forEach(([date, count]) => {
+      const dailyCount = count as number;
+      if (dailyCount > maxDailyCount) {
+        maxDailyCount = dailyCount;
+        maxDailyDate = date;
+      }
+    });
+
+    // Update the record if we found a higher count
+    if (maxDailyCount > 0) {
+      await update(ref(db), {
+        "milestones/records/daily": {
+          date: maxDailyDate,
+          count: maxDailyCount,
+        },
+      });
+    }
+
+    return {
+      maxDailyCount,
+      maxDailyDate,
+    };
+  } catch (error) {
+    console.error("Failed to force check historical records:", error);
+    throw error;
   }
 };

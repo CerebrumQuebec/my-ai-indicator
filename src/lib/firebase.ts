@@ -36,10 +36,26 @@ const getSystemInfo = () => {
   );
   const hour = montrealTime.getHours();
 
+  // Determine screen size category
+  const width = window.innerWidth;
+  let screenSizeCategory = "unknown";
+  if (width < 640) {
+    screenSizeCategory = "mobile"; // Mobile
+  } else if (width < 768) {
+    screenSizeCategory = "small"; // Small tablets
+  } else if (width < 1024) {
+    screenSizeCategory = "medium"; // Large tablets / small laptops
+  } else if (width < 1280) {
+    screenSizeCategory = "large"; // Laptops
+  } else {
+    screenSizeCategory = "xlarge"; // Desktops and large screens
+  }
+
   return {
     deviceType,
     browser,
     screenSize: `${window.innerWidth}x${window.innerHeight}`,
+    screenSizeCategory, // Add the category
     language: navigator.language.split("-")[0],
     hour,
   };
@@ -50,11 +66,24 @@ export const incrementPageView = async () => {
   if (typeof window === "undefined") return;
 
   try {
-    const today = new Date().toISOString().split("T")[0];
+    // Get Montreal time with proper date handling
+    const now = new Date();
+    // Create a date object in Montreal timezone
+    const montrealDate = new Date(
+      now.toLocaleString("en-US", { timeZone: "America/Montreal" })
+    );
+
+    // Format the date manually to ensure YYYY-MM-DD format
+    const year = montrealDate.getFullYear();
+    const month = String(montrealDate.getMonth() + 1).padStart(2, "0");
+    const day = String(montrealDate.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+
     const systemInfo = getSystemInfo();
     if (!systemInfo) return;
 
-    const { deviceType, browser, language, hour } = systemInfo;
+    const { deviceType, browser, language, hour, screenSizeCategory } =
+      systemInfo;
 
     const updates = {
       [`pageViews/total`]: increment(1),
@@ -63,6 +92,7 @@ export const incrementPageView = async () => {
       [`analytics/browsers/${browser}`]: increment(1),
       [`analytics/languages/${language}`]: increment(1),
       [`analytics/hours/${hour}`]: increment(1),
+      [`analytics/screenSizes/${screenSizeCategory}`]: increment(1),
     };
 
     // Add performance data if available
@@ -93,11 +123,18 @@ export const incrementPageView = async () => {
 // Check and update milestones
 const checkMilestones = async (currentCount: number, timestamp: Date) => {
   try {
+    // Get Montreal time
     const now = new Date();
-    const montrealTime = new Date(
+    // Create a date object in Montreal timezone
+    const montrealDate = new Date(
       now.toLocaleString("en-US", { timeZone: "America/Montreal" })
     );
-    const today = montrealTime.toISOString().split("T")[0];
+
+    // Format the date manually to ensure YYYY-MM-DD format
+    const year = montrealDate.getFullYear();
+    const month = String(montrealDate.getMonth() + 1).padStart(2, "0");
+    const day = String(montrealDate.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
 
     // Get all daily counts
     const dailyRef = ref(db, "pageViews/daily");
@@ -105,10 +142,14 @@ const checkMilestones = async (currentCount: number, timestamp: Date) => {
     const dailyCounts = dailySnapshot.val() || {};
 
     // Find the highest daily count and its date
-    let maxDailyCount = 0;
+    const todayCount = dailyCounts[today] || 0;
+    let maxDailyCount = todayCount;
     let maxDailyDate = today;
+
+    // Compare with historical dates
     Object.entries(dailyCounts).forEach(([date, count]) => {
       const countNum = count as number;
+      // Only update if this day's count is higher than our current maximum
       if (countNum > maxDailyCount) {
         maxDailyCount = countNum;
         maxDailyDate = date;
@@ -221,19 +262,28 @@ export const getAnalytics = async () => {
 // Get page views data
 export const getPageViews = async () => {
   try {
-    const snapshot = await get(ref(db));
-    const data = snapshot.val() || {};
+    // Fetch data specifically from pageViews and analytics nodes
+    const pageViewsRef = ref(db, "pageViews");
+    const analyticsRef = ref(db, "analytics");
+    const [pageViewsSnapshot, analyticsSnapshot] = await Promise.all([
+      get(pageViewsRef),
+      get(analyticsRef),
+    ]);
+
+    const pageViewsData = pageViewsSnapshot.val() || {};
+    const analyticsData = analyticsSnapshot.val() || {};
 
     return {
-      total: data.total || 0,
-      daily: data.pageViews?.daily || {},
+      total: pageViewsData.total || 0,
+      daily: pageViewsData.daily || {},
       analytics: {
-        devices: data.analytics?.devices || {},
-        browsers: data.analytics?.browsers || {},
-        languages: data.analytics?.languages || {},
-        hours: data.analytics?.hours || {},
+        devices: analyticsData.devices || {},
+        browsers: analyticsData.browsers || {},
+        languages: analyticsData.languages || {},
+        hours: analyticsData.hours || {},
+        screenSizes: analyticsData.screenSizes || {}, // Add screen sizes
         performance: {
-          avg_load_time: data.analytics?.performance?.avg_load_time || 0,
+          avg_load_time: analyticsData.performance?.avg_load_time || 0,
         },
       },
     };
@@ -247,6 +297,7 @@ export const getPageViews = async () => {
         browsers: {},
         languages: {},
         hours: {},
+        screenSizes: {}, // Add empty screen sizes
         performance: {
           avg_load_time: 0,
         },
