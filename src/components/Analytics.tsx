@@ -241,7 +241,7 @@ export default function Analytics() {
     >
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl text-text-primary font-medium mb-4 tracking-wide">
+        <h1 className="text-5xl md:text-6xl text-text-primary font-medium mb-4 tracking-wide">
           {t("analyticsOverview")}
         </h1>
         <div className="h-1 w-24 bg-primary-600 mx-auto rounded-full mb-4"></div>
@@ -263,38 +263,40 @@ export default function Analytics() {
       <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="text-center p-4 bg-surface-hover rounded-lg">
-            <div className="text-3xl text-primary-700 mb-2 font-bold">
+            <div className="text-4xl text-primary-700 mb-2 font-bold">
               {formatNumber(viewCounts.total)}
             </div>
-            <div className="text-text-primary font-medium">
+            <div className="text-text-primary font-medium text-lg">
               {t("totalVisits")}
             </div>
           </div>
           <div className="text-center p-4 bg-surface-hover rounded-lg">
-            <div className="text-3xl text-primary-700 mb-2 font-bold">
+            <div className="text-4xl text-primary-700 mb-2 font-bold">
               {formatNumber(viewCounts.daily[getTodayInMontreal()] || 0)}
             </div>
-            <div className="text-text-primary font-medium">
+            <div className="text-text-primary font-medium text-lg">
               {t("todayVisits")}
             </div>
           </div>
           <div className="text-center p-4 bg-surface-hover rounded-lg">
-            <div className="text-3xl text-primary-700 mb-2 font-bold">
+            <div className="text-4xl text-primary-700 mb-2 font-bold">
               {viewCounts.analytics.performance?.avg_load_time
                 ? `${(
                     viewCounts.analytics.performance.avg_load_time / 1000
                   ).toFixed(2)}s`
                 : t("notAvailable")}
             </div>
-            <div className="text-text-primary font-medium">
+            <div className="text-text-primary font-medium text-lg">
               {t("avgLoadTime")}
             </div>
           </div>
           <div className="text-center p-4 bg-surface-hover rounded-lg">
-            <div className="text-3xl text-primary-700 mb-2 font-bold">
+            <div className="text-4xl text-primary-700 mb-2 font-bold">
               {Object.keys(viewCounts.analytics.devices).length}
             </div>
-            <div className="text-text-primary font-medium">{t("devices")}</div>
+            <div className="text-text-primary font-medium text-lg">
+              {t("devices")}
+            </div>
           </div>
         </div>
       </div>
@@ -302,22 +304,22 @@ export default function Analytics() {
       {/* Devices, Browsers, and Languages Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="bg-surface-card rounded-xl p-6 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-          <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+          <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
             {t("devices")}
           </h2>
           {Object.entries(viewCounts.analytics.devices).map(
             ([device, count]) => (
               <div key={device} className="mb-4">
                 <div className="flex justify-between mb-2">
-                  <span className="capitalize text-text-primary">
+                  <span className="capitalize text-text-primary text-lg">
                     {t(device)}
                   </span>
-                  <span className="text-text-secondary">
+                  <span className="text-text-secondary text-lg">
                     {formatNumber(count)} (
                     {calculatePercentage(count, totalDevices)}%)
                   </span>
                 </div>
-                <div className="w-full bg-surface-hover rounded-full h-2">
+                <div className="w-full bg-surface-hover rounded-full h-3">
                   <div
                     className="bg-primary-500 rounded-full h-full transition-all duration-300"
                     style={{ width: `${(count / totalDevices) * 100}%` }}
@@ -329,22 +331,22 @@ export default function Analytics() {
         </div>
 
         <div className="bg-surface-card rounded-xl p-6 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-          <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+          <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
             {t("browsers")}
           </h2>
           {Object.entries(viewCounts.analytics.browsers).map(
             ([browser, count]) => (
               <div key={browser} className="mb-4">
                 <div className="flex justify-between mb-2">
-                  <span className="capitalize text-text-primary">
+                  <span className="capitalize text-text-primary text-lg">
                     {t(browser)}
                   </span>
-                  <span className="text-text-secondary">
+                  <span className="text-text-secondary text-lg">
                     {formatNumber(count)} (
                     {calculatePercentage(count, totalBrowsers)}%)
                   </span>
                 </div>
-                <div className="w-full bg-surface-hover rounded-full h-2">
+                <div className="w-full bg-surface-hover rounded-full h-3">
                   <div
                     className="bg-primary-500 rounded-full h-full transition-all duration-300"
                     style={{ width: `${(count / totalBrowsers) * 100}%` }}
@@ -356,7 +358,7 @@ export default function Analytics() {
         </div>
 
         <div className="bg-surface-card rounded-xl p-6 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-          <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+          <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
             {t("languages")}
           </h2>
           {Object.entries(viewCounts.analytics.languages)
@@ -364,13 +366,13 @@ export default function Analytics() {
             .map(([lang, count]) => (
               <div key={lang} className="mb-4">
                 <div className="flex justify-between mb-2">
-                  <span className="text-text-primary">{t(lang)}</span>
-                  <span className="text-text-secondary">
+                  <span className="text-text-primary text-lg">{t(lang)}</span>
+                  <span className="text-text-secondary text-lg">
                     {formatNumber(count)} (
                     {calculatePercentage(count, totalLanguages)}%)
                   </span>
                 </div>
-                <div className="w-full bg-surface-hover rounded-full h-2">
+                <div className="w-full bg-surface-hover rounded-full h-3">
                   <div
                     className="bg-primary-500 rounded-full h-full transition-all duration-300"
                     style={{ width: `${(count / totalLanguages) * 100}%` }}
@@ -383,7 +385,7 @@ export default function Analytics() {
 
       {/* Hours Distribution */}
       <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-        <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+        <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
           {t("visitHours")}
         </h2>
         <div className="flex flex-col h-80">
@@ -405,14 +407,14 @@ export default function Analytics() {
                     >
                       {/* Enhanced Tooltip */}
                       <div className="opacity-0 group-hover:opacity-100 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-surface-card p-3 rounded-lg shadow-lg text-text-primary transition-opacity duration-200 whitespace-nowrap z-10">
-                        <div className="text-sm font-medium">{timeLabel}</div>
-                        <div className="text-lg">
+                        <div className="text-base font-medium">{timeLabel}</div>
+                        <div className="text-xl">
                           {formatNumber(count)} {t("visits")}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="text-xs mt-2 text-center text-text-secondary">
+                  <div className="text-sm mt-2 text-center text-text-primary">
                     {hour}h
                   </div>
                 </div>
@@ -424,7 +426,7 @@ export default function Analytics() {
 
       {/* Daily History */}
       <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-        <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+        <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
           {t("dailyRecord")}
         </h2>
         <div className="grid gap-4">
@@ -433,14 +435,14 @@ export default function Analytics() {
               key={date}
               className="flex justify-between items-center p-4 rounded-lg hover:bg-surface-hover transition-colors duration-200"
             >
-              <div className="text-text-primary font-medium">
+              <div className="text-text-primary font-medium text-lg">
                 {formatDateInMontreal(date)}
               </div>
               <div className="flex items-center gap-4">
-                <div className="text-text-secondary">
+                <div className="text-text-secondary text-lg">
                   {formatNumber(count)} {t("visits")}
                 </div>
-                <div className="w-24 bg-surface-hover rounded-full h-2">
+                <div className="w-24 bg-surface-hover rounded-full h-3">
                   <div
                     className="bg-primary-500 rounded-full h-full transition-all duration-300"
                     style={{
@@ -462,7 +464,7 @@ export default function Analytics() {
       {viewCounts.platformClicks &&
         Object.keys(viewCounts.platformClicks).length > 0 && (
           <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-            <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+            <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
               {t("platformClicks")}
             </h2>
             <div className="grid gap-6">
@@ -471,14 +473,14 @@ export default function Analytics() {
                 .map(([platform, count]) => (
                   <div key={platform} className="group">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-lg text-text-primary font-medium group-hover:text-primary-500 transition-colors duration-200">
+                      <span className="text-xl text-text-primary font-medium group-hover:text-primary-500 transition-colors duration-200">
                         {platform}
                       </span>
                       <div className="flex items-center gap-4">
-                        <span className="text-text-secondary">
+                        <span className="text-lg text-text-secondary">
                           {formatNumber(count)} {t("visits")}
                         </span>
-                        <span className="text-sm text-text-secondary">
+                        <span className="text-lg text-text-secondary">
                           {calculatePercentage(count, totalPlatformClicks)}%
                         </span>
                       </div>
@@ -508,27 +510,28 @@ export default function Analytics() {
       {/* Timezone Distribution */}
       {Object.keys(viewCounts.analytics.timezones || {}).length > 0 && (
         <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
-          <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
+          <h2 className="text-3xl mb-6 text-text-primary border-b border-surface-hover pb-3">
             {t("timezoneDistribution")} 🌍
           </h2>
-          <div className="mb-6 text-text-secondary text-sm">
+          <div className="mb-6 text-text-secondary text-lg">
             {t("visualizeTimezonesOnMap")}
           </div>
+
           {/* SVG World Timezone Map */}
           <div className="flex justify-center items-center w-full overflow-x-auto">
             <svg
-              viewBox="0 0 1200 250"
+              viewBox="0 0 1200 400"
               width="100%"
-              height="250"
-              style={{ maxWidth: 1000 }}
-              className="bg-surface-hover rounded-lg shadow-md p-2 hidden md:block"
+              height="400"
+              style={{ maxWidth: 1200 }}
+              className="bg-surface-hover rounded-lg shadow-md p-8 hidden md:block"
             >
-              {/* Titre */}
+              {/* Title */}
               <text
                 x="600"
-                y="25"
+                y="50"
                 textAnchor="middle"
-                fontSize="16"
+                fontSize="28"
                 fill="#ffffff"
                 className="font-semibold"
               >
@@ -538,63 +541,77 @@ export default function Analytics() {
               {/* Dessin de la "terre" stylisée */}
               <ellipse
                 cx="600"
-                cy="130"
-                rx="580"
-                ry="90"
+                cy="200"
+                rx="520"
+                ry="100"
                 fill="#1e293b"
                 stroke="#3b82f6"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 className="opacity-70"
               />
 
               {/* Ligne de l'équateur */}
               <line
-                x1="20"
-                y1="130"
-                x2="1180"
-                y2="130"
+                x1="80"
+                y1="200"
+                x2="1120"
+                y2="200"
                 stroke="#3b82f6"
-                strokeWidth="0.5"
+                strokeWidth="1"
                 strokeDasharray="5,5"
                 opacity="0.5"
               />
 
-              {/* Grille de référence */}
-              {Array.from({ length: 13 }).map((_, i) => {
-                const x = 40 + i * 90;
+              {/* Points de référence principaux */}
+              {[-12, -8, -4, 0, 4, 8, 12].map((offset, i) => {
+                const x = 600 + offset * 85;
                 return (
-                  <line
-                    key={`grid-${i}`}
-                    x1={x}
-                    y1="50"
-                    x2={x}
-                    y2="210"
-                    stroke="#3b82f6"
-                    strokeWidth="0.5"
-                    strokeDasharray="2,3"
-                    opacity="0.3"
-                  />
+                  <g key={`grid-${i}`}>
+                    {/* Ligne verticale */}
+                    <line
+                      x1={x}
+                      y1="100"
+                      x2={x}
+                      y2="300"
+                      stroke="#3b82f6"
+                      strokeWidth="1"
+                      strokeDasharray="4,4"
+                      opacity="0.3"
+                    />
+                    {/* Background pour le texte UTC */}
+                    <rect
+                      x={x - 35}
+                      y="320"
+                      width="70"
+                      height="40"
+                      rx="6"
+                      fill="#1e293b"
+                      opacity="0.8"
+                    />
+                    {/* Label UTC */}
+                    <text
+                      x={x}
+                      y="347"
+                      textAnchor="middle"
+                      fontSize="24"
+                      fill="#ffffff"
+                      className="font-bold"
+                    >
+                      {offset >= 0 ? `+${offset}` : offset}
+                    </text>
+                  </g>
                 );
               })}
 
-              {/* Fuseaux horaires principaux */}
-              {Array.from({ length: 25 }).map((_, i) => {
-                // Convertir l'index en code de fuseau horaire (50-74)
-                const tzCode = 50 + i;
-
-                // Trouver ce fuseau dans nos données
+              {/* Fuseaux horaires simplifiés */}
+              {Array.from({ length: 13 }).map((_, i) => {
+                const offset = i * 2 - 12; // -12 to +12 by steps of 2
+                const tzCode = 50 + i * 2;
                 const count =
                   Object.entries(viewCounts.analytics.timezones || {}).find(
                     ([key]) => Number(key) === tzCode
                   )?.[1] || 0;
-
-                // Position horizontale calculée
-                const x = 50 + i * 45;
-
-                // Convertir le code en UTC offset pour l'affichage
-                const utcOffset = i - 12; // 50 -> -12, 62 -> 0, 74 -> +12
-
-                // Hauteur de la barre proportionnelle au nombre de visites
+                const x = 80 + i * 85;
                 const maxCount = Math.max(
                   1,
                   ...Object.values(viewCounts.analytics.timezones || {}).map(
@@ -602,61 +619,47 @@ export default function Analytics() {
                   )
                 );
                 const barHeight =
-                  count > 0 ? 30 + (count / maxCount) * 100 : 30;
+                  count > 0 ? 50 + (count / maxCount) * 150 : 50;
 
                 return (
                   <g key={i} className="group">
-                    {/* Bande verticale */}
+                    {/* Barre de visite */}
                     <rect
                       x={x}
-                      y={130 - barHeight / 2}
-                      width={35}
+                      y={200 - barHeight / 2}
+                      width="65"
                       height={barHeight}
                       fill={count > 0 ? "#3b82f6" : "#334155"}
                       opacity={count > 0 ? 0.8 : 0.2}
-                      rx={6}
+                      rx="10"
                       className="transition-all duration-300 hover:opacity-100 cursor-pointer"
                     />
 
-                    {/* Lignes d'extension du fuseau */}
-                    <line
-                      x1={x + 17.5}
-                      y1={count > 0 ? 130 - barHeight / 2 - 5 : 130 - 20}
-                      x2={x + 17.5}
-                      y2="45"
-                      stroke={count > 0 ? "#60a5fa" : "#475569"}
-                      strokeWidth="0.75"
-                      strokeDasharray={count > 0 ? "none" : "2,2"}
-                      opacity={count > 0 ? 0.4 : 0.2}
-                    />
-
-                    {/* Nombre de visiteurs */}
+                    {/* Nombre de visiteurs avec fond */}
                     {count > 0 && (
-                      <text
-                        x={x + 17.5}
-                        y={130}
-                        textAnchor="middle"
-                        fontSize="14"
-                        fontWeight="bold"
-                        fill="#ffffff"
-                        className="drop-shadow-lg pointer-events-none"
-                      >
-                        {count}
-                      </text>
+                      <>
+                        <rect
+                          x={x}
+                          y={195 - barHeight / 2}
+                          width="65"
+                          height="30"
+                          fill="#1e293b"
+                          opacity="0.9"
+                          rx="6"
+                        />
+                        <text
+                          x={x + 32.5}
+                          y={215 - barHeight / 2}
+                          textAnchor="middle"
+                          fontSize="22"
+                          fontWeight="bold"
+                          fill="#ffffff"
+                          className="drop-shadow-lg pointer-events-none"
+                        >
+                          {count}
+                        </text>
+                      </>
                     )}
-
-                    {/* Label UTC au-dessus */}
-                    <text
-                      x={x + 17.5}
-                      y="230"
-                      textAnchor="middle"
-                      fontSize="11"
-                      fill={count > 0 ? "#f8fafc" : "#94a3b8"}
-                      className="transition-colors duration-200 font-medium"
-                    >
-                      {t("utcTime")}
-                      {utcOffset >= 0 ? `+${utcOffset}` : utcOffset}
-                    </text>
                   </g>
                 );
               })}
@@ -664,22 +667,21 @@ export default function Analytics() {
               {/* Point pour GMT/UTC-0 */}
               <circle
                 cx="600"
-                cy="130"
-                r="4"
+                cy="200"
+                r="8"
                 fill="#f8fafc"
                 stroke="#3b82f6"
-                strokeWidth="1"
+                strokeWidth="2"
               />
             </svg>
           </div>
 
-          {/* Liste des fuseaux horaires actualisée - Version mobile optimisée */}
+          {/* Timezone List */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(viewCounts.analytics.timezones || {})
               .sort((a, b) => Number(a[0]) - Number(b[0]))
               .map(([timezone, count], index) => {
                 const utcOffset = Number(timezone) - 62;
-                // Sur mobile, on n'affiche que les fuseaux horaires avec des visites
                 if (count === 0 && window.innerWidth < 640) return null;
                 return (
                   <div
@@ -687,11 +689,11 @@ export default function Analytics() {
                     className="bg-surface-hover/50 rounded-lg p-4 hover:bg-surface-hover transition-colors duration-200"
                   >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-text-primary font-medium text-lg">
+                      <span className="text-text-primary font-medium text-xl">
                         {t("utcTime")}
                         {utcOffset >= 0 ? `+${utcOffset}` : utcOffset}
                       </span>
-                      <span className="text-lg font-bold text-primary-400">
+                      <span className="text-xl font-bold text-primary-400">
                         {formatNumber(count as number)}
                       </span>
                     </div>
@@ -712,7 +714,7 @@ export default function Analytics() {
                         }}
                       />
                     </div>
-                    <div className="mt-2 text-sm text-text-secondary text-right">
+                    <div className="mt-2 text-lg text-text-secondary text-right">
                       {calculatePercentage(
                         count as number,
                         totalTimezoneVisits
@@ -988,10 +990,10 @@ export default function Analytics() {
         </div>
       )}
 
-      {/* Screen Sizes - New Fun Visual Section */}
+      {/* Screen Sizes */}
       {totalScreenSizes > 0 && (
         <div className="bg-gradient-to-br from-surface-card to-surface-hover/80 rounded-xl p-8 shadow-xl transform hover:scale-[1.01] transition-transform duration-300">
-          <h2 className="text-2xl mb-6 text-text-primary font-semibold border-b border-secondary-400 pb-3 flex items-center gap-3">
+          <h2 className="text-3xl mb-6 text-text-primary font-semibold border-b border-secondary-400 pb-3 flex items-center gap-3">
             <span className="text-secondary-600">🖥️</span> {t("screenSizes")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1010,11 +1012,11 @@ export default function Analytics() {
                       <span className="text-3xl transform group-hover:rotate-12 transition-transform duration-300">
                         {screenSizeIcons[size] || "📊"}
                       </span>
-                      <span className="text-lg font-semibold text-text-primary">
+                      <span className="text-xl font-semibold text-text-primary">
                         {screenSizeLabels[size] || size}
                       </span>
                     </div>
-                    <span className="text-xl font-bold text-secondary-700">
+                    <span className="text-2xl font-bold text-secondary-700">
                       {calculatePercentage(count, totalScreenSizes)}%
                     </span>
                   </div>
@@ -1035,7 +1037,7 @@ export default function Analytics() {
                       }}
                     />
                   </div>
-                  <div className="mt-2 text-right text-text-primary font-medium">
+                  <div className="mt-2 text-right text-text-primary font-medium text-lg">
                     {formatNumber(count)} {t("visits")}
                   </div>
                 </div>
