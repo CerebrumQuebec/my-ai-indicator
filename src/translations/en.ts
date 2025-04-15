@@ -475,4 +475,11 @@ export const en = {
   screenSizeLarge: "Laptop",
   screenSizeXlarge: "Desktop",
   screenSizeUnknown: "Unknown Size",
+
+  // Timezone Distribution
+  timezoneDistribution: "Timezone Distribution",
+  visualizeTimezonesOnMap:
+    "Visualization of visitors by timezone on the world map",
+  timezoneMapLegend: "Each band represents a timezone (UTC)",
+  utcTime: "UTC",
 };

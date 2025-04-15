@@ -27,6 +27,7 @@ type Analytics = {
       avg_load_time: number;
     };
     screenSizes?: Record<string, number>;
+    timezones?: Record<string, number>;
   };
   platformClicks?: Record<string, number>;
   milestones?: {
@@ -221,14 +222,18 @@ export default function Analytics() {
     viewCounts.platformClicks ?? {}
   ).reduce((a, b) => a + b, 0);
 
+  // Calculate total timezone visits
+  const totalTimezoneVisits = Object.values(
+    viewCounts.analytics.timezones || {}
+  ).reduce((total, count) => total + (count as number), 0);
+
   // Prepare timezone data
-  const sortedTimezones = Object.entries(viewCounts.timezones || {})
-    .sort((a, b) => b[1] - a[1])
+  const timezoneData = Object.entries(viewCounts.analytics.timezones || {})
+    .sort((a, b) => (b[1] as number) - (a[1] as number))
     .slice(0, 10); // Show top 10
-  const totalTimezones = Object.values(viewCounts.timezones || {}).reduce(
-    (a, b) => a + b,
-    0
-  );
+
+  //console.log("Timezone data from Firebase:", viewCounts.analytics.timezones);
+  //console.log("Processed timezone data:", timezoneData);
 
   return (
     <div
@@ -501,40 +506,222 @@ export default function Analytics() {
         )}
 
       {/* Timezone Distribution */}
-      {sortedTimezones.length > 0 && (
+      {Object.keys(viewCounts.analytics.timezones || {}).length > 0 && (
         <div className="bg-surface-card rounded-xl p-8 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
           <h2 className="text-2xl mb-6 text-text-primary border-b border-surface-hover pb-3">
-            {t("timezoneDistribution")}
+            {t("timezoneDistribution")} 🌍
           </h2>
-          <div className="grid gap-4">
-            {sortedTimezones.map(([timezone, count]) => (
-              <div key={timezone} className="group">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-text-primary group-hover:text-primary-500 transition-colors duration-200">
-                    {timezone.replace(/_/g, " ")}
-                  </span>
-                  <span className="text-sm text-text-secondary">
-                    {formatNumber(count)} (
-                    {calculatePercentage(count, totalTimezones)}%)
-                  </span>
-                </div>
-                <div className="w-full bg-surface-hover rounded-full h-2">
-                  <div
-                    className="bg-secondary-500 rounded-full h-full transition-all duration-300 group-hover:bg-secondary-400"
-                    style={{
-                      width: `${
-                        (count /
-                          Math.max(
-                            1,
-                            ...Object.values(viewCounts.timezones || {})
-                          )) *
-                        100
-                      }%`,
-                    }}
+          <div className="mb-6 text-text-secondary text-sm">
+            {t("visualizeTimezonesOnMap")}
+          </div>
+          {/* SVG World Timezone Map */}
+          <div className="flex justify-center items-center w-full overflow-x-auto">
+            <svg
+              viewBox="0 0 1200 250"
+              width="100%"
+              height="250"
+              style={{ maxWidth: 1000 }}
+              className="bg-surface-hover rounded-lg shadow-md p-2 hidden md:block"
+            >
+              {/* Titre */}
+              <text
+                x="600"
+                y="25"
+                textAnchor="middle"
+                fontSize="16"
+                fill="#ffffff"
+                className="font-semibold"
+              >
+                {t("timezoneMapLegend")}
+              </text>
+
+              {/* Dessin de la "terre" stylisée */}
+              <ellipse
+                cx="600"
+                cy="130"
+                rx="580"
+                ry="90"
+                fill="#1e293b"
+                stroke="#3b82f6"
+                strokeWidth="1.5"
+                className="opacity-70"
+              />
+
+              {/* Ligne de l'équateur */}
+              <line
+                x1="20"
+                y1="130"
+                x2="1180"
+                y2="130"
+                stroke="#3b82f6"
+                strokeWidth="0.5"
+                strokeDasharray="5,5"
+                opacity="0.5"
+              />
+
+              {/* Grille de référence */}
+              {Array.from({ length: 13 }).map((_, i) => {
+                const x = 40 + i * 90;
+                return (
+                  <line
+                    key={`grid-${i}`}
+                    x1={x}
+                    y1="50"
+                    x2={x}
+                    y2="210"
+                    stroke="#3b82f6"
+                    strokeWidth="0.5"
+                    strokeDasharray="2,3"
+                    opacity="0.3"
                   />
-                </div>
-              </div>
-            ))}
+                );
+              })}
+
+              {/* Fuseaux horaires principaux */}
+              {Array.from({ length: 25 }).map((_, i) => {
+                // Convertir l'index en code de fuseau horaire (50-74)
+                const tzCode = 50 + i;
+
+                // Trouver ce fuseau dans nos données
+                const count =
+                  Object.entries(viewCounts.analytics.timezones || {}).find(
+                    ([key]) => Number(key) === tzCode
+                  )?.[1] || 0;
+
+                // Position horizontale calculée
+                const x = 50 + i * 45;
+
+                // Convertir le code en UTC offset pour l'affichage
+                const utcOffset = i - 12; // 50 -> -12, 62 -> 0, 74 -> +12
+
+                // Hauteur de la barre proportionnelle au nombre de visites
+                const maxCount = Math.max(
+                  1,
+                  ...Object.values(viewCounts.analytics.timezones || {}).map(
+                    (v) => Number(v)
+                  )
+                );
+                const barHeight =
+                  count > 0 ? 30 + (count / maxCount) * 100 : 30;
+
+                return (
+                  <g key={i} className="group">
+                    {/* Bande verticale */}
+                    <rect
+                      x={x}
+                      y={130 - barHeight / 2}
+                      width={35}
+                      height={barHeight}
+                      fill={count > 0 ? "#3b82f6" : "#334155"}
+                      opacity={count > 0 ? 0.8 : 0.2}
+                      rx={6}
+                      className="transition-all duration-300 hover:opacity-100 cursor-pointer"
+                    />
+
+                    {/* Lignes d'extension du fuseau */}
+                    <line
+                      x1={x + 17.5}
+                      y1={count > 0 ? 130 - barHeight / 2 - 5 : 130 - 20}
+                      x2={x + 17.5}
+                      y2="45"
+                      stroke={count > 0 ? "#60a5fa" : "#475569"}
+                      strokeWidth="0.75"
+                      strokeDasharray={count > 0 ? "none" : "2,2"}
+                      opacity={count > 0 ? 0.4 : 0.2}
+                    />
+
+                    {/* Nombre de visiteurs */}
+                    {count > 0 && (
+                      <text
+                        x={x + 17.5}
+                        y={130}
+                        textAnchor="middle"
+                        fontSize="14"
+                        fontWeight="bold"
+                        fill="#ffffff"
+                        className="drop-shadow-lg pointer-events-none"
+                      >
+                        {count}
+                      </text>
+                    )}
+
+                    {/* Label UTC au-dessus */}
+                    <text
+                      x={x + 17.5}
+                      y="230"
+                      textAnchor="middle"
+                      fontSize="11"
+                      fill={count > 0 ? "#f8fafc" : "#94a3b8"}
+                      className="transition-colors duration-200 font-medium"
+                    >
+                      {t("utcTime")}
+                      {utcOffset >= 0 ? `+${utcOffset}` : utcOffset}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Point pour GMT/UTC-0 */}
+              <circle
+                cx="600"
+                cy="130"
+                r="4"
+                fill="#f8fafc"
+                stroke="#3b82f6"
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
+
+          {/* Liste des fuseaux horaires actualisée - Version mobile optimisée */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.entries(viewCounts.analytics.timezones || {})
+              .sort((a, b) => Number(a[0]) - Number(b[0]))
+              .map(([timezone, count], index) => {
+                const utcOffset = Number(timezone) - 62;
+                // Sur mobile, on n'affiche que les fuseaux horaires avec des visites
+                if (count === 0 && window.innerWidth < 640) return null;
+                return (
+                  <div
+                    key={index}
+                    className="bg-surface-hover/50 rounded-lg p-4 hover:bg-surface-hover transition-colors duration-200"
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-text-primary font-medium text-lg">
+                        {t("utcTime")}
+                        {utcOffset >= 0 ? `+${utcOffset}` : utcOffset}
+                      </span>
+                      <span className="text-lg font-bold text-primary-400">
+                        {formatNumber(count as number)}
+                      </span>
+                    </div>
+                    <div className="w-full bg-surface-card rounded-full h-3">
+                      <div
+                        className="bg-primary-500 rounded-full h-full transition-all duration-300"
+                        style={{
+                          width: `${
+                            ((count as number) /
+                              Math.max(
+                                1,
+                                ...Object.values(
+                                  viewCounts.analytics.timezones || {}
+                                ).map((v) => Number(v))
+                              )) *
+                            100
+                          }%`,
+                        }}
+                      />
+                    </div>
+                    <div className="mt-2 text-sm text-text-secondary text-right">
+                      {calculatePercentage(
+                        count as number,
+                        totalTimezoneVisits
+                      )}
+                      % {t("visits")}
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       )}

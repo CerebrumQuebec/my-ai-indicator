@@ -491,4 +491,11 @@ export const fr = {
   screenSizeLarge: "Ordinateur portable",
   screenSizeXlarge: "Grand écran",
   screenSizeUnknown: "Taille inconnue",
+
+  // Timezone Distribution
+  timezoneDistribution: "Distribution des Fuseaux Horaires",
+  visualizeTimezonesOnMap:
+    "Visualisation des visiteurs par fuseau horaire sur la carte du monde",
+  timezoneMapLegend: "Chaque bande représente un fuseau horaire (UTC)",
+  utcTime: "UTC",
 };

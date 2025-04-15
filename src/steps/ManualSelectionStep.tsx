@@ -30,7 +30,7 @@ export default function ManualSelectionStep({
   const isAnyCategorySelected = Object.values(selectedCategories).some(Boolean);
 
   // Add debugging console log
-  console.log("Current selected categories:", selectedCategories);
+  //console.log("Current selected categories:", selectedCategories);
 
   return (
     <div className="space-y-8">

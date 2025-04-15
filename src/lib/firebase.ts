@@ -273,6 +273,9 @@ export const getPageViews = async () => {
     const pageViewsData = pageViewsSnapshot.val() || {};
     const analyticsData = analyticsSnapshot.val() || {};
 
+    //console.log("Analytics data from Firebase:", analyticsData);
+    //console.log("Timezones data:", analyticsData.timezones);
+
     return {
       total: pageViewsData.total || 0,
       daily: pageViewsData.daily || {},
@@ -281,7 +284,8 @@ export const getPageViews = async () => {
         browsers: analyticsData.browsers || {},
         languages: analyticsData.languages || {},
         hours: analyticsData.hours || {},
-        screenSizes: analyticsData.screenSizes || {}, // Add screen sizes
+        screenSizes: analyticsData.screenSizes || {},
+        timezones: analyticsData.timezones || {},
         performance: {
           avg_load_time: analyticsData.performance?.avg_load_time || 0,
         },
@@ -297,7 +301,8 @@ export const getPageViews = async () => {
         browsers: {},
         languages: {},
         hours: {},
-        screenSizes: {}, // Add empty screen sizes
+        screenSizes: {},
+        timezones: {},
         performance: {
           avg_load_time: 0,
         },

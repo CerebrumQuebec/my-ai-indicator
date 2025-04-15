@@ -1,4 +1,4 @@
-import { ref, increment, update, get } from "firebase/database";
+import { ref, increment, update, get, set } from "firebase/database";
 import { db } from "./firebase-config";
 
 type RecordUpdate = {
@@ -25,9 +25,27 @@ export const trackPlatformClick = async (platform: string) => {
 export const trackTimezone = async () => {
   try {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    //console.log("[trackTimezone] Fuseau détecté :", timezone);
+
+    // Obtenir l'offset en heures
+    const now = new Date();
+    const offset = -now.getTimezoneOffset() / 60; // Convertir minutes en heures
+
+    // Convertir l'offset en code (50-74 comme pour hours)
+    // -12 devient 50, 0 devient 62, +12 devient 74
+    const timezoneCode = Math.floor(offset + 12 + 50);
+
+    //console.log("[trackTimezone] Code du fuseau:", timezoneCode);
+
+    // Mettre à jour le compteur dans analytics/timezones
     await update(ref(db), {
-      [`timezones/${timezone}`]: increment(1),
+      [`analytics/timezones/${timezoneCode}`]: increment(1),
     });
+
+    //console.log(
+    //  "[trackTimezone] Fuseau enregistré avec le code:",
+    //  timezoneCode
+    //);
   } catch (error) {
     console.error("Failed to track timezone:", error);
   }

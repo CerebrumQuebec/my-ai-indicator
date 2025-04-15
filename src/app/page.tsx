@@ -41,11 +41,11 @@ export default function Home() {
   } = useWizard();
 
   // Debug current step
-  console.log("Current step:", step);
-  console.log("Selected categories:", selectedCategories);
-  console.log("Sound category:", soundsCategory);
-  console.log("Visual category:", visualCategory);
-  console.log("Text category:", textCategory);
+  //console.log("Current step:", step);
+  //console.log("Selected categories:", selectedCategories);
+  //console.log("Sound category:", soundsCategory);
+  //console.log("Visual category:", visualCategory);
+  //console.log("Text category:", textCategory);
 
   // Adjusted step calculation to not count Introduction
   const totalSteps =
@@ -114,8 +114,8 @@ export default function Home() {
 
   const renderStep = () => {
     // Debug step rendering
-    console.log("Rendering step:", step);
-    console.log("Total steps:", totalSteps);
+    //console.log("Rendering step:", step);
+    //console.log("Total steps:", totalSteps);
 
     switch (step) {
       case 1:

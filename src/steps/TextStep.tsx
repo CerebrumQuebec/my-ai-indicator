@@ -20,12 +20,12 @@ const TextStep: React.FC<StepProps> = ({ onNext, onBack }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log("TextStep - textCategoryOptions:", textCategoryOptions);
-    console.log("TextStep - category0Title translation:", t("category0Title"));
-    console.log(
-      "TextStep - category0Description translation:",
-      t("category0Description")
-    );
+    //console.log("TextStep - textCategoryOptions:", textCategoryOptions);
+    //console.log("TextStep - category0Title translation:", t("category0Title"));
+    //console.log(
+    //  "TextStep - category0Description translation:",
+    //  t("category0Description")
+    //);
   }, [t]);
 
   const handleCategoryChange = (value: Category) => {

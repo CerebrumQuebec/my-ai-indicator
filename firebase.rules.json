@@ -44,17 +44,17 @@
         "avg_load_time": {
           ".validate": "newData.isNumber() && newData.val() >= 0"
         }
+      },
+      "timezones": {
+        ".write": true,
+        "$zone": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
+        }
       }
     },
     "platformClicks": {
       ".write": true,
       "$platform": {
-        ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
-      }
-    },
-    "timezones": {
-      ".write": true,
-      "$zone": {
         ".validate": "newData.isNumber() && (!data.exists() || newData.val() > data.val())"
       }
     },
