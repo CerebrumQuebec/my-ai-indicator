@@ -741,9 +741,6 @@ export default function Analytics() {
               viewCounts.milestones.records.daily &&
               viewCounts.milestones.records.daily.count > 0 && (
                 <div className="mb-10">
-                  <h3 className="text-xl mb-5 text-text-primary font-medium">
-                    {t("records")}
-                  </h3>
                   <div className="bg-surface-hover/90 p-6 rounded-xl shadow-md relative overflow-hidden group hover:shadow-lg transition-shadow duration-300">
                     <div className="absolute -top-4 -right-4 text-8xl text-primary-500 opacity-10 group-hover:opacity-20 transition-opacity duration-300 rotate-12">
                       🏅
