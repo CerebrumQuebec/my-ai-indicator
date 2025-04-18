@@ -24,19 +24,34 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
       }`}
     >
       <div
-        className={`w-full max-w-2xl px-8 py-10 bg-gradient-to-br ${bgColor} backdrop-blur-md rounded-xl border border-white/10 shadow-lg text-center`}
+        className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br ${bgColor} transition-all duration-500 py-4`}
       >
-        {illustration ? (
-          <div className="w-36 h-36 mx-auto mb-6 flex items-center justify-center">
-            {illustration}
-          </div>
-        ) : (
-          <div className="w-16 h-16 mx-auto bg-surface-dark/40 rounded-full flex items-center justify-center mb-6 shadow-glow">
-            <span className="text-3xl">{icon}</span>
-          </div>
-        )}
-        <h3 className="text-2xl font-bold mb-4 text-text-primary">{title}</h3>
-        <p className="text-text-secondary text-lg">{content}</p>
+        <div className="flex-grow flex items-center justify-center w-full max-h-[70%]">
+          {illustration ? (
+            <div className="transform-gpu scale-[1.8] sm:scale-[2] md:scale-[2.2] lg:scale-[2.5] flex items-center justify-center">
+              {illustration}
+            </div>
+          ) : (
+            <div className="w-16 h-16 bg-surface-dark/40 rounded-full flex items-center justify-center shadow-glow">
+              <span className="text-3xl">{icon}</span>
+            </div>
+          )}
+        </div>
+
+        <div className="w-full px-4 sm:px-6 pt-4 sm:pt-6 text-center max-h-[30%] flex flex-col justify-end">
+          <h3
+            className="text-xl sm:text-2xl font-bold text-text-primary mb-1 sm:mb-2 animate-fade-in opacity-0"
+            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+          >
+            {title}
+          </h3>
+          <p
+            className="text-xs sm:text-sm md:text-base text-text-secondary max-w-md mx-auto animate-fade-in opacity-0"
+            style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
+          >
+            {content}
+          </p>
+        </div>
       </div>
     </div>
   );
