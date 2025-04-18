@@ -19,7 +19,38 @@ const SlideIllustration2: React.FC = () => {
         fillOpacity="0.3"
       />
 
-      {/* Category badges */}
+      {/* Hybrid content container - represents mixed media content being analyzed */}
+      <rect
+        x="35"
+        y="25"
+        width="50"
+        height="70"
+        rx="4"
+        stroke="#A5B4FC"
+        strokeWidth="0.75"
+        strokeDasharray="2 2"
+        fill="#334155"
+        fillOpacity="0.2"
+      />
+
+      {/* Scanning beam animation representing smart classification */}
+      <rect
+        x="35"
+        y="45"
+        width="50"
+        height="1"
+        fill="#67E8F9"
+        fillOpacity="0.8"
+      >
+        <animate
+          attributeName="y"
+          values="25;95;25"
+          dur="4s"
+          repeatCount="indefinite"
+        />
+      </rect>
+
+      {/* Category badges with recognition indicators */}
       <g>
         {/* Sound (S) Badge */}
         <circle
@@ -42,6 +73,29 @@ const SlideIllustration2: React.FC = () => {
         >
           S
         </text>
+
+        {/* Recognition highlight for sound */}
+        <circle
+          cx="40"
+          cy="40"
+          r="20"
+          stroke="#22D3EE"
+          strokeWidth="0.5"
+          strokeOpacity="0.8"
+        >
+          <animate
+            attributeName="r"
+            values="18;22;18"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="stroke-opacity"
+            values="0.8;0.1;0.8"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        </circle>
 
         {/* Sound waves animation */}
         <path
@@ -123,6 +177,31 @@ const SlideIllustration2: React.FC = () => {
           V
         </text>
 
+        {/* Recognition highlight for visual */}
+        <circle
+          cx="80"
+          cy="40"
+          r="20"
+          stroke="#818CF8"
+          strokeWidth="0.5"
+          strokeOpacity="0.8"
+        >
+          <animate
+            attributeName="r"
+            values="18;22;18"
+            dur="2s"
+            repeatCount="indefinite"
+            begin="0.7s"
+          />
+          <animate
+            attributeName="stroke-opacity"
+            values="0.8;0.1;0.8"
+            dur="2s"
+            repeatCount="indefinite"
+            begin="0.7s"
+          />
+        </circle>
+
         {/* Aperture lines */}
         <path
           d="M80 28C80 28 76 34 80 34C84 34 80 28 80 28Z"
@@ -162,6 +241,31 @@ const SlideIllustration2: React.FC = () => {
           T
         </text>
 
+        {/* Recognition highlight for text */}
+        <circle
+          cx="60"
+          cy="80"
+          r="20"
+          stroke="#C084FC"
+          strokeWidth="0.5"
+          strokeOpacity="0.8"
+        >
+          <animate
+            attributeName="r"
+            values="18;22;18"
+            dur="2s"
+            repeatCount="indefinite"
+            begin="1.4s"
+          />
+          <animate
+            attributeName="stroke-opacity"
+            values="0.8;0.1;0.8"
+            dur="2s"
+            repeatCount="indefinite"
+            begin="1.4s"
+          />
+        </circle>
+
         {/* Text lines */}
         <path
           d="M52 92H68"
@@ -179,7 +283,52 @@ const SlideIllustration2: React.FC = () => {
         />
       </g>
 
-      {/* Connecting lines */}
+      {/* Smart detection labels */}
+      <text
+        x="40"
+        y="30"
+        textAnchor="middle"
+        fontSize="4"
+        fill="#22D3EE"
+        fontFamily="sans-serif"
+      >
+        DETECTED
+      </text>
+
+      <text
+        x="80"
+        y="30"
+        textAnchor="middle"
+        fontSize="4"
+        fill="#818CF8"
+        fontFamily="sans-serif"
+      >
+        DETECTED
+      </text>
+
+      <text
+        x="60"
+        y="70"
+        textAnchor="middle"
+        fontSize="4"
+        fill="#C084FC"
+        fontFamily="sans-serif"
+      >
+        DETECTED
+      </text>
+
+      {/* Central "hybrid content" markers */}
+      <circle cx="60" cy="60" r="4" fill="#67E8F9" fillOpacity="0.5">
+        <animate
+          attributeName="opacity"
+          values="0.5;0.9;0.5"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle cx="60" cy="60" r="1" fill="white" />
+
+      {/* Connecting smart classification lines */}
       <path
         d="M50 50L57 70"
         stroke="#A5B4FC"
@@ -198,6 +347,53 @@ const SlideIllustration2: React.FC = () => {
         strokeWidth="1"
         strokeDasharray="2 2"
       />
+
+      {/* Algorithm highlights - data points being analyzed */}
+      <circle cx="60" cy="45" r="0.7" fill="white">
+        <animate
+          attributeName="fill-opacity"
+          values="1;0.2;1"
+          dur="1.5s"
+          repeatCount="indefinite"
+          begin="0s"
+        />
+      </circle>
+      <circle cx="55" cy="50" r="0.7" fill="white">
+        <animate
+          attributeName="fill-opacity"
+          values="1;0.2;1"
+          dur="1.5s"
+          repeatCount="indefinite"
+          begin="0.2s"
+        />
+      </circle>
+      <circle cx="65" cy="50" r="0.7" fill="white">
+        <animate
+          attributeName="fill-opacity"
+          values="1;0.2;1"
+          dur="1.5s"
+          repeatCount="indefinite"
+          begin="0.4s"
+        />
+      </circle>
+      <circle cx="53" cy="60" r="0.7" fill="white">
+        <animate
+          attributeName="fill-opacity"
+          values="1;0.2;1"
+          dur="1.5s"
+          repeatCount="indefinite"
+          begin="0.6s"
+        />
+      </circle>
+      <circle cx="67" cy="60" r="0.7" fill="white">
+        <animate
+          attributeName="fill-opacity"
+          values="1;0.2;1"
+          dur="1.5s"
+          repeatCount="indefinite"
+          begin="0.8s"
+        />
+      </circle>
 
       <defs>
         <radialGradient

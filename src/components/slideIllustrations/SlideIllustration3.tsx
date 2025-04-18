@@ -234,6 +234,8 @@ const SlideIllustration3: React.FC = () => {
           repeatCount="indefinite"
         />
       </rect>
+
+      {/* Overall percentage indicator */}
       <circle
         cx="60"
         cy="30"
@@ -281,6 +283,123 @@ const SlideIllustration3: React.FC = () => {
         Balanced
       </text>
 
+      {/* Component-level metrics */}
+      {/* Color component */}
+      <rect
+        x="30"
+        y="88"
+        width="16"
+        height="5"
+        rx="1"
+        fill="#334155"
+        fillOpacity="0.7"
+        stroke="#67E8F9"
+        strokeWidth="0.5"
+      />
+      <rect
+        x="30"
+        y="88"
+        width="6"
+        height="5"
+        rx="1"
+        fill="#67E8F9"
+        fillOpacity="0.4"
+      />
+      <text x="38" y="92" fontSize="3.5" textAnchor="middle" fill="white">
+        COLOR 25%
+      </text>
+
+      {/* Composition component */}
+      <rect
+        x="52"
+        y="88"
+        width="16"
+        height="5"
+        rx="1"
+        fill="#334155"
+        fillOpacity="0.7"
+        stroke="#A5B4FC"
+        strokeWidth="0.5"
+      />
+      <rect
+        x="52"
+        y="88"
+        width="8"
+        height="5"
+        rx="1"
+        fill="#A5B4FC"
+        fillOpacity="0.4"
+      />
+      <text x="60" y="92" fontSize="3.5" textAnchor="middle" fill="white">
+        COMP 50%
+      </text>
+
+      {/* Style component */}
+      <rect
+        x="74"
+        y="88"
+        width="16"
+        height="5"
+        rx="1"
+        fill="#334155"
+        fillOpacity="0.7"
+        stroke="#C084FC"
+        strokeWidth="0.5"
+      />
+      <rect
+        x="74"
+        y="88"
+        width="12"
+        height="5"
+        rx="1"
+        fill="#C084FC"
+        fillOpacity="0.4"
+      />
+      <text x="82" y="92" fontSize="3.5" textAnchor="middle" fill="white">
+        STYLE 75%
+      </text>
+
+      {/* Data points indicator lines */}
+      <line
+        x1="38"
+        y1="88"
+        x2="38"
+        y2="84"
+        stroke="#67E8F9"
+        strokeWidth="0.5"
+        strokeDasharray="1 1"
+      />
+      <line
+        x1="60"
+        y1="88"
+        x2="60"
+        y2="84"
+        stroke="#A5B4FC"
+        strokeWidth="0.5"
+        strokeDasharray="1 1"
+      />
+      <line
+        x1="82"
+        y1="88"
+        x2="82"
+        y2="84"
+        stroke="#C084FC"
+        strokeWidth="0.5"
+        strokeDasharray="1 1"
+      />
+
+      {/* Component label text */}
+      <text
+        x="60"
+        y="100"
+        textAnchor="middle"
+        fontSize="4"
+        fill="white"
+        fontFamily="monospace"
+      >
+        GRANULAR COMPONENT METRICS
+      </text>
+
       {/* Gradient fill animation for scale */}
       <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stopColor="#22D3EE" stopOpacity="0.6">
@@ -300,7 +419,14 @@ const SlideIllustration3: React.FC = () => {
           />
         </stop>
       </linearGradient>
-      <rect x="28" y="90" width="64" height="4" rx="2" fill="url(#gradient)" />
+      <rect
+        x="28"
+        y="84"
+        width="64"
+        height="1"
+        rx="0.5"
+        fill="url(#gradient)"
+      />
 
       <defs>
         <radialGradient
