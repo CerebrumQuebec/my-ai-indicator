@@ -14,6 +14,7 @@ export default function Future() {
   const [animatedElements, setAnimatedElements] = useState<Set<string>>(
     new Set()
   );
+  const [aiSlider, setAiSlider] = useState(50);
 
   useEffect(() => {
     // Intersection Observer for scroll animations
@@ -205,14 +206,14 @@ export default function Future() {
             className="animate-on-scroll text-5xl md:text-7xl font-extrabold mb-6 tracking-tight"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-accent-indigo to-primary-600">
-              The Future of Badge AI
+              {t("futureTitle")}
             </span>
           </h1>
           <p
             id="hero-subtitle"
             className="animate-on-scroll text-2xl md:text-3xl text-text-primary font-light max-w-3xl mx-auto leading-relaxed"
           >
-            Envisioning the universal standard for AI transparency
+            {t("futureSubtitle")}
           </p>
 
           <div
@@ -221,7 +222,7 @@ export default function Future() {
           >
             {["S", "V", "T"].map((type) => (
               <div
-                key={type}
+                key={`badge-${type}`}
                 className="flex items-center px-4 py-2 bg-surface-dark/80 backdrop-blur-md rounded-full border border-primary-600/30 shadow-glow"
               >
                 <span className="text-lg font-mono font-bold mr-2 text-primary-400">
@@ -231,7 +232,7 @@ export default function Future() {
                 <span className="flex ml-2">
                   {[0, 1, 2, 3, 4].map((level) => (
                     <span
-                      key={level}
+                      key={`${type}-level-${level}`}
                       className={`w-2 h-6 mx-0.5 ${
                         level < 3 ? "bg-primary-600/80" : "bg-primary-600/30"
                       } rounded-sm`}
@@ -249,35 +250,164 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-4xl mx-auto bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-lg"
         >
           <h2 className="text-3xl font-bold mb-6 text-text-primary">
-            Our Vision: Seamless Digital Transparency
+            {t("futureVisionTitle")}
           </h2>
           <p className="text-text-secondary mb-4 text-lg">
-            Imagine a future where Badge AI becomes the universal standard for
-            transparent AI attribution. Our goal is for every piece of digital
-            content—from social media posts to professional software—to
-            seamlessly integrate AI transparency badges, revealing how
-            artificial intelligence contributed to its creation.
-          </p>
-          <p className="text-text-secondary mb-6 text-lg">
-            We envision Badge AI evolving into an essential metadata layer woven
-            throughout the digital ecosystem. Software like ChatGPT, Photoshop,
-            or Logic Pro could automatically detect AI usage during the creation
-            process and embed the corresponding Badge AI level directly into the
-            file's metadata, updating it dynamically as the level of AI
-            involvement changes. This would enable instant verification of
-            content authenticity and AI contribution levels across all
-            platforms.
+            {t("futureVisionDescription")}
           </p>
 
           <div className="flex items-center justify-center p-6 bg-surface-dark/50 rounded-xl border border-white/5">
             <blockquote className="italic text-xl text-center text-primary-300">
-              "Our aim is to fundamentally change how we interact with digital
-              content, bringing clarity and trust to an increasingly AI-powered
-              world."
+              {t("futureVisionQuote")}
               <footer className="text-right text-sm text-text-secondary mt-2">
-                — The Badge AI Vision
+                — Philippe Bourque
               </footer>
             </blockquote>
+          </div>
+        </section>
+
+        {/* Badge Definition Section */}
+        <section
+          id="badge-definition"
+          className="animate-on-scroll mb-20 max-w-4xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
+            {t("badgeDefinitionTitle")}
+          </h2>
+
+          <div className="bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+            <div className="mb-8">
+              <label className="block text-text-primary text-sm mb-2">
+                {t("adjustAIContribution")}{" "}
+                <span className="text-primary-400 font-mono">{aiSlider}%</span>
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={aiSlider}
+                onChange={(e) => setAiSlider(parseInt(e.target.value))}
+                className="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer"
+              />
+              <div className="flex justify-between text-xs text-text-secondary mt-1">
+                <span>{t("humanOnly")}</span>
+                <span>{t("aiGenerated")}</span>
+              </div>
+            </div>
+
+            <div className="relative h-48 bg-surface-dark/70 rounded-lg border border-white/5 overflow-hidden mb-6">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-full max-w-xs">
+                  <div className="h-4 bg-surface-light/10 rounded-full mb-3 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-green-400 to-blue-500"
+                      style={{ width: `${100 - aiSlider}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-green-400">
+                      {t("humanPercentage").replace(
+                        "{{percentage}}",
+                        (100 - aiSlider).toString()
+                      )}
+                    </span>
+                    <span className="text-blue-500">
+                      {t("aiPercentage").replace(
+                        "{{percentage}}",
+                        aiSlider.toString()
+                      )}
+                    </span>
+                  </div>
+
+                  <div className="mt-6 space-y-2">
+                    {[
+                      { name: t("originalComposition"), aiThreshold: 0 },
+                      { name: t("colorCorrection"), aiThreshold: 15 },
+                      { name: t("objectRemoval"), aiThreshold: 30 },
+                      { name: t("backgroundGeneration"), aiThreshold: 45 },
+                    ].map((activity) => (
+                      <div
+                        key={activity.name}
+                        className="flex justify-between items-center"
+                      >
+                        <span className="text-text-secondary text-xs">
+                          {activity.name}
+                        </span>
+                        <span
+                          className={`text-xs font-mono px-2 py-0.5 rounded ${
+                            aiSlider > activity.aiThreshold
+                              ? "bg-blue-500/20 text-blue-400"
+                              : "bg-green-500/20 text-green-400"
+                          }`}
+                        >
+                          {aiSlider > activity.aiThreshold
+                            ? t("activityStatus")
+                            : t("humanOnly")}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  letter: "S",
+                  title: t("soundsCategory"),
+                  description: t("soundsDescription"),
+                  color: "text-cyan-400",
+                  bg: "bg-cyan-500/20",
+                  border: "border-cyan-500/30",
+                },
+                {
+                  letter: "V",
+                  title: t("visualCategory"),
+                  description: t("visualDescription"),
+                  color: "text-indigo-400",
+                  bg: "bg-indigo-500/20",
+                  border: "border-indigo-500/30",
+                },
+                {
+                  letter: "T",
+                  title: t("textCategory"),
+                  description: t("textDescription"),
+                  color: "text-purple-400",
+                  bg: "bg-purple-500/20",
+                  border: "border-purple-500/30",
+                },
+              ].map((type) => (
+                <div
+                  key={`type-${type.letter}`}
+                  className={`p-6 rounded-xl ${type.bg} ${type.border} flex flex-col items-center text-center`}
+                >
+                  <div
+                    className={`w-16 h-16 flex items-center justify-center rounded-full ${type.bg} border ${type.border} mb-4`}
+                  >
+                    <span
+                      className={`text-3xl font-mono font-bold ${type.color}`}
+                    >
+                      {type.letter}
+                    </span>
+                  </div>
+                  <h3 className={`text-xl font-semibold mb-2 ${type.color}`}>
+                    {type.title}
+                  </h3>
+                  <p className="text-text-secondary">{type.description}</p>
+                  <div className="flex flex-wrap justify-center gap-2 mt-4">
+                    {[0, 1, 2, 3, 4].map((level) => (
+                      <span
+                        key={`${type.letter}-level-${level}`}
+                        className={`inline-flex items-center px-2 py-1 rounded text-xs font-mono ${type.bg} ${type.color} ${type.border}`}
+                      >
+                        {type.letter}-AI-{level}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -287,7 +417,7 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-4xl mx-auto bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-lg"
         >
           <h2 className="text-3xl font-bold mb-6 text-center text-text-primary">
-            Real-Time AI Detection & Badging
+            {t("realTimeDetectionTitle")}
           </h2>
 
           <div className="space-y-8">
@@ -297,7 +427,7 @@ export default function Future() {
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">🤖</span>
                   <h3 className="text-xl font-bold text-text-primary">
-                    ChatGPT Integration
+                    {t("chatGPTIntegrationTitle")}
                   </h3>
                 </div>
                 <div className="flex items-center px-3 py-1 bg-primary-600/20 rounded-full">
@@ -308,18 +438,12 @@ export default function Future() {
               </div>
               <div className="p-6">
                 <p className="text-text-secondary mb-4">
-                  Each ChatGPT response would carry dynamic Badge AI metadata
-                  that adjusts in real-time based on:
+                  {t("chatGPTIntegrationDescription")}
                 </p>
                 <ul className="space-y-2 text-text-secondary ml-6 list-disc">
-                  <li>
-                    Whether you're refining the AI's output with additional
-                    prompts
-                  </li>
-                  <li>The complexity and creativity of the AI's responses</li>
-                  <li>
-                    How much human editing is applied to the final content
-                  </li>
+                  <li>{t("aiPromptRefinement")}</li>
+                  <li>{t("aiComplexityLevel")}</li>
+                  <li>{t("humanEditing")}</li>
                 </ul>
                 <div className="mt-6 bg-surface-dark/70 p-4 rounded-lg border border-white/5">
                   <div className="flex items-start space-x-3">
@@ -328,7 +452,7 @@ export default function Future() {
                     </div>
                     <div>
                       <p className="text-text-secondary text-sm mb-1">
-                        Write me a short poem about autumn
+                        {t("userPromptExample")}
                       </p>
                       <div className="flex items-center mt-1">
                         <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
@@ -344,13 +468,7 @@ export default function Future() {
                     </div>
                     <div>
                       <p className="text-text-secondary text-sm mb-1">
-                        Crisp leaves dance on autumn breeze,
-                        <br />
-                        Amber skies and golden trees.
-                        <br />
-                        Nature's canvas, rich and deep,
-                        <br />
-                        As the world prepares to sleep.
+                        {t("aiResponseExample")}
                       </p>
                       <div className="flex items-center mt-1">
                         <span className="text-xs font-mono text-accent-indigo bg-accent-indigo/10 px-2 py-0.5 rounded">
@@ -369,7 +487,7 @@ export default function Future() {
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">🖌️</span>
                   <h3 className="text-xl font-bold text-text-primary">
-                    Adobe Photoshop Integration
+                    {t("photoshopIntegrationTitle")}
                   </h3>
                 </div>
                 <div className="flex items-center px-3 py-1 bg-primary-600/20 rounded-full">
@@ -393,26 +511,26 @@ export default function Future() {
                       <div className="mt-4 space-y-2">
                         <div className="flex justify-between items-center">
                           <span className="text-text-secondary text-xs">
-                            Original composition
+                            {t("originalComposition")}
                           </span>
                           <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
-                            Human
+                            {t("humanOnly")}
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-text-secondary text-xs">
-                            Color correction
+                            {t("colorCorrection")}
                           </span>
                           <span className="text-xs font-mono text-accent-indigo bg-accent-indigo/10 px-2 py-0.5 rounded">
-                            AI-assisted
+                            {t("aiAssisted")}
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-text-secondary text-xs">
-                            Object removal
+                            {t("objectRemoval")}
                           </span>
                           <span className="text-xs font-mono text-accent-indigo bg-accent-indigo/10 px-2 py-0.5 rounded">
-                            AI-generated
+                            {t("aiGenerated")}
                           </span>
                         </div>
                       </div>
@@ -420,9 +538,7 @@ export default function Future() {
                   </div>
                 </div>
                 <p className="text-text-secondary">
-                  As the artist applies various tools, the system analyzes which
-                  operations are human-executed versus AI-generated, with the
-                  final exported image carrying a Badge AI metadata tag.
+                  {t("photoshopIntegrationDescription")}
                 </p>
               </div>
             </div>
@@ -435,7 +551,7 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-5xl mx-auto"
         >
           <h2 className="text-3xl font-bold mb-10 text-center text-text-primary">
-            The Badge AI Metadata Protocol
+            {t("metadataProtocolTitle")}
           </h2>
 
           <div className="relative h-96 bg-surface-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 overflow-hidden">
@@ -590,7 +706,7 @@ export default function Future() {
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 transition-all duration-300 hover:shadow-glow-sm hover:border-primary-500/30">
               <h3 className="text-lg font-bold mb-2 text-text-primary">
-                Automatic Detection
+                {t("automaticDetectionTitle")}
               </h3>
               <p className="text-sm text-text-secondary">
                 Software analyzes AI usage patterns in real-time, generating
@@ -600,7 +716,7 @@ export default function Future() {
 
             <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 transition-all duration-300 hover:shadow-glow-sm hover:border-primary-500/30">
               <h3 className="text-lg font-bold mb-2 text-text-primary">
-                Seamless Transfer
+                {t("seamlessTransferTitle")}
               </h3>
               <p className="text-sm text-text-secondary">
                 Badge AI metadata persists through file transfers, conversions,
@@ -610,7 +726,7 @@ export default function Future() {
 
             <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 transition-all duration-300 hover:shadow-glow-sm hover:border-primary-500/30">
               <h3 className="text-lg font-bold mb-2 text-text-primary">
-                Universal Display
+                {t("universalDisplayTitle")}
               </h3>
               <p className="text-sm text-text-secondary">
                 All digital platforms can recognize and display the Badge AI
@@ -620,120 +736,142 @@ export default function Future() {
           </div>
         </section>
 
-        {/* Integration Showcase */}
-        <section className="mb-20">
-          <h2
-            id="integration-title"
-            className="animate-on-scroll text-3xl font-bold mb-8 text-center text-text-primary"
-          >
-            Towards Universal Integration
+        {/* Technical Implementation Section */}
+        <section
+          id="technical-implementation"
+          className="animate-on-scroll mb-20 max-w-4xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
+            Technical Implementation
           </h2>
 
-          <p className="text-text-secondary text-center mb-8 max-w-3xl mx-auto">
-            In our vision, every platform automatically analyzes AI usage and
-            assigns the appropriate Badge AI level. As users create and modify
-            content, these applications continuously update the Badge AI
-            metadata to reflect the changing balance between human and AI
-            contributions.
-          </p>
-
-          {/* Tabs for different categories */}
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex p-1 bg-surface-dark/50 backdrop-blur-md rounded-full border border-white/10">
-              {["software", "social", "media"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab as any)}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab
-                      ? "bg-primary-600/30 text-white shadow-glow-sm"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
+          <div className="space-y-8">
+            {/* Metadata Schema */}
+            <div className="bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+              <h3 className="text-xl font-bold mb-4 text-primary-400">
+                {t("metadataSchemaTitle")}
+              </h3>
+              <div className="bg-surface-dark/70 rounded-xl p-4 font-mono text-sm overflow-x-auto">
+                <pre className="text-text-secondary">
+                  {`{
+  "badgeAI": {
+    "version": "1.0",
+    "types": {
+      "visual": {
+        "level": 2,
+        "components": [
+          {
+            "name": "Composition",
+            "humanContribution": 90,
+            "aiContribution": 10,
+            "aiTools": ["Adobe Firefly"]
+          },
+          {
+            "name": "Color Grading",
+            "humanContribution": 30,
+            "aiContribution": 70,
+            "aiTools": ["Adobe Sensei"]
+          }
+        ]
+      }
+    },
+    "timestamp": "2025-04-01T12:34:56Z",
+    "signature": "ed25519:abcdef1234567890"
+  }
+}`}
+                </pre>
+              </div>
             </div>
-          </div>
 
-          {/* Integration grid */}
-          <div
-            id="integration-grid"
-            className="animate-on-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {integrations[activeTab].map((item, index) => (
-              <div
-                key={index}
-                className="bg-surface-dark/50 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden transition-all duration-500 hover:border-primary-500/30 hover:shadow-glow hover:scale-105"
-              >
-                <div className="h-40 bg-gradient-to-br from-surface-light/5 to-surface-dark flex items-center justify-center">
-                  <span className="text-6xl">{item.icon}</span>
+            {/* Embedding Methods */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-2xl">🖼️</span>
                 </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-text-primary">
-                      {item.name}
-                    </h3>
-                    <span className="px-3 py-1 bg-primary-600/20 rounded-full text-sm font-mono text-primary-400">
-                      {item.badge}
-                    </span>
-                  </div>
-                  <p className="text-text-secondary mb-3">{item.description}</p>
-                  <p className="text-xs text-text-secondary border-t border-white/5 pt-3">
-                    Badge AI adjusts as users interact with AI features,
-                    ensuring transparency about the level of AI involvement at
-                    any moment.
-                  </p>
+                <h3 className="text-lg font-bold mb-2 text-text-primary">
+                  Image Files
+                </h3>
+                <p className="text-sm text-text-secondary mb-4">
+                  Badge AI metadata embedded in EXIF/XMP data for seamless
+                  integration with existing image workflows.
+                </p>
+                <div className="bg-surface-dark/70 rounded-lg p-3 font-mono text-xs">
+                  <code className="text-primary-400">
+                    {'<x:xmpmeta xmlns:x="adobe:ns:meta/">'}
+                  </code>
                 </div>
               </div>
-            ))}
+
+              <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                <div className="w-12 h-12 bg-accent-indigo/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-2xl">📄</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-text-primary">
+                  HTML Documents
+                </h3>
+                <p className="text-sm text-text-secondary mb-4">
+                  Simple meta tags for web content, making Badge AI data easily
+                  accessible to browsers and crawlers.
+                </p>
+                <div className="bg-surface-dark/70 rounded-lg p-3 font-mono text-xs">
+                  <code className="text-accent-indigo">
+                    {
+                      '<meta name="badge-ai" content=\'{"type":"text","level":3}\'>'
+                    }
+                  </code>
+                </div>
+              </div>
+
+              <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                <div className="w-12 h-12 bg-primary-400/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-2xl">🎵</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2 text-text-primary">
+                  Audio Files
+                </h3>
+                <p className="text-sm text-text-secondary mb-4">
+                  Badge AI data stored in ID3 tags or BWF chunks for
+                  comprehensive audio file support.
+                </p>
+                <div className="bg-surface-dark/70 rounded-lg p-3 font-mono text-xs">
+                  <code className="text-primary-400">
+                    {"ID3v2.4.0+badgeai/1.0"}
+                  </code>
+                </div>
+              </div>
+            </div>
+
+            {/* API Integration */}
+            <div className="bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+              <h3 className="text-xl font-bold mb-4 text-primary-400">
+                {t("apiIntegrationTitle")}
+              </h3>
+              <p className="text-text-secondary mb-6">
+                Simple REST API for software platforms to implement Badge AI:
+              </p>
+              <div className="bg-surface-dark/70 rounded-xl p-4 font-mono text-sm overflow-x-auto">
+                <pre className="text-text-secondary">
+                  {`// Generate Badge AI metadata
+const response = await fetch('https://api.badgeai.org/v1/generate', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    content_type: 'image',
+    ai_tools_used: ['Midjourney', 'Photoshop'],
+    human_editing_time: 45, // minutes
+    ai_generation_steps: 3
+  })
+});
+
+const badgeMetadata = await response.json();`}
+                </pre>
+              </div>
+            </div>
           </div>
-          <div className="bg-surface-dark/50 backdrop-blur-md rounded-xl border border-white/10 p-6 mt-8 max-w-3xl mx-auto">
-            <h3 className="text-lg font-bold mb-3 text-center text-primary-400">
-              How Dynamic Badge AI Works
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Each platform integrates Badge AI differently, but follows the
-              same principles:
-            </p>
-            <ul className="space-y-2 text-text-secondary">
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <span>
-                  <strong>Real-time Analysis:</strong> Applications continuously
-                  monitor the ratio of AI-generated to human-created elements
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <span>
-                  <strong>Contextual Awareness:</strong> Systems understand
-                  different creative contexts and adjust Badge AI levels
-                  accordingly
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <span>
-                  <strong>Persistent Metadata:</strong> Badge AI information
-                  remains with content as it's shared, exported, or modified
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary-400 mr-2">•</span>
-                <span>
-                  <strong>User Control:</strong> Creators can view detailed
-                  breakdowns of how Badge AI levels were calculated
-                </span>
-              </li>
-            </ul>
-          </div>
-          <p className="text-center mt-8 text-text-secondary max-w-3xl mx-auto">
-            Achieving this requires collaboration with software developers and
-            platform owners to build robust AI detection mechanisms and
-            standardized metadata protocols, allowing Badge AI levels to be
-            assigned and updated automatically based on real-time usage.
-          </p>
         </section>
 
         {/* How It Works Section */}
@@ -742,7 +880,7 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-4xl mx-auto"
         >
           <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
-            The Path to Seamless Integration
+            {t("integrationPathTitle")}
           </h2>
 
           <div className="space-y-8">
@@ -773,15 +911,10 @@ export default function Future() {
               </div>
               <div className="w-full md:w-2/3">
                 <h3 className="text-xl font-bold mb-2 text-primary-400">
-                  Automatic Detection & Dynamic Badging
+                  {t("automaticDetectionAndBadgingTitle")}
                 </h3>
                 <p className="text-text-secondary">
-                  The vision includes developing sophisticated AI fingerprinting
-                  or usage-tracking technology within creative tools. This would
-                  automatically identify and measure AI contribution in
-                  real-time. As a user leverages AI features (e.g., generating
-                  text, applying filters, composing melodies), the system
-                  dynamically updates the embedded Badge AI metadata.
+                  {t("automaticDetectionDescription")}
                 </p>
               </div>
             </div>
@@ -828,14 +961,10 @@ export default function Future() {
               </div>
               <div className="w-full md:w-2/3">
                 <h3 className="text-xl font-bold mb-2 text-accent-indigo">
-                  Global Standards & Interoperability
+                  {t("globalStandardsTitle")}
                 </h3>
                 <p className="text-text-secondary">
-                  Establishing universal adoption requires creating open
-                  standards for Badge AI metadata. This ensures seamless
-                  transferability across diverse platforms and formats. Content
-                  shared between applications would maintain its transparency
-                  data, creating a cohesive and trustworthy digital ecosystem.
+                  {t("globalStandardsDescription")}
                 </p>
               </div>
             </div>
@@ -883,15 +1012,10 @@ export default function Future() {
               </div>
               <div className="w-full md:w-2/3">
                 <h3 className="text-xl font-bold mb-2 text-primary-600">
-                  Effortless Verification
+                  {t("effortlessVerificationTitle")}
                 </h3>
                 <p className="text-text-secondary">
-                  Ultimately, audiences everywhere could benefit from instant,
-                  reliable visual indicators showing AI contribution levels.
-                  Verification could become possible through intuitive
-                  interfaces like augmented reality overlays, browser
-                  extensions, and native platform integrations, making
-                  transparency easily accessible.
+                  {t("effortlessVerificationDescription")}
                 </p>
               </div>
             </div>
@@ -904,7 +1028,7 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-5xl mx-auto"
         >
           <h2 className="text-3xl font-bold mb-10 text-center text-text-primary">
-            A New Era of Digital Trust
+            {t("digitalTrustTitle")}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -913,12 +1037,10 @@ export default function Future() {
                 <span className="text-xl">🛡️</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-text-primary">
-                Protection from Misinformation
+                {t("protectionTitle")}
               </h3>
               <p className="text-text-secondary">
-                Badge AI helps combat deep fakes and AI-generated misinformation
-                by providing immediate verification of content authenticity and
-                clear insight into how AI contributed.
+                {t("protectionDescription")}
               </p>
             </div>
 
@@ -927,12 +1049,10 @@ export default function Future() {
                 <span className="text-xl">⚖️</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-text-primary">
-                Supporting Responsible AI
+                {t("responsibleAITitle")}
               </h3>
               <p className="text-text-secondary">
-                As AI usage grows, clear standards like Badge AI can support
-                regulatory efforts and promote ethical AI practices by providing
-                a common framework for disclosure and accountability.
+                {t("responsibleAIDescription")}
               </p>
             </div>
 
@@ -941,12 +1061,10 @@ export default function Future() {
                 <span className="text-xl">🔍</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-text-primary">
-                Consumer Awareness
+                {t("consumerAwarenessTitle")}
               </h3>
               <p className="text-text-secondary">
-                People now routinely check Badge AI indicators before making
-                purchasing decisions, consuming news, or engaging with social
-                media content.
+                {t("consumerAwarenessDescription")}
               </p>
             </div>
 
@@ -955,12 +1073,10 @@ export default function Future() {
                 <span className="text-xl">💼</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-text-primary">
-                Creative Economy
+                {t("creativeEconomyTitle")}
               </h3>
               <p className="text-text-secondary">
-                Badge AI has created a new value system where fully
-                human-created content can be properly recognized and valued
-                alongside AI-assisted or AI-generated content.
+                {t("creativeEconomyDescription")}
               </p>
             </div>
           </div>
@@ -975,7 +1091,7 @@ export default function Future() {
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-indigo/10 rounded-full blur-3xl -z-10"></div>
 
           <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
-            Badge AI Integrated Experience
+            {t("interactiveDemoTitle")}
           </h2>
 
           <div className="aspect-video rounded-xl border border-white/10 overflow-hidden bg-black/60 relative">
@@ -985,10 +1101,10 @@ export default function Future() {
                   <span className="text-5xl">▶️</span>
                 </div>
                 <p className="text-text-primary text-lg font-medium">
-                  Interactive Demo Coming Soon
+                  {t("demoComingSoonTitle")}
                 </p>
                 <p className="text-text-secondary mt-2">
-                  Experience the future of Badge AI integration
+                  {t("demoComingSoonDescription")}
                 </p>
               </div>
             </div>
@@ -1003,14 +1119,6 @@ export default function Future() {
               </div>
             </div>
           </div>
-
-          <div className="mt-6 text-center">
-            <p className="text-text-secondary">
-              This interactive demo will showcase how Badge AI seamlessly
-              integrates across platforms, providing real-time transparency for
-              all digital content.
-            </p>
-          </div>
         </section>
 
         {/* Timeline */}
@@ -1019,7 +1127,7 @@ export default function Future() {
           className="animate-on-scroll mb-20 max-w-5xl mx-auto"
         >
           <h2 className="text-3xl font-bold mb-12 text-center text-text-primary">
-            Roadmap to Transparency
+            {t("timelineTitle")}
           </h2>
 
           <div className="relative">
@@ -1031,15 +1139,14 @@ export default function Future() {
               <div className="flex flex-col md:flex-row items-center">
                 <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 mb-6 md:mb-0">
                   <h3 className="text-xl font-bold text-primary-400 mb-2">
-                    Phase 1: Foundation
+                    {t("timelinePhase1Title")}
                   </h3>
                   <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 inline-block">
                     <h4 className="text-lg font-semibold mb-2 text-text-primary">
-                      Launch & Initial Adoption
+                      {t("timelinePhase1Subtitle")}
                     </h4>
                     <p className="text-text-secondary">
-                      Establish the Badge AI system and tools, encouraging
-                      voluntary adoption by creators and early partners.
+                      {t("timelinePhase1Description")}
                     </p>
                   </div>
                 </div>
@@ -1069,16 +1176,14 @@ export default function Future() {
 
                 <div className="w-full md:w-[calc(50%-2rem)] md:pl-8 order-2 md:order-1">
                   <h3 className="text-xl font-bold text-primary-400 mb-2">
-                    Phase 2: Integration
+                    {t("timelinePhase2Title")}
                   </h3>
                   <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10">
                     <h4 className="text-lg font-semibold mb-2 text-text-primary">
-                      Industry Partnerships
+                      {t("timelinePhase2Subtitle")}
                     </h4>
                     <p className="text-text-secondary">
-                      Collaborate with major software and platform developers to
-                      integrate Badge AI options, potentially including early
-                      automatic detection features.
+                      {t("timelinePhase2Description")}
                     </p>
                   </div>
                 </div>
@@ -1088,16 +1193,14 @@ export default function Future() {
               <div className="flex flex-col md:flex-row items-center">
                 <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 mb-6 md:mb-0">
                   <h3 className="text-xl font-bold text-primary-400 mb-2">
-                    Phase 3: Standardization
+                    {t("timelinePhase3Title")}
                   </h3>
                   <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 inline-block">
                     <h4 className="text-lg font-semibold mb-2 text-text-primary">
-                      Developing Open Standards
+                      {t("timelinePhase3Subtitle")}
                     </h4>
                     <p className="text-text-secondary">
-                      Work towards establishing Badge AI as an open standard for
-                      metadata, promoting interoperability and potentially
-                      aligning with emerging regulatory frameworks.
+                      {t("timelinePhase3Description")}
                     </p>
                   </div>
                 </div>
@@ -1127,17 +1230,14 @@ export default function Future() {
 
                 <div className="w-full md:w-[calc(50%-2rem)] md:pl-8 order-2 md:order-1">
                   <h3 className="text-xl font-bold text-accent-indigo mb-2">
-                    Phase 4: Universal Adoption
+                    {t("timelinePhase4Title")}
                   </h3>
                   <div className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-accent-indigo/20 shadow-glow-sm">
                     <h4 className="text-lg font-semibold mb-2 text-text-primary">
-                      Seamless Ecosystem
+                      {t("timelinePhase4Subtitle")}
                     </h4>
                     <p className="text-text-secondary">
-                      The ultimate vision: Badge AI is universally embedded,
-                      with platforms automatically detecting, displaying, and
-                      transferring AI attribution data, creating a transparent
-                      digital environment.
+                      {t("timelinePhase4Description")}
                     </p>
                   </div>
                 </div>
@@ -1146,33 +1246,262 @@ export default function Future() {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="text-center mb-12">
-          <div
-            id="cta"
-            className="animate-on-scroll bg-gradient-to-br from-surface-dark/90 to-surface-dark/60 rounded-2xl p-12 border border-white/10 max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl font-bold mb-6 text-text-primary">
-              Shape the Future with Badge AI
-            </h2>
-            <p className="text-lg text-text-secondary mb-8 max-w-xl mx-auto">
-              The future of digital transparency is already beginning. Join us
-              in building a more honest and ethical digital world.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/about"
-                className="px-8 py-3 bg-primary-600/20 hover:bg-primary-600/30 border border-primary-600/30 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-glow-sm"
+        {/* Challenges & Solutions Section */}
+        <section
+          id="challenges"
+          className="animate-on-scroll mb-20 max-w-4xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
+            {t("challengesTitle")}
+          </h2>
+
+          <div className="space-y-6">
+            {[
+              {
+                challenge: t("challengeBadgeSpoofing"),
+                solution: t("challengeBadgeSpoofingSolution"),
+                icon: "🔒",
+              },
+              {
+                challenge: t("challengeAIContribution"),
+                solution: t("challengeAIContributionSolution"),
+                icon: "📊",
+              },
+              {
+                challenge: t("challengeCrossPlatform"),
+                solution: t("challengeCrossPlatformSolution"),
+                icon: "🔄",
+              },
+              {
+                challenge: t("challengePrivacy"),
+                solution: t("challengePrivacySolution"),
+                icon: "🛡️",
+              },
+              {
+                challenge: t("challengeTechnical"),
+                solution: t("challengeTechnicalSolution"),
+                icon: "⚙️",
+              },
+            ].map((item, index) => (
+              <div
+                key={`challenge-${index}`}
+                className="bg-surface-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:border-primary-500/30 transition-all duration-300"
               >
-                Learn More
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">{item.icon}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-primary-400">
+                      {item.challenge}
+                    </h3>
+                    <p className="text-text-secondary">{item.solution}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Industry Adoption Partners Section */}
+        <section
+          id="partners"
+          className="animate-on-scroll mb-20 max-w-5xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
+            {t("partnersTitle")}
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { name: "Adobe", icon: "🎨" },
+              { name: "Microsoft", icon: "💻" },
+              { name: "Google", icon: "🔍" },
+              { name: "Meta", icon: "🌐" },
+              { name: "Apple", icon: "🍎" },
+              { name: "OpenAI", icon: "🤖" },
+              { name: "Anthropic", icon: "🧠" },
+              { name: "Stability AI", icon: "🎯" },
+            ].map((partner) => (
+              <div
+                key={partner.name}
+                className="group bg-surface-dark/60 backdrop-blur-md rounded-xl p-6 border border-white/10 flex flex-col items-center justify-center h-32 hover:border-primary-500/30 transition-all duration-300 hover:shadow-glow-sm"
+              >
+                <span className="text-3xl mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                  {partner.icon}
+                </span>
+                <span className="text-xl font-medium text-text-primary opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                  {partner.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center mt-6 text-text-secondary opacity-70">
+            {t("partnersDisclaimer")}
+          </p>
+        </section>
+
+        {/* Improved CTA Section */}
+        <section className="animate-on-scroll mb-20">
+          <div className="bg-gradient-to-br from-surface-dark/90 to-surface-dark/60 rounded-2xl p-8 md:p-12 border border-white/10 max-w-5xl mx-auto relative overflow-hidden">
+            {/* Background effects */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-indigo/10 rounded-full blur-3xl"></div>
+
+            <h2 className="text-3xl font-bold mb-6 text-center text-text-primary relative z-10">
+              {t("ctaTitle")}
+            </h2>
+
+            <p className="text-lg text-text-secondary mb-8 max-w-3xl mx-auto text-center relative z-10">
+              {t("ctaDescription")}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
+              <div className="bg-surface-dark/50 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-primary-500/30 transition-all duration-300">
+                <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-xl">👩‍💻</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-text-primary">
+                  {t("ctaDevelopersTitle")}
+                </h3>
+                <p className="text-text-secondary mb-4">
+                  {t("ctaDevelopersDescription")}
+                </p>
+                <Link
+                  href="/developers"
+                  className="text-primary-400 hover:text-primary-300 inline-flex items-center"
+                >
+                  <span>{t("ctaDevelopersAction")}</span>
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </Link>
+              </div>
+
+              <div className="bg-surface-dark/50 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-accent-indigo/30 transition-all duration-300">
+                <div className="w-12 h-12 bg-accent-indigo/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-xl">🏢</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-text-primary">
+                  {t("ctaOrganizationsTitle")}
+                </h3>
+                <p className="text-text-secondary mb-4">
+                  {t("ctaOrganizationsDescription")}
+                </p>
+                <Link
+                  href="/partners"
+                  className="text-accent-indigo hover:text-accent-indigo/80 inline-flex items-center"
+                >
+                  <span>{t("ctaOrganizationsAction")}</span>
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </Link>
+              </div>
+
+              <div className="bg-surface-dark/50 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-primary-400/30 transition-all duration-300">
+                <div className="w-12 h-12 bg-primary-400/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-xl">🎨</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-text-primary">
+                  {t("ctaCreatorsTitle")}
+                </h3>
+                <p className="text-text-secondary mb-4">
+                  {t("ctaCreatorsDescription")}
+                </p>
+                <Link
+                  href="/"
+                  className="text-primary-400 hover:text-primary-300 inline-flex items-center"
+                >
+                  <span>{t("ctaCreatorsAction")}</span>
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+              <Link
+                href="/beta"
+                className="px-8 py-3 bg-primary-600 hover:bg-primary-500 rounded-lg text-white font-medium transition-all duration-300 text-center hover:shadow-glow-sm"
+              >
+                {t("ctaBetaAction")}
               </Link>
               <Link
-                href="/"
-                className="px-8 py-3 bg-surface-dark hover:bg-surface-dark/80 border border-white/10 rounded-lg text-text-primary font-medium transition-all duration-300"
+                href="/updates"
+                className="px-8 py-3 bg-surface-dark hover:bg-surface-dark/80 border border-white/10 rounded-lg text-text-primary font-medium transition-all duration-300 text-center"
               >
-                Try Badge AI Today
+                {t("ctaUpdatesAction")}
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="animate-on-scroll mb-20 max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-center text-text-primary">
+            {t("futureFaqTitle")}
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                question: t("futureFaqQuestion1"),
+                answer: t("futureFaqAnswer1"),
+              },
+              {
+                question: t("futureFaqQuestion2"),
+                answer: t("futureFaqAnswer2"),
+              },
+              {
+                question: t("futureFaqQuestion3"),
+                answer: t("futureFaqAnswer3"),
+              },
+              {
+                question: t("futureFaqQuestion4"),
+                answer: t("futureFaqAnswer4"),
+              },
+              {
+                question: t("futureFaqQuestion5"),
+                answer: t("futureFaqAnswer5"),
+              },
+              {
+                question: t("futureFaqQuestion6"),
+                answer: t("futureFaqAnswer6"),
+              },
+            ].map((item, index) => (
+              <div
+                key={`faq-${index}`}
+                className="bg-surface-card/40 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 transition-all hover:border-primary-500/30"
+              >
+                <div className="p-6">
+                  <h3 className="text-lg font-bold mb-3 text-text-primary">
+                    {item.question}
+                  </h3>
+                  <p className="text-text-secondary">{item.answer}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>

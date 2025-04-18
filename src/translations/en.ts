@@ -41,14 +41,13 @@ export const en = {
     "A standardized system for indicating AI involvement across different creative mediums",
   soundsLetter: "S",
   soundsTitle: "Sounds",
-  soundsDescription: "Music, podcasts, sound effects, and other audio content",
+  soundsDescription: "Audio, music, spoken word, sound effects",
   visualLetter: "V",
   visualTitle: "Visual",
-  visualDescription: "Images, videos, animations, and other visual content",
+  visualDescription: "Images, videos, animations, graphical elements",
   textLetter: "T",
   textTitle: "Text",
-  textDescription:
-    "Written content like books, social media posts, emails, and code",
+  textDescription: "Written content, code, structured data",
   levelHumanOnly: "Human Only",
   levelHumanWithAI: "Human with AI Assistance",
   levelAICollaboration: "AI Collaboration",
@@ -489,4 +488,244 @@ export const en = {
     "Visualization of visitors by timezone on the world map",
   timezoneMapLegend: "Each band represents a timezone (UTC)",
   utcTime: "UTC",
+
+  // Future Vision Page
+  futureTitle: "The Future of Badge AI",
+  futureSubtitle: "Envisioning the universal standard for AI transparency",
+  futureVisionTitle: "Our Vision: Seamless Digital Transparency",
+  futureVisionDescription:
+    "Imagine a future where Badge AI becomes the universal standard for transparent AI attribution. Our goal is for every piece of digital content—from social media posts to professional software—to seamlessly integrate AI transparency badges, revealing how artificial intelligence contributed to its creation.",
+  futureVisionQuote:
+    "Our aim is to fundamentally change how we interact with digital content, bringing clarity and trust to an increasingly AI-powered world.",
+
+  // Challenges Section
+  challengesTitle: "Overcoming Implementation Challenges",
+  challengeBadgeSpoofing: "Badge Spoofing",
+  challengeBadgeSpoofingSolution:
+    "Cryptographic signatures tied to content hashes ensure badge integrity",
+  challengeAIContribution: "Determining AI Contribution",
+  challengeAIContributionSolution:
+    "Software-level API hooks capture real-time AI usage metrics",
+  challengeCrossPlatform: "Cross-Platform Adoption",
+  challengeCrossPlatformSolution:
+    "Open standards with simple implementation and strong industry partnerships",
+  challengePrivacy: "Privacy Concerns",
+  challengePrivacySolution:
+    "Granular control over metadata exposure and anonymous contribution tracking",
+  challengeTechnical: "Technical Integration",
+  challengeTechnicalSolution:
+    "Comprehensive SDKs and developer tools for seamless implementation",
+
+  // Industry Partners Section
+  partnersTitle: "Future Industry Adoption",
+  partnersDisclaimer:
+    "*Conceptual partnerships - not representing actual commitments",
+
+  // Improved CTA Section
+  ctaTitle: "Help Shape the Future of Digital Transparency",
+  ctaDescription:
+    "The Badge AI vision requires collaboration across the digital ecosystem. Join us in building this transparent future.",
+
+  // CTA Cards
+  ctaDevelopersTitle: "Developers",
+  ctaDevelopersDescription:
+    "Contribute to our open-source tools and help build the technical infrastructure.",
+  ctaDevelopersAction: "Join GitHub",
+
+  ctaOrganizationsTitle: "Organizations",
+  ctaOrganizationsDescription:
+    "Partner with us to integrate Badge AI into your platforms and tools.",
+  ctaOrganizationsAction: "Become a Partner",
+
+  ctaCreatorsTitle: "Creators",
+  ctaCreatorsDescription:
+    "Start using Badge AI today and help promote transparent creation standards.",
+  ctaCreatorsAction: "Try Badge AI",
+
+  ctaBetaAction: "Join the Beta Program",
+  ctaUpdatesAction: "Subscribe to Updates",
+
+  // Badge Definition Section
+  badgeDefinitionTitle: "Interactive Badge AI System",
+  adjustAIContribution: "Adjust AI Contribution:",
+  humanContribution: "Human Contribution",
+  aiContribution: "AI Contribution",
+
+  // Badge Categories
+  badgeCategoriesTitle: "Badge Categories",
+  soundsCategory: "Sounds",
+  visualCategory: "Visual",
+  textCategory: "Text",
+
+  // AI Level Activities
+  aiActivitiesTitle: "AI Level Activities",
+  aiActivitiesDescription:
+    "Activities are classified based on AI contribution level:",
+
+  // Human Activities (0-20% AI)
+  humanActivitiesTitle: "Human-Driven",
+  humanActivities: [
+    "Manual content creation",
+    "Original composition",
+    "Hand-drawn artwork",
+    "Direct recording",
+    "Traditional editing",
+  ],
+
+  // Assisted Activities (21-40% AI)
+  assistedActivitiesTitle: "AI-Assisted",
+  assistedActivities: [
+    "Spell checking",
+    "Basic filters",
+    "Auto-correction",
+    "Noise reduction",
+    "Simple enhancements",
+  ],
+
+  // Collaborative Activities (41-60% AI)
+  collaborativeActivitiesTitle: "Human-AI Collaboration",
+  collaborativeActivities: [
+    "Style transfer",
+    "Content suggestions",
+    "Smart composition",
+    "Automated mixing",
+    "Intelligent editing",
+  ],
+
+  // AI-Driven Activities (61-80% AI)
+  aiDrivenActivitiesTitle: "AI-Driven",
+  aiDrivenActivities: [
+    "Generated content with edits",
+    "Automated composition",
+    "Image generation with prompts",
+    "Voice synthesis with direction",
+    "Automated writing with revision",
+  ],
+
+  // Full AI Activities (81-100% AI)
+  fullAiActivitiesTitle: "Full AI Generation",
+  fullAiActivities: [
+    "Complete text generation",
+    "Full image synthesis",
+    "Automated music composition",
+    "Voice cloning",
+    "Autonomous creation",
+  ],
+
+  // Badge Definition Section Additional UI Elements
+  humanOnly: "Human Only",
+  aiGenerated: "AI Generated",
+  aiAssisted: "AI-assisted",
+  originalComposition: "Original composition",
+  colorCorrection: "Color correction",
+  objectRemoval: "Object removal",
+  backgroundGeneration: "Background generation",
+
+  // Contribution Labels
+  humanPercentage: "Human: {{percentage}}%",
+  aiPercentage: "AI: {{percentage}}%",
+
+  // Activity Status
+  activityStatus: "AI-assisted",
+
+  // Real-Time AI Detection & Badging Section
+  realTimeDetectionTitle: "Real-Time AI Detection & Badging",
+  chatGPTIntegrationTitle: "ChatGPT Integration",
+  chatGPTIntegrationDescription:
+    "Each ChatGPT response would carry dynamic Badge AI metadata that adjusts in real-time based on:",
+  aiPromptRefinement:
+    "Whether you're refining the AI's output with additional prompts",
+  aiComplexityLevel: "The complexity and creativity of the AI's responses",
+  humanEditing: "How much human editing is applied to the final content",
+  userPromptExample: "Write me a short poem about autumn",
+  aiResponseExample:
+    "Crisp leaves dance on autumn breeze,\nAmber skies and golden trees.\nNature's canvas, rich and deep,\nAs the world prepares to sleep.",
+  photoshopIntegrationTitle: "Adobe Photoshop Integration",
+  photoshopIntegrationDescription:
+    "As the artist applies various tools, the system analyzes which operations are human-executed versus AI-generated, with the final exported image carrying a Badge AI metadata tag.",
+
+  // Badge AI Metadata Protocol
+  metadataProtocolTitle: "The Badge AI Metadata Protocol",
+  metadataSchemaTitle: "Badge AI Metadata Schema",
+  embedMethodsTitle: "Embedding Methods",
+  apiIntegrationTitle: "API Integration",
+  automaticDetectionTitle: "Automatic Detection",
+  seamlessTransferTitle: "Seamless Transfer",
+  universalDisplayTitle: "Universal Display",
+
+  // Path to Integration
+  integrationPathTitle: "The Path to Seamless Integration",
+  automaticDetectionAndBadgingTitle: "Automatic Detection & Dynamic Badging",
+  automaticDetectionDescription:
+    "The vision includes developing sophisticated AI fingerprinting or usage-tracking technology within creative tools. This would automatically identify and measure AI contribution in real-time. As a user leverages AI features (e.g., generating text, applying filters, composing melodies), the system dynamically updates the embedded Badge AI metadata.",
+  globalStandardsTitle: "Global Standards & Interoperability",
+  globalStandardsDescription:
+    "Establishing universal adoption requires creating open standards for Badge AI metadata. This ensures seamless transferability across diverse platforms and formats. Content shared between applications would maintain its transparency data, creating a cohesive and trustworthy digital ecosystem.",
+  effortlessVerificationTitle: "Effortless Verification",
+  effortlessVerificationDescription:
+    "Ultimately, audiences everywhere could benefit from instant, reliable visual indicators showing AI contribution levels. Verification could become possible through intuitive interfaces like augmented reality overlays, browser extensions, and native platform integrations, making transparency easily accessible.",
+
+  // Interactive Demo
+  interactiveDemoTitle: "Badge AI Integrated Experience",
+  demoComingSoonTitle: "Interactive Demo Coming Soon",
+  demoComingSoonDescription: "Experience the future of Badge AI integration",
+
+  // Future Page FAQ Section
+  futureFaqTitle: "Frequently Asked Questions",
+  futureFaqQuestion1:
+    "How will Badge AI determine the exact level of AI involvement?",
+  futureFaqAnswer1:
+    "Future creative software will include Badge AI integration that monitors the creative process in real-time. It will track which operations are performed by AI and which by humans, calculating a precise contribution percentage for each component of the work. These metrics will then determine the appropriate badge level automatically.",
+  futureFaqQuestion2:
+    "What prevents someone from manually changing their Badge AI level?",
+  futureFaqAnswer2:
+    "The Badge AI metadata will include cryptographic signatures tied to the content hash. This creates a tamper-evident system where any modification to either the badge or the content would invalidate the signature. Verification tools will be able to detect such tampering.",
+  futureFaqQuestion3:
+    "How will Badge AI handle content that uses multiple types of AI?",
+  futureFaqAnswer3:
+    "The metadata specification supports detailed component-level tracking. For example, an image might list separate AI contribution percentages for composition, color grading, and object generation, each potentially using different AI tools.",
+  futureFaqQuestion4: "Will Badge AI create extra work for creators?",
+  futureFaqAnswer4:
+    "No, the vision is for Badge AI to work invisibly in the background. Once integrated into creative software, it will automatically track AI usage and assign the appropriate badge without requiring any additional steps from creators.",
+  futureFaqQuestion5:
+    "How will Badge AI metadata persist across file formats and platforms?",
+  futureFaqAnswer5:
+    "The Badge AI protocol will define standard embedding methods for all major file formats. Additionally, platforms that display content will recognize and preserve this metadata when content is uploaded, shared, or modified.",
+  futureFaqQuestion6: "What happens if content is modified after it's badged?",
+  futureFaqAnswer6:
+    "When properly integrated, editing software will update the Badge AI metadata in real-time as modifications are made. If the AI contribution level changes due to edits, the badge will be automatically adjusted to reflect the new balance.",
+
+  // Digital Trust Section
+  digitalTrustTitle: "A New Era of Digital Trust",
+  protectionTitle: "Protection from Misinformation",
+  protectionDescription:
+    "Badge AI helps combat deep fakes and AI-generated misinformation by providing immediate verification of content authenticity and clear insight into how AI contributed.",
+  responsibleAITitle: "Supporting Responsible AI",
+  responsibleAIDescription:
+    "As AI usage grows, clear standards like Badge AI can support regulatory efforts and promote ethical AI practices by providing a common framework for disclosure and accountability.",
+  consumerAwarenessTitle: "Consumer Awareness",
+  consumerAwarenessDescription:
+    "People now routinely check Badge AI indicators before making purchasing decisions, consuming news, or engaging with social media content.",
+  creativeEconomyTitle: "Creative Economy",
+  creativeEconomyDescription:
+    "Badge AI has created a new value system where fully human-created content can be properly recognized and valued alongside AI-assisted or AI-generated content.",
+
+  // Timeline Section
+  timelineTitle: "Roadmap to Transparency",
+  timelinePhase1Title: "Phase 1: Foundation",
+  timelinePhase1Subtitle: "Launch & Initial Adoption",
+  timelinePhase1Description:
+    "Establish the Badge AI system and tools, encouraging voluntary adoption by creators and early partners.",
+  timelinePhase2Title: "Phase 2: Integration",
+  timelinePhase2Subtitle: "Industry Partnerships",
+  timelinePhase2Description:
+    "Collaborate with major software and platform developers to integrate Badge AI options, potentially including early automatic detection features.",
+  timelinePhase3Title: "Phase 3: Standardization",
+  timelinePhase3Subtitle: "Developing Open Standards",
+  timelinePhase3Description:
+    "Work towards establishing Badge AI as an open standard for metadata, promoting interoperability and potentially aligning with emerging regulatory frameworks.",
+  timelinePhase4Title: "Phase 4: Universal Adoption",
+  timelinePhase4Subtitle: "Seamless Ecosystem",
+  timelinePhase4Description:
+    "The ultimate vision: Badge AI is universally embedded, with platforms automatically detecting, displaying, and transferring AI attribution data, creating a transparent digital environment.",
 };

@@ -41,15 +41,13 @@ export const fr = {
     "Un système standardisé pour indiquer l'implication de l'IA dans différents médiums créatifs",
   soundsLetter: "S",
   soundsTitle: "Sons",
-  soundsDescription:
-    "Musique, podcasts, effets sonores et autres contenus audio",
+  soundsDescription: "Audio, musique, voix parlée, effets sonores",
   visualLetter: "V",
   visualTitle: "Visuel",
-  visualDescription: "Images, vidéos, animations et autres contenus visuels",
+  visualDescription: "Images, vidéos, animations, éléments graphiques",
   textLetter: "T",
   textTitle: "Texte",
-  textDescription:
-    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code",
+  textDescription: "Contenu écrit, code, données structurées",
   levelHumanOnly: "Humain Uniquement",
   levelHumanWithAI: "Humain avec Assistance IA",
   levelAICollaboration: "Collaboration IA",
@@ -59,20 +57,17 @@ export const fr = {
   // Badge Types
   soundsBadgeTitle: "S",
   soundsBadgeSubtitle: "Sons",
-  soundsBadgeDescription:
-    "Musique, podcasts, effets sonores et autres contenus audio",
+  soundsBadgeDescription: "Audio, musique, voix parlée, effets sonores",
   soundsBadgeCode: "S-AI-0-4",
 
   visualBadgeTitle: "V",
   visualBadgeSubtitle: "Visuel",
-  visualBadgeDescription:
-    "Images, vidéos, animations et autres contenus visuels",
+  visualBadgeDescription: "Images, vidéos, animations, éléments graphiques",
   visualBadgeCode: "V-AI-0-4",
 
   textBadgeTitle: "T",
   textBadgeSubtitle: "Texte",
-  textBadgeDescription:
-    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code",
+  textBadgeDescription: "Contenu écrit, code, données structurées",
   textBadgeCode: "T-AI-0-4",
 
   // AI Levels
@@ -160,14 +155,11 @@ export const fr = {
   categorySelectionDescription:
     "Choisissez quels types de contenu vous souhaitez évaluer pour l'utilisation de l'IA.",
   soundsCategoryTitle: "Sons",
-  soundsCategoryDescription:
-    "Musique, podcasts, effets sonores et autres contenus audio.",
+  soundsCategoryDescription: "Audio, musique, voix parlée, effets sonores",
   visualCategoryTitle: "Visuel",
-  visualCategoryDescription:
-    "Images, vidéos, animations et autres contenus visuels.",
+  visualCategoryDescription: "Images, vidéos, animations, éléments graphiques",
   textCategoryTitle: "Texte",
-  textCategoryDescription:
-    "Contenu écrit comme les livres, publications sur les réseaux sociaux, emails et code.",
+  textCategoryDescription: "Contenu écrit, code, données structurées",
 
   // Categories
   category0Title: "Humain Uniquement",
@@ -506,4 +498,248 @@ export const fr = {
     "Visualisation des visiteurs par fuseau horaire sur la carte du monde",
   timezoneMapLegend: "Chaque bande représente un fuseau horaire (UTC)",
   utcTime: "UTC",
+
+  // Future Vision Page
+  futureTitle: "L'Avenir de Badge IA",
+  futureSubtitle:
+    "Envisager le standard universel pour la transparence de l'IA",
+  futureVisionTitle: "Notre Vision : Une Transparence Numérique Fluide",
+  futureVisionDescription:
+    "Imaginez un futur où Badge IA devient le standard universel pour l'attribution transparente de l'IA. Notre objectif est que chaque contenu numérique - des publications sur les réseaux sociaux aux logiciels professionnels - intègre de manière transparente des badges IA, révélant comment l'intelligence artificielle a contribué à sa création.",
+  futureVisionQuote:
+    "Notre objectif est de changer fondamentalement la façon dont nous interagissons avec le contenu numérique, apportant clarté et confiance dans un monde de plus en plus alimenté par l'IA.",
+
+  // Challenges Section
+  challengesTitle: "Surmonter les Défis de Mise en Œuvre",
+  challengeBadgeSpoofing: "Falsification des Badges",
+  challengeBadgeSpoofingSolution:
+    "Signatures cryptographiques liées aux empreintes du contenu pour garantir l'intégrité des badges",
+  challengeAIContribution: "Détermination de la Contribution IA",
+  challengeAIContributionSolution:
+    "Hooks API au niveau logiciel pour capturer les métriques d'utilisation de l'IA en temps réel",
+  challengeCrossPlatform: "Adoption Multi-Plateformes",
+  challengeCrossPlatformSolution:
+    "Standards ouverts avec une implémentation simple et des partenariats industriels solides",
+  challengePrivacy: "Préoccupations de Confidentialité",
+  challengePrivacySolution:
+    "Contrôle granulaire de l'exposition des métadonnées et suivi anonyme des contributions",
+  challengeTechnical: "Intégration Technique",
+  challengeTechnicalSolution:
+    "SDKs complets et outils de développement pour une intégration fluide",
+
+  // Industry Partners Section
+  partnersTitle: "Adoption Future par l'Industrie",
+  partnersDisclaimer:
+    "*Partenariats conceptuels - ne représentant pas des engagements réels",
+
+  // Improved CTA Section
+  ctaTitle: "Aidez à Façonner l'Avenir de la Transparence Numérique",
+  ctaDescription:
+    "La vision de Badge IA nécessite une collaboration à travers l'écosystème numérique. Rejoignez-nous pour construire cet avenir transparent.",
+
+  // CTA Cards
+  ctaDevelopersTitle: "Développeurs",
+  ctaDevelopersDescription:
+    "Contribuez à nos outils open-source et aidez à construire l'infrastructure technique.",
+  ctaDevelopersAction: "Rejoindre GitHub",
+
+  ctaOrganizationsTitle: "Organisations",
+  ctaOrganizationsDescription:
+    "Devenez partenaire pour intégrer Badge IA dans vos plateformes et outils.",
+  ctaOrganizationsAction: "Devenir Partenaire",
+
+  ctaCreatorsTitle: "Créateurs",
+  ctaCreatorsDescription:
+    "Commencez à utiliser Badge IA aujourd'hui et aidez à promouvoir des standards de création transparents.",
+  ctaCreatorsAction: "Essayer Badge IA",
+
+  ctaBetaAction: "Rejoindre le Programme Bêta",
+  ctaUpdatesAction: "S'abonner aux Mises à Jour",
+
+  // Badge Definition Section
+  badgeDefinitionTitle: "Système Interactif de Badge IA",
+  adjustAIContribution: "Ajuster la Contribution IA :",
+  humanContribution: "Contribution Humaine",
+  aiContribution: "Contribution IA",
+
+  // Badge Categories
+  badgeCategoriesTitle: "Catégories de Badges",
+  soundsCategory: "Sons",
+  visualCategory: "Visuel",
+  textCategory: "Texte",
+
+  // AI Level Activities
+  aiActivitiesTitle: "Activités par Niveau d'IA",
+  aiActivitiesDescription:
+    "Les activités sont classées selon le niveau de contribution de l'IA :",
+
+  // Human Activities (0-20% AI)
+  humanActivitiesTitle: "Création Humaine",
+  humanActivities: [
+    "Création manuelle de contenu",
+    "Composition originale",
+    "Dessin à la main",
+    "Enregistrement direct",
+    "Édition traditionnelle",
+  ],
+
+  // Assisted Activities (21-40% AI)
+  assistedActivitiesTitle: "Assisté par IA",
+  assistedActivities: [
+    "Vérification orthographique",
+    "Filtres de base",
+    "Auto-correction",
+    "Réduction du bruit",
+    "Améliorations simples",
+  ],
+
+  // Collaborative Activities (41-60% AI)
+  collaborativeActivitiesTitle: "Collaboration Humain-IA",
+  collaborativeActivities: [
+    "Transfert de style",
+    "Suggestions de contenu",
+    "Composition intelligente",
+    "Mixage automatisé",
+    "Édition intelligente",
+  ],
+
+  // AI-Driven Activities (61-80% AI)
+  aiDrivenActivitiesTitle: "Piloté par l'IA",
+  aiDrivenActivities: [
+    "Contenu généré avec éditions",
+    "Composition automatisée",
+    "Génération d'images avec prompts",
+    "Synthèse vocale dirigée",
+    "Écriture automatisée avec révision",
+  ],
+
+  // Full AI Activities (81-100% AI)
+  fullAiActivitiesTitle: "Génération IA Complète",
+  fullAiActivities: [
+    "Génération complète de texte",
+    "Synthèse complète d'images",
+    "Composition musicale automatisée",
+    "Clonage vocal",
+    "Création autonome",
+  ],
+
+  // Badge Definition Section Additional UI Elements
+  humanOnly: "Humain Uniquement",
+  aiGenerated: "Généré par l'IA",
+  aiAssisted: "Assisté par l'IA",
+  originalComposition: "Composition originale",
+  colorCorrection: "Correction des couleurs",
+  objectRemoval: "Suppression d'objets",
+  backgroundGeneration: "Génération d'arrière-plan",
+
+  // Contribution Labels
+  humanPercentage: "Humain : {{percentage}}%",
+  aiPercentage: "IA : {{percentage}}%",
+
+  // Activity Status
+  activityStatus: "Assisté par l'IA",
+
+  // Real-Time AI Detection & Badging Section
+  realTimeDetectionTitle: "Détection et Badges IA en Temps Réel",
+  chatGPTIntegrationTitle: "Intégration ChatGPT",
+  chatGPTIntegrationDescription:
+    "Chaque réponse de ChatGPT porterait des métadonnées Badge IA dynamiques qui s'ajustent en temps réel selon :",
+  aiPromptRefinement:
+    "Si vous affinez la sortie de l'IA avec des prompts supplémentaires",
+  aiComplexityLevel: "La complexité et la créativité des réponses de l'IA",
+  humanEditing: "La quantité d'édition humaine appliquée au contenu final",
+  userPromptExample: "Écris-moi un court poème sur l'automne",
+  aiResponseExample:
+    "Feuilles craquantes dans la brise d'automne,\nCiel ambré et arbres dorés.\nLa toile de la nature, riche et profonde,\nTandis que le monde se prépare à sommeiller.",
+  photoshopIntegrationTitle: "Intégration Adobe Photoshop",
+  photoshopIntegrationDescription:
+    "Lorsque l'artiste utilise différents outils, le système analyse quelles opérations sont exécutées par l'humain ou générées par l'IA, l'image exportée finale portant une étiquette de métadonnées Badge IA.",
+
+  // Badge AI Metadata Protocol
+  metadataProtocolTitle: "Le Protocole de Métadonnées Badge IA",
+  metadataSchemaTitle: "Schéma de Métadonnées Badge IA",
+  embedMethodsTitle: "Méthodes d'Intégration",
+  apiIntegrationTitle: "Intégration API",
+  automaticDetectionTitle: "Détection Automatique",
+  seamlessTransferTitle: "Transfert Transparent",
+  universalDisplayTitle: "Affichage Universel",
+
+  // Path to Integration
+  integrationPathTitle: "La Voie vers l'Intégration Transparente",
+  automaticDetectionAndBadgingTitle:
+    "Détection Automatique & Badges Dynamiques",
+  automaticDetectionDescription:
+    "La vision inclut le développement d'une technologie sophistiquée d'empreintes digitales IA ou de suivi d'utilisation au sein des outils créatifs. Cela identifierait et mesurerait automatiquement la contribution de l'IA en temps réel. Lorsqu'un utilisateur exploite des fonctionnalités d'IA (génération de texte, application de filtres, composition de mélodies), le système met à jour dynamiquement les métadonnées Badge IA intégrées.",
+  globalStandardsTitle: "Standards Mondiaux & Interopérabilité",
+  globalStandardsDescription:
+    "Établir une adoption universelle nécessite la création de standards ouverts pour les métadonnées Badge IA. Cela assure une transférabilité transparente entre diverses plateformes et formats. Le contenu partagé entre applications conserverait ses données de transparence, créant un écosystème numérique cohérent et digne de confiance.",
+  effortlessVerificationTitle: "Vérification Sans Effort",
+  effortlessVerificationDescription:
+    "À terme, les audiences partout pourraient bénéficier d'indicateurs visuels instantanés et fiables montrant les niveaux de contribution de l'IA. La vérification pourrait devenir possible via des interfaces intuitives comme des superpositions en réalité augmentée, des extensions de navigateur et des intégrations natives aux plateformes, rendant la transparence facilement accessible.",
+
+  // Interactive Demo
+  interactiveDemoTitle: "Expérience Intégrée Badge IA",
+  demoComingSoonTitle: "Démo Interactive Bientôt Disponible",
+  demoComingSoonDescription: "Découvrez l'avenir de l'intégration Badge IA",
+
+  // Future Page FAQ Section
+  futureFaqTitle: "Questions Fréquentes",
+  futureFaqQuestion1:
+    "Comment Badge IA déterminera-t-il le niveau exact d'implication de l'IA ?",
+  futureFaqAnswer1:
+    "Les futurs logiciels de création incluront l'intégration de Badge IA qui surveille le processus créatif en temps réel. Il suivra quelles opérations sont effectuées par l'IA et lesquelles par les humains, calculant un pourcentage précis de contribution pour chaque composant de l'œuvre. Ces métriques détermineront ensuite automatiquement le niveau de badge approprié.",
+  futureFaqQuestion2:
+    "Qu'est-ce qui empêche quelqu'un de modifier manuellement son niveau Badge IA ?",
+  futureFaqAnswer2:
+    "Les métadonnées Badge IA incluront des signatures cryptographiques liées à l'empreinte numérique du contenu. Cela crée un système à preuve de falsification où toute modification du badge ou du contenu invaliderait la signature. Les outils de vérification pourront détecter de telles falsifications.",
+  futureFaqQuestion3:
+    "Comment Badge IA gérera-t-il le contenu qui utilise plusieurs types d'IA ?",
+  futureFaqAnswer3:
+    "La spécification des métadonnées prend en charge le suivi détaillé au niveau des composants. Par exemple, une image pourrait répertorier des pourcentages distincts de contribution d'IA pour la composition, le traitement des couleurs et la génération d'objets, chacun utilisant potentiellement différents outils d'IA.",
+  futureFaqQuestion4:
+    "Badge IA créera-t-il du travail supplémentaire pour les créateurs ?",
+  futureFaqAnswer4:
+    "Non, la vision est que Badge IA fonctionne invisiblement en arrière-plan. Une fois intégré aux logiciels de création, il suivra automatiquement l'utilisation de l'IA et attribuera le badge approprié sans nécessiter d'étapes supplémentaires de la part des créateurs.",
+  futureFaqQuestion5:
+    "Comment les métadonnées Badge IA persisteront-elles à travers les formats de fichiers et les plateformes ?",
+  futureFaqAnswer5:
+    "Le protocole Badge IA définira des méthodes d'intégration standard pour tous les principaux formats de fichiers. De plus, les plateformes qui affichent du contenu reconnaîtront et préserveront ces métadonnées lorsque le contenu est téléchargé, partagé ou modifié.",
+  futureFaqQuestion6:
+    "Que se passe-t-il si le contenu est modifié après avoir été badgé ?",
+  futureFaqAnswer6:
+    "Lorsqu'ils sont correctement intégrés, les logiciels d'édition mettront à jour les métadonnées Badge IA en temps réel à mesure que des modifications sont apportées. Si le niveau de contribution de l'IA change en raison des modifications, le badge sera automatiquement ajusté pour refléter le nouvel équilibre.",
+
+  // Digital Trust Section
+  digitalTrustTitle: "Une Nouvelle Ère de Confiance Numérique",
+  protectionTitle: "Protection contre la Désinformation",
+  protectionDescription:
+    "Badge IA aide à combattre les deepfakes et la désinformation générée par l'IA en fournissant une vérification immédiate de l'authenticité du contenu et une vision claire de la contribution de l'IA.",
+  responsibleAITitle: "Soutenir une IA Responsable",
+  responsibleAIDescription:
+    "À mesure que l'utilisation de l'IA se développe, des normes claires comme Badge IA peuvent soutenir les efforts réglementaires et promouvoir des pratiques éthiques d'IA en fournissant un cadre commun pour la divulgation et la responsabilité.",
+  consumerAwarenessTitle: "Sensibilisation des Consommateurs",
+  consumerAwarenessDescription:
+    "Les gens vérifient désormais régulièrement les indicateurs Badge IA avant de prendre des décisions d'achat, de consommer des nouvelles ou d'interagir avec du contenu sur les réseaux sociaux.",
+  creativeEconomyTitle: "Économie Créative",
+  creativeEconomyDescription:
+    "Badge IA a créé un nouveau système de valeurs où le contenu entièrement créé par l'humain peut être correctement reconnu et valorisé aux côtés du contenu assisté par l'IA ou généré par l'IA.",
+
+  // Timeline Section
+  timelineTitle: "Feuille de Route vers la Transparence",
+  timelinePhase1Title: "Phase 1 : Fondation",
+  timelinePhase1Subtitle: "Lancement & Adoption Initiale",
+  timelinePhase1Description:
+    "Établir le système et les outils Badge IA, encourageant l'adoption volontaire par les créateurs et les premiers partenaires.",
+  timelinePhase2Title: "Phase 2 : Intégration",
+  timelinePhase2Subtitle: "Partenariats Industriels",
+  timelinePhase2Description:
+    "Collaborer avec les principaux développeurs de logiciels et de plateformes pour intégrer les options Badge IA, incluant potentiellement les premières fonctionnalités de détection automatique.",
+  timelinePhase3Title: "Phase 3 : Standardisation",
+  timelinePhase3Subtitle: "Développement de Standards Ouverts",
+  timelinePhase3Description:
+    "Travailler à établir Badge IA comme standard ouvert pour les métadonnées, favorisant l'interopérabilité et s'alignant potentiellement sur les cadres réglementaires émergents.",
+  timelinePhase4Title: "Phase 4 : Adoption Universelle",
+  timelinePhase4Subtitle: "Écosystème Transparent",
+  timelinePhase4Description:
+    "La vision ultime : Badge IA est universellement intégré, avec des plateformes détectant, affichant et transférant automatiquement les données d'attribution IA, créant un environnement numérique transparent.",
 };
