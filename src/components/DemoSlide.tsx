@@ -74,11 +74,11 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
 
       {type === "text" ? (
         // Text slide with cinematic animations
-        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-8">
+        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-8 text-center">
           <div className="w-full max-w-3xl mx-auto">
             {title && (
               <h3
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6 sm:mb-8 opacity-0 animate-cinematic-title"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6 sm:mb-8 opacity-0 animate-cinematic-title mx-auto text-center"
                 style={{
                   animationDelay: "0.3s",
                   animationFillMode: "forwards",
@@ -91,7 +91,7 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
 
             {content && (
               <p
-                className="text-lg sm:text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto opacity-0 animate-cinematic-text"
+                className="text-lg sm:text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto opacity-0 animate-cinematic-text text-center"
                 style={{
                   animationDelay: "0.8s",
                   animationFillMode: "forwards",
@@ -107,14 +107,8 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
         // Full-screen SVG illustration slide
         <div className="relative z-10 w-full h-full flex items-center justify-center">
           {illustration && (
-            <div className="svg-container w-full h-full flex items-center justify-center max-w-none">
-              <div
-                style={{
-                  transform: "scale(5)",
-                  transformOrigin: "center center",
-                }}
-                className="animate-float"
-              >
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center">
+              <div className="animate-float" style={{ transform: "scale(5)" }}>
                 {illustration}
               </div>
             </div>
