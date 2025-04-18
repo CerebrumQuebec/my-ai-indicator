@@ -771,6 +771,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
               <div
                 className="w-full h-1.5 bg-gray-700/60 backdrop-blur-sm rounded-full mb-3 cursor-pointer relative overflow-hidden group"
                 onClick={(e) => {
+                  e.stopPropagation();
                   if (!containerRef.current) return;
                   const rect = e.currentTarget.getBoundingClientRect();
                   const position = (e.clientX - rect.left) / rect.width;
