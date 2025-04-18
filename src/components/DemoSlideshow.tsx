@@ -139,11 +139,11 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
       {/* Control elements */}
       {!isPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60 z-20">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/90 z-20">
           <div className="text-center">
             <button
               onClick={onTogglePlay}
-              className="w-24 h-24 bg-primary-600/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse hover:bg-primary-600/40 transition-colors duration-300"
+              className="w-24 h-24 bg-primary-600/30 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse hover:bg-primary-600/50 transition-colors duration-300"
             >
               <span className="text-5xl">▶️</span>
             </button>
