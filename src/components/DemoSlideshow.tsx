@@ -33,6 +33,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const [showControls, setShowControls] = useState(true);
   const [controlsInactive, setControlsInactive] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [enteringFullscreen, setEnteringFullscreen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -174,25 +175,30 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     };
   }, []);
 
-  // Function to toggle fullscreen
+  // Function to toggle fullscreen with enhanced transition
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
+      // Entering fullscreen
+      setEnteringFullscreen(true);
+
       if (playerContainerRef.current?.requestFullscreen) {
         playerContainerRef.current.requestFullscreen().catch((err) => {
           console.error(
             `Error attempting to enable full-screen mode: ${err.message}`
           );
+          setEnteringFullscreen(false);
         });
-        setIsFullScreen(true);
+      } else {
+        setEnteringFullscreen(false);
       }
     } else {
+      // Exiting fullscreen
       if (document.exitFullscreen) {
         document.exitFullscreen().catch((err) => {
           console.error(
             `Error attempting to exit full-screen mode: ${err.message}`
           );
         });
-        setIsFullScreen(false);
       }
     }
   };
@@ -200,7 +206,19 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   // Listen for fullscreen change events
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullScreen(!!document.fullscreenElement);
+      const isInFullScreen = !!document.fullscreenElement;
+      setIsFullScreen(isInFullScreen);
+
+      // Reset entering state after transition
+      if (isInFullScreen) {
+        setTimeout(() => {
+          setEnteringFullscreen(false);
+        }, 800); // Match this with the transition duration
+      }
+
+      // Always show controls briefly when fullscreen state changes
+      setShowControls(true);
+      startControlsTimer();
     };
 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
@@ -321,11 +339,38 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       ref={playerContainerRef}
       className={`video-player-container w-full mx-auto select-none ${
         isFullScreen ? "fixed inset-0 z-50 bg-black" : ""
-      }`}
+      } ${enteringFullscreen ? "animate-fullscreen-appear" : ""}`}
       onMouseMove={handleInteraction}
       onTouchStart={handleInteraction}
     >
       <style jsx global>{`
+        /* Fullscreen styles */
+        .fullscreen-video {
+          width: 100vw !important;
+          height: 100vh !important;
+          padding-top: 0 !important;
+          max-width: none !important;
+          max-height: none !important;
+          margin: 0 !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0 !important;
+        }
+
+        /* Enhanced keyframes for fullscreen mode */
+        @keyframes fullscreen-appear {
+          0% {
+            opacity: 0;
+            transform: scale(0.98);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        /* Other animations */
         @keyframes cinematic-title {
           0% {
             opacity: 0;
@@ -508,14 +553,9 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
           animation-delay: var(--delay, 0s);
         }
 
-        /* Fullscreen styles */
-        .fullscreen-video {
-          width: 100% !important;
-          height: 100% !important;
-          padding-top: 0 !important;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .animate-fullscreen-appear {
+          animation: fullscreen-appear 0.8s cubic-bezier(0.16, 1, 0.3, 1)
+            forwards;
         }
       `}</style>
 
@@ -523,7 +563,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       <div
         className={`relative ${
           isFullScreen ? "fullscreen-video" : "w-full pt-[56.25%]"
-        } bg-black rounded-xl overflow-hidden border border-primary-600/30 shadow-lg`}
+        } bg-black rounded-xl overflow-hidden border border-primary-600/30 shadow-lg transition-all duration-500`}
       >
         {/* Video content container */}
         <div
@@ -532,7 +572,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
             isFullScreen
               ? "w-full h-full"
               : "absolute top-0 left-0 right-0 bottom-0 w-full h-full"
-          } overflow-hidden`}
+          } overflow-hidden transition-all duration-500`}
         >
           {/* Futuristic sci-fi background effects that are always present */}
           <div className="absolute inset-0 z-0">
@@ -670,7 +710,9 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
             <div
               ref={controlsRef}
               className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-20 pb-4 px-4 z-30 transition-opacity duration-500 ${
-                showControls ? "opacity-100" : "opacity-0 pointer-events-none"
+                showControls
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 pointer-events-none"
               }`}
             >
               {/* Progress bar */}
@@ -684,15 +726,20 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                   setCurrentSlide(
                     Math.min(Math.max(0, newSlide), slides.length - 1)
                   );
+                  // Always show controls briefly after user interaction with progress bar
+                  setShowControls(true);
+                  startControlsTimer();
                 }}
               >
                 {/* Progress glow effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-40 bg-primary-400/20 blur-sm transition-opacity duration-300"></div>
 
+                {/* Progress bar fill */}
                 <div
                   className="h-full bg-gradient-to-r from-primary-600 via-accent-indigo to-primary-400 rounded-full transition-all duration-300"
                   style={{ width: `${progressPercentage}%` }}
                 >
+                  {/* Progress handle */}
                   <div
                     className="w-3 h-3 bg-white rounded-full absolute -top-1 shadow-glow"
                     style={{
@@ -732,7 +779,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                       isFullScreen ? "Exit fullscreen" : "Enter fullscreen"
                     }
                   >
-                    <span className="text-lg">{isFullScreen ? "⛶" : "⛶"}</span>
+                    <span className="text-lg">{isFullScreen ? "⎋" : "⛶"}</span>
                   </button>
 
                   {/* Stop button */}

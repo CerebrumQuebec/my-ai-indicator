@@ -324,27 +324,6 @@ const SlideIllustration7: React.FC = () => {
         </text>
       </g>
 
-      {/* Start today banner */}
-      <rect
-        x="35"
-        y="95"
-        width="50"
-        height="10"
-        rx="2"
-        fill="#334155"
-        fillOpacity="0.7"
-      />
-      <text
-        x="60"
-        y="101.5"
-        textAnchor="middle"
-        fontSize="6"
-        fill="#67E8F9"
-        fontFamily="monospace"
-      >
-        Start Today!
-      </text>
-
       <defs>
         <radialGradient
           id="paint0_radial"
