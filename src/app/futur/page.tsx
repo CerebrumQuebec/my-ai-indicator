@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useTranslation } from "../../contexts/TranslationContext";
 import Image from "next/image";
+import DemoSlideshow from "../../components/DemoSlideshow";
 
 export default function Future() {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ export default function Future() {
     new Set()
   );
   const [aiSlider, setAiSlider] = useState(50);
+  const [isPlayingDemo, setIsPlayingDemo] = useState(false);
 
   useEffect(() => {
     // Intersection Observer for scroll animations
@@ -158,6 +160,11 @@ export default function Future() {
         description: "AI-collaborative writing",
       },
     ],
+  };
+
+  // New toggle function for demo
+  const handleToggleDemo = () => {
+    setIsPlayingDemo(!isPlayingDemo);
   };
 
   return (
@@ -1402,31 +1409,10 @@ const badgeMetadata = await response.json();`}
             {t("interactiveDemoTitle")}
           </h2>
 
-          <div className="aspect-video rounded-xl border border-white/10 overflow-hidden bg-black/60 relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-primary-600/20 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
-                  <span className="text-5xl">▶️</span>
-                </div>
-                <p className="text-text-primary text-lg font-medium">
-                  {t("demoComingSoonTitle")}
-                </p>
-                <p className="text-text-secondary mt-2">
-                  {t("demoComingSoonDescription")}
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup UI elements */}
-            <div className="absolute bottom-4 left-4 flex space-x-2 opacity-70">
-              <div className="px-2 py-1 bg-surface-dark/70 backdrop-blur-md rounded-md text-xs font-mono text-primary-400 border border-primary-600/30">
-                S-AI-2
-              </div>
-              <div className="px-2 py-1 bg-surface-dark/70 backdrop-blur-md rounded-md text-xs font-mono text-accent-indigo border border-accent-indigo/30">
-                V-AI-3
-              </div>
-            </div>
-          </div>
+          <DemoSlideshow
+            isPlaying={isPlayingDemo}
+            onTogglePlay={handleToggleDemo}
+          />
         </section>
 
         {/* Timeline */}

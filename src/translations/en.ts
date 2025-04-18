@@ -712,6 +712,40 @@ export const en = {
   futureFaqAnswer6:
     "When properly integrated, editing software will update the Badge AI metadata in real-time as modifications are made. If the AI contribution level changes due to edits, the badge will be automatically adjusted to reflect the new balance.",
 
+  // Interactive Demo Slideshow
+  interactiveDemoStart: "Start Demo",
+  interactiveDemoStop: "Stop Demo",
+  interactiveDemoLoading: "Loading...",
+
+  // Slideshow slides
+  slide1Title: "What is Badge AI?",
+  slide1Content:
+    "Badge AI is a standardized system to communicate AI involvement in creative works. It allows creators to be transparent about how AI was used in their process.",
+
+  slide2Title: "The Three Categories",
+  slide2Content:
+    "Badge AI covers three main content types: Sounds (S), Visual (V), and Text (T), ensuring comprehensive classification across all media.",
+
+  slide3Title: "Five Levels of AI Involvement",
+  slide3Content:
+    "From 0 (Human Only) to 4 (AI Only), Badge AI precisely indicates the balance between human creativity and artificial intelligence.",
+
+  slide4Title: "Real-Time Detection",
+  slide4Content:
+    "Creative software can automatically analyze AI contribution and assign the appropriate badge level as you work.",
+
+  slide5Title: "Seamless Integration",
+  slide5Content:
+    "Badge AI metadata travels with your content across platforms, preserving the transparency throughout the digital ecosystem.",
+
+  slide6Title: "Universal Adoption",
+  slide6Content:
+    "Our vision is Badge AI becoming the standard for AI attribution, supported by all major platforms and creative tools.",
+
+  slide7Title: "Start Using Badge AI Today",
+  slide7Content:
+    "Join us in building a more transparent creative future where AI contribution is clearly communicated.",
+
   // Digital Trust Section
   digitalTrustTitle: "A New Era of Digital Trust",
   protectionTitle: "Protection from Misinformation",

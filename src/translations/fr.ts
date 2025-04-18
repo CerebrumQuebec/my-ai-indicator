@@ -726,6 +726,40 @@ export const fr = {
   futureFaqAnswer6:
     "Lorsqu'ils sont correctement intégrés, les logiciels d'édition mettront à jour les métadonnées Badge IA en temps réel à mesure que des modifications sont apportées. Si le niveau de contribution de l'IA change en raison des modifications, le badge sera automatiquement ajusté pour refléter le nouvel équilibre.",
 
+  // Interactive Demo Slideshow
+  interactiveDemoStart: "Démarrer la Démo",
+  interactiveDemoStop: "Arrêter la Démo",
+  interactiveDemoLoading: "Chargement...",
+
+  // Slideshow slides
+  slide1Title: "Qu'est-ce que Badge IA ?",
+  slide1Content:
+    "Badge IA est un système standardisé pour communiquer l'implication de l'IA dans les œuvres créatives. Il permet aux créateurs d'être transparents sur la façon dont l'IA a été utilisée dans leur processus.",
+
+  slide2Title: "Les Trois Catégories",
+  slide2Content:
+    "Badge IA couvre trois types de contenu principaux : Sons (S), Visuel (V) et Texte (T), assurant une classification complète pour tous les médias.",
+
+  slide3Title: "Cinq Niveaux d'Implication de l'IA",
+  slide3Content:
+    "De 0 (Humain Uniquement) à 4 (IA Uniquement), Badge IA indique précisément l'équilibre entre créativité humaine et intelligence artificielle.",
+
+  slide4Title: "Détection en Temps Réel",
+  slide4Content:
+    "Les logiciels créatifs peuvent analyser automatiquement la contribution de l'IA et attribuer le niveau de badge approprié pendant que vous travaillez.",
+
+  slide5Title: "Intégration Transparente",
+  slide5Content:
+    "Les métadonnées Badge IA voyagent avec votre contenu à travers les plateformes, préservant la transparence dans tout l'écosystème numérique.",
+
+  slide6Title: "Adoption Universelle",
+  slide6Content:
+    "Notre vision est que Badge IA devienne la norme pour l'attribution de l'IA, soutenue par toutes les principales plateformes et outils créatifs.",
+
+  slide7Title: "Commencez à Utiliser Badge IA Dès Aujourd'hui",
+  slide7Content:
+    "Rejoignez-nous pour construire un avenir créatif plus transparent où la contribution de l'IA est clairement communiquée.",
+
   // Digital Trust Section
   digitalTrustTitle: "Une Nouvelle Ère de Confiance Numérique",
   protectionTitle: "Protection contre la Désinformation",
