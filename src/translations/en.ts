@@ -7,6 +7,11 @@ export const en = {
   contact: "Contact",
   donate: "Donate",
 
+  // Vision Section
+  ourVisionTitle: "Our Vision",
+  ourVisionDescription:
+    "Experience how Badge AI will seamlessly integrate into the creative process, providing real-time transparency about AI involvement in digital content.",
+
   // Donation
   donateTitle: "Make a donation",
   oneTimeDonation: "One-time",
@@ -720,31 +725,31 @@ export const en = {
   // Slideshow slides
   slide1Title: "What is Badge AI?",
   slide1Content:
-    "Badge AI is a standardized system to communicate AI involvement in creative works. It allows creators to be transparent about how AI was used in their process.",
+    "Badge AI is a standardized system that helps creators be transparent about AI usage in their work. Currently, you can manually declare AI involvement, and in the future, this process will become automated.",
 
   slide2Title: "The Three Categories",
   slide2Content:
-    "Badge AI covers three main content types: Sounds (S), Visual (V), and Text (T), ensuring comprehensive classification across all media.",
+    "Currently available: Three main content types (Sounds, Visual, Text) with manual classification. Future vision: Automatic content type detection and multi-category support for hybrid works.",
 
   slide3Title: "Five Levels of AI Involvement",
   slide3Content:
-    "From 0 (Human Only) to 4 (AI Only), Badge AI precisely indicates the balance between human creativity and artificial intelligence.",
+    "Available now: Five clear levels from Human Only (0) to AI Only (4). Coming soon: Detailed percentage-based tracking and component-level AI contribution analysis.",
 
-  slide4Title: "Real-Time Detection",
+  slide4Title: "AI Usage Declaration",
   slide4Content:
-    "Creative software can automatically analyze AI contribution and assign the appropriate badge level as you work.",
+    "Current feature: Manual selection through our questionnaire system. Future vision: Real-time AI detection and automatic badge assignment integrated into creative software.",
 
-  slide5Title: "Seamless Integration",
+  slide5Title: "Badge Integration",
   slide5Content:
-    "Badge AI metadata travels with your content across platforms, preserving the transparency throughout the digital ecosystem.",
+    "Currently: HTML, JSON-LD, and markdown code for manual badge integration. Future: Automatic metadata embedding and cross-platform badge preservation.",
 
-  slide6Title: "Universal Adoption",
+  slide6Title: "Platform Support",
   slide6Content:
-    "Our vision is Badge AI becoming the standard for AI attribution, supported by all major platforms and creative tools.",
+    "Current: Web-based badge generation and documentation. Future vision: Native integration with major creative platforms and social media, with automatic badge synchronization.",
 
-  slide7Title: "Start Using Badge AI Today",
+  slide7Title: "Join the Evolution",
   slide7Content:
-    "Join us in building a more transparent creative future where AI contribution is clearly communicated.",
+    "Start using Badge AI today with our manual classification system, and be part of our journey toward automated, standardized AI attribution across the digital ecosystem.",
 
   // Digital Trust Section
   digitalTrustTitle: "A New Era of Digital Trust",

@@ -180,6 +180,15 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     };
   }, []);
 
+  // Handle unmounting
+  useEffect(() => {
+    return () => {
+      if (isPlaying) {
+        onTogglePlay();
+      }
+    };
+  }, [isPlaying, onTogglePlay]);
+
   // Debounced resize handler
   const debouncedResizeHandler = useCallback(
     debounce((entries: ResizeObserverEntry[]) => {
@@ -378,6 +387,11 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       } ${enteringFullscreen ? "animate-fullscreen-appear" : ""}`}
       onMouseMove={handleInteraction}
       onTouchStart={handleInteraction}
+      onClick={() => {
+        if (isPlaying) {
+          onTogglePlay();
+        }
+      }}
     >
       <style jsx global>{`
         /* Fullscreen styles */

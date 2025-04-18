@@ -7,6 +7,11 @@ export const fr = {
   contact: "Contact",
   donate: "Faire un don",
 
+  // Vision Section
+  ourVisionTitle: "Notre Vision",
+  ourVisionDescription:
+    "Découvrez comment Badge IA s'intégrera de manière transparente dans le processus créatif, offrant une transparence en temps réel sur l'implication de l'IA dans le contenu numérique.",
+
   // Donation
   donateTitle: "Faire un don",
   oneTimeDonation: "Unique",
@@ -732,33 +737,33 @@ export const fr = {
   interactiveDemoLoading: "Chargement...",
 
   // Slideshow slides
-  slide1Title: "Qu'est-ce que Badge IA ?",
+  slide1Title: "Qu'est-ce que Badge AI ?",
   slide1Content:
-    "Badge IA est un système standardisé pour communiquer l'implication de l'IA dans les œuvres créatives. Il permet aux créateurs d'être transparents sur la façon dont l'IA a été utilisée dans leur processus.",
+    "Badge AI est un système standardisé qui aide les créateurs à être transparents sur l'utilisation de l'IA dans leur travail. Actuellement, vous pouvez déclarer manuellement l'implication de l'IA, et à l'avenir, ce processus deviendra automatisé.",
 
   slide2Title: "Les Trois Catégories",
   slide2Content:
-    "Badge IA couvre trois types de contenu principaux : Sons (S), Visuel (V) et Texte (T), assurant une classification complète pour tous les médias.",
+    "Disponible actuellement : Trois types de contenu principaux (Sons, Visuel, Texte) avec classification manuelle. Vision future : Détection automatique du type de contenu et support multi-catégories pour les œuvres hybrides.",
 
   slide3Title: "Cinq Niveaux d'Implication de l'IA",
   slide3Content:
-    "De 0 (Humain Uniquement) à 4 (IA Uniquement), Badge IA indique précisément l'équilibre entre créativité humaine et intelligence artificielle.",
+    "Disponible maintenant : Cinq niveaux clairs, de Humain Uniquement (0) à IA Uniquement (4). À venir : Suivi détaillé basé sur les pourcentages et analyse de la contribution de l'IA au niveau des composants.",
 
-  slide4Title: "Détection en Temps Réel",
+  slide4Title: "Déclaration d'Utilisation de l'IA",
   slide4Content:
-    "Les logiciels créatifs peuvent analyser automatiquement la contribution de l'IA et attribuer le niveau de badge approprié pendant que vous travaillez.",
+    "Fonctionnalité actuelle : Sélection manuelle via notre système de questionnaire. Vision future : Détection en temps réel de l'IA et attribution automatique des badges intégrée aux logiciels créatifs.",
 
-  slide5Title: "Intégration Transparente",
+  slide5Title: "Intégration des Badges",
   slide5Content:
-    "Les métadonnées Badge IA voyagent avec votre contenu à travers les plateformes, préservant la transparence dans tout l'écosystème numérique.",
+    "Actuellement : Code HTML, JSON-LD et markdown pour l'intégration manuelle des badges. Futur : Intégration automatique des métadonnées et préservation des badges sur toutes les plateformes.",
 
-  slide6Title: "Adoption Universelle",
+  slide6Title: "Support des Plateformes",
   slide6Content:
-    "Notre vision est que Badge IA devienne la norme pour l'attribution de l'IA, soutenue par toutes les principales plateformes et outils créatifs.",
+    "Actuel : Génération de badges et documentation web. Vision future : Intégration native avec les principales plateformes créatives et réseaux sociaux, avec synchronisation automatique des badges.",
 
-  slide7Title: "Commencez à Utiliser Badge IA Dès Aujourd'hui",
+  slide7Title: "Rejoignez l'Évolution",
   slide7Content:
-    "Rejoignez-nous pour construire un avenir créatif plus transparent où la contribution de l'IA est clairement communiquée.",
+    "Commencez à utiliser Badge AI aujourd'hui avec notre système de classification manuelle, et participez à notre voyage vers une attribution standardisée et automatisée de l'IA dans tout l'écosystème numérique.",
 
   // Digital Trust Section
   digitalTrustTitle: "Une Nouvelle Ère de Confiance Numérique",
