@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import DemoSlide from "./DemoSlide";
 import { useTranslation } from "../contexts/TranslationContext";
 import {
@@ -10,6 +10,7 @@ import {
   SlideIllustration6,
   SlideIllustration7,
 } from "./slideIllustrations";
+import { debounce } from "../utils/debounce";
 
 interface DemoSlideshowProps {
   isPlaying: boolean;
@@ -41,6 +42,10 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
   const userInteractedRef = useRef(false);
+  const [containerDimensions, setContainerDimensions] = useState<{
+    width: number;
+    height: number;
+  }>({ width: 0, height: 0 });
 
   // Create an array of slides alternating between text and SVG
   const createSlides = (): SlideData[] => {
@@ -174,6 +179,37 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       }
     };
   }, []);
+
+  // Debounced resize handler
+  const debouncedResizeHandler = useCallback(
+    debounce((entries: ResizeObserverEntry[]) => {
+      if (entries && entries.length > 0) {
+        const { width, height } = entries[0].contentRect;
+        setContainerDimensions({ width, height });
+      }
+    }, 150), // Debounce resize updates (e.g., 150ms delay)
+    []
+  );
+
+  // Observe container size changes
+  useEffect(() => {
+    const observer = new ResizeObserver(debouncedResizeHandler);
+    const currentContainer = containerRef.current;
+
+    if (currentContainer) {
+      observer.observe(currentContainer);
+      // Initial size check
+      const { width, height } = currentContainer.getBoundingClientRect();
+      setContainerDimensions({ width, height });
+    }
+
+    return () => {
+      if (currentContainer) {
+        observer.unobserve(currentContainer);
+      }
+      debouncedResizeHandler.cancel(); // Cancel any pending debounce on unmount
+    };
+  }, [debouncedResizeHandler]);
 
   // Function to toggle fullscreen with enhanced transition
   const toggleFullScreen = () => {
@@ -679,6 +715,8 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
               type={slide.type}
               illustration={slide.illustration}
               animationDelay={index % 2}
+              containerWidth={containerDimensions.width}
+              containerHeight={containerDimensions.height}
             />
           ))}
 

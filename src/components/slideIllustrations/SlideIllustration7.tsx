@@ -3,11 +3,12 @@ import React from "react";
 const SlideIllustration7: React.FC = () => {
   return (
     <svg
-      width="120"
-      height="120"
-      viewBox="0 0 120 120"
+      viewBox="0 0 150 150"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      height="100%"
+      preserveAspectRatio="xMidYMid meet"
     >
       {/* Background circle */}
       <circle

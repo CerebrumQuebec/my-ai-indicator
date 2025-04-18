@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState, useRef } from "react";
+import React, { ReactNode, useMemo } from "react";
 
 interface DemoSlideProps {
   title?: string;
@@ -8,6 +8,8 @@ interface DemoSlideProps {
   isActive: boolean;
   type: "text" | "svg";
   animationDelay?: number;
+  containerWidth: number;
+  containerHeight: number;
 }
 
 const DemoSlide: React.FC<DemoSlideProps> = ({
@@ -18,76 +20,88 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
   isActive,
   type,
   animationDelay = 0,
+  containerWidth,
+  containerHeight,
 }) => {
-  const [svgScale, setSvgScale] = useState(5); // Default scale
-  const [textSizes, setTextSizes] = useState({
-    titleSize: "2.5rem",
-    contentSize: "1.2rem",
-    titleMargin: "1.5rem",
-  });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Update scale and text sizes based on container size
-  useEffect(() => {
-    const updateSizes = () => {
-      if (!containerRef.current) return;
-
-      const container = containerRef.current;
-      const rect = container.getBoundingClientRect();
-
-      // Calculate the appropriate scale based on the container size
-      // Use the smaller dimension to ensure SVG fits completely
-      const minDimension = Math.min(rect.width, rect.height);
-
-      // Base size is around 120px (for most SVGs in the illustrations)
-      // We want it to take up about 75% of the available space
-      let newScale = (minDimension * 0.75) / 120;
-
-      // Ensure scale is reasonable and not too small or too large
-      newScale = Math.max(3, Math.min(12, newScale));
-
-      setSvgScale(newScale);
-
-      // Calculate text sizes based on container dimensions
-      const isFullScreen = !!document.fullscreenElement;
-      const baseTitleSize = isFullScreen
-        ? Math.max(2, minDimension * 0.035)
-        : Math.max(1.5, minDimension * 0.03);
-
-      const baseContentSize = isFullScreen
-        ? Math.max(1.2, minDimension * 0.022)
-        : Math.max(1, minDimension * 0.018);
-
-      const titleMargin = isFullScreen
-        ? Math.max(1.5, minDimension * 0.02)
-        : Math.max(1, minDimension * 0.015);
-
-      setTextSizes({
-        titleSize: `${Math.min(4, baseTitleSize)}rem`,
-        contentSize: `${Math.min(2, baseContentSize)}rem`,
-        titleMargin: `${Math.min(3, titleMargin)}rem`,
-      });
-    };
-
-    // Initial calculation
-    updateSizes();
-
-    // Recalculate on resize and fullscreen change
-    window.addEventListener("resize", updateSizes);
-    document.addEventListener("fullscreenchange", updateSizes);
-
-    // Also update when the slide becomes active
-    if (isActive) {
-      // Small delay to allow transitions to complete
-      const timer = setTimeout(updateSizes, 100);
-      return () => clearTimeout(timer);
+  // Calculate sizes based on passed container dimensions
+  const { textSizes, svgContainerStyle } = useMemo(() => {
+    if (containerWidth === 0 || containerHeight === 0) {
+      // Return default/initial sizes if dimensions are not yet available
+      return {
+        textSizes: {
+          titleSize: "1.5rem",
+          contentSize: "1rem",
+          titleMargin: "1rem",
+        },
+        svgContainerStyle: {
+          width: "80%", // Default width
+          height: "80%", // Default height
+          maxWidth: "500px", // Max size constraint
+          maxHeight: "500px",
+        },
+      };
     }
 
-    return () => {
-      window.removeEventListener("resize", updateSizes);
-      document.removeEventListener("fullscreenchange", updateSizes);
+    const minDimension = Math.min(containerWidth, containerHeight);
+    const isFullScreen = !!document.fullscreenElement; // Keep fullscreen check for potential adjustments
+
+    // --- Text Size Calculation --- Adjusted for better scaling & fullscreen
+    // Use viewport units (vw/vh) or container dimensions for more responsive scaling
+    const widthFactor = containerWidth / 100; // Represents 1vw equivalent within container
+    const heightFactor = containerHeight / 100; // Represents 1vh equivalent within container
+
+    // Base sizes using a mix of factors, slightly more aggressive
+    let baseTitleVw = isFullScreen ? 5 : 3.5;
+    let baseContentVw = isFullScreen ? 2.5 : 1.8;
+    let baseTitleVh = isFullScreen ? 6 : 4;
+    let baseContentVh = isFullScreen ? 3 : 2.2;
+
+    // Choose the smaller dimension's factor to prevent overflow
+    const titleSizeCalc = Math.min(
+      widthFactor * baseTitleVw,
+      heightFactor * baseTitleVh
+    );
+    const contentSizeCalc = Math.min(
+      widthFactor * baseContentVw,
+      heightFactor * baseContentVh
+    );
+
+    // Apply minimum and maximum caps (in rem)
+    const finalTitleSize = Math.min(
+      isFullScreen ? 8 : 5,
+      Math.max(isFullScreen ? 2.5 : 1.8, titleSizeCalc / 16)
+    ); // Convert px calculation to rem
+    const finalContentSize = Math.min(
+      isFullScreen ? 4 : 2.5,
+      Math.max(isFullScreen ? 1.5 : 1.1, contentSizeCalc / 16)
+    ); // Convert px calculation to rem
+
+    // Adjust margin based on title size
+    const titleMargin = `${Math.min(4, Math.max(1, finalTitleSize * 0.5))}rem`;
+
+    const calculatedTextSizes = {
+      titleSize: `${finalTitleSize}rem`,
+      contentSize: `${finalContentSize}rem`,
+      titleMargin: titleMargin,
     };
-  }, [isActive]);
+
+    // --- SVG Size Calculation ---
+    // Aim for SVG to take ~80% of the smaller dimension, but allow flexibility
+    const svgSize = Math.min(containerWidth * 0.85, containerHeight * 0.85);
+
+    const calculatedSvgContainerStyle = {
+      width: `${svgSize}px`,
+      height: `${svgSize}px`,
+      // Optional: Add max size constraints if needed, e.g.,
+      // maxWidth: '90vw',
+      // maxHeight: '90vh',
+    };
+
+    return {
+      textSizes: calculatedTextSizes,
+      svgContainerStyle: calculatedSvgContainerStyle,
+    };
+  }, [containerWidth, containerHeight]);
 
   return (
     <div
@@ -97,7 +111,6 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
           : "opacity-0 z-0 blur-md scale-105"
       }`}
       style={{ transitionDelay: `${animationDelay * 0.1}s` }}
-      ref={containerRef}
     >
       {/* Futuristic background effects for all slides */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
@@ -159,7 +172,9 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
                   marginBottom: textSizes.titleMargin,
                   animationDelay: "0.3s",
                   animationFillMode: "forwards",
-                  textShadow: "0 0 15px rgba(103, 232, 249, 0.5)",
+                  // Increased text shadow for better contrast
+                  textShadow:
+                    "0 0 10px rgba(103, 232, 249, 0.6), 0 0 25px rgba(103, 232, 249, 0.4)",
                 }}
               >
                 {title}
@@ -172,10 +187,12 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
                 style={{
                   fontSize: textSizes.contentSize,
                   lineHeight: "1.5",
-                  maxWidth: "80vmin",
+                  maxWidth: "80vmin", // Keep vmin for max width constraint
                   animationDelay: "0.8s",
                   animationFillMode: "forwards",
-                  textShadow: "0 0 10px rgba(103, 232, 249, 0.3)",
+                  // Increased text shadow for better contrast
+                  textShadow:
+                    "0 0 8px rgba(103, 232, 249, 0.5), 0 0 15px rgba(103, 232, 249, 0.3)",
                 }}
               >
                 {content}
@@ -184,14 +201,14 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
           </div>
         ) : (
           // SVG illustration slide content
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center p-4">
             {illustration && (
               <div
-                className="will-change-transform"
+                className="will-change-transform flex items-center justify-center"
                 style={{
-                  transform: `scale(${svgScale})`,
+                  ...svgContainerStyle,
                   transformOrigin: "center center",
-                  transition: "transform 0.5s ease-in-out",
+                  transition: "width 0.3s ease-in-out, height 0.3s ease-in-out",
                 }}
               >
                 {illustration}
