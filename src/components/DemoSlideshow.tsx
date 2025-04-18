@@ -32,10 +32,12 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showControls, setShowControls] = useState(true);
   const [controlsInactive, setControlsInactive] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const playerContainerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
   const userInteractedRef = useRef(false);
 
@@ -172,6 +174,42 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     };
   }, []);
 
+  // Function to toggle fullscreen
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      if (playerContainerRef.current?.requestFullscreen) {
+        playerContainerRef.current.requestFullscreen().catch((err) => {
+          console.error(
+            `Error attempting to enable full-screen mode: ${err.message}`
+          );
+        });
+        setIsFullScreen(true);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch((err) => {
+          console.error(
+            `Error attempting to exit full-screen mode: ${err.message}`
+          );
+        });
+        setIsFullScreen(false);
+      }
+    }
+  };
+
+  // Listen for fullscreen change events
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullScreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
+
   // Function to hide controls after timeout
   const startControlsTimer = () => {
     if (controlsTimerRef.current) {
@@ -280,7 +318,10 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
   return (
     <div
-      className="video-player-container w-full mx-auto select-none"
+      ref={playerContainerRef}
+      className={`video-player-container w-full mx-auto select-none ${
+        isFullScreen ? "fixed inset-0 z-50 bg-black" : ""
+      }`}
       onMouseMove={handleInteraction}
       onTouchStart={handleInteraction}
     >
@@ -466,14 +507,32 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
           animation: comet-reverse var(--duration, 8s) linear infinite;
           animation-delay: var(--delay, 0s);
         }
+
+        /* Fullscreen styles */
+        .fullscreen-video {
+          width: 100% !important;
+          height: 100% !important;
+          padding-top: 0 !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       `}</style>
 
-      {/* Outer container with fixed aspect ratio */}
-      <div className="relative w-full pt-[56.25%] bg-black rounded-xl overflow-hidden border border-primary-600/30 shadow-lg">
+      {/* Outer container with fixed aspect ratio - adjusts for fullscreen */}
+      <div
+        className={`relative ${
+          isFullScreen ? "fullscreen-video" : "w-full pt-[56.25%]"
+        } bg-black rounded-xl overflow-hidden border border-primary-600/30 shadow-lg`}
+      >
         {/* Video content container */}
         <div
           ref={containerRef}
-          className="absolute top-0 left-0 right-0 bottom-0 w-full h-full overflow-hidden"
+          className={`${
+            isFullScreen
+              ? "w-full h-full"
+              : "absolute top-0 left-0 right-0 bottom-0 w-full h-full"
+          } overflow-hidden`}
         >
           {/* Futuristic sci-fi background effects that are always present */}
           <div className="absolute inset-0 z-0">
@@ -664,17 +723,30 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                   </div>
                 </div>
 
-                {/* Stop button */}
-                <button
-                  onClick={onTogglePlay}
-                  className="px-3 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center space-x-1 shadow-glow-sm"
-                  aria-label="Stop"
-                >
-                  <span>⏹️</span>
-                  <span className="hidden sm:inline ml-1">
-                    {t("interactiveDemoStop")}
-                  </span>
-                </button>
+                <div className="flex items-center space-x-2">
+                  {/* Fullscreen button */}
+                  <button
+                    onClick={toggleFullScreen}
+                    className="px-2 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center shadow-glow-sm"
+                    aria-label={
+                      isFullScreen ? "Exit fullscreen" : "Enter fullscreen"
+                    }
+                  >
+                    <span className="text-lg">{isFullScreen ? "⛶" : "⛶"}</span>
+                  </button>
+
+                  {/* Stop button */}
+                  <button
+                    onClick={onTogglePlay}
+                    className="px-3 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center space-x-1 shadow-glow-sm"
+                    aria-label="Stop"
+                  >
+                    <span>⏹️</span>
+                    <span className="hidden sm:inline ml-1">
+                      {t("interactiveDemoStop")}
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
