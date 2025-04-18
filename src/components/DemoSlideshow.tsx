@@ -35,6 +35,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const [controlsInactive, setControlsInactive] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteringFullscreen, setEnteringFullscreen] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -389,6 +390,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       onTouchStart={handleInteraction}
       onClick={() => {
         if (isPlaying) {
+          setIsPaused(true);
           onTogglePlay();
         }
       }}
@@ -735,11 +737,15 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
           ))}
 
           {/* Control elements */}
-          {!isPlaying && (
+          {!isPlaying && !isPaused && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/90 z-20">
               <div className="text-center px-4 sm:px-0">
                 <button
-                  onClick={onTogglePlay}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPaused(false);
+                    onTogglePlay();
+                  }}
                   className="w-20 h-20 sm:w-24 sm:h-24 bg-primary-600/30 hover:bg-primary-600/50 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-pulse relative group transition-all duration-300"
                   aria-label="Play"
                 >
@@ -754,6 +760,23 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                   {t("demoComingSoonDescription")}
                 </p>
               </div>
+            </div>
+          )}
+
+          {!isPlaying && isPaused && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPaused(false);
+                  onTogglePlay();
+                }}
+                className="w-20 h-20 sm:w-24 sm:h-24 bg-primary-600/30 hover:bg-primary-600/50 rounded-full flex items-center justify-center animate-pulse relative group transition-all duration-300"
+                aria-label="Resume"
+              >
+                <div className="absolute inset-0 rounded-full bg-primary-600/20 group-hover:bg-primary-600/30 blur-md transition-all duration-300"></div>
+                <span className="text-4xl sm:text-5xl relative z-10">▶️</span>
+              </button>
             </div>
           )}
 
@@ -842,6 +865,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      setIsPaused(false);
                       onTogglePlay();
                     }}
                     className="px-3 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center space-x-1 shadow-glow-sm"
