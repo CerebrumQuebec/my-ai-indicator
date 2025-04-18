@@ -179,12 +179,16 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
       timerRef.current = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
-        // Show controls briefly when changing slides
-        setShowControls(true);
-        startControlsTimer();
+        // Only show controls briefly on the first slide to indicate functionality
+        // but maintain current visibility state on subsequent slides
+        if (currentSlide === 0) {
+          setShowControls(true);
+          startControlsTimer();
+        }
       }, 4000); // Change slide every 4 seconds
 
-      // Start the timer to hide controls
+      // Start the timer to hide controls initially
+      setShowControls(true);
       startControlsTimer();
     } else if (audioRef.current) {
       audioRef.current.pause();
@@ -210,7 +214,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
         clearTimeout(controlsTimerRef.current);
       }
     };
-  }, [isPlaying, slides.length]);
+  }, [isPlaying, slides.length, currentSlide]);
 
   // Function to restart the controls hide timer
   const startControlsTimer = () => {
