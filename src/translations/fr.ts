@@ -737,33 +737,40 @@ export const fr = {
   interactiveDemoLoading: "Chargement...",
 
   // Slideshow slides
-  slide1Title: "Qu'est-ce que Badge AI ?",
+  slide1Title:
+    "Badge AI deviendra la norme universelle pour la transparence de l'IA dans les créations",
   slide1Content:
-    "Badge AI est un système standardisé qui aide les créateurs à être transparents sur l'utilisation de l'IA dans leur travail. Actuellement, vous pouvez déclarer manuellement l'implication de l'IA, et à l'avenir, ce processus deviendra automatisé.",
+    "Évolution des déclarations manuelles vers une attribution entièrement automatisée et fluide dans tous les médias numériques.",
 
-  slide2Title: "Les Trois Catégories",
+  slide2Title:
+    "La classification intelligente reconnaîtra instantanément les éléments Sonores, Visuels et Textuels",
   slide2Content:
-    "Disponible actuellement : Trois types de contenu principaux (Sons, Visuel, Texte) avec classification manuelle. Vision future : Détection automatique du type de contenu et support multi-catégories pour les œuvres hybrides.",
+    "Des algorithmes avancés détecteront automatiquement plusieurs types de contenu dans les œuvres hybrides avec précision.",
 
-  slide3Title: "Cinq Niveaux d'Implication de l'IA",
+  slide3Title:
+    "L'analyse d'implication de l'IA fournira des métriques granulaires au niveau des composants",
   slide3Content:
-    "Disponible maintenant : Cinq niveaux clairs, de Humain Uniquement (0) à IA Uniquement (4). À venir : Suivi détaillé basé sur les pourcentages et analyse de la contribution de l'IA au niveau des composants.",
+    "Au-delà de l'échelle à cinq niveaux, des répartitions détaillées par pourcentage révéleront les contributions exactes de l'IA dans les œuvres.",
 
-  slide4Title: "Déclaration d'Utilisation de l'IA",
+  slide4Title:
+    "La détection en temps réel de l'IA s'intégrera directement dans les logiciels créatifs",
   slide4Content:
-    "Fonctionnalité actuelle : Sélection manuelle via notre système de questionnaire. Vision future : Détection en temps réel de l'IA et attribution automatique des badges intégrée aux logiciels créatifs.",
+    "Les badges intelligents seront attribués automatiquement pendant la création, éliminant le besoin de questionnaires manuels.",
 
-  slide5Title: "Intégration des Badges",
+  slide5Title:
+    "L'intégration fluide des badges persistera sur toutes les plateformes numériques",
   slide5Content:
-    "Actuellement : Code HTML, JSON-LD et markdown pour l'intégration manuelle des badges. Futur : Intégration automatique des métadonnées et préservation des badges sur toutes les plateformes.",
+    "Les métadonnées suivront le contenu partout, maintenant l'intégrité d'attribution dans tout l'écosystème numérique.",
 
-  slide6Title: "Support des Plateformes",
+  slide6Title:
+    "L'intégration native s'étendra à toutes les principales plateformes créatives et réseaux sociaux",
   slide6Content:
-    "Actuel : Génération de badges et documentation web. Vision future : Intégration native avec les principales plateformes créatives et réseaux sociaux, avec synchronisation automatique des badges.",
+    "La reconnaissance synchronisée des badges offrira une transparence cohérente dans tout le paysage numérique.",
 
-  slide7Title: "Rejoignez l'Évolution",
+  slide7Title:
+    "Une norme d'attribution mondiale émergera de notre écosystème communautaire",
   slide7Content:
-    "Commencez à utiliser Badge AI aujourd'hui avec notre système de classification manuelle, et participez à notre voyage vers une attribution standardisée et automatisée de l'IA dans tout l'écosystème numérique.",
+    "Rejoignez-nous aujourd'hui pour contribuer à façonner un avenir où l'attribution de l'IA devient aussi fondamentale que le droit d'auteur.",
 
   // Digital Trust Section
   digitalTrustTitle: "Une Nouvelle Ère de Confiance Numérique",
