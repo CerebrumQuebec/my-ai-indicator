@@ -825,7 +825,10 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                 <div className="flex items-center space-x-2">
                   {/* Fullscreen button */}
                   <button
-                    onClick={toggleFullScreen}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFullScreen();
+                    }}
                     className="px-2 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center shadow-glow-sm"
                     aria-label={
                       isFullScreen ? "Exit fullscreen" : "Enter fullscreen"
@@ -836,7 +839,10 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
                   {/* Stop button */}
                   <button
-                    onClick={onTogglePlay}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onTogglePlay();
+                    }}
                     className="px-3 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center space-x-1 shadow-glow-sm"
                     aria-label="Stop"
                   >
