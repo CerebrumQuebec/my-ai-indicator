@@ -655,6 +655,23 @@ export const fr = {
   photoshopIntegrationDescription:
     "Lorsque l'artiste utilise différents outils, le système analyse quelles opérations sont exécutées par l'humain ou générées par l'IA, l'image exportée finale portant une étiquette de métadonnées Badge IA.",
 
+  // Content Journey Section
+  contentJourneyTitle: "Traçabilité du Badge IA à Travers les Plateformes",
+  contentJourneyDescription:
+    "Suivez un contenu unique dans son parcours à travers plusieurs plateformes IA, avec l'historique complet du Badge IA préservé dans les métadonnées.",
+  iphoneStepDescription:
+    "Photo prise avec un iPhone utilisant le mode Portrait avec des effets de profondeur améliorés par l'IA",
+  chatgptStepDescription:
+    "Image utilisée comme référence et entièrement recréée à l'aide de la génération d'images DALL-E de ChatGPT",
+  photoshopStepDescription:
+    "Image générée par IA améliorée dans Photoshop avec des retouches humaines et des filtres alimentés par IA",
+  instagramStepDescription:
+    "Image finale partagée sur Instagram, qui affiche le niveau précis de Badge IA et donne accès à l'historique complet des contributions IA",
+  viewHistory: "Voir l'historique",
+  aiContributionHistory: "Historique des Contributions IA",
+  metadataSchemaNote:
+    "Le champ 'history' préserve le parcours complet du traitement IA et les niveaux de badge à travers les outils et plateformes.",
+
   // Badge AI Metadata Protocol
   metadataProtocolTitle: "Le Protocole de Métadonnées Badge IA",
   metadataSchemaTitle: "Schéma de Métadonnées Badge IA",

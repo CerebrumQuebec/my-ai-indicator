@@ -736,6 +736,302 @@ export default function Future() {
           </div>
         </section>
 
+        {/* Content Transformation Journey Section */}
+        <section
+          id="content-journey"
+          className="animate-on-scroll mb-20 max-w-4xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
+            {t("contentJourneyTitle")}
+          </h2>
+
+          <div className="bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+            <p className="text-text-secondary mb-8 text-center">
+              {t("contentJourneyDescription")}
+            </p>
+
+            <div className="relative">
+              {/* Vertical timeline line */}
+              <div className="absolute left-[calc(50%-1px)] top-0 bottom-0 w-0.5 bg-primary-600/30"></div>
+
+              <div className="space-y-16">
+                {/* Step 1: iPhone */}
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-full md:w-[calc(50%-2rem)] text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                      <div className="flex items-center justify-end mb-4">
+                        <span className="text-2xl mr-3">📱</span>
+                        <h3 className="text-xl font-bold text-text-primary">
+                          iPhone Camera
+                        </h3>
+                      </div>
+                      <p className="text-text-secondary text-sm mb-3">
+                        {t("iphoneStepDescription")}
+                      </p>
+                      <div className="flex justify-end">
+                        <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
+                          V-AI-1
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative w-12 h-12 flex-shrink-0 z-10">
+                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                      <span className="text-lg">1</span>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-[calc(50%-2rem)] md:pl-8">
+                    {/* Metadata Display */}
+                    <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
+                      <pre className="text-primary-400 text-[10px] text-left">
+                        {`{
+  "badgeAI": {
+    "version": "1.0",
+    "types": {
+      "visual": { "level": 1 }
+    },
+    "history": [
+      {
+        "tool": "iPhone Camera",
+        "timestamp": "2025-03-01T10:00:00Z"
+      }
+    ]
+  }
+}`}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 2: ChatGPT */}
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-full md:w-[calc(50%-2rem)] mb-6 md:mb-0 order-1 md:order-2">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                      <div className="flex items-center mb-4">
+                        <span className="text-2xl mr-3">🤖</span>
+                        <h3 className="text-xl font-bold text-text-primary">
+                          ChatGPT
+                        </h3>
+                      </div>
+                      <p className="text-text-secondary text-sm mb-3">
+                        {t("chatgptStepDescription")}
+                      </p>
+                      <div className="flex">
+                        <span className="text-xs font-mono text-accent-indigo bg-accent-indigo/10 px-2 py-0.5 rounded">
+                          V-AI-3
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative w-12 h-12 flex-shrink-0 z-10 order-2 md:order-1">
+                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                      <span className="text-lg">2</span>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 order-3 md:order-0">
+                    {/* Metadata Display */}
+                    <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
+                      <pre className="text-primary-400 text-[10px] text-left">
+                        {`{
+  "badgeAI": {
+    "version": "1.0",
+    "types": {
+      "visual": { "level": 3 }
+    },
+    "history": [
+      {
+        "tool": "iPhone Camera",
+        "timestamp": "2025-03-01T10:00:00Z",
+        "badge": "V-AI-1"
+      },
+      {
+        "tool": "ChatGPT Image Gen",
+        "timestamp": "2025-03-01T14:30:00Z"
+      }
+    ]
+  }
+}`}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 3: Photoshop */}
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-full md:w-[calc(50%-2rem)] text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                      <div className="flex items-center justify-end mb-4">
+                        <span className="text-2xl mr-3">🖌️</span>
+                        <h3 className="text-xl font-bold text-text-primary">
+                          Adobe Photoshop
+                        </h3>
+                      </div>
+                      <p className="text-text-secondary text-sm mb-3">
+                        {t("photoshopStepDescription")}
+                      </p>
+                      <div className="flex justify-end">
+                        <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
+                          V-AI-2
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative w-12 h-12 flex-shrink-0 z-10">
+                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                      <span className="text-lg">3</span>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-[calc(50%-2rem)] md:pl-8">
+                    {/* Metadata Display */}
+                    <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
+                      <pre className="text-primary-400 text-[10px] text-left">
+                        {`{
+  "badgeAI": {
+    "version": "1.0",
+    "types": {
+      "visual": { 
+        "level": 2,
+        "components": [
+          {
+            "name": "Base image",
+            "humanContribution": 0,
+            "aiContribution": 100,
+            "aiTools": ["ChatGPT"]
+          },
+          {
+            "name": "Retouching",
+            "humanContribution": 80,
+            "aiContribution": 20,
+            "aiTools": ["Adobe Sensei"]
+          }
+        ]
+      }
+    },
+    "history": [
+      {
+        "tool": "iPhone Camera",
+        "timestamp": "2025-03-01T10:00:00Z",
+        "badge": "V-AI-1"
+      },
+      {
+        "tool": "ChatGPT Image Gen",
+        "timestamp": "2025-03-01T14:30:00Z",
+        "badge": "V-AI-3"
+      },
+      {
+        "tool": "Adobe Photoshop",
+        "timestamp": "2025-03-01T16:45:00Z"
+      }
+    ]
+  }
+}`}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 4: Instagram */}
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-full md:w-[calc(50%-2rem)] mb-6 md:mb-0 order-1 md:order-2">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                      <div className="flex items-center mb-4">
+                        <span className="text-2xl mr-3">📸</span>
+                        <h3 className="text-xl font-bold text-text-primary">
+                          Instagram
+                        </h3>
+                      </div>
+                      <p className="text-text-secondary text-sm mb-3">
+                        {t("instagramStepDescription")}
+                      </p>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
+                          V-AI-2
+                        </span>
+                        <span className="text-text-secondary text-[10px]">
+                          {t("viewHistory")} →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="relative w-12 h-12 flex-shrink-0 z-10 order-2 md:order-1">
+                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-accent-indigo flex items-center justify-center animate-pulse">
+                      <span className="text-lg">4</span>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 order-3 md:order-0">
+                    {/* User interface showing the badge history */}
+                    <div className="bg-surface-dark/60 rounded-lg overflow-hidden border border-white/5">
+                      <div className="p-2 border-b border-white/10 bg-surface-dark/80">
+                        <h4 className="text-xs font-medium text-text-primary">
+                          {t("aiContributionHistory")}
+                        </h4>
+                      </div>
+                      <div className="p-3">
+                        <div className="space-y-2">
+                          {[
+                            {
+                              tool: "iPhone Camera",
+                              time: "10:00 AM",
+                              level: "V-AI-1",
+                              date: "Mar 1",
+                            },
+                            {
+                              tool: "ChatGPT Image",
+                              time: "2:30 PM",
+                              level: "V-AI-3",
+                              date: "Mar 1",
+                            },
+                            {
+                              tool: "Adobe Photoshop",
+                              time: "4:45 PM",
+                              level: "V-AI-2",
+                              date: "Mar 1",
+                            },
+                          ].map((entry, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center justify-between text-[10px]"
+                            >
+                              <div className="flex items-center">
+                                <span className="w-3 h-3 rounded-full bg-primary-600/50 mr-2"></span>
+                                <span className="text-text-primary">
+                                  {entry.tool}
+                                </span>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <span className="text-text-secondary">
+                                  {entry.date} {entry.time}
+                                </span>
+                                <span
+                                  className={`px-1.5 py-0.5 rounded ${
+                                    entry.level === "V-AI-3"
+                                      ? "bg-accent-indigo/20 text-accent-indigo"
+                                      : "bg-primary-600/10 text-primary-400"
+                                  }`}
+                                >
+                                  {entry.level}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Technical Implementation Section */}
         <section
           id="technical-implementation"
@@ -752,7 +1048,7 @@ export default function Future() {
                 {t("metadataSchemaTitle")}
               </h3>
               <div className="bg-surface-dark/70 rounded-xl p-4 font-mono text-sm overflow-x-auto">
-                <pre className="text-text-secondary">
+                <pre className="text-text-secondary text-left">
                   {`{
   "badgeAI": {
     "version": "1.0",
@@ -775,12 +1071,27 @@ export default function Future() {
         ]
       }
     },
+    "history": [
+      {
+        "tool": "iPhone Camera",
+        "timestamp": "2025-03-01T10:00:00Z",
+        "badge": "V-AI-1"
+      },
+      {
+        "tool": "Adobe Photoshop",
+        "timestamp": "2025-03-02T14:30:00Z",
+        "badge": "V-AI-2"
+      }
+    ],
     "timestamp": "2025-04-01T12:34:56Z",
     "signature": "ed25519:abcdef1234567890"
   }
 }`}
                 </pre>
               </div>
+              <p className="text-xs text-text-secondary mt-2 italic text-center">
+                {t("metadataSchemaNote")}
+              </p>
             </div>
 
             {/* Embedding Methods */}
@@ -1087,8 +1398,8 @@ const badgeMetadata = await response.json();`}
           id="interactive-demo"
           className="animate-on-scroll mb-20 max-w-4xl mx-auto bg-surface-card/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/10 rounded-full blur-3xl -z-10"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-indigo/10 rounded-full blur-3xl -z-10"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-600/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-indigo/10 rounded-full blur-3xl"></div>
 
           <h2 className="text-3xl font-bold mb-8 text-center text-text-primary">
             {t("interactiveDemoTitle")}

@@ -644,6 +644,23 @@ export const en = {
   photoshopIntegrationDescription:
     "As the artist applies various tools, the system analyzes which operations are human-executed versus AI-generated, with the final exported image carrying a Badge AI metadata tag.",
 
+  // Content Journey Section
+  contentJourneyTitle: "Badge AI Traceability Across Platforms",
+  contentJourneyDescription:
+    "Follow a single piece of content through its journey across multiple AI platforms, with complete Badge AI history preserved in the metadata.",
+  iphoneStepDescription:
+    "Photo taken with an iPhone camera using Portrait mode with AI-enhanced depth effects",
+  chatgptStepDescription:
+    "Image used as a reference and fully recreated using ChatGPT's DALL-E image generation",
+  photoshopStepDescription:
+    "AI-generated image enhanced in Photoshop with human retouching and AI-powered filters",
+  instagramStepDescription:
+    "Final image shared on Instagram, which displays accurate Badge AI level and provides access to the complete AI contribution history",
+  viewHistory: "View History",
+  aiContributionHistory: "AI Contribution History",
+  metadataSchemaNote:
+    "The 'history' field preserves the complete AI processing journey and badge levels across tools and platforms.",
+
   // Badge AI Metadata Protocol
   metadataProtocolTitle: "The Badge AI Metadata Protocol",
   metadataSchemaTitle: "Badge AI Metadata Schema",
