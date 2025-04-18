@@ -752,13 +752,13 @@ export default function Future() {
 
             <div className="relative">
               {/* Vertical timeline line */}
-              <div className="absolute left-[calc(50%-1px)] top-0 bottom-0 w-0.5 bg-primary-600/30"></div>
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-primary-600/30"></div>
 
               <div className="space-y-16">
                 {/* Step 1: iPhone */}
                 <div className="flex flex-col md:flex-row items-center">
-                  <div className="w-full md:w-[calc(50%-2rem)] text-right md:pr-8 mb-6 md:mb-0">
-                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                  <div className="w-full md:w-[calc(50%-3rem)] text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5 w-full">
                       <div className="flex items-center justify-end mb-4">
                         <span className="text-2xl mr-3">📱</span>
                         <h3 className="text-xl font-bold text-text-primary">
@@ -776,13 +776,13 @@ export default function Future() {
                     </div>
                   </div>
 
-                  <div className="relative w-12 h-12 flex-shrink-0 z-10">
-                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                  <div className="relative w-24 h-12 flex-shrink-0 z-10 flex justify-center">
+                    <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
                       <span className="text-lg">1</span>
                     </div>
                   </div>
 
-                  <div className="w-full md:w-[calc(50%-2rem)] md:pl-8">
+                  <div className="w-full md:w-[calc(50%-3rem)] md:pl-8">
                     {/* Metadata Display */}
                     <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
                       <pre className="text-primary-400 text-[10px] text-left">
@@ -807,9 +807,9 @@ export default function Future() {
 
                 {/* Step 2: ChatGPT */}
                 <div className="flex flex-col md:flex-row items-center">
-                  <div className="w-full md:w-[calc(50%-2rem)] mb-6 md:mb-0 order-1 md:order-2">
-                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
-                      <div className="flex items-center mb-4">
+                  <div className="w-full md:w-[calc(50%-3rem)] md:text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5 w-full">
+                      <div className="flex items-center justify-end mb-4">
                         <span className="text-2xl mr-3">🤖</span>
                         <h3 className="text-xl font-bold text-text-primary">
                           ChatGPT
@@ -818,7 +818,7 @@ export default function Future() {
                       <p className="text-text-secondary text-sm mb-3">
                         {t("chatgptStepDescription")}
                       </p>
-                      <div className="flex">
+                      <div className="flex justify-end">
                         <span className="text-xs font-mono text-accent-indigo bg-accent-indigo/10 px-2 py-0.5 rounded">
                           V-AI-3
                         </span>
@@ -826,13 +826,13 @@ export default function Future() {
                     </div>
                   </div>
 
-                  <div className="relative w-12 h-12 flex-shrink-0 z-10 order-2 md:order-1">
-                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                  <div className="relative w-24 h-12 flex-shrink-0 z-10 flex justify-center">
+                    <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
                       <span className="text-lg">2</span>
                     </div>
                   </div>
 
-                  <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 order-3 md:order-0">
+                  <div className="w-full md:w-[calc(50%-3rem)] md:pl-8">
                     {/* Metadata Display */}
                     <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
                       <pre className="text-primary-400 text-[10px] text-left">
@@ -862,8 +862,8 @@ export default function Future() {
 
                 {/* Step 3: Photoshop */}
                 <div className="flex flex-col md:flex-row items-center">
-                  <div className="w-full md:w-[calc(50%-2rem)] text-right md:pr-8 mb-6 md:mb-0">
-                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
+                  <div className="w-full md:w-[calc(50%-3rem)] text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5 w-full">
                       <div className="flex items-center justify-end mb-4">
                         <span className="text-2xl mr-3">🖌️</span>
                         <h3 className="text-xl font-bold text-text-primary">
@@ -881,13 +881,13 @@ export default function Future() {
                     </div>
                   </div>
 
-                  <div className="relative w-12 h-12 flex-shrink-0 z-10">
-                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
+                  <div className="relative w-24 h-12 flex-shrink-0 z-10 flex justify-center">
+                    <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-surface-dark rounded-full border-2 border-primary-600 flex items-center justify-center">
                       <span className="text-lg">3</span>
                     </div>
                   </div>
 
-                  <div className="w-full md:w-[calc(50%-2rem)] md:pl-8">
+                  <div className="w-full md:w-[calc(50%-3rem)] md:pl-8">
                     {/* Metadata Display */}
                     <div className="bg-surface-dark/60 rounded-lg p-3 font-mono text-xs overflow-hidden border border-white/5">
                       <pre className="text-primary-400 text-[10px] text-left">
@@ -938,9 +938,9 @@ export default function Future() {
 
                 {/* Step 4: Instagram */}
                 <div className="flex flex-col md:flex-row items-center">
-                  <div className="w-full md:w-[calc(50%-2rem)] mb-6 md:mb-0 order-1 md:order-2">
-                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5">
-                      <div className="flex items-center mb-4">
+                  <div className="w-full md:w-[calc(50%-3rem)] text-right md:pr-8 mb-6 md:mb-0">
+                    <div className="inline-block bg-surface-dark/70 rounded-xl p-6 border border-white/5 w-full">
+                      <div className="flex items-center justify-end mb-4">
                         <span className="text-2xl mr-3">📸</span>
                         <h3 className="text-xl font-bold text-text-primary">
                           Instagram
@@ -949,24 +949,21 @@ export default function Future() {
                       <p className="text-text-secondary text-sm mb-3">
                         {t("instagramStepDescription")}
                       </p>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex justify-end">
                         <span className="text-xs font-mono text-primary-400 bg-primary-600/10 px-2 py-0.5 rounded">
                           V-AI-2
-                        </span>
-                        <span className="text-text-secondary text-[10px]">
-                          {t("viewHistory")} →
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="relative w-12 h-12 flex-shrink-0 z-10 order-2 md:order-1">
-                    <div className="absolute w-12 h-12 bg-surface-dark rounded-full border-2 border-accent-indigo flex items-center justify-center animate-pulse">
+                  <div className="relative w-24 h-12 flex-shrink-0 z-10 flex justify-center">
+                    <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-surface-dark rounded-full border-2 border-accent-indigo flex items-center justify-center animate-pulse">
                       <span className="text-lg">4</span>
                     </div>
                   </div>
 
-                  <div className="w-full md:w-[calc(50%-2rem)] md:text-right md:pr-8 order-3 md:order-0">
+                  <div className="w-full md:w-[calc(50%-3rem)] md:pl-8">
                     {/* User interface showing the badge history */}
                     <div className="bg-surface-dark/60 rounded-lg overflow-hidden border border-white/5">
                       <div className="p-2 border-b border-white/10 bg-surface-dark/80">
@@ -1443,7 +1440,7 @@ const badgeMetadata = await response.json();`}
 
           <div className="relative">
             {/* Vertical timeline line */}
-            <div className="absolute left-[calc(50%-1px)] top-0 bottom-0 w-0.5 bg-primary-600/30"></div>
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-primary-600/30"></div>
 
             <div className="space-y-20">
               {/* Phase 1: Foundation */}
