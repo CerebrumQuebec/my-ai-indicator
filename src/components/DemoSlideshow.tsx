@@ -31,11 +31,13 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showControls, setShowControls] = useState(true);
+  const [controlsInactive, setControlsInactive] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
+  const userInteractedRef = useRef(false);
 
   // Create an array of slides alternating between text and SVG
   const createSlides = (): SlideData[] => {
@@ -161,8 +163,8 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
         audioRef.current.pause();
         audioRef.current = null;
       }
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
+      if (slideTimerRef.current) {
+        clearInterval(slideTimerRef.current);
       }
       if (controlsTimerRef.current) {
         clearTimeout(controlsTimerRef.current);
@@ -170,68 +172,95 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     };
   }, []);
 
-  // Handle play/pause
-  useEffect(() => {
-    if (isPlaying && audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error("Audio playback failed:", error);
-      });
-
-      timerRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-        // Only show controls briefly on the first slide to indicate functionality
-        // but maintain current visibility state on subsequent slides
-        if (currentSlide === 0) {
-          setShowControls(true);
-          startControlsTimer();
-        }
-      }, 4000); // Change slide every 4 seconds
-
-      // Start the timer to hide controls initially
-      setShowControls(true);
-      startControlsTimer();
-    } else if (audioRef.current) {
-      audioRef.current.pause();
-
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-
-      // Keep controls visible when paused
-      setShowControls(true);
-      if (controlsTimerRef.current) {
-        clearTimeout(controlsTimerRef.current);
-        controlsTimerRef.current = null;
-      }
-    }
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-      if (controlsTimerRef.current) {
-        clearTimeout(controlsTimerRef.current);
-      }
-    };
-  }, [isPlaying, slides.length, currentSlide]);
-
-  // Function to restart the controls hide timer
+  // Function to hide controls after timeout
   const startControlsTimer = () => {
     if (controlsTimerRef.current) {
       clearTimeout(controlsTimerRef.current);
     }
 
     controlsTimerRef.current = setTimeout(() => {
-      setShowControls(false);
+      if (isPlaying && !userInteractedRef.current) {
+        setShowControls(false);
+      }
+      setControlsInactive(true);
     }, 3000); // Hide controls after 3 seconds
   };
+
+  // Start slideshow timer
+  const startSlideTimer = () => {
+    if (slideTimerRef.current) {
+      clearInterval(slideTimerRef.current);
+    }
+
+    // Advance slide every 4 seconds
+    slideTimerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      // Don't show controls on slide change if they were already hidden
+      // and the user hasn't interacted with the video
+      if (controlsInactive && !userInteractedRef.current) {
+        setShowControls(false);
+      }
+    }, 4000);
+  };
+
+  // Handle play/pause
+  useEffect(() => {
+    if (isPlaying) {
+      // Start audio
+      if (audioRef.current) {
+        audioRef.current.play().catch((error) => {
+          console.error("Audio playback failed:", error);
+        });
+      }
+
+      // Show controls initially then hide them
+      setShowControls(true);
+      startControlsTimer();
+
+      // Start slide timer
+      startSlideTimer();
+    } else {
+      // Pause audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+
+      // Clear timers
+      if (slideTimerRef.current) {
+        clearInterval(slideTimerRef.current);
+        slideTimerRef.current = null;
+      }
+
+      if (controlsTimerRef.current) {
+        clearTimeout(controlsTimerRef.current);
+        controlsTimerRef.current = null;
+      }
+
+      // Always show controls when paused
+      setShowControls(true);
+      setControlsInactive(false);
+    }
+
+    // Reset user interaction flag when playback state changes
+    userInteractedRef.current = false;
+
+    return () => {
+      if (slideTimerRef.current) clearInterval(slideTimerRef.current);
+      if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
+    };
+  }, [isPlaying]);
 
   // Handle mouse movement and touch to show controls
   const handleInteraction = () => {
     if (isPlaying) {
+      userInteractedRef.current = true;
       setShowControls(true);
       startControlsTimer();
+
+      // Reset user interaction flag after controls hide
+      setTimeout(() => {
+        userInteractedRef.current = false;
+      }, 3500);
     }
   };
 
@@ -361,6 +390,44 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
           }
         }
 
+        @keyframes comet {
+          0% {
+            transform: translateX(calc(100vw))
+              translateY(calc(-20vh + var(--offset-y, 0) * 1vh));
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          80% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(calc(-20vw))
+              translateY(calc(20vh + var(--offset-y, 0) * 1vh));
+            opacity: 0;
+          }
+        }
+
+        @keyframes comet-reverse {
+          0% {
+            transform: translateX(calc(-20vw))
+              translateY(calc(-20vh + var(--offset-y, 0) * 1vh));
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          80% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(calc(100vw))
+              translateY(calc(20vh + var(--offset-y, 0) * 1vh));
+            opacity: 0;
+          }
+        }
+
         .animate-cinematic-title {
           animation: cinematic-title 1.2s cubic-bezier(0.23, 1, 0.32, 1)
             forwards;
@@ -389,6 +456,16 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
         .animate-hue-rotate {
           animation: hue-rotate 30s linear infinite;
         }
+
+        .animate-comet {
+          animation: comet var(--duration, 8s) linear infinite;
+          animation-delay: var(--delay, 0s);
+        }
+
+        .animate-comet-reverse {
+          animation: comet-reverse var(--duration, 8s) linear infinite;
+          animation-delay: var(--delay, 0s);
+        }
       `}</style>
 
       {/* Outer container with fixed aspect ratio */}
@@ -406,6 +483,84 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
             {/* Digital noise overlay */}
             <div className="absolute inset-0 opacity-5 mix-blend-lighten">
               <div className="w-full h-full bg-[url('/images/noise.png')] animate-flicker"></div>
+            </div>
+
+            {/* Flying comets/shooting stars */}
+            <div className="absolute inset-0 overflow-hidden">
+              {/* Comet 1 - top to bottom, left to right */}
+              <div
+                className="absolute w-40 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-primary-200 rounded-full animate-comet opacity-0"
+                style={
+                  {
+                    "--duration": "7s",
+                    "--delay": "0s",
+                    "--offset-y": "10",
+                    transform: "rotate(15deg)",
+                    boxShadow:
+                      "0 0 10px #67E8F9, 0 0 20px rgba(103, 232, 249, 0.5)",
+                  } as React.CSSProperties
+                }
+              ></div>
+
+              {/* Comet 2 - top to bottom, left to right faster */}
+              <div
+                className="absolute w-24 h-0.5 bg-gradient-to-r from-transparent via-accent-indigo to-white rounded-full animate-comet opacity-0"
+                style={
+                  {
+                    "--duration": "4s",
+                    "--delay": "2s",
+                    "--offset-y": "25",
+                    transform: "rotate(30deg)",
+                    boxShadow:
+                      "0 0 8px #818CF8, 0 0 16px rgba(129, 140, 248, 0.5)",
+                  } as React.CSSProperties
+                }
+              ></div>
+
+              {/* Comet 3 - bottom to top, right to left */}
+              <div
+                className="absolute w-32 h-0.5 bg-gradient-to-r from-transparent via-primary-300 to-white rounded-full animate-comet-reverse opacity-0"
+                style={
+                  {
+                    "--duration": "6s",
+                    "--delay": "1s",
+                    "--offset-y": "15",
+                    transform: "rotate(-20deg)",
+                    boxShadow:
+                      "0 0 12px #67E8F9, 0 0 24px rgba(103, 232, 249, 0.5)",
+                  } as React.CSSProperties
+                }
+              ></div>
+
+              {/* Comet 4 - very fast, small streak */}
+              <div
+                className="absolute w-16 h-0.5 bg-gradient-to-r from-transparent via-white to-white rounded-full animate-comet opacity-0"
+                style={
+                  {
+                    "--duration": "2.5s",
+                    "--delay": "4.5s",
+                    "--offset-y": "5",
+                    transform: "rotate(10deg)",
+                    boxShadow:
+                      "0 0 5px white, 0 0 10px rgba(255, 255, 255, 0.5)",
+                  } as React.CSSProperties
+                }
+              ></div>
+
+              {/* Comet 5 - slow, large comet */}
+              <div
+                className="absolute w-48 h-1 bg-gradient-to-r from-transparent via-primary-400 to-accent-indigo rounded-full animate-comet opacity-0"
+                style={
+                  {
+                    "--duration": "12s",
+                    "--delay": "3s",
+                    "--offset-y": "30",
+                    transform: "rotate(25deg)",
+                    boxShadow:
+                      "0 0 15px #67E8F9, 0 0 30px rgba(103, 232, 249, 0.5)",
+                  } as React.CSSProperties
+                }
+              ></div>
             </div>
 
             {/* Edge glow effect */}
@@ -456,7 +611,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
             <div
               ref={controlsRef}
               className={`video-controls absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-20 pb-4 px-4 z-30 transition-opacity duration-500 ${
-                showControls ? "opacity-100" : "opacity-0"
+                showControls ? "opacity-100" : "opacity-0 pointer-events-none"
               }`}
             >
               {/* Progress bar */}
@@ -484,6 +639,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                     style={{
                       left: `${progressPercentage}%`,
                       transform: "translateX(-50%)",
+                      boxShadow: "0 0 10px rgba(255, 255, 255, 0.8)",
                     }}
                   ></div>
                 </div>
