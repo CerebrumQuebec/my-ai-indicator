@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState, useRef } from "react";
 
 interface DemoSlideProps {
   title?: string;
@@ -19,96 +19,75 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
   type,
   animationDelay = 0,
 }) => {
-  // Track viewport dimensions and fullscreen state
-  const [viewport, setViewport] = useState({
-    width: typeof window !== "undefined" ? window.innerWidth : 0,
-    height: typeof window !== "undefined" ? window.innerHeight : 0,
-    isFullScreen: false,
-    smallerDimension:
-      typeof window !== "undefined"
-        ? Math.min(window.innerWidth, window.innerHeight)
-        : 0,
+  const [svgScale, setSvgScale] = useState(5); // Default scale
+  const [textSizes, setTextSizes] = useState({
+    titleSize: "2.5rem",
+    contentSize: "1.2rem",
+    titleMargin: "1.5rem",
   });
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Update dimensions on resize and fullscreen change
+  // Update scale and text sizes based on container size
   useEffect(() => {
-    const updateViewport = () => {
+    const updateSizes = () => {
+      if (!containerRef.current) return;
+
+      const container = containerRef.current;
+      const rect = container.getBoundingClientRect();
+
+      // Calculate the appropriate scale based on the container size
+      // Use the smaller dimension to ensure SVG fits completely
+      const minDimension = Math.min(rect.width, rect.height);
+
+      // Base size is around 120px (for most SVGs in the illustrations)
+      // We want it to take up about 75% of the available space
+      let newScale = (minDimension * 0.75) / 120;
+
+      // Ensure scale is reasonable and not too small or too large
+      newScale = Math.max(3, Math.min(12, newScale));
+
+      setSvgScale(newScale);
+
+      // Calculate text sizes based on container dimensions
       const isFullScreen = !!document.fullscreenElement;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      setViewport({
-        width,
-        height,
-        isFullScreen,
-        smallerDimension: Math.min(width, height),
+      const baseTitleSize = isFullScreen
+        ? Math.max(2, minDimension * 0.035)
+        : Math.max(1.5, minDimension * 0.03);
+
+      const baseContentSize = isFullScreen
+        ? Math.max(1.2, minDimension * 0.022)
+        : Math.max(1, minDimension * 0.018);
+
+      const titleMargin = isFullScreen
+        ? Math.max(1.5, minDimension * 0.02)
+        : Math.max(1, minDimension * 0.015);
+
+      setTextSizes({
+        titleSize: `${Math.min(4, baseTitleSize)}rem`,
+        contentSize: `${Math.min(2, baseContentSize)}rem`,
+        titleMargin: `${Math.min(3, titleMargin)}rem`,
       });
     };
 
-    // Initialize
-    updateViewport();
+    // Initial calculation
+    updateSizes();
 
-    // Add event listeners
-    window.addEventListener("resize", updateViewport);
-    document.addEventListener("fullscreenchange", updateViewport);
+    // Recalculate on resize and fullscreen change
+    window.addEventListener("resize", updateSizes);
+    document.addEventListener("fullscreenchange", updateSizes);
 
-    // Clean up
-    return () => {
-      window.removeEventListener("resize", updateViewport);
-      document.removeEventListener("fullscreenchange", updateViewport);
-    };
-  }, []);
-
-  // Dynamically calculate SVG scale based on viewport
-  const getSvgStyle = (): React.CSSProperties => {
-    const { smallerDimension, isFullScreen } = viewport;
-    let scale = 1; // Default scale
-
-    if (isFullScreen) {
-      // Aim for SVG to take ~70% of the smaller dimension
-      scale = (smallerDimension * 0.7) / 120; // 120 is base SVG size
-      scale = Math.max(4, Math.min(8, scale)); // Clamp scale
-    } else {
-      // Scale based on container width (approximated by viewport width)
-      scale = (viewport.width * 0.8) / 120;
-      scale = Math.max(3, Math.min(7, scale)); // Clamp for regular view
+    // Also update when the slide becomes active
+    if (isActive) {
+      // Small delay to allow transitions to complete
+      const timer = setTimeout(updateSizes, 100);
+      return () => clearTimeout(timer);
     }
 
-    return {
-      transform: `scale(${scale})`,
-      transformOrigin: "center center",
-      transition: "transform 0.5s ease-in-out", // Smooth transition
-      willChange: "transform",
+    return () => {
+      window.removeEventListener("resize", updateSizes);
+      document.removeEventListener("fullscreenchange", updateSizes);
     };
-  };
-
-  // Get text size using viewport units for better fullscreen scaling
-  const getTextStyles = () => {
-    const { smallerDimension, isFullScreen } = viewport;
-
-    // Use vmin (percentage of the smaller viewport dimension) for dynamic sizing
-    const baseFontSize = Math.max(1, smallerDimension * 0.01); // Base 1% of smaller dimension
-
-    return {
-      title: {
-        fontSize: `${Math.min(
-          isFullScreen ? 5 : 4,
-          baseFontSize * (isFullScreen ? 3.5 : 2.8)
-        )}vmin`,
-        lineHeight: "1.2",
-        marginBottom: `${Math.max(1, baseFontSize * 1.5)}vmin`,
-      },
-      content: {
-        fontSize: `${Math.min(
-          isFullScreen ? 2.8 : 2.2,
-          baseFontSize * (isFullScreen ? 2 : 1.6)
-        )}vmin`,
-        lineHeight: "1.5",
-        maxWidth: "80vmin", // Limit width based on viewport
-      },
-    };
-  };
-
-  const textStyles = getTextStyles();
+  }, [isActive]);
 
   return (
     <div
@@ -118,6 +97,7 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
           : "opacity-0 z-0 blur-md scale-105"
       }`}
       style={{ transitionDelay: `${animationDelay * 0.1}s` }}
+      ref={containerRef}
     >
       {/* Futuristic background effects for all slides */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
@@ -174,7 +154,9 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
               <h3
                 className="font-bold text-text-primary mx-auto text-center opacity-0 animate-cinematic-title"
                 style={{
-                  ...textStyles.title,
+                  fontSize: textSizes.titleSize,
+                  lineHeight: "1.2",
+                  marginBottom: textSizes.titleMargin,
                   animationDelay: "0.3s",
                   animationFillMode: "forwards",
                   textShadow: "0 0 15px rgba(103, 232, 249, 0.5)",
@@ -188,7 +170,9 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
               <p
                 className="text-text-secondary mx-auto opacity-0 animate-cinematic-text text-center leading-relaxed"
                 style={{
-                  ...textStyles.content,
+                  fontSize: textSizes.contentSize,
+                  lineHeight: "1.5",
+                  maxWidth: "80vmin",
                   animationDelay: "0.8s",
                   animationFillMode: "forwards",
                   textShadow: "0 0 10px rgba(103, 232, 249, 0.3)",
@@ -200,11 +184,15 @@ const DemoSlide: React.FC<DemoSlideProps> = ({
           </div>
         ) : (
           // SVG illustration slide content
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-auto h-auto">
+          <div className="absolute inset-0 flex items-center justify-center">
             {illustration && (
               <div
-                className="animate-float will-change-transform"
-                style={getSvgStyle()}
+                className="will-change-transform"
+                style={{
+                  transform: `scale(${svgScale})`,
+                  transformOrigin: "center center",
+                  transition: "transform 0.5s ease-in-out",
+                }}
               >
                 {illustration}
               </div>
