@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --packet-size: 32px;
+  }
+
   body {
     @apply bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-gray-100;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -111,6 +115,27 @@
   @keyframes shimmer {
     100% {
       transform: translateX(100%);
+    }
+  }
+
+  .data-packet {
+    width: var(--packet-size) !important;
+    height: var(--packet-size) !important;
+    font-size: calc(var(--packet-size) * 0.45) !important;
+    animation: packet-wiggle 3s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes packet-wiggle {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-2px) rotate(-2deg);
+    }
+    75% {
+      transform: translateY(2px) rotate(2deg);
     }
   }
 }

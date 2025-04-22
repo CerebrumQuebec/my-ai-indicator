@@ -37,10 +37,22 @@ module.exports = {
       boxShadow: {
         soft: "0 2px 15px -3px rgba(0, 0, 0, 0.15), 0 10px 20px -2px rgba(0, 0, 0, 0.1)",
         glow: "0 0 20px rgba(59, 130, 246, 0.3)",
+        "glow-sm": "0 0 10px rgba(59, 130, 246, 0.2)",
       },
       borderRadius: {
         xl: "1rem",
         "2xl": "1.5rem",
+      },
+      animation: {
+        "pulse-slow": "pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "spin-slow": "spin 8s linear infinite",
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
     },
   },

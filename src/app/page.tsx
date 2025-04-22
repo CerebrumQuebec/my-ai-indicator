@@ -17,6 +17,7 @@ import VisualQuestionnaire from "../steps/VisualQuestionnaire";
 import Result from "../steps/Result";
 import ManualSelectionStep from "../steps/ManualSelectionStep";
 import GuidedSelectionStep from "../steps/GuidedSelectionStep";
+import DemoSlideshow from "../components/DemoSlideshow";
 import {
   ArrowRightIcon,
   SparklesIcon,
@@ -29,6 +30,7 @@ import Header from "../components/Header";
 
 export default function Home() {
   const [showWizard, setShowWizard] = useState(false);
+  const [isDemoPlaying, setIsDemoPlaying] = useState(false);
   const { t } = useTranslation();
   const {
     step,
@@ -853,6 +855,62 @@ export default function Home() {
                 </div>
               </motion.div>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Our Vision Section */}
+      <section className="py-16 relative z-10 bg-surface-card/20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="animated-gradient-text">
+                {t("ourVisionTitle")}
+              </span>
+            </h2>
+            <p className="text-text-secondary max-w-3xl mx-auto mb-8">
+              {t("ourVisionDescription")}
+            </p>
+
+            <Link
+              href="/futur"
+              className="inline-flex items-center px-6 py-3 bg-primary-600/20 hover:bg-primary-600/30 border border-primary-600/30 hover:border-primary-600/50 rounded-full text-text-primary transition-all duration-300 group"
+            >
+              <span>{t("learnMoreAboutVision")}</span>
+              <svg
+                className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="max-w-5xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <DemoSlideshow
+              isPlaying={isDemoPlaying}
+              onTogglePlay={() => setIsDemoPlaying(!isDemoPlaying)}
+            />
           </motion.div>
         </div>
       </section>
