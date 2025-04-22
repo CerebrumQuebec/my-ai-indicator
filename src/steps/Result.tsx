@@ -87,16 +87,16 @@ ${selectedCategoryTypes
 
   const generateMarkdownCode = () => {
     return selectedCategoryTypes
-      .map(
-        (type) =>
-          `![${getCategoryTitle(type)}: ${getCategoryCode(
-            type
-          )}-AI-${getCategoryValue(
-            type
-          )}](https://img.shields.io/badge/${getCategoryTitle(
-            type
-          )}-${getCategoryCode(type)}-AI-${getCategoryValue(type)}-blue)`
-      )
+      .map((type) => {
+        const title = getCategoryTitle(type);
+        const code = getCategoryCode(type);
+        const value = getCategoryValue(type);
+        const label = `${title}: ${code}.AI.${value}`;
+        const url = `https://img.shields.io/badge/${encodeURIComponent(
+          title
+        )}-${code}.AI.${value}-blue`;
+        return `![${label}](${url})`;
+      })
       .join(" ");
   };
 

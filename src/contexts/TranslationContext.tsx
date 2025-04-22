@@ -5,6 +5,9 @@ import { translations } from "../translations";
 
 type Language = "en" | "fr";
 
+// Define a type that allows string or string array values
+type TranslationValue = string | string[];
+
 interface TranslationContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -21,8 +24,13 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({
   const [language, setLanguage] = useState<Language>("fr");
 
   const t = (key: string): string => {
-    const translationObj = translations[language] as Record<string, string>;
-    return translationObj[key] || key;
+    const value = translations[language][
+      key as keyof (typeof translations)[typeof language]
+    ] as TranslationValue;
+    if (Array.isArray(value)) {
+      return value.join(", ");
+    }
+    return value?.toString() || key;
   };
 
   return (
