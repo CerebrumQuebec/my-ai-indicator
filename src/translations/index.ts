@@ -3,7 +3,15 @@ import { fr } from "./fr";
 
 export type Language = "en" | "fr";
 
-export const translations = {
+// Define a type for translation values that can be either string or string array
+export type TranslationValue = string | string[];
+
+// Define the structure of our translations object
+export type TranslationType = {
+  [key: string]: TranslationValue;
+};
+
+export const translations: Record<Language, TranslationType> = {
   en,
   fr,
 };
@@ -12,6 +20,9 @@ export const translations = {
 export type TranslationKey = string;
 
 export const getTranslation = (lang: Language, key: TranslationKey): string => {
-  const translationsObj = translations[lang] as Record<string, string>;
-  return translationsObj[key] || key;
+  const value = translations[lang][key];
+  if (Array.isArray(value)) {
+    return value.join(", ");
+  }
+  return value?.toString() || key;
 };
