@@ -614,40 +614,39 @@ export default function Future() {
 
               {/* Animation of data packets moving */}
               <div className="w-full max-w-xs h-20 relative my-8 md:my-0 flex-shrink-0 z-30">
-                <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-primary-600/30"></div>
-
                 {/* Animated data packets */}
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 left-0 w-8 h-8 bg-surface-dark border border-primary-600/50 rounded-md flex items-center justify-center transform -translate-x-1/2 animate-float z-40"
-                  style={{ animationDuration: "8s", left: "20%" }}
+                  className="data-packet absolute bg-surface-dark/80 backdrop-blur-sm border border-primary-600/30 rounded flex items-center justify-center z-40"
+                  style={{
+                    animationDelay: "0s",
+                    left: "25%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
                 >
-                  <span className="text-xs font-mono text-primary-400">
-                    S-AI-2
-                  </span>
+                  <span className="font-mono text-primary-400/80">S2</span>
                 </div>
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 left-0 w-8 h-8 bg-surface-dark border border-accent-indigo/50 rounded-md flex items-center justify-center transform -translate-x-1/2 animate-float z-40"
+                  className="data-packet absolute bg-surface-dark/80 backdrop-blur-sm border border-primary-400/30 rounded flex items-center justify-center z-40"
                   style={{
-                    animationDuration: "8s",
                     animationDelay: "1s",
-                    left: "40%",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <span className="text-xs font-mono text-accent-indigo">
-                    V-AI-3
-                  </span>
+                  <span className="font-mono text-primary-400/80">T1</span>
                 </div>
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 left-0 w-8 h-8 bg-surface-dark border border-primary-400/50 rounded-md flex items-center justify-center transform -translate-x-1/2 animate-float z-40"
+                  className="data-packet absolute bg-surface-dark/80 backdrop-blur-sm border border-accent-indigo/30 rounded flex items-center justify-center z-40"
                   style={{
-                    animationDuration: "8s",
                     animationDelay: "2s",
-                    left: "60%",
+                    left: "75%",
+                    top: "50%",
+                    transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <span className="text-xs font-mono text-primary-400">
-                    T-AI-1
-                  </span>
+                  <span className="font-mono text-accent-indigo/80">V3</span>
                 </div>
 
                 {/* Protocol labels */}
@@ -1663,7 +1662,7 @@ const badgeMetadata = await response.json();`}
                   {t("ctaDevelopersDescription")}
                 </p>
                 <Link
-                  href="/developers"
+                  href="https://github.com/CerebrumQuebec/my-ai-indicator"
                   className="text-primary-400 hover:text-primary-300 inline-flex items-center"
                 >
                   <span>{t("ctaDevelopersAction")}</span>
@@ -1690,7 +1689,7 @@ const badgeMetadata = await response.json();`}
                   {t("ctaOrganizationsDescription")}
                 </p>
                 <Link
-                  href="/partners"
+                  href="/contact"
                   className="text-accent-indigo hover:text-accent-indigo/80 inline-flex items-center"
                 >
                   <span>{t("ctaOrganizationsAction")}</span>
@@ -1736,13 +1735,13 @@ const badgeMetadata = await response.json();`}
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
               <Link
-                href="/beta"
+                href="/contact"
                 className="px-8 py-3 bg-primary-600 hover:bg-primary-500 rounded-lg text-white font-medium transition-all duration-300 text-center hover:shadow-glow-sm"
               >
                 {t("ctaBetaAction")}
               </Link>
               <Link
-                href="/updates"
+                href="https://www.linkedin.com/in/philippebourque/"
                 className="px-8 py-3 bg-surface-dark hover:bg-surface-dark/80 border border-white/10 rounded-lg text-text-primary font-medium transition-all duration-300 text-center"
               >
                 {t("ctaUpdatesAction")}

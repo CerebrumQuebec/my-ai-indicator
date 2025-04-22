@@ -11,6 +11,7 @@ export const fr = {
   ourVisionTitle: "Notre Vision",
   ourVisionDescription:
     "Découvrez comment Badge IA s'intégrera de manière transparente dans le processus créatif, offrant une transparence en temps réel sur l'implication de l'IA dans le contenu numérique.",
+  learnMoreAboutVision: "En savoir plus sur notre vision",
 
   // Donation
   donateTitle: "Faire un don",

@@ -874,9 +874,30 @@ export default function Home() {
                 {t("ourVisionTitle")}
               </span>
             </h2>
-            <p className="text-text-secondary max-w-3xl mx-auto">
+            <p className="text-text-secondary max-w-3xl mx-auto mb-8">
               {t("ourVisionDescription")}
             </p>
+
+            <Link
+              href="/futur"
+              className="inline-flex items-center px-6 py-3 bg-primary-600/20 hover:bg-primary-600/30 border border-primary-600/30 hover:border-primary-600/50 rounded-full text-text-primary transition-all duration-300 group"
+            >
+              <span>{t("learnMoreAboutVision")}</span>
+              <svg
+                className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </Link>
           </motion.div>
 
           <motion.div

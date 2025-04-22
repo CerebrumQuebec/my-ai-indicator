@@ -36,6 +36,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteringFullscreen, setEnteringFullscreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -310,6 +311,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     if (isPlaying) {
       // Start audio
       if (audioRef.current) {
+        audioRef.current.muted = isMuted;
         audioRef.current.play().catch((error) => {
           console.error("Audio playback failed:", error);
         });
@@ -350,7 +352,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
       if (slideTimerRef.current) clearInterval(slideTimerRef.current);
       if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, isMuted]);
 
   // Handle mouse movement and touch to show controls
   const handleInteraction = () => {
@@ -379,6 +381,13 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
   // Calculate progress percentage
   const progressPercentage = (currentSlide / (slides.length - 1)) * 100;
+
+  // Add effect to handle mute state changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   return (
     <div
@@ -739,27 +748,19 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
           {/* Control elements */}
           {!isPlaying && !isPaused && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/90 z-20">
-              <div className="text-center px-4 sm:px-0">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsPaused(false);
-                    onTogglePlay();
-                  }}
-                  className="w-20 h-20 sm:w-24 sm:h-24 bg-primary-600/30 hover:bg-primary-600/50 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-pulse relative group transition-all duration-300"
-                  aria-label="Play"
-                >
-                  {/* Glowing effect around button */}
-                  <div className="absolute inset-0 rounded-full bg-primary-600/20 group-hover:bg-primary-600/30 blur-md transition-all duration-300"></div>
-                  <span className="text-4xl sm:text-5xl relative z-10">▶️</span>
-                </button>
-                <p className="text-text-primary text-base sm:text-lg font-medium">
-                  {t("demoComingSoonTitle")}
-                </p>
-                <p className="text-text-secondary mt-2 text-sm sm:text-base">
-                  {t("demoComingSoonDescription")}
-                </p>
-              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPaused(false);
+                  onTogglePlay();
+                }}
+                className="w-20 h-20 sm:w-24 sm:h-24 bg-primary-600/30 hover:bg-primary-600/50 rounded-full flex items-center justify-center animate-pulse relative group transition-all duration-300"
+                aria-label="Play"
+              >
+                {/* Glowing effect around button */}
+                <div className="absolute inset-0 rounded-full bg-primary-600/20 group-hover:bg-primary-600/30 blur-md transition-all duration-300"></div>
+                <span className="text-4xl sm:text-5xl relative z-10">▶️</span>
+              </button>
             </div>
           )}
 
@@ -847,6 +848,18 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
                 </div>
 
                 <div className="flex items-center space-x-2">
+                  {/* Mute button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsMuted(!isMuted);
+                    }}
+                    className="px-2 py-1.5 bg-surface-dark/70 backdrop-blur-md rounded-md text-sm text-text-primary border border-white/20 hover:bg-surface-dark hover:border-primary-600/30 transition-colors duration-300 flex items-center shadow-glow-sm"
+                    aria-label={isMuted ? "Unmute" : "Mute"}
+                  >
+                    <span className="text-lg">{isMuted ? "🔇" : "🔊"}</span>
+                  </button>
+
                   {/* Fullscreen button */}
                   <button
                     onClick={(e) => {

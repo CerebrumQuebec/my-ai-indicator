@@ -11,6 +11,7 @@ export const en = {
   ourVisionTitle: "Our Vision",
   ourVisionDescription:
     "Experience how Badge AI will seamlessly integrate into the creative process, providing real-time transparency about AI involvement in digital content.",
+  learnMoreAboutVision: "Learn more about our vision",
 
   // Donation
   donateTitle: "Make a donation",
