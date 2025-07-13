@@ -49,6 +49,10 @@ git log --format="%h - %s%n%b" [LAST_VERSION_COMMIT]..HEAD
 
 # See what files were changed
 git diff --name-only [LAST_VERSION_COMMIT]..HEAD
+
+# Get commit dates for accurate release date
+git show --format="%cd" --date=format:"%B %d, %Y" [LAST_VERSION_COMMIT] | head -1
+git show --format="%cd" --date=format:"%B %d, %Y" HEAD | head -1
 ```
 
 **Change Impact Assessment:**
@@ -70,7 +74,7 @@ git diff --name-only [LAST_VERSION_COMMIT]..HEAD
 **Key Elements to Preserve:**
 
 - Consistent title format: "Version X.X.X - [User-Friendly Category]"
-- Appropriate release date format
+- Accurate release date format using git commit dates (e.g., "April 22, 2025" / "22 avril 2025")
 - "whatsNew" summary style
 - Feature list structure and tone
 
@@ -94,8 +98,8 @@ git diff --name-only [LAST_VERSION_COMMIT]..HEAD
     "fr": "Version X.X.X - [French User Benefit Category]"
   },
   "releaseDate": {
-    "en": "Month Year",
-    "fr": "Mois Année"
+    "en": "Month DD, YYYY",
+    "fr": "DD mois YYYY"
   },
   "whatsNew": {
     "en": "Brief user-focused summary of improvements:",
@@ -137,6 +141,10 @@ git log --format="%h - %s%n%b" [VERSION_COMMIT]..HEAD
 
 # File change overview
 git diff --name-only [VERSION_COMMIT]..HEAD
+
+# Get accurate commit dates for version releases
+git show --format="%cd" --date=format:"%B %d, %Y" [VERSION_COMMIT] | head -1
+git show --format="%cd" --date=format:"%B %d, %Y" HEAD | head -1
 
 # Specific commit details
 git show [COMMIT_HASH]

@@ -1,6 +1,43 @@
 {
-  "currentVersion": "0.0",
+  "currentVersion": "0.1",
   "versions": [
+    {
+      "version": "0.1",
+      "title": {
+        "en": "Version 0.1 - Performance & Documentation",
+        "fr": "Version 0.1 - Performance et Documentation"
+      },
+      "releaseDate": {
+        "en": "July 13, 2025",
+        "fr": "13 juillet 2025"
+      },
+      "whatsNew": {
+        "en": "Enhanced Badge AI with significant performance improvements and comprehensive documentation system for better user experience and development transparency:",
+        "fr": "Badge AI amélioré avec des améliorations de performance significatives et un système de documentation complet pour une meilleure expérience utilisateur et une transparence de développement :"
+      },
+      "features": {
+        "en": [
+          "Faster page loading with 12KB reduction in homepage bundle size",
+          "Improved responsiveness through optimized image loading and caching",
+          "Enhanced mobile performance with better font rendering and reduced loading times", 
+          "Version history tracking system to monitor platform evolution",
+          "Comprehensive documentation architecture covering all system components",
+          "Better analytics performance with offline-capable batch processing",
+          "Optimized visual elements using modern SVG sprite technology",
+          "Enhanced developer experience with improved project documentation"
+        ],
+        "fr": [
+          "Chargement de page plus rapide avec une réduction de 12KB de la taille du bundle de la page d'accueil",
+          "Réactivité améliorée grâce au chargement d'images optimisé et à la mise en cache",
+          "Performance mobile améliorée avec un meilleur rendu des polices et des temps de chargement réduits",
+          "Système de suivi de l'historique des versions pour surveiller l'évolution de la plateforme",
+          "Architecture de documentation complète couvrant tous les composants du système",
+          "Meilleure performance analytique avec traitement par lots capable de fonctionner hors ligne",
+          "Éléments visuels optimisés utilisant la technologie moderne de sprite SVG",
+          "Expérience développeur améliorée avec une documentation de projet améliorée"
+        ]
+      }
+    },
     {
       "version": "0.0",
       "title": {
@@ -8,8 +45,8 @@
         "fr": "Version 0.0 - Plateforme Badge AI Initiale"
       },
       "releaseDate": {
-        "en": "July 2025",
-        "fr": "Juillet 2025"
+        "en": "April 22, 2025",
+        "fr": "22 avril 2025"
       },
       "whatsNew": {
         "en": "Introducing Badge AI - the first comprehensive platform for transparent AI usage communication in creative works:",
