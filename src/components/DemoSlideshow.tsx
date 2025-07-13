@@ -191,34 +191,39 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
     };
   }, [isPlaying, onTogglePlay]);
 
-  // Debounced resize handler
+  // Optimized resize handler - avoid getBoundingClientRect()
   const debouncedResizeHandler = useCallback(
     debounce((entries: ResizeObserverEntry[]) => {
       if (entries && entries.length > 0) {
         const { width, height } = entries[0].contentRect;
-        setContainerDimensions({ width, height });
+        // Only update if dimensions actually changed significantly
+        setContainerDimensions(prev => {
+          if (Math.abs(prev.width - width) > 5 || Math.abs(prev.height - height) > 5) {
+            return { width, height };
+          }
+          return prev;
+        });
       }
-    }, 150), // Debounce resize updates (e.g., 150ms delay)
+    }, 250), // Increased debounce for better performance
     []
   );
 
-  // Observe container size changes
+  // Observe container size changes - optimized
   useEffect(() => {
     const observer = new ResizeObserver(debouncedResizeHandler);
     const currentContainer = containerRef.current;
 
     if (currentContainer) {
       observer.observe(currentContainer);
-      // Initial size check
-      const { width, height } = currentContainer.getBoundingClientRect();
-      setContainerDimensions({ width, height });
+      // Use ResizeObserver for initial size instead of getBoundingClientRect
+      // This avoids forced reflow on component mount
     }
 
     return () => {
       if (currentContainer) {
         observer.unobserve(currentContainer);
       }
-      debouncedResizeHandler.cancel(); // Cancel any pending debounce on unmount
+      debouncedResizeHandler.cancel();
     };
   }, [debouncedResizeHandler]);
 
@@ -392,7 +397,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
   return (
     <div
       ref={playerContainerRef}
-      className={`video-player-container w-full mx-auto select-none ${
+      className={`demo-slideshow-container video-player-container w-full mx-auto select-none ${
         isFullScreen ? "fixed inset-0 z-50 bg-black" : ""
       } ${enteringFullscreen ? "animate-fullscreen-appear" : ""}`}
       onMouseMove={handleInteraction}
@@ -404,221 +409,6 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
         }
       }}
     >
-      <style jsx global>{`
-        /* Fullscreen styles */
-        .fullscreen-video {
-          width: 100vw !important;
-          height: 100vh !important;
-          padding-top: 0 !important;
-          max-width: none !important;
-          max-height: none !important;
-          margin: 0 !important;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 0 !important;
-        }
-
-        /* Enhanced keyframes for fullscreen mode */
-        @keyframes fullscreen-appear {
-          0% {
-            opacity: 0;
-            transform: scale(0.98);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        /* Other animations */
-        @keyframes cinematic-title {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px) scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes cinematic-text {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          20% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes pulse-slow {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.03);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
-
-        @keyframes float {
-          0% {
-            transform: scale(5) translateY(0px);
-          }
-          50% {
-            transform: scale(5) translateY(-10px);
-          }
-          100% {
-            transform: scale(5) translateY(0px);
-          }
-        }
-
-        @keyframes scan-vertical {
-          0% {
-            top: 0;
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            top: 100%;
-            opacity: 0;
-          }
-        }
-
-        @keyframes flicker {
-          0% {
-            opacity: 1;
-          }
-          5% {
-            opacity: 0.8;
-          }
-          10% {
-            opacity: 1;
-          }
-          15% {
-            opacity: 0.3;
-          }
-          20% {
-            opacity: 1;
-          }
-          70% {
-            opacity: 1;
-          }
-          71% {
-            opacity: 0.5;
-          }
-          72% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-
-        @keyframes hue-rotate {
-          0% {
-            filter: hue-rotate(0deg);
-          }
-          100% {
-            filter: hue-rotate(360deg);
-          }
-        }
-
-        @keyframes comet {
-          0% {
-            transform: translateX(calc(100vw))
-              translateY(calc(-20vh + var(--offset-y, 0) * 1vh));
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          80% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(calc(-20vw))
-              translateY(calc(20vh + var(--offset-y, 0) * 1vh));
-            opacity: 0;
-          }
-        }
-
-        @keyframes comet-reverse {
-          0% {
-            transform: translateX(calc(-20vw))
-              translateY(calc(-20vh + var(--offset-y, 0) * 1vh));
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          80% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(calc(100vw))
-              translateY(calc(20vh + var(--offset-y, 0) * 1vh));
-            opacity: 0;
-          }
-        }
-
-        .animate-cinematic-title {
-          animation: cinematic-title 1.2s cubic-bezier(0.23, 1, 0.32, 1)
-            forwards;
-        }
-
-        .animate-cinematic-text {
-          animation: cinematic-text 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 8s ease-in-out infinite;
-        }
-
-        .animate-float {
-          animation: float 10s ease-in-out infinite;
-        }
-
-        .animate-scan-vertical {
-          animation: scan-vertical 6s linear infinite;
-        }
-
-        .animate-flicker {
-          animation: flicker 4s linear infinite;
-        }
-
-        .animate-hue-rotate {
-          animation: hue-rotate 30s linear infinite;
-        }
-
-        .animate-comet {
-          animation: comet var(--duration, 8s) linear infinite;
-          animation-delay: var(--delay, 0s);
-        }
-
-        .animate-comet-reverse {
-          animation: comet-reverse var(--duration, 8s) linear infinite;
-          animation-delay: var(--delay, 0s);
-        }
-
-        .animate-fullscreen-appear {
-          animation: fullscreen-appear 0.8s cubic-bezier(0.16, 1, 0.3, 1)
-            forwards;
-        }
-      `}</style>
 
       {/* Outer container with fixed aspect ratio - adjusts for fullscreen */}
       <div
@@ -629,7 +419,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
         {/* Video content container */}
         <div
           ref={containerRef}
-          className={`${
+          className={`demo-slide-content ${
             isFullScreen
               ? "w-full h-full"
               : "absolute top-0 left-0 right-0 bottom-0 w-full h-full"
@@ -793,7 +583,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
             >
               {/* Progress bar */}
               <div
-                className="w-full h-1.5 bg-gray-700/60 backdrop-blur-sm rounded-full mb-3 cursor-pointer relative overflow-hidden group"
+                className="progress-bar-container w-full h-1.5 bg-gray-700/60 backdrop-blur-sm rounded-full mb-3 cursor-pointer relative overflow-hidden group"
                 onClick={(e) => {
                   e.stopPropagation();
                   if (!containerRef.current) return;
@@ -813,7 +603,7 @@ const DemoSlideshow: React.FC<DemoSlideshowProps> = ({
 
                 {/* Progress bar fill */}
                 <div
-                  className="h-full bg-gradient-to-r from-primary-600 via-accent-indigo to-primary-400 rounded-full transition-all duration-300"
+                  className="progress-bar-fill h-full bg-gradient-to-r from-primary-600 via-accent-indigo to-primary-400 rounded-full transition-all duration-300"
                   style={{ width: `${progressPercentage}%` }}
                 >
                   {/* Progress handle */}

@@ -1,0 +1,79 @@
+{
+  "currentVersion": "0.1",
+  "versions": [
+    {
+      "version": "0.1",
+      "title": {
+        "en": "Version 0.1 - Performance & Documentation",
+        "fr": "Version 0.1 - Performance et Documentation"
+      },
+      "releaseDate": {
+        "en": "July 13, 2025",
+        "fr": "13 juillet 2025"
+      },
+      "whatsNew": {
+        "en": "Enhanced Badge AI with significant performance improvements and comprehensive documentation system for better user experience and development transparency:",
+        "fr": "Badge AI amélioré avec des améliorations de performance significatives et un système de documentation complet pour une meilleure expérience utilisateur et une transparence de développement :"
+      },
+      "features": {
+        "en": [
+          "Faster page loading with 12KB reduction in homepage bundle size",
+          "Improved responsiveness through optimized image loading and caching",
+          "Enhanced mobile performance with better font rendering and reduced loading times", 
+          "Version history tracking system to monitor platform evolution",
+          "Comprehensive documentation architecture covering all system components",
+          "Better analytics performance with offline-capable batch processing",
+          "Optimized visual elements using modern SVG sprite technology",
+          "Enhanced developer experience with improved project documentation"
+        ],
+        "fr": [
+          "Chargement de page plus rapide avec une réduction de 12KB de la taille du bundle de la page d'accueil",
+          "Réactivité améliorée grâce au chargement d'images optimisé et à la mise en cache",
+          "Performance mobile améliorée avec un meilleur rendu des polices et des temps de chargement réduits",
+          "Système de suivi de l'historique des versions pour surveiller l'évolution de la plateforme",
+          "Architecture de documentation complète couvrant tous les composants du système",
+          "Meilleure performance analytique avec traitement par lots capable de fonctionner hors ligne",
+          "Éléments visuels optimisés utilisant la technologie moderne de sprite SVG",
+          "Expérience développeur améliorée avec une documentation de projet améliorée"
+        ]
+      }
+    },
+    {
+      "version": "0.0",
+      "title": {
+        "en": "Version 0.0 - Initial Badge AI Platform",
+        "fr": "Version 0.0 - Plateforme Badge AI Initiale"
+      },
+      "releaseDate": {
+        "en": "April 22, 2025",
+        "fr": "22 avril 2025"
+      },
+      "whatsNew": {
+        "en": "Introducing Badge AI - the first comprehensive platform for transparent AI usage communication in creative works:",
+        "fr": "Présentation de Badge AI - la première plateforme complète pour communiquer de manière transparente l'utilisation de l'IA dans les œuvres créatives :"
+      },
+      "features": {
+        "en": [
+          "Complete wizard-guided evaluation system for sounds, visual, and text content",
+          "Standardized 5-level AI usage classification (0-4) with clear category descriptions",
+          "Professional SVG badge generation with category-specific visual design",
+          "Multiple export formats: HTML, Markdown, JSON metadata, ID3 tags, and Creative Commons",
+          "Dual evaluation modes: quick manual selection and detailed 10-question assessments",
+          "Full bilingual support (English/French) with seamless language switching",
+          "Glass morphism design with smooth animations and responsive mobile interface",
+          "Anonymous analytics tracking for usage insights and platform improvement"
+        ],
+        "fr": [
+          "Système d'évaluation guidé complet pour le contenu sonore, visuel et textuel",
+          "Classification standardisée de l'utilisation de l'IA à 5 niveaux (0-4) avec descriptions claires",
+          "Génération de badges SVG professionnels avec design visuel spécifique aux catégories",
+          "Formats d'exportation multiples : HTML, Markdown, métadonnées JSON, tags ID3 et Creative Commons",
+          "Modes d'évaluation doubles : sélection manuelle rapide et évaluations détaillées de 10 questions",
+          "Support bilingue complet (anglais/français) avec changement de langue fluide",
+          "Design glassmorphisme avec animations fluides et interface mobile responsive",
+          "Suivi analytique anonyme pour les insights d'utilisation et l'amélioration de la plateforme"
+        ]
+      }
+    }
+  ]
+}

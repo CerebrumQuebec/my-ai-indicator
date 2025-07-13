@@ -248,6 +248,15 @@ export const fr = {
   aboutTeamRole: "CEO de Cérebrum • Artiste ingénieur",
   aboutTeamContact: "phil@cerebrum.website",
 
+  // Version History Page
+  versionHistoryTitle: "Historique des Versions",
+  versionHistoryDescription: "Suivez l'évolution de Badge AI avec des notes de version détaillées et les mises à jour des fonctionnalités.",
+  versionHistory: "Historique des Versions",
+  currentVersion: "Version Actuelle",
+  currentVersionDescription: "La dernière version stable avec toutes les améliorations et fonctionnalités récentes.",
+  keyFeatures: "Fonctionnalités Clés :",
+  versionHistoryNote: "Vous voulez rester informé ? Les nouvelles versions sont annoncées avec des journaux de modifications détaillés montrant exactement ce qui est nouveau et amélioré.",
+
   // Contribution Section
   aboutContributeTitle: "Contribuer au Projet",
   aboutContributeText:

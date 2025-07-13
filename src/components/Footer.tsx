@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useTranslation } from "../contexts/TranslationContext";
 import HighContrastText from "./HighContrastText";
+import versionData from "../data/versions.json";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -161,6 +162,13 @@ const Footer: React.FC = () => {
                 {t("cerebrum")}
               </a>{" "}
               {t("allRightsReserved")}
+              <span className="mx-2">•</span>
+              <Link
+                href="/version-history"
+                className="text-primary-400 hover:text-primary-300 transition-colors"
+              >
+                v{versionData.currentVersion}
+              </Link>
             </div>
 
             <div className="flex items-center gap-4">

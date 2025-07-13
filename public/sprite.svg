@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Badge Category 0 - Human Only -->
+  <symbol id="badge-0" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.1" />
+    <path d="M50 25C55.2 25 60 29.8 60 35C60 40.2 55.2 45 50 45C44.8 45 40 40.2 40 35C40 29.8 44.8 25 50 25Z" fill="white" />
+    <path d="M65 62.5C65 55.5964 58.2843 50 50 50C41.7157 50 35 55.5964 35 62.5C35 69.4036 50 75 50 75C50 75 65 69.4036 65 62.5Z" fill="white" />
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+  </symbol>
+
+  <!-- Badge Category 1 - Human with AI -->
+  <symbol id="badge-1" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.1" />
+    <path d="M40 25C45.2 25 50 29.8 50 35C50 40.2 45.2 45 40 45C34.8 45 30 40.2 30 35C30 29.8 34.8 25 40 25Z" fill="white" />
+    <path d="M55 62.5C55 55.5964 48.2843 50 40 50C31.7157 50 25 55.5964 25 62.5C25 69.4036 40 75 40 75C40 75 55 69.4036 55 62.5Z" fill="white" />
+    <circle cx="65" cy="35" r="10" fill="#6586ff" stroke="white" stroke-width="1" />
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">1</text>
+  </symbol>
+
+  <!-- Badge Category 2 - AI Collaboration -->
+  <symbol id="badge-2" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.1" />
+    <path d="M35 30C40.2 30 45 34.8 45 40C45 45.2 40.2 50 35 50C29.8 50 25 45.2 25 40C25 34.8 29.8 30 35 30Z" fill="white" />
+    <path d="M47.5 65C47.5 58.0964 42.2843 52.5 35 52.5C27.7157 52.5 22.5 58.0964 22.5 65C22.5 71.9036 35 77.5 35 77.5C35 77.5 47.5 71.9036 47.5 65Z" fill="white" />
+    <circle cx="65" cy="40" r="15" fill="#9f7aea" stroke="white" stroke-width="1" />
+    <circle cx="65" cy="65" r="10" fill="#9f7aea" stroke="white" stroke-width="1" />
+    <line x1="45" y1="40" x2="50" y2="40" stroke="white" stroke-width="2" stroke-dasharray="2" />
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">2</text>
+  </symbol>
+
+  <!-- Badge Category 3 - Directed AI -->
+  <symbol id="badge-3" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.1" />
+    <path d="M30 25C34 25 37 29 37 33C37 37 34 40 30 40C26 40 23 37 23 33C23 29 26 25 30 25Z" fill="white" />
+    <path d="M40 50C40 43.9249 35.5228 40 30 40C24.4772 40 20 43.9249 20 50C20 56.0751 30 60 30 60C30 60 40 56.0751 40 50Z" fill="white" />
+    <circle cx="60" cy="45" r="20" fill="#6586ff" stroke="white" stroke-width="1" />
+    <path d="M37 33L45 40" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M45 40L40 45" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">3</text>
+  </symbol>
+
+  <!-- Badge Category 4 - AI Only -->
+  <symbol id="badge-4" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="45" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.2" />
+    <circle cx="50" cy="50" r="40" fill="#212640" stroke="white" stroke-width="1" stroke-opacity="0.1" />
+    <circle cx="50" cy="40" r="20" fill="#c3daff" stroke="white" stroke-width="1" />
+    <circle cx="40" cy="70" r="7" fill="#c3daff" stroke="white" stroke-width="1" />
+    <circle cx="60" cy="70" r="7" fill="#c3daff" stroke="white" stroke-width="1" />
+    <line x1="50" y1="60" x2="40" y2="70" stroke="#c3daff" stroke-width="2" />
+    <line x1="50" y1="60" x2="60" y2="70" stroke="#c3daff" stroke-width="2" />
+    <text x="50" y="92" font-family="monospace" font-size="10" fill="white" text-anchor="middle">4</text>
+  </symbol>
+
+  <!-- Sounds Icon -->
+  <symbol id="sounds-icon" viewBox="0 0 24 24" fill="none">
+    <path d="M9 18V5l12-2v13" stroke="#6586ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="6" cy="18" r="3" stroke="#6586ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="18" cy="16" r="3" stroke="#6586ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </symbol>
+
+  <!-- Visual Icon -->
+  <symbol id="visual-icon" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="#9f7aea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="8.5" cy="8.5" r="1.5" stroke="#9f7aea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <polyline points="21 15 16 10 5 21" stroke="#9f7aea" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </symbol>
+
+  <!-- Text Icon -->
+  <symbol id="text-icon" viewBox="0 0 24 24" fill="none">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#c3daff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <polyline points="14 2 14 8 20 8" stroke="#c3daff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="16" y1="13" x2="8" y2="13" stroke="#c3daff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="16" y1="17" x2="8" y2="17" stroke="#c3daff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <polygon points="10 9 9 9 8 9" stroke="#c3daff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </symbol>
+</svg>
