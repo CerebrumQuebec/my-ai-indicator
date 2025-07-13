@@ -1,0 +1,42 @@
+{
+  "currentVersion": "0.0",
+  "versions": [
+    {
+      "version": "0.0",
+      "title": {
+        "en": "Version 0.0 - Initial Badge AI Platform",
+        "fr": "Version 0.0 - Plateforme Badge AI Initiale"
+      },
+      "releaseDate": {
+        "en": "July 2025",
+        "fr": "Juillet 2025"
+      },
+      "whatsNew": {
+        "en": "Introducing Badge AI - the first comprehensive platform for transparent AI usage communication in creative works:",
+        "fr": "Présentation de Badge AI - la première plateforme complète pour communiquer de manière transparente l'utilisation de l'IA dans les œuvres créatives :"
+      },
+      "features": {
+        "en": [
+          "Complete wizard-guided evaluation system for sounds, visual, and text content",
+          "Standardized 5-level AI usage classification (0-4) with clear category descriptions",
+          "Professional SVG badge generation with category-specific visual design",
+          "Multiple export formats: HTML, Markdown, JSON metadata, ID3 tags, and Creative Commons",
+          "Dual evaluation modes: quick manual selection and detailed 10-question assessments",
+          "Full bilingual support (English/French) with seamless language switching",
+          "Glass morphism design with smooth animations and responsive mobile interface",
+          "Anonymous analytics tracking for usage insights and platform improvement"
+        ],
+        "fr": [
+          "Système d'évaluation guidé complet pour le contenu sonore, visuel et textuel",
+          "Classification standardisée de l'utilisation de l'IA à 5 niveaux (0-4) avec descriptions claires",
+          "Génération de badges SVG professionnels avec design visuel spécifique aux catégories",
+          "Formats d'exportation multiples : HTML, Markdown, métadonnées JSON, tags ID3 et Creative Commons",
+          "Modes d'évaluation doubles : sélection manuelle rapide et évaluations détaillées de 10 questions",
+          "Support bilingue complet (anglais/français) avec changement de langue fluide",
+          "Design glassmorphisme avec animations fluides et interface mobile responsive",
+          "Suivi analytique anonyme pour les insights d'utilisation et l'amélioration de la plateforme"
+        ]
+      }
+    }
+  ]
+}

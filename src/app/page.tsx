@@ -17,7 +17,19 @@ import VisualQuestionnaire from "../steps/VisualQuestionnaire";
 import Result from "../steps/Result";
 import ManualSelectionStep from "../steps/ManualSelectionStep";
 import GuidedSelectionStep from "../steps/GuidedSelectionStep";
-import DemoSlideshow from "../components/DemoSlideshow";
+import dynamic from "next/dynamic";
+
+const DemoSlideshow = dynamic(() => import("../components/DemoSlideshow"), {
+  loading: () => (
+    <div className="w-full h-96 flex items-center justify-center bg-surface-card/40 backdrop-blur-sm border border-white/10 rounded-3xl">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-text-secondary">Loading interactive demo...</p>
+      </div>
+    </div>
+  ),
+  ssr: false,
+});
 import {
   ArrowRightIcon,
   SparklesIcon,
@@ -27,10 +39,12 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/24/outline";
 import Header from "../components/Header";
+import FloatingParticles from "../components/FloatingParticles";
 
 export default function Home() {
   const [showWizard, setShowWizard] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
+  const [shouldLoadDemo, setShouldLoadDemo] = useState(false);
   const { t } = useTranslation();
   const {
     step,
@@ -199,14 +213,6 @@ export default function Home() {
   }
 
   // Otherwise show the landing page
-
-  // Particle animation component - simplified to prevent errors
-  const FloatingParticles = () => {
-    // Return empty div to avoid animation errors
-    return (
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none"></div>
-    );
-  };
 
   return (
     <div className="w-full">
@@ -903,14 +909,29 @@ export default function Home() {
           <motion.div
             className="max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={{ 
+              opacity: 1, 
+              y: 0,
+              transition: {
+                duration: 0.8,
+                onComplete: () => setShouldLoadDemo(true)
+              }
+            }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
           >
-            <DemoSlideshow
-              isPlaying={isDemoPlaying}
-              onTogglePlay={() => setIsDemoPlaying(!isDemoPlaying)}
-            />
+            {shouldLoadDemo ? (
+              <DemoSlideshow
+                isPlaying={isDemoPlaying}
+                onTogglePlay={() => setIsDemoPlaying(!isDemoPlaying)}
+              />
+            ) : (
+              <div className="w-full h-96 flex items-center justify-center bg-surface-card/40 backdrop-blur-sm border border-white/10 rounded-3xl">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-text-secondary">Preparing interactive demo...</p>
+                </div>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>

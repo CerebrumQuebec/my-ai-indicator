@@ -1,4 +1,5 @@
 import "./globals.css";
+import "../styles/demo-slideshow.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { WizardProvider } from "../contexts/WizardContext";
@@ -8,7 +9,12 @@ import Footer from "../components/Footer";
 import AnalyticsTracker from "../components/AnalyticsTracker";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://badgeai.org"),
@@ -89,6 +95,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Preconnect to critical external origins for faster loading */}
+        <link rel="preconnect" href="https://badgeai-default-rtdb.firebaseio.com" />
+        <link rel="preconnect" href="https://s-usc1a-nss-2000.firebaseio.com" />
+        <link rel="preconnect" href="https://js.stripe.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload critical assets */}
+        <link rel="preload" href="/sprite.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/logo.png" as="image" />
+      </head>
       <body
         className={`${inter.className} min-h-screen bg-gradient-to-b from-surface-dark via-surface-dark/90 to-surface-card text-text-primary`}
       >

@@ -1,0 +1,10 @@
+# Modern browsers target to reduce polyfills
+> 0.5%
+last 2 versions
+not dead
+not ie 11
+not op_mini all
+Chrome >= 88
+Firefox >= 85
+Safari >= 14
+Edge >= 88
